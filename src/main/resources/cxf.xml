@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jaxrs="http://cxf.apache.org/jaxrs" xmlns:util="http://www.springframework.org/schema/util" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/aop 
+           http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+           http://www.springframework.org/schema/tx 
+           http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+           http://cxf.apache.org/jaxws
+           http://cxf.apache.org/schemas/jaxws.xsd
+           http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+	<!-- the context definition for the cxf application -->
+
+	<!-- ========================= WEB SERVICE ========================= -->
+
+	<import resource="classpath*:META-INF/cxf/cxf.xml" />
+	<import resource="classpath*:META-INF/cxf/cxf-extension-soap.xml" />
+	<import resource="classpath*:META-INF/cxf/cxf-extension-http-binding.xml" />
+	<import resource="classpath*:META-INF/cxf/cxf-servlet.xml" />
+
+	<!-- ========================= Application Bean Definitions ========================= -->
+
+	<import resource="classpath*:/**/applicationContext.xml" />
+
+	<!-- ======================= PARABANK SOAP SERVICES ==================== -->
+
+	<jaxws:endpoint id="paraBankSOAP" implementor="#paraBankService" address="/ParaBank">
+		<jaxws:serviceFactory>
+			<bean class="org.apache.cxf.jaxws.support.JaxWsServiceFactoryBean">
+				<property name="serviceConfigurations">
+					<list>
+						<bean class="com.parasoft.parabank.service.ParaBankServiceConfiguration" />
+						<bean class="org.apache.cxf.wsdl.service.factory.DefaultServiceConfiguration" />
+					</list>
+				</property>
+			</bean>
+		</jaxws:serviceFactory>
+	</jaxws:endpoint>
+
+	<jaxws:endpoint id="loanProcessorSOAP" implementor="#loanProcessorService" address="/LoanProcessor">
+		<jaxws:serviceFactory>
+			<bean class="org.apache.cxf.jaxws.support.JaxWsServiceFactoryBean">
+				<property name="serviceConfigurations">
+					<list>
+						<bean class="com.parasoft.parabank.service.ParaBankServiceConfiguration" />
+						<bean class="org.apache.cxf.wsdl.service.factory.DefaultServiceConfiguration" />
+					</list>
+				</property>
+			</bean>
+		</jaxws:serviceFactory>
+	</jaxws:endpoint>
+
+	<!-- ======================= BOOKSTORE SERVICES ======================== -->
+
+	<jaxws:endpoint id="store" implementor="#bookstoreService" address="/store-01" />
+	<jaxws:endpoint id="storeV2" implementor="#bookstoreServiceV2" address="/store-01V2" />
+
+	<bean id="printline" class="com.parasoft.bookstore.CartTimer" />
+	<bean id="printlineV2" class="com.parasoft.bookstore2.CartTimer" />
+
+	<bean id="scheduledTask" class="org.springframework.scheduling.concurrent.ScheduledExecutorTask">
+		<property name="period" value="600000" />
+		<property name="runnable" ref="printline" />
+	</bean>
+
+	<bean id="scheduledTaskV2" class="org.springframework.scheduling.concurrent.ScheduledExecutorTask">
+		<property name="period" value="600000" />
+		<property name="runnable" ref="printlineV2" />
+	</bean>
+
+	<bean id="timerFactory" class="org.springframework.scheduling.concurrent.ScheduledExecutorFactoryBean">
+		<property name="scheduledExecutorTasks">
+			<list>
+				<ref bean="scheduledTask" />
+				<ref bean="scheduledTaskV2" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- ====================== WS-SECURITY SERVICES ======================= -->
+
+	<jaxws:endpoint id="store-01" implementor="#bookstoreService" address="/store-wss-01">
+		<jaxws:inInterceptors>
+			<bean class="org.apache.cxf.binding.soap.saaj.SAAJInInterceptor" />
+			<bean class="org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor">
+				<constructor-arg>
+					<map>
+						<entry key="action" value="UsernameToken" />
+						<entry key="passwordType" value="PasswordText" />
+						<entry key="passwordCallbackClass" value="com.parasoft.bookstore.UsernameTokenPasswordCallback" />
+					</map>
+				</constructor-arg>
+			</bean>
+		</jaxws:inInterceptors>
+	</jaxws:endpoint>
+
+	<jaxws:endpoint id="store-02" implementor="#bookstoreService" address="/store-wss-02">
+		<jaxws:inInterceptors>
+			<bean class="org.apache.cxf.binding.soap.saaj.SAAJInInterceptor" />
+			<ref bean="store-02-Request" />
+		</jaxws:inInterceptors>
+		<jaxws:outInterceptors>
+			<bean class="org.apache.cxf.binding.soap.saaj.SAAJOutInterceptor" />
+			<ref bean="store-02-Response" />
+		</jaxws:outInterceptors>
+	</jaxws:endpoint>
+
+	<jaxws:endpoint id="store-03" implementor="#bookstoreService" address="/store-wss-03">
+		<jaxws:inInterceptors>
+			<bean class="org.apache.cxf.binding.soap.saaj.SAAJInInterceptor" />
+			<ref bean="store-03-Request" />
+		</jaxws:inInterceptors>
+		<jaxws:outInterceptors>
+			<bean class="org.apache.cxf.binding.soap.saaj.SAAJOutInterceptor" />
+			<ref bean="store-03-Response" />
+		</jaxws:outInterceptors>
+	</jaxws:endpoint>
+
+	<jaxws:endpoint id="store-04" wsdlLocation="store-04.wsdl" implementor="#bookstoreService" address="/store-wss-04">
+		<jaxws:properties>
+			<entry key="ws-security.signature.username" value="soatest" />
+			<entry key="ws-security.signature.properties" value="com/parasoft/bookstore/resources/keystore.properties" />
+			<entry key="ws-security.encryption.properties" value="com/parasoft/bookstore/resources/keystore.properties" />
+			<entry key="ws-security.callback-handler" value="com.parasoft.bookstore.KeystorePasswordCallback" />
+		</jaxws:properties>
+	</jaxws:endpoint>
+
+	<!-- ========================= REST SERVICE ========================= -->
+
+	<jaxrs:server id="paraBankREST" address="/bank">
+
+		<jaxrs:serviceBeans>
+			<ref bean="paraBankService" />
+		</jaxrs:serviceBeans>
+
+		<jaxrs:providers>
+<!--			<ref bean="jsonProviderJackson" /> -->
+			<ref bean="wadlGenerator" />
+ 			<bean id="jsonProvider" class="org.apache.cxf.jaxrs.provider.json.JSONProvider" />
+            <ref bean="cors-filter" />
+ 		</jaxrs:providers>
+		
+		<jaxrs:features>
+			<ref bean="swagger2Feature" />
+		</jaxrs:features>
+
+	</jaxrs:server>
+
+	<!-- ========================= SERVICE IMPLEMENTATIONS ========================= -->
+
+	<bean id="wadlGenerator" class="org.apache.cxf.jaxrs.model.wadl.WadlGenerator" />
+	<bean id="cors-filter" class="org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter"/>
+
+  <!-- JAXRS providers -->
+    <bean id="jsonProviderJackson" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider" />
+ 
+    <!-- CXF Swagger2Feature --> 
+    <bean id="swagger2Feature" class="com.parasoft.parabank.util.CustomSwagger2Feature">
+<!--
+	 	<property name="version" value="3.0.0" />
+    	<property name="title" value="Parabank REST Services" />
+    	<property name="contact" value="webadmin@parabank.parasoft.com" />
+    	<property name="description" value="This API provides access to the ParaBank operations." />
+        
+
+         <property name="schemes" >
+			<array value-type="java.lang.String">
+				<value>"http"</value>
+			</array>        
+        </property>
+ -->    	
+        <!-- customize some of the properties -->
+ 		<property name="resourcePackage" value="io.swagger.resources,com.parasoft.parabank.service" />
+        <property name="host"  ref="hostAndPortStr" />
+        <property name="basePath" value="/parabank/services/bank"/>
+        <property name="prettyPrint" value="true" />
+    </bean>
+
+	<bean id="hostAndPortStr" factory-method="getHostPortString" class="com.parasoft.parabank.util.Util" />
+
+	<bean id="paraBankService" class="com.parasoft.parabank.service.ParaBankServiceImpl">
+		<property name="adminManager" ref="adminManager" />
+		<property name="bankManager" ref="bankManager" />
+	</bean>
+
+	<bean id="loanProcessorService" class="com.parasoft.parabank.service.LoanProcessorServiceImpl">
+		<property name="loanProcessor" ref="loanProcessor" />
+		<property name="loanProviderName" value="Wealth Securities Dynamic Loans (WSDL)" />
+	</bean>
+
+	<bean id="bookstoreService" class="com.parasoft.bookstore.CartService" />
+	<bean id="bookstoreServiceV2" class="com.parasoft.bookstore2.CartService" />
+
+	<bean id="store-02-Request" class="org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor">
+		<constructor-arg>
+			<map>
+				<entry key="action" value="Signature" />
+				<entry key="signaturePropFile" value="com/parasoft/bookstore/resources/keystore.properties" />
+			</map>
+		</constructor-arg>
+	</bean>
+
+	<bean id="store-02-Response" class="org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor">
+		<constructor-arg>
+			<map>
+				<entry key="action" value="Signature" />
+				<entry key="user" value="soatest" />
+				<entry key="signaturePropFile" value="com/parasoft/bookstore/resources/keystore.properties" />
+				<entry key="passwordCallbackClass" value="com.parasoft.bookstore.KeystorePasswordCallback" />
+			</map>
+		</constructor-arg>
+	</bean>
+
+	<bean id="store-03-Request" class="org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor">
+		<constructor-arg>
+			<map>
+				<entry key="action" value="Encrypt" />
+				<entry key="decryptionPropFile" value="com/parasoft/bookstore/resources/keystore.properties" />
+				<entry key="passwordCallbackClass" value="com.parasoft.bookstore.KeystorePasswordCallback" />
+			</map>
+		</constructor-arg>
+	</bean>
+
+	<bean id="store-03-Response" class="org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor">
+		<constructor-arg>
+			<map>
+				<entry key="action" value="Encrypt" />
+				<entry key="encryptionPropFile" value="com/parasoft/bookstore/resources/keystore.properties" />
+				<entry key="encryptionUser" value="soatest" />
+				<entry key="encryptionSymAlgorithm" value="http://www.w3.org/2001/04/xmlenc#aes256-cbc" />
+				<entry key="encryptionKeyIdentifier" value="DirectReference" />
+			</map>
+		</constructor-arg>
+	</bean>
+</beans>

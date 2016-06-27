@@ -1,0 +1,4 @@
+The scripts in this folder are to help during development:
+This will help by providing the values that can be added to @Resource(name="") definitions so that more precise auto-wiring can be used.
+extract.constant.defs -- extracts the list of values for viewName and formView to generate constant references to com.parasoft.parabank.util.Constants interface
+extract.constant.java.defs -- extracts the list of values for viewName and formView to generate constant declarations to be added to com.parasoft.parabank.util.Constants interface

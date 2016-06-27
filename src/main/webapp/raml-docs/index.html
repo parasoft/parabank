@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>RAML UI</title>
+  <script src='js/raml-parser.min.js' type='text/javascript'></script>
+
+  <!-- Some basic translations -->
+  <!-- <script src='lang/translator.js' type='text/javascript'></script> -->
+  <!-- <script src='lang/ru.js' type='text/javascript'></script> -->
+  <!-- <script src='lang/en.js' type='text/javascript'></script> -->
+</head>
+<body>
+	<div id="raml">  <script type="text/javascript">
+RAML.Parser.loadFile('../jaxrs-raml/api.raml').then( function(data) {
+  console.log(data)
+}, function(error) {
+  console.log('Error parsing: ' + error);
+});
+  </script></div>
+</body>
+</html>

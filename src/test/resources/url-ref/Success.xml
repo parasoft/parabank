@@ -1,0 +1,11 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+	<soap:Body>
+		<ns2:requestLoanResponse xmlns:ns2="http://service.parabank.parasoft.com/">
+			<ns2:loanResponse>
+				<responseDate>2014-03-13T15:37:51.045-04:00</responseDate>
+				<loanProviderName>Test Result Web</loanProviderName>
+				<approved>true</approved>
+			</ns2:loanResponse>
+		</ns2:requestLoanResponse>
+	</soap:Body>
+</soap:Envelope>

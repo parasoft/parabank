@@ -1,0 +1,102 @@
+
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://service.parabank.parasoft.com/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http"
+	name="LoanProcessorServiceImplService" targetNamespace="http://service.parabank.parasoft.com/">
+	<wsdl:types>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:tns="http://service.parabank.parasoft.com/"
+			attributeFormDefault="unqualified" elementFormDefault="qualified"
+			targetNamespace="http://service.parabank.parasoft.com/">
+			<xs:element name="loanRequest" type="tns:loanRequest" />
+			<xs:element name="loanResponse" type="tns:loanResponse" />
+			<xs:element name="requestLoan" type="tns:requestLoan" />
+			<xs:element name="requestLoanResponse" type="tns:requestLoanResponse" />
+			<xs:complexType name="requestLoan">
+				<xs:sequence>
+					<xs:element ref="tns:loanRequest" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="loanRequest">
+				<xs:sequence>
+					<xs:element form="unqualified" minOccurs="0" name="requestDate"
+						type="xs:dateTime" />
+					<xs:element form="unqualified" name="customerId" type="xs:int" />
+					<xs:element form="unqualified" name="availableFunds"
+						type="xs:decimal" />
+					<xs:element form="unqualified" name="loanAmount" type="xs:decimal" />
+					<xs:element form="unqualified" name="downPayment" type="xs:decimal" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="requestLoanResponse">
+				<xs:sequence>
+					<xs:element ref="tns:loanResponse" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="loanResponse">
+				<xs:sequence>
+					<xs:element form="unqualified" minOccurs="0" name="responseDate"
+						type="xs:dateTime" />
+					<xs:element form="unqualified" name="loanProviderName"
+						type="xs:string" />
+					<xs:element form="unqualified" name="approved" type="xs:boolean" />
+					<xs:element form="unqualified" minOccurs="0" name="message"
+						type="xs:string" />
+					<xs:element form="unqualified" minOccurs="0" name="accountId"
+						type="xs:int" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="ParaBankServiceException" type="tns:ParaBankServiceException" />
+			<xs:complexType name="ParaBankServiceException">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="message" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="requestLoanResponse">
+		<wsdl:part element="tns:requestLoanResponse" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ParaBankServiceException">
+		<wsdl:part element="tns:ParaBankServiceException" name="ParaBankServiceException">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="requestLoan">
+		<wsdl:part element="tns:requestLoan" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="LoanProcessorService">
+		<wsdl:operation name="requestLoan">
+			<wsdl:input message="tns:requestLoan" name="requestLoan">
+			</wsdl:input>
+			<wsdl:output message="tns:requestLoanResponse" name="requestLoanResponse">
+			</wsdl:output>
+			<wsdl:fault message="tns:ParaBankServiceException" name="ParaBankServiceException">
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="LoanProcessorServiceImplServiceSoapBinding"
+		type="tns:LoanProcessorService">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="requestLoan">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="requestLoan">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="requestLoanResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="ParaBankServiceException">
+				<soap:fault name="ParaBankServiceException" use="literal" />
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="LoanProcessorServiceImplService">
+		<wsdl:port binding="tns:LoanProcessorServiceImplServiceSoapBinding"
+			name="LoanProcessorServiceImplPort">
+			<soap:address location="http://localhost:8090/parabank/services/LoanProcessor" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

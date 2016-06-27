@@ -1,0 +1,2 @@
+INSERT INTO Customer (id, first_name, last_name, address, city, state, zip_code, phone_number, ssn, username, password) VALUES (101, 'John', 'Smith', '1431 Main St', 'Beverly Hills', 'CA', '90210', '310-447-4121', '622-11-9999', 'test1', 'test');
+INSERT INTO Customer (id, first_name, last_name, address, city, state, zip_code, phone_number, ssn, username, password) VALUES (102, 'John', 'Smith', '1431 Main St', 'Beverly Hills', 'CA', '90210', '310-447-4121', '622-11-9999', 'test2', 'test');

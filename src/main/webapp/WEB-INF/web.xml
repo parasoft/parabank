@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+         http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+<!--  -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+<!-- 		<param-value>classpath:cxf.xml, classpath:applicationContext.xml</param-value> -->
+		<param-value>classpath:cxf.xml</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+<!-- 
+	<filter>
+		<filter-name>jersey</filter-name>
+		<filter-class>org.glassfish.jersey.servlet.ServletContainer</filter-class>
+		<init-param>
+			<param-name>jersey.config.server.provider.packages</param-name>
+			<param-value>
+            io.swagger.jaxrs.listing, com.parasoft.parabank.service
+        	</param-value>
+		</init-param>
+ -->
+ <!-- 		<load-on-startup>1</load-on-startup> -->
+<!-- 	</filter>
+ --><!-- using bean instead
+     <servlet>
+        <servlet-name>Jersey2Config</servlet-name>
+        <servlet-class>io.swagger.jersey.config.JerseyJaxrsConfig</servlet-class>
+        <init-param>
+            <param-name>api.version</param-name>
+            <param-value>3.0.0</param-value>
+        </init-param>
+        <init-param>
+            <param-name>swagger.api.basepath</param-name>
+            <param-value>http://localhost:18080/parabank/services/</param-value>
+        </init-param>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+  
+ -->
+ 	<servlet>
+		<servlet-name>parabank</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet>
+		<servlet-name>cxf</servlet-name>
+		<servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+<!-- 
+	<servlet>
+		<description>Swagger Initialization Servlet</description>
+		<display-name>SwaggerBootstrap</display-name>
+		<servlet-name>SwaggerBootstrap</servlet-name>
+		<servlet-class>com.parasoft.parabank.util.SwaggerBootstrap</servlet-class>
+        <load-on-startup>2</load-on-startup>
+	</servlet>
+ -->
+     <!--
+	<filter-mapping>
+		<filter-name>jersey</filter-name>
+		<url-pattern>/bank/*</url-pattern>
+	</filter-mapping>
+-->
+	<servlet-mapping>
+		<servlet-name>cxf</servlet-name>
+		<url-pattern>/services/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>parabank</servlet-name>
+		<url-pattern>*.htm</url-pattern>
+	</servlet-mapping>
+
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+
+	<error-page>
+		<error-code>500</error-code>
+		<location>/error.htm</location>
+	</error-page>
+
+	<error-page>
+		<error-code>404</error-code>
+		<location>/error.htm</location>
+	</error-page>
+
+</web-app>

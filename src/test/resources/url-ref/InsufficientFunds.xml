@@ -1,0 +1,13 @@
+<soap:Envelope
+   xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+ <soap:Body>
+  <ns2:requestLoanResponse xmlns:ns2="http://service.parabank.parasoft.com/">
+   <ns2:loanResponse>
+    <responseDate>2016-06-06T12:33:47.076-07:00</responseDate>
+    <loanProviderName>Test Result Web</loanProviderName>
+    <approved>false</approved>
+    <message>error.insufficient.funds</message>
+   </ns2:loanResponse>
+  </ns2:requestLoanResponse>
+ </soap:Body>
+</soap:Envelope> 

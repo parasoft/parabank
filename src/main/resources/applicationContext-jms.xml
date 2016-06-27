@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:amq="http://activemq.apache.org/schema/core"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+           http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
+           http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
+           http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd">
+
+	<!-- the parent application context definition for the springapp application -->
+
+	<!-- ========================= XML MARSHALLER ========================= -->
+
+	<bean id="jaxb2Marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+		<property name="classesToBeBound">
+			<list>
+				<value>com.parasoft.parabank.domain.LoanRequest</value>
+				<value>com.parasoft.parabank.domain.LoanResponse</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- ========================= JMS ========================= -->
+
+	<bean id="jmsLoanProcessor" class="com.parasoft.parabank.messaging.JmsLoanProcessor">
+		<property name="jmsTemplate" ref="jmsTemplate" />
+		<property name="marshaller" ref="jaxb2Marshaller" />
+		<property name="unmarshaller" ref="jaxb2Marshaller" />
+		<property name="loanProcessor" ref="loanProcessor" />
+		<property name="destinationName" value="${response.queue}" />
+		<property name="loanProviderName" value="Jiffy Mortgage Solutions (JMS)" />
+	</bean>
+
+	<bean id="jmsListener" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="concurrentConsumers" value="5" />
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="destinationName" value="${request.queue}" />
+		<property name="messageListener" ref="jmsLoanProcessor" />
+	</bean>
+
+	<bean id="jndiTemplate" class="org.springframework.jndi.JndiTemplate">
+		<property name="environment">
+			<props>
+				<prop key="java.naming.factory.initial">${jndi.factory.initial}</prop>
+				<prop key="java.naming.provider.url">${jndi.url}</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="receiveTimeout" value="30000" />
+	</bean>
+
+	<bean id="connectionFactory" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiTemplate" ref="jndiTemplate" />
+		<property name="jndiName" value="${jndi.factory.connection}" />
+	</bean>
+
+	<amq:broker useJmx="false" persistent="false">
+		<amq:destinationInterceptors>
+			<amq:mirroredQueue copyMessage="true" postfix=".mirror" prefix="" />
+		</amq:destinationInterceptors>
+		<amq:transportConnectors>
+			<amq:transportConnector uri="tcp://localhost:61616" />
+		</amq:transportConnectors>
+	</amq:broker>
+
+</beans>

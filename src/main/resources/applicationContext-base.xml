@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:amq="http://activemq.apache.org/schema/core"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+           http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
+           http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
+           http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd">
+
+	<!-- the parent application context definition for the springapp application -->
+
+	<!-- ========================= MANAGERS ========================= -->
+
+	<bean id="bankManager" class="com.parasoft.parabank.domain.logic.impl.BankManagerImpl">
+		<property name="accountDao" ref="accountDao" />
+		<property name="customerDao" ref="customerDao" />
+		<property name="positionDao" ref="positionDao" />
+		<property name="transactionDao" ref="transactionDao" />
+		<property name="adminDao" ref="adminDao" />
+		<property name="loanProvider" ref="loanProvider" />
+	</bean>
+
+
+	<bean id="adminManager" class="com.parasoft.parabank.domain.logic.impl.AdminManagerImpl" lazy-init="false">
+		<property name="adminDao" ref="adminDao" />
+		<property name="jmsListener" ref="jmsListener" />
+	</bean>
+
+	<bean id="newsManager" class="com.parasoft.parabank.domain.logic.impl.NewsManagerImpl">
+		<property name="newsDao" ref="newsDao" />
+	</bean>
+
+	<!-- ========================= DAOS ========================= -->
+
+	<bean id="sequenceDao" class="com.parasoft.parabank.dao.jdbc.JdbcSequenceDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="accountDao" class="com.parasoft.parabank.dao.jdbc.JdbcAccountDao">
+		<property name="dataSource" ref="dataSource" />
+		<property name="sequenceDao" ref="sequenceDao" />
+	</bean>
+
+	<bean id="adminDao" class="com.parasoft.parabank.dao.jdbc.JdbcAdminDao">
+		<property name="dataSource" ref="dataSource" />
+		<property name="inserters">
+			<list>
+				<ref bean="stockDataInserter" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="bookstoreDao" class="com.parasoft.bookstore.jdbc.JdbcBookstoreDao">
+		<property name="dataSource" ref="BookstoreDS" />
+	</bean>
+
+	<bean id="customerDao" class="com.parasoft.parabank.dao.jdbc.JdbcCustomerDao">
+
+		<property name="dataSource" ref="dataSource" />
+		<property name="sequenceDao" ref="sequenceDao" />
+	</bean>
+
+	<bean id="newsDao" class="com.parasoft.parabank.dao.jdbc.JdbcNewsDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="positionDao" class="com.parasoft.parabank.dao.jdbc.JdbcPositionDao">
+		<property name="dataSource" ref="dataSource" />
+		<property name="sequenceDao" ref="sequenceDao" />
+	</bean>
+
+	<bean id="transactionDao" class="com.parasoft.parabank.dao.jdbc.JdbcTransactionDao">
+		<property name="dataSource" ref="dataSource" />
+		<property name="sequenceDao" ref="sequenceDao" />
+	</bean>
+
+	<!-- ========================= INSERTERS ========================= -->
+
+	<bean id="stockDataInserter" class="com.parasoft.parabank.dao.jdbc.internal.StockDataInserter">
+		<property name="dataSource" ref="dataSource" />
+		<property name="sequenceDao" ref="sequenceDao" />
+	</bean>
+
+	<!-- ========================= LOAN PROVIDERS ========================= -->
+
+	<bean id="loanProvider" class="com.parasoft.parabank.domain.logic.impl.ConfigurableLoanProvider">
+		<property name="adminManager" ref="adminManager" />
+		<property name="loanProviders">
+			<map>
+				<entry key="jms">
+					<ref bean="jmsLoanProvider" />
+				</entry>
+				<entry key="ws">
+					<ref bean="wsLoanProvider" />
+				</entry>
+				<entry key="local">
+					<ref bean="localLoanProvider" />
+				</entry>
+			</map>
+		</property>
+		<property name="parameter" value="loanProvider" />
+	</bean>
+
+	<bean id="jmsLoanProvider" class="com.parasoft.parabank.messaging.JmsLoanProvider">
+		<property name="jmsTemplate" ref="jmsTemplate" />
+		<property name="marshaller" ref="jaxb2Marshaller" />
+		<property name="unmarshaller" ref="jaxb2Marshaller" />
+		<property name="requestDestinationName" value="${request.queue}" />
+		<property name="responseDestinationName" value="${response.queue}" />
+	</bean>
+
+	<bean id="wsLoanProvider" class="com.parasoft.parabank.messaging.WebServiceLoanProvider">
+		<property name="adminManager" ref="adminManager" />
+		<property name="wsdlUrl" value="http://localhost:8080/parabank/services/LoanProcessor?wsdl" />
+	</bean>
+
+	<bean id="localLoanProvider" class="com.parasoft.parabank.messaging.LocalLoanProvider">
+		<property name="loanProcessor" ref="loanProcessor" />
+		<property name="loanProviderName" value="ParaBank" />
+	</bean>
+
+	<bean id="loanProcessor" class="com.parasoft.parabank.domain.logic.impl.ConfigurableLoanProvider">
+		<property name="adminManager" ref="adminManager" />
+		<property name="loanProviders">
+			<map>
+				<entry key="funds">
+					<bean class="com.parasoft.parabank.domain.logic.impl.AvailableFundsLoanProcessor">
+						<property name="adminManager" ref="adminManager" />
+					</bean>
+				</entry>
+				<entry key="down">
+					<bean class="com.parasoft.parabank.domain.logic.impl.DownPaymentLoanProcessor">
+						<property name="adminManager" ref="adminManager" />
+					</bean>
+				</entry>
+				<entry key="combined">
+					<bean class="com.parasoft.parabank.domain.logic.impl.CombinedLoanProcessor">
+						<property name="adminManager" ref="adminManager" />
+					</bean>
+				</entry>
+			</map>
+		</property>
+		<property name="parameter" value="loanProcessor" />
+	</bean>
+
+	<!-- ========================= VALIDATORS ========================= -->
+
+	<bean id="addressValidator" class="com.parasoft.parabank.domain.validator.AddressValidator" />
+
+	<bean id="adminFormValidator" class="com.parasoft.parabank.domain.validator.AdminFormValidator" />
+
+	<bean id="billPayFormValidator" class="com.parasoft.parabank.domain.validator.BillPayFormValidator">
+		<property name="payeeValidator" ref="payeeValidator" />
+	</bean>
+
+	<bean id="contactFormValidator" class="com.parasoft.parabank.domain.validator.ContactFormValidator" />
+
+	<bean id="customerFormValidator" class="com.parasoft.parabank.domain.validator.CustomerFormValidator">
+		<property name="customerValidator" ref="customerValidator" />
+	</bean>
+
+	<bean id="customerValidator" class="com.parasoft.parabank.domain.validator.CustomerValidator">
+		<property name="addressValidator" ref="addressValidator" />
+	</bean>
+
+	<bean id="findTransactionFormValidator" class="com.parasoft.parabank.domain.validator.FindTransactionFormValidator">
+		<property name="transactionCriteriaValidator" ref="transactionCriteriaValidator" />
+	</bean>
+
+	<bean id="lookupFormValidator" class="com.parasoft.parabank.domain.validator.LookupFormValidator">
+		<property name="addressValidator" ref="addressValidator" />
+	</bean>
+
+	<bean id="payeeValidator" class="com.parasoft.parabank.domain.validator.PayeeValidator">
+		<property name="addressValidator" ref="addressValidator" />
+	</bean>
+
+	<bean id="transactionCriteriaValidator" class="com.parasoft.parabank.domain.validator.TransactionCriteriaValidator" />
+
+	<bean id="requestLoanFormValidator" class="com.parasoft.parabank.domain.validator.RequestLoanFormValidator" />
+
+	<bean id="transferFormValidator" class="com.parasoft.parabank.domain.validator.TransferFormValidator" />
+
+
+	<!-- ========================= AOP ========================= -->
+
+	<aop:config>
+		<aop:pointcut id="bankManagerOperation" expression="execution(* com.parasoft.parabank.domain.logic.BankManager.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="bankManagerOperation" />
+	</aop:config>
+
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="*" />
+		</tx:attributes>
+	</tx:advice>
+
+</beans>

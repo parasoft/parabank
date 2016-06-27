@@ -1,0 +1,16 @@
+DELETE FROM Stock;
+DELETE FROM Company;
+DELETE FROM Positions;
+DELETE FROM Transaction;
+DELETE FROM Account;
+DELETE FROM Customer;
+DELETE FROM Sequence;
+INSERT INTO Customer (id, first_name, last_name, address, city, state, zip_code, phone_number, ssn, username, password) VALUES (12212, 'John', 'Smith', '1431 Main St', 'Beverly Hills', 'CA', '90210', '310-447-4121', '622-11-9999', 'john', 'demo');
+INSERT INTO Account VALUES (13344, 12212, 0, '5022.93');
+INSERT INTO Positions (position_id, customer_id, name, symbol, shares, purchase_price) VALUES (12345, 12212, 'AMR Corporation', 'AAR', 20, '23.53');
+INSERT INTO Sequence (name, next_id) VALUES ('Customer', 12434);
+INSERT INTO Sequence (name, next_id) VALUES ('Account', 13455);
+INSERT INTO Sequence (name, next_id) VALUES ('Position', 13017);
+INSERT INTO Sequence (name, next_id) VALUES ('Transaction', 14476);
+INSERT INTO Sequence (name, next_id) VALUES ('Stock', 111);
+INSERT INTO Company (symbol, name) VALUES ('AAR', 'AMR Corporation');

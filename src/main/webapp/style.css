@@ -1,0 +1,86 @@
+.title {
+    font-size: 18px;
+    color: #3979AA;
+    width: 502px;
+    height: 25px;
+    background: url(images/sky-color-bg.gif) 0 10px repeat-x;
+    margin: 0px 0px 10px 0px;
+}
+
+.error {
+    color: red;	
+}
+
+.gradient-style {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 12px;
+    width: 480px;
+    text-align: left;
+    border-collapse: collapse;
+}
+.gradient-style th {
+    font-size: 13px;
+    font-weight: normal;
+    padding: 4px;
+    background: #b9c9fe url('images/gradhead.png') repeat-x;
+    border-top: 2px solid #d3ddff;
+    border-bottom: 1px solid #fff;
+    color: #039;
+}
+.gradient-style td {
+    padding: 4px; 
+    border-bottom: 1px solid #fff;
+    color: #669;
+    border-top: 1px solid #fff;
+    background: #e8edff url('images/gradback.png') repeat-x;
+}
+.gradient-style tfoot tr td {
+    background: #e8edff;
+    font-size: 12px;
+    color: #99c;
+}
+.gradient-style tbody tr:hover td {
+    background: #d0dafd url('images/gradhover.png') repeat-x;
+    color: #339;
+}
+
+.smallText {
+	font-size: 10px;
+}
+
+.login {
+	margin: 0 0 10px 0
+}
+
+.table_hidden {
+	padding: 0px;
+    border-width: 0px;
+    border-style: hidden;
+    border-spacing: 0px;
+}
+
+.form {
+	padding: 10px;
+    background: #d5e2ff;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #bbccff;
+}
+.form2 {
+	padding: 2px;
+    background: #d5e2ff;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #bbccff;
+    border-spacing: 3px;
+}
+
+.form_activity {
+	padding: 5px;
+    border-width: 0px;
+    border-style: none;
+    border-spacing: 0px;
+}
+.headline {
+    color: #3979AA;	
+}

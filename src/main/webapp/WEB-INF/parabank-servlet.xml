@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.2.xsd 
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.2.xsd
+       http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util-4.2.xsd">
+
+	<!-- the application context definition for the ParaBank DispatcherServlet -->
+<!-- 	<context:annotation-config />
+ -->
+ 	<mvc:annotation-driven>
+		<mvc:argument-resolvers>
+			<bean  class="com.parasoft.parabank.util.SessionParamArgumentResolver" lazy-init="false" />
+		</mvc:argument-resolvers>
+	</mvc:annotation-driven>
+	<context:component-scan base-package="com.parasoft.parabank,com.parasoft.bookstore,com.parasoft.bookstore2" />
+
+	<mvc:view-controller path="/about.htm" view-name="about" />
+	<mvc:view-controller path="/services.htm" view-name="services" />
+	<mvc:view-controller path="/loginForm.htm" view-name="loginform" />
+	<mvc:view-controller path="/sitemap.htm" view-name="sitemap" />
+
+	<!--
+		<mvc:view-controller path="/about.htm" view-name="about"/>
+	-->
+
+
+	<!-- ========================= CUSTOM ANNOTATION RESOLVERS ========================= -->
+	<!-- This is now done above
+		<bean primary="true" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="customArgumentResolvers">
+		<list>
+		<ref bean="sessionArgResolver" />
+		</list>
+		</property>
+		<property name="synchronizeOnSession" value="true" />
+		</bean>
+			<bean id="sessionArgResolver" class="com.parasoft.parabank.util.SessionParamArgumentResolver" />
+		
+	-->
+	<!-- <bean id="requestMappingHandlerMapping" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"
+		/>
+	-->
+	<!-- ========================= VIEW RESOLVER ========================= -->
+
+	<bean id="viewResolver" class="com.parasoft.parabank.web.TemplateViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>
+		<property name="prefix" value="/WEB-INF/jsp/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+
+
+	<!-- ========================= LOCALIZED MESSAGES DEFINITION ========================= -->
+
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="messages" />
+	</bean>
+
+	<!-- ========================= ENUM TYPE CONVERTER ========================= -->
+
+	<bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+		<property name="converters">
+			<list>
+				<bean class="com.parasoft.parabank.web.AccountTypeConverter" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- ========================= DATE EDITOR ========================= -->
+
+	<bean id="customDateEditor" class="org.springframework.beans.propertyeditors.CustomDateEditor">
+		<constructor-arg>
+			<bean class="java.text.SimpleDateFormat">
+				<constructor-arg>
+					<value>MM/dd/yyyy</value>
+				</constructor-arg>
+			</bean>
+		</constructor-arg>
+		<constructor-arg>
+			<value>true</value>
+		</constructor-arg>
+	</bean>
+
+	<!-- ========================= VIEW NAMES ========================= -->
+	<util:constant id="about" static-field="com.parasoft.parabank.util.Constants.ABOUT" />
+	<util:constant id="activity" static-field="com.parasoft.parabank.util.Constants.ACTIVITY" />
+	<util:constant id="admin" static-field="com.parasoft.parabank.util.Constants.ADMIN" />
+	<util:constant id="billpay" static-field="com.parasoft.parabank.util.Constants.BILLPAY" />
+	<util:constant id="contact" static-field="com.parasoft.parabank.util.Constants.CONTACT" />
+	<util:constant id="findtrans" static-field="com.parasoft.parabank.util.Constants.FINDTRANS" />
+	<util:constant id="index" static-field="com.parasoft.parabank.util.Constants.INDEX" />
+	<util:constant id="loginform" static-field="com.parasoft.parabank.util.Constants.LOGINFORM" />
+	<util:constant id="lookup" static-field="com.parasoft.parabank.util.Constants.LOOKUP" />
+	<util:constant id="news" static-field="com.parasoft.parabank.util.Constants.NEWS" />
+	<util:constant id="openaccount" static-field="com.parasoft.parabank.util.Constants.OPENACCOUNT" />
+	<util:constant id="register" static-field="com.parasoft.parabank.util.Constants.REGISTER" />
+	<util:constant id="requestloan" static-field="com.parasoft.parabank.util.Constants.REQUESTLOAN" />
+	<util:constant id="services" static-field="com.parasoft.parabank.util.Constants.SERVICES" />
+	<util:constant id="sitemap" static-field="com.parasoft.parabank.util.Constants.SITEMAP" />
+	<util:constant id="transfer" static-field="com.parasoft.parabank.util.Constants.TRANSFER" />
+	<util:constant id="transaction" static-field="com.parasoft.parabank.util.Constants.TRANSACTION" />
+	<util:constant id="updateprofile" static-field="com.parasoft.parabank.util.Constants.UPDATEPROFILE" />
+
+	<!-- ========================= COMMAND CLASS NAMES ========================= -->
+	<util:constant id="classAdminForm" static-field="com.parasoft.parabank.util.Constants.CLASS_ADMINFORM" />
+	<util:constant id="classContactForm" static-field="com.parasoft.parabank.util.Constants.CLASS_CONTACTFORM" />
+	<util:constant id="classLookupForm" static-field="com.parasoft.parabank.util.Constants.CLASS_LOOKUPFORM" />
+	<util:constant id="classCustomerForm" static-field="com.parasoft.parabank.util.Constants.CLASS_CUSTOMERFORM" />
+	<util:constant id="classTransactionCriteria" static-field="com.parasoft.parabank.util.Constants.CLASS_TRANSACTIONCRITERIA" />
+	<util:constant id="classBillPayForm" static-field="com.parasoft.parabank.util.Constants.CLASS_BILLPAYFORM" />
+	<util:constant id="classFindTransactionForm" static-field="com.parasoft.parabank.util.Constants.CLASS_FINDTRANSACTIONFORM" />
+	<util:constant id="classOpenAccountForm" static-field="com.parasoft.parabank.util.Constants.CLASS_OPENACCOUNTFORM" />
+	<util:constant id="classRequestLoanForm" static-field="com.parasoft.parabank.util.Constants.CLASS_REQUESTLOANFORM" />
+	<util:constant id="classTransferForm" static-field="com.parasoft.parabank.util.Constants.CLASS_TRANSFERFORM" />
+	<util:constant id="classCustomerForm" static-field="com.parasoft.parabank.util.Constants.CLASS_CUSTOMERFORM" />
+
+	<!-- ========================= COMMAND NAMES ========================= -->
+	<util:constant id="adminForm" static-field="com.parasoft.parabank.util.Constants.ADMINFORM" />
+	<util:constant id="contactForm" static-field="com.parasoft.parabank.util.Constants.CONTACTFORM" />
+	<util:constant id="lookupForm" static-field="com.parasoft.parabank.util.Constants.LOOKUPFORM" />
+	<util:constant id="customerForm" static-field="com.parasoft.parabank.util.Constants.CUSTOMERFORM" />
+	<util:constant id="customerFormUpdate" static-field="com.parasoft.parabank.util.Constants.CUSTOMERFORMUPDATE" />
+	<util:constant id="transactionCriteria" static-field="com.parasoft.parabank.util.Constants.TRANSACTIONCRITERIA" />
+	<util:constant id="billPayForm" static-field="com.parasoft.parabank.util.Constants.BILLPAYFORM" />
+	<util:constant id="findTransactionForm" static-field="com.parasoft.parabank.util.Constants.FINDTRANSACTIONFORM" />
+	<util:constant id="openAccountForm" static-field="com.parasoft.parabank.util.Constants.OPENACCOUNTFORM" />
+	<util:constant id="requestLoanForm" static-field="com.parasoft.parabank.util.Constants.REQUESTLOANFORM" />
+	<util:constant id="transferForm" static-field="com.parasoft.parabank.util.Constants.TRANSFERFORM" />
+
+	<!-- ========================= CONTROLLERS FOR PUBLIC PAGES ========================= -->
+	<bean id="defaultHandlerMapping" class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />
+
+	<!-- ========================= CONTROLLERS FOR PROTECTED PAGES ========================= -->
+
+	<bean id="secureHandlerMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref bean="loginInterceptor" />
+			</list>
+		</property>
+		<property name="urlMap">
+			<map>
+				<entry key="/activity.htm" value-ref="secure_activity" />
+				<entry key="/billpay.htm" value-ref="secure_billpay" />
+				<entry key="/findtrans.htm" value-ref="secure_findtrans" />
+				<entry key="/requestloan.htm" value-ref="secure_requestloan" />
+				<entry key="/openaccount.htm" value-ref="secure_openaccount" />
+				<entry key="/overview.htm" value-ref="secure_overview" />
+				<entry key="/transaction.htm" value-ref="secure_transaction" />
+				<entry key="/transfer.htm" value-ref="secure_transfer" />
+				<entry key="/updateprofile.htm" value-ref="secure_updateprofile" />
+			</map>
+		</property>
+	</bean>
+
+
+	<bean id="loginInterceptor" class="com.parasoft.parabank.web.LoginInterceptor" />
+
+
+	<!--
+		<bean name="/about.htm" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+		<property name="viewName" ref="about" />
+		</bean>
+
+		<bean name="/services.htm" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+		<property name="viewName" ref="services" />
+		</bean>
+
+		<bean name="/admin.htm" class="com.parasoft.parabank.web.controller.AdminController">
+		<property name="adminManager" ref="adminManager" />
+		<property name="loanProvider" ref="loanProvider" />
+		<property name="loanProcessor" ref="loanProcessor" />
+		<property name="commandName" ref="adminForm" />
+		<property name="commandClass" ref="classAdminForm" />
+		<property name="formView" ref="admin" />
+		</bean>
+
+		<bean name="/contact.htm" class="com.parasoft.parabank.web.controller.ContactController">
+	--><!-- <property name="sessionForm" value="true" />
+	--><!--
+		<property name="commandName" ref="contactForm" />
+		<property name="commandClass" ref="classContactForm" />
+		<property name="formView" ref="contact" />
+		</bean>
+
+		<bean name="/db.htm" class="com.parasoft.parabank.web.controller.DatabaseController">
+		<property name="adminManager" ref="adminManager" />
+		<property name="formView" ref="admin" />
+		</bean>
+
+		<bean name="/error.htm" class="com.parasoft.parabank.web.controller.ErrorController" />
+
+		<bean name="/index.htm" class="com.parasoft.parabank.web.controller.IndexController">
+		<property name="formView" ref="index" />
+		<property name="newsManager" ref="newsManager" />
+		</bean>
+
+		<bean name="/initializeDB.htm" class="com.parasoft.parabank.web.controller.InitializeDBController">
+		<property name="adminManager" ref="adminManager" />
+		<property name="bookstoreAdminDao" ref="bookstoreDao" />
+		</bean>
+
+		<bean name="/jms.htm" class="com.parasoft.parabank.web.controller.JmsListenerController">
+		<property name="adminManager" ref="adminManager" />
+		<property name="formView" ref="admin" />
+		</bean>
+
+		<bean name="/lookup.htm" class="com.parasoft.parabank.web.controller.CustomerLookupController">
+		<property name="bankManager" ref="bankManager" />
+		<property name="validator" ref="lookupFormValidator" />
+	--><!-- <property name="validateOnBinding" value="false" />
+		<property name="sessionForm" value="true" />
+	--><!--
+		<property name="commandName" ref="lookupForm" />
+		<property name="commandClass" ref="classLookupForm" />
+		<property name="formView" ref="lookup" />
+		</bean>
+
+		<bean name="/login.htm" class="com.parasoft.parabank.web.controller.LoginController">
+		<property name="bankManager" ref="bankManager" />
+		<property name="accessModeController" ref="accessModeController" />
+
+		</bean>
+
+		<bean name="accessModeController" class="com.parasoft.parabank.util.AccessModeController">
+		<property name="adminManager" ref="adminManager" />
+		<property name="bankManager" ref="bankManager" />
+		</bean>
+
+		<bean name="/loginForm.htm" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+		<property name="viewName" ref="loginform" />
+		</bean>
+
+		<bean name="/news.htm" class="com.parasoft.parabank.web.controller.NewsController">
+		<property name="newsManager" ref="newsManager" />
+		<property name="formView" ref="news" />
+		</bean>
+	--><!--
+		<bean name="/register.htm" class="com.parasoft.parabank.web.controller.RegisterCustomerController">
+		<property name="bankManager" ref="bankManager" />
+		<property name="validator" ref="customerValidator" />
+	--><!-- <property name="validateOnBinding" value="false" />
+		<property name="sessionForm" value="true" />
+	--><!--
+		<property name="commandName" ref="customerForm" />
+		<property name="commandClass" ref="classCustomerForm" />
+		<property name="formView" ref="register" />
+		</bean>
+
+		<bean name="/sitemap.htm" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+		<property name="viewName" ref="sitemap" />
+		</bean>
+
+		<bean name="/logout.htm" class="com.parasoft.parabank.web.controller.LogoutController" />
+
+		<bean name="/portfolio.htm" class="com.parasoft.parabank.web.controller.PortfolioController" />
+	-->
+
+
+	<!--
+		<bean id="secure_activity" class="com.parasoft.parabank.web.controller.AccountActivityController">
+		<property name="adminManager" ref="adminManager" />
+		<property name="accessModeController" ref="accessModeController" />
+		<property name="bankManager" ref="bankManager" />
+		<property name="commandName" ref="transactionCriteria" />
+		<property name="commandClass" ref="classTransactionCriteria" />
+		<property name="formView" ref="activity" />
+		</bean>
+	--><!--
+		<bean id="secure_billpay" class="com.parasoft.parabank.web.controller.BillPayController">
+		<property name="bankManager" ref="bankManager" />
+		<property name="messageSource" ref="messageSource" />
+		<property name="validator" ref="payeeValidator" />
+		<property name="validateOnBinding" value="false" />
+
+		<property name="commandName" ref="billPayForm" />
+		<property name="commandClass" ref="classBillPayForm" />
+		<property name="formView" ref="billpay" />
+		</bean>
+	--><!--
+		<bean id="secure_findtrans" class="com.parasoft.parabank.web.controller.FindTransactionController">
+		<property name="bankManager" ref="bankManager" />
+		<property name="validator" ref="transactionCriteriaValidator" />
+	--><!-- <property name="validateOnBinding" value="false" />
+	--><!--
+		<property name="commandName" ref="findTransactionForm" />
+		<property name="commandClass" ref="classFindTransactionForm" />
+		<property name="formView" ref="findtrans" />
+		<property name="adminManager" ref="adminManager" />
+		<property name="accessModeController" ref="accessModeController" />
+		</bean>
+
+		<bean id="secure_openaccount" class="com.parasoft.parabank.web.controller.OpenAccountController">
+		<property name="bankManager" ref="bankManager" />
+		<property name="accessModeController" ref="accessModeController" />
+		<property name="adminManager" ref="adminManager" />
+		<property name="commandName" ref="openAccountForm" />
+		<property name="commandClass" ref="classOpenAccountForm" />
+		<property name="formView" ref="openaccount" />
+		</bean>
+
+		<bean id="secure_overview" class="com.parasoft.parabank.web.controller.AccountsOverviewController">
+		<property name="bankManager" ref="bankManager" />
+		<property name="adminManager" ref="adminManager" />
+		<property name="accessModeController" ref="accessModeController" />
+		</bean>
+
+		<bean id="secure_requestloan" class="com.parasoft.parabank.web.controller.RequestLoanController">
+
+		<property name="adminManager" ref="adminManager" />
+		<property name="accessModeController" ref="accessModeController" />
+		<property name="bankManager" ref="bankManager" />
+		<property name="commandName" ref="requestLoanForm" />
+		<property name="commandClass" ref="classRequestLoanForm" />
+		<property name="formView" ref="requestloan" />
+		</bean>
+
+		<bean id="secure_transaction" class="com.parasoft.parabank.web.controller.TransactionController">
+		<property name="bankManager" ref="bankManager" />
+		<property name="adminManager" ref="adminManager" />
+		<property name="accessModeController" ref="accessModeController" />
+		<property name="formView" ref="transaction" />
+		</bean>
+
+		<bean id="secure_transfer" class="com.parasoft.parabank.web.controller.TransferController">
+		<property name="bankManager" ref="bankManager" />
+		<property name="adminManager" ref="adminManager" />
+		<property name="accessModeController" ref="accessModeController" />
+		<property name="commandName" ref="transferForm" />
+		<property name="commandClass" ref="classTransferForm" />
+		<property name="formView" ref="transfer" />
+		</bean>
+	--><!--
+		<bean id="secure_updateprofile" class="com.parasoft.parabank.web.controller.UpdateCustomerController">
+		<property name="adminManager" ref="adminManager" />
+		<property name="accessModeController" ref="accessModeController" />
+		<property name="bankManager" ref="bankManager" />
+		<property name="validator" ref="customerValidator" />
+	--><!-- <property name="validateOnBinding" value="false" />
+		<property name="sessionForm" value="true" />
+	--><!--
+		<property name="commandName" ref="customerForm" />
+		<property name="commandClass" ref="classCustomerForm" />
+		<property name="formView" ref="updateprofile" />
+		</bean>
+	-->
+</beans>

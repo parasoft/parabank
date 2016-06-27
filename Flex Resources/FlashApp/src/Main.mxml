@@ -1,0 +1,945 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   applicationComplete="initApp()"
+			   minWidth="955" minHeight="600" tabStops="25" currentState="Initial" height="852" width="1071" xmlns:components="components.*">
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.charts.events.ChartItemEvent;
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.events.ListEvent;
+			import mx.events.StateChangeEvent;
+			import mx.rpc.events.FaultEvent;
+			import mx.rpc.events.ResultEvent;
+			import mx.rpc.soap.SOAPFault;
+			import mx.rpc.soap.WebService;
+			
+			import spark.events.IndexChangeEvent;
+			
+			[Bindable]
+			private var currentDate:Date = new Date();
+			
+			[Bindable]
+			private var positionsData:ArrayCollection = new ArrayCollection();
+			
+			[Bindable]
+			private var positionData:ArrayCollection = new ArrayCollection();
+			
+			[Bindable]
+			private var accountsData:ArrayCollection = new ArrayCollection();
+			
+			[Bindable]
+			private var balanceData:Array = new Array();
+			
+			[Bindable]
+			private var companies:ArrayCollection = new ArrayCollection( [
+				{ stockname: "Apple Inc.", symbol: "AAPL", lastprice: "$200.00", marketvalue: "$50.00", totalgain: "$200.00", daysgain: "2.00"},
+				{ stockname: "Microsoft Corporation", symbol: "MSFT", lastprice: "$5.00", marketvalue: "$1.00", totalgain: "$0.01", daysgain: "0.01"},
+				{ stockname: "Oracle Corporation", symbol: "ORCL", lastprice: "$15.00", marketvalue: "$15.00", totalgain: "$50.00", daysgain: "10.00"}]);
+			
+			[Bindable]
+			private var apple:ArrayCollection = new ArrayCollection();			
+			
+			[Bindable]
+			private var microsoft:ArrayCollection = new ArrayCollection();
+			
+			[Bindable]
+			private var oracle:ArrayCollection = new ArrayCollection();
+			
+			[Bindable]
+			private var historicalPoints:ArrayCollection = new ArrayCollection();
+			
+			[Bindable]
+			private var appleWeek:ArrayCollection = new ArrayCollection();
+			
+			[Bindable]
+			private var microsoftWeek:ArrayCollection = new ArrayCollection();
+			
+			[Bindable]
+			private var oracleWeek:ArrayCollection = new ArrayCollection();
+			
+			[Bindable]
+			private var historicalPointsWeek:ArrayCollection = new ArrayCollection();
+			
+			[Bindable]
+			private var appleMonth:ArrayCollection = new ArrayCollection();
+			
+			[Bindable]
+			private var microsoftMonth:ArrayCollection = new ArrayCollection();
+			
+			[Bindable]
+			private var oracleMonth:ArrayCollection = new ArrayCollection();
+			
+			[Bindable]
+			private var historicalPointsMonth:ArrayCollection = new ArrayCollection();
+			
+			[Bindable]
+			private var appleThreeMonth:ArrayCollection = new ArrayCollection();
+			
+			[Bindable]
+			private var microsoftThreeMonth:ArrayCollection = new ArrayCollection();
+			
+			[Bindable]
+			private var oracleThreeMonth:ArrayCollection = new ArrayCollection();
+			
+			[Bindable]
+			private var historicalPointsThreeMonth:ArrayCollection = new ArrayCollection();
+			
+			[Bindable]
+			public var depts:ArrayCollection = new ArrayCollection([
+				{label:"Apple Inc.", data:1}, 
+				{label:"Microsoft Corporation", data:2}, 
+				{label:"Oracle Corporation", data:3} ])
+			
+			public function initHistoricalData():void {
+				
+				apple = new ArrayCollection( [
+					{ Month: "Mar 4 '11", StockPrice: 182},
+					{ Month: "Mar 3 '11", StockPrice: 180},
+					{ Month: "Mar 2 '11", StockPrice: 177},
+					{ Month: "Mar 1 '11", StockPrice: 175},
+					{ Month: "Feb 28 '11", StockPrice: 169},
+					{ Month: "Feb 27 '11", StockPrice: 170},
+					{ Month: "Feb 26 '11", StockPrice: 175},
+					{ Month: "Feb 25 '11", StockPrice: 172},
+					{ Month: "Feb 24 '11", StockPrice: 174},
+					{ Month: "Feb 23 '11", StockPrice: 167},
+					{ Month: "Feb 22 '11", StockPrice: 169},
+					{ Month: "Feb 21 '11", StockPrice: 173},
+					{ Month: "Feb 20 '11", StockPrice: 171},
+					{ Month: "Feb 19 '11", StockPrice: 170},
+					{ Month: "Feb 18 '11", StockPrice: 168},
+					{ Month: "Feb 17 '11", StockPrice: 165},
+					{ Month: "Feb 16 '11", StockPrice: 160},
+					{ Month: "Feb 15 '11", StockPrice: 158},
+					{ Month: "Feb 14 '11", StockPrice: 159},
+					{ Month: "Feb 13 '11", StockPrice: 158},
+					{ Month: "Feb 12 '11", StockPrice: 152},
+					{ Month: "Feb 11 '11", StockPrice: 150},
+					{ Month: "Feb 10 '11", StockPrice: 175},
+					{ Month: "Feb 9 '11", StockPrice: 169},
+					{ Month: "Feb 8 '11", StockPrice: 171},
+					{ Month: "Feb 7 '11", StockPrice: 168},
+					{ Month: "Feb 6 '11", StockPrice: 166},
+					{ Month: "Feb 5 '11", StockPrice: 165},
+					{ Month: "Feb 4 '11", StockPrice: 176},
+					{ Month: "Feb 3 '11", StockPrice: 177},
+					{ Month: "Feb 2 '11", StockPrice: 172},
+					{ Month: "Feb 1 '11", StockPrice: 174},
+					{ Month: "Jan 31 '11", StockPrice: 169},
+					{ Month: "Jan 30 '11", StockPrice: 169},
+					{ Month: "Jan 29 '11", StockPrice: 169},
+					{ Month: "Jan 28 '11", StockPrice: 169},
+					{ Month: "Jan 27 '11", StockPrice: 170},
+					{ Month: "Jan 26 '11", StockPrice: 175},
+					{ Month: "Jan 25 '11", StockPrice: 172},
+					{ Month: "Jan 24 '11", StockPrice: 174},
+					{ Month: "Jan 23 '11", StockPrice: 167},
+					{ Month: "Jan 22 '11", StockPrice: 169},
+					{ Month: "Jan 21 '11", StockPrice: 173},
+					{ Month: "Jan 20 '11", StockPrice: 171},
+					{ Month: "Jan 19 '11", StockPrice: 170},
+					{ Month: "Jan 18 '11", StockPrice: 168},
+					{ Month: "Jan 17 '11", StockPrice: 165},
+					{ Month: "Jan 16 '11", StockPrice: 160},
+					{ Month: "Jan 15 '11", StockPrice: 158},
+					{ Month: "Jan 14 '11", StockPrice: 159},
+					{ Month: "Jan 13 '11", StockPrice: 158},
+					{ Month: "Jan 12 '11", StockPrice: 152},
+					{ Month: "Jan 11 '11", StockPrice: 150},
+					{ Month: "Jan 10 '11", StockPrice: 175},
+					{ Month: "Jan 9 '11", StockPrice: 169},
+					{ Month: "Jan 8 '11", StockPrice: 171},
+					{ Month: "Jan 7 '11", StockPrice: 168},
+					{ Month: "Jan 6 '11", StockPrice: 166},
+					{ Month: "Jan 5 '11", StockPrice: 165},
+					{ Month: "Jan 4 '11", StockPrice: 176},
+					{ Month: "Jan 3 '11", StockPrice: 177},
+					{ Month: "Jan 2 '11", StockPrice: 172},
+					{ Month: "Jan 1 '11", StockPrice: 174},
+					{ Month: "Dec 31 '10", StockPrice: 169},
+					{ Month: "Dec 30 '10", StockPrice: 169},
+					{ Month: "Dec 29 '10", StockPrice: 169},
+					{ Month: "Dec 28 '10", StockPrice: 169},
+					{ Month: "Dec 27 '10", StockPrice: 170},
+					{ Month: "Dec 26 '10", StockPrice: 175},
+					{ Month: "Dec 25 '10", StockPrice: 172},
+					{ Month: "Dec 24 '10", StockPrice: 174},
+					{ Month: "Dec 23 '10", StockPrice: 167},
+					{ Month: "Dec 22 '10", StockPrice: 169},
+					{ Month: "Dec 21 '10", StockPrice: 173},
+					{ Month: "Dec 20 '10", StockPrice: 171},
+					{ Month: "Dec 19 '10", StockPrice: 170},
+					{ Month: "Dec 18 '10", StockPrice: 168},
+					{ Month: "Dec 17 '10", StockPrice: 165},
+					{ Month: "Dec 16 '10", StockPrice: 160},
+					{ Month: "Dec 15 '10", StockPrice: 158},
+					{ Month: "Dec 14 '10", StockPrice: 159},
+					{ Month: "Dec 13 '10", StockPrice: 158},
+					{ Month: "Dec 12 '10", StockPrice: 152},
+					{ Month: "Dec 11 '10", StockPrice: 150},
+					{ Month: "Dec 10 '10", StockPrice: 175},
+					{ Month: "Dec 9 '10", StockPrice: 169},
+					{ Month: "Dec 8 '10", StockPrice: 171},
+					{ Month: "Dec 7 '10", StockPrice: 168},
+					{ Month: "Dec 6 '10", StockPrice: 166},
+					{ Month: "Dec 5 '10", StockPrice: 165},
+					{ Month: "Dec 4 '10", StockPrice: 176},
+					{ Month: "Dec 3 '10", StockPrice: 177},
+					{ Month: "Dec 2 '10", StockPrice: 172},
+					{ Month: "Dec 1 '10", StockPrice: 174},
+					{ Month: "Nov '10", StockPrice: 150},
+					{ Month: "Oct '10", StockPrice: 164},
+					{ Month: "Sep '10", StockPrice: 162}, 
+					{ Month: "Aug '10", StockPrice: 160},
+					{ Month: "Jul '10", StockPrice: 177},
+					{ Month: "Jun '10", StockPrice: 178},
+					{ Month: "May '10", StockPrice: 170}, 
+					{ Month: "Apr '10", StockPrice: 175},
+					{ Month: "Mar '10", StockPrice: 192},
+					{ Month: "Feb '10", StockPrice: 190}]);			
+				
+				microsoft = new ArrayCollection( [
+					{ Month: "Mar 4 '11", StockPrice: 19},
+					{ Month: "Mar 3 '11", StockPrice: 18},
+					{ Month: "Mar 2 '11", StockPrice: 16},
+					{ Month: "Mar 1 '11", StockPrice: 21},
+					{ Month: "Feb 28 '11", StockPrice: 20},
+					{ Month: "Feb 27 '11", StockPrice: 21},
+					{ Month: "Feb 26 '11", StockPrice: 21},
+					{ Month: "Feb 25 '11", StockPrice: 21},
+					{ Month: "Feb 24 '11", StockPrice: 18},
+					{ Month: "Feb 23 '11", StockPrice: 19},
+					{ Month: "Feb 22 '11", StockPrice: 6},
+					{ Month: "Feb 21 '11", StockPrice: 7},
+					{ Month: "Feb 20 '11", StockPrice: 5},
+					{ Month: "Feb 19 '11", StockPrice: 4},
+					{ Month: "Feb 18 '11", StockPrice: 8},
+					{ Month: "Feb 17 '11", StockPrice: 5},
+					{ Month: "Feb 16 '11", StockPrice: 9},
+					{ Month: "Feb 15 '11", StockPrice: 6},
+					{ Month: "Feb 14 '11", StockPrice: 6},
+					{ Month: "Feb 13 '11", StockPrice: 7},
+					{ Month: "Feb 12 '11", StockPrice: 8},
+					{ Month: "Feb 11 '11", StockPrice: 7},
+					{ Month: "Feb 10 '11", StockPrice: 5},
+					{ Month: "Feb 9 '11", StockPrice: 6},
+					{ Month: "Feb 8 '11", StockPrice: 5},
+					{ Month: "Feb 7 '11", StockPrice: 2},
+					{ Month: "Feb 6 '11", StockPrice: 8},
+					{ Month: "Feb 5 '11", StockPrice: 18},
+					{ Month: "Feb 4 '11", StockPrice: 21},
+					{ Month: "Feb 3 '11", StockPrice: 20},
+					{ Month: "Feb 2 '11", StockPrice: 18},
+					{ Month: "Feb 1 '11", StockPrice: 20},
+					{ Month: "Jan 31 '11", StockPrice: 22},
+					{ Month: "Jan 30 '11", StockPrice: 22},
+					{ Month: "Jan 29 '11", StockPrice: 19},
+					{ Month: "Jan 28 '11", StockPrice: 18},
+					{ Month: "Jan 27 '11", StockPrice: 17},
+					{ Month: "Jan 26 '11", StockPrice: 17},
+					{ Month: "Jan 25 '11", StockPrice: 17},
+					{ Month: "Jan 24 '11", StockPrice: 17},
+					{ Month: "Jan 23 '11", StockPrice: 16},
+					{ Month: "Jan 22 '11", StockPrice: 16},
+					{ Month: "Jan 21 '11", StockPrice: 17},
+					{ Month: "Jan 20 '11", StockPrice: 17},
+					{ Month: "Jan 19 '11", StockPrice: 17},
+					{ Month: "Jan 18 '11", StockPrice: 16},
+					{ Month: "Jan 17 '11", StockPrice: 16},
+					{ Month: "Jan 16 '11", StockPrice: 16},
+					{ Month: "Jan 15 '11", StockPrice: 15},
+					{ Month: "Jan 14 '11", StockPrice: 15},
+					{ Month: "Jan 13 '11", StockPrice: 15},
+					{ Month: "Jan 12 '11", StockPrice: 15},
+					{ Month: "Jan 11 '11", StockPrice: 15},
+					{ Month: "Jan 10 '11", StockPrice: 17},
+					{ Month: "Jan 9 '11", StockPrice: 16},
+					{ Month: "Jan 8 '11", StockPrice: 17},
+					{ Month: "Jan 7 '11", StockPrice: 16},
+					{ Month: "Jan 6 '11", StockPrice: 16},
+					{ Month: "Jan 5 '11", StockPrice: 16},
+					{ Month: "Jan 4 '11", StockPrice: 17},
+					{ Month: "Jan 3 '11", StockPrice: 17},
+					{ Month: "Jan 2 '11", StockPrice: 17},
+					{ Month: "Jan 1 '11", StockPrice: 20},
+					{ Month: "Dec 31 '10", StockPrice: 22},
+					{ Month: "Dec 30 '10", StockPrice: 22},
+					{ Month: "Dec 29 '10", StockPrice: 19},
+					{ Month: "Dec 28 '10", StockPrice: 18},
+					{ Month: "Dec 27 '10", StockPrice: 17},
+					{ Month: "Dec 26 '10", StockPrice: 17},
+					{ Month: "Dec 25 '10", StockPrice: 17},
+					{ Month: "Dec 24 '10", StockPrice: 17},
+					{ Month: "Dec 23 '10", StockPrice: 16},
+					{ Month: "Dec 22 '10", StockPrice: 16},
+					{ Month: "Dec 21 '10", StockPrice: 17},
+					{ Month: "Dec 20 '10", StockPrice: 17},
+					{ Month: "Dec 19 '10", StockPrice: 17},
+					{ Month: "Dec 18 '10", StockPrice: 16},
+					{ Month: "Dec 17 '10", StockPrice: 16},
+					{ Month: "Dec 16 '10", StockPrice: 16},
+					{ Month: "Dec 15 '10", StockPrice: 15},
+					{ Month: "Dec 14 '10", StockPrice: 15},
+					{ Month: "Dec 13 '10", StockPrice: 15},
+					{ Month: "Dec 12 '10", StockPrice: 15},
+					{ Month: "Dec 11 '10", StockPrice: 15},
+					{ Month: "Dec 10 '10", StockPrice: 17},
+					{ Month: "Dec 9 '10", StockPrice: 16},
+					{ Month: "Dec 8 '10", StockPrice: 17},
+					{ Month: "Dec 7 '10", StockPrice: 16},
+					{ Month: "Dec 6 '10", StockPrice: 16},
+					{ Month: "Dec 5 '10", StockPrice: 16},
+					{ Month: "Dec 4 '10", StockPrice: 17},
+					{ Month: "Dec 3 '10", StockPrice: 17},
+					{ Month: "Dec 2 '10", StockPrice: 17},
+					{ Month: "Dec 1 '10", StockPrice: 20},
+					{ Month: "Nov '10", StockPrice: 3},
+					{ Month: "Oct '10", StockPrice: 4},
+					{ Month: "Sep '10", StockPrice: 1}, 
+					{ Month: "Aug '10", StockPrice: 6},
+					{ Month: "Jul '10", StockPrice: 10},
+					{ Month: "Jun '10", StockPrice: 15},
+					{ Month: "May '10", StockPrice: 1}, 
+					{ Month: "Apr '10", StockPrice: 6},
+					{ Month: "Mar '10", StockPrice: 10},
+					{ Month: "Feb '10", StockPrice: 15},
+					{ Month: "Jan '10", StockPrice: 19}]);
+				
+				oracle = new ArrayCollection( [
+					{ Month: "Mar 4 '11", StockPrice: 50},
+					{ Month: "Mar 3 '11", StockPrice: 48},
+					{ Month: "Mar 2 '11", StockPrice: 49},
+					{ Month: "Mar 1 '11", StockPrice: 47},
+					{ Month: "Feb 28 '11", StockPrice: 34},
+					{ Month: "Feb 27 '11", StockPrice: 28},
+					{ Month: "Feb 26 '11", StockPrice: 21},
+					{ Month: "Feb 25 '11", StockPrice: 21},
+					{ Month: "Feb 24 '11", StockPrice: 18},
+					{ Month: "Feb 23 '11", StockPrice: 19},
+					{ Month: "Feb 22 '11", StockPrice: 6},
+					{ Month: "Feb 21 '11", StockPrice: 7},
+					{ Month: "Feb 20 '11", StockPrice: 5},
+					{ Month: "Feb 19 '11", StockPrice: 4},
+					{ Month: "Feb 18 '11", StockPrice: 8},
+					{ Month: "Feb 17 '11", StockPrice: 5},
+					{ Month: "Feb 16 '11", StockPrice: 9},
+					{ Month: "Feb 15 '11", StockPrice: 6},
+					{ Month: "Feb 14 '11", StockPrice: 6},
+					{ Month: "Feb 13 '11", StockPrice: 7},
+					{ Month: "Feb 12 '11", StockPrice: 8},
+					{ Month: "Feb 11 '11", StockPrice: 7},
+					{ Month: "Feb 10 '11", StockPrice: 5},
+					{ Month: "Feb 9 '11", StockPrice: 6},
+					{ Month: "Feb 8 '11", StockPrice: 5},
+					{ Month: "Feb 7 '11", StockPrice: 2},
+					{ Month: "Feb 6 '11", StockPrice: 8},
+					{ Month: "Feb 5 '11", StockPrice: 18},
+					{ Month: "Feb 4 '11", StockPrice: 21},
+					{ Month: "Feb 3 '11", StockPrice: 20},
+					{ Month: "Feb 2 '11", StockPrice: 18},
+					{ Month: "Feb 1 '11", StockPrice: 20},
+					{ Month: "Jan 31 '11", StockPrice: 22},
+					{ Month: "Jan 30 '11", StockPrice: 22},
+					{ Month: "Jan 29 '11", StockPrice: 19},
+					{ Month: "Jan 28 '11", StockPrice: 18},
+					{ Month: "Jan 27 '11", StockPrice: 17},
+					{ Month: "Jan 26 '11", StockPrice: 17},
+					{ Month: "Jan 25 '11", StockPrice: 17},
+					{ Month: "Jan 24 '11", StockPrice: 17},
+					{ Month: "Jan 23 '11", StockPrice: 16},
+					{ Month: "Jan 22 '11", StockPrice: 16},
+					{ Month: "Jan 21 '11", StockPrice: 17},
+					{ Month: "Jan 20 '11", StockPrice: 17},
+					{ Month: "Jan 19 '11", StockPrice: 17},
+					{ Month: "Jan 18 '11", StockPrice: 16},
+					{ Month: "Jan 17 '11", StockPrice: 16},
+					{ Month: "Jan 16 '11", StockPrice: 16},
+					{ Month: "Jan 15 '11", StockPrice: 15},
+					{ Month: "Jan 14 '11", StockPrice: 15},
+					{ Month: "Jan 13 '11", StockPrice: 15},
+					{ Month: "Jan 12 '11", StockPrice: 15},
+					{ Month: "Jan 11 '11", StockPrice: 15},
+					{ Month: "Jan 10 '11", StockPrice: 17},
+					{ Month: "Jan 9 '11", StockPrice: 16},
+					{ Month: "Jan 8 '11", StockPrice: 17},
+					{ Month: "Jan 7 '11", StockPrice: 16},
+					{ Month: "Jan 6 '11", StockPrice: 16},
+					{ Month: "Jan 5 '11", StockPrice: 16},
+					{ Month: "Jan 4 '11", StockPrice: 17},
+					{ Month: "Jan 3 '11", StockPrice: 17},
+					{ Month: "Jan 2 '11", StockPrice: 17},
+					{ Month: "Jan 1 '11", StockPrice: 20},
+					{ Month: "Dec 31 '10", StockPrice: 22},
+					{ Month: "Dec 30 '10", StockPrice: 22},
+					{ Month: "Dec 29 '10", StockPrice: 19},
+					{ Month: "Dec 28 '10", StockPrice: 18},
+					{ Month: "Dec 27 '10", StockPrice: 17},
+					{ Month: "Dec 26 '10", StockPrice: 17},
+					{ Month: "Dec 25 '10", StockPrice: 17},
+					{ Month: "Dec 24 '10", StockPrice: 17},
+					{ Month: "Dec 23 '10", StockPrice: 16},
+					{ Month: "Dec 22 '10", StockPrice: 16},
+					{ Month: "Dec 21 '10", StockPrice: 17},
+					{ Month: "Dec 20 '10", StockPrice: 17},
+					{ Month: "Dec 19 '10", StockPrice: 17},
+					{ Month: "Dec 18 '10", StockPrice: 16},
+					{ Month: "Dec 17 '10", StockPrice: 16},
+					{ Month: "Dec 16 '10", StockPrice: 16},
+					{ Month: "Dec 15 '10", StockPrice: 15},
+					{ Month: "Dec 14 '10", StockPrice: 15},
+					{ Month: "Dec 13 '10", StockPrice: 15},
+					{ Month: "Dec 12 '10", StockPrice: 15},
+					{ Month: "Dec 11 '10", StockPrice: 15},
+					{ Month: "Dec 10 '10", StockPrice: 17},
+					{ Month: "Dec 9 '10", StockPrice: 16},
+					{ Month: "Dec 8 '10", StockPrice: 17},
+					{ Month: "Dec 7 '10", StockPrice: 16},
+					{ Month: "Dec 6 '10", StockPrice: 16},
+					{ Month: "Dec 5 '10", StockPrice: 16},
+					{ Month: "Dec 4 '10", StockPrice: 17},
+					{ Month: "Dec 3 '10", StockPrice: 17},
+					{ Month: "Dec 2 '10", StockPrice: 17},
+					{ Month: "Dec 1 '10", StockPrice: 20},
+					{ Month: "Nov '10", StockPrice: 10},
+					{ Month: "Oct '10", StockPrice: 12}, 
+					{ Month: "Sep '10", StockPrice: 4},
+					{ Month: "Aug '10", StockPrice: 12},
+					{ Month: "Jul '10", StockPrice: 13},
+					{ Month: "Jun '10", StockPrice: 12}, 
+					{ Month: "May '10", StockPrice: 4},
+					{ Month: "Apr '10", StockPrice: 12},
+					{ Month: "Mar '10", StockPrice: 13},
+					{ Month: "Mar '10", StockPrice: 10},
+					{ Month: "Jan '10", StockPrice: 8}]);
+				
+				for (var i:int = 0; i < 91; i++){
+					if (i < 7) {
+						appleWeek.addItem(apple[i]);
+						microsoftWeek.addItem(microsoft[i]);
+						oracleWeek.addItem(oracle[i]);
+						
+						appleMonth.addItem(apple[i]);
+						microsoftMonth.addItem(microsoft[i]);
+						oracleMonth.addItem(oracle[i]);
+						
+						appleThreeMonth.addItem(apple[i]);
+						microsoftThreeMonth.addItem(microsoft[i]);
+						oracleThreeMonth.addItem(oracle[i]);
+					} else if (i >= 7 && i < 30){
+						appleMonth.addItem(apple[i]);
+						microsoftMonth.addItem(microsoft[i]);
+						oracleMonth.addItem(oracle[i]);
+						
+						appleThreeMonth.addItem(apple[i]);
+						microsoftThreeMonth.addItem(microsoft[i]);
+						oracleThreeMonth.addItem(oracle[i]);
+					} else if (i >= 30 && i < 91){
+						appleThreeMonth.addItem(apple[i]);
+						microsoftThreeMonth.addItem(microsoft[i]);
+						oracleThreeMonth.addItem(oracle[i]);
+					}
+				}						
+				
+				historicalPoints = new ArrayCollection( [
+					apple,
+					microsoft,
+					oracle]);
+				
+				historicalPointsWeek = new ArrayCollection( [
+					appleWeek,
+					microsoftWeek,
+					oracleWeek]);
+				
+				historicalPointsMonth = new ArrayCollection( [
+					appleMonth,
+					microsoftMonth,
+					oracleMonth]);
+				
+				historicalPointsThreeMonth = new ArrayCollection( [
+					appleThreeMonth,
+					microsoftThreeMonth,
+					oracleThreeMonth]);
+				
+			}
+			
+			// Function to run on Application start up
+			private function initApp():void {			
+				initHistoricalData();
+				paraBankService.getPositions("12212");  //to be replaced with retreval of customerId from session
+				//paraBankService.getAccounts("12212");  	//to be replaced with retreval of customerId from session
+				compdrop.selectedIndex=0;				//ensures on start up that the compdrop has a selected row
+				compdatag.dataProvider=companies[0];
+				compdatag.selectedIndex = 0;			//ensures on start up that the compdatag has a selected row
+			}
+			
+			protected function positionDataGridChangeHandler(event:ListEvent):void
+			{
+				var name:String = positionDataGrid.selectedItem.stockname;
+				var length:int = companies.length;
+				var found:Boolean = false;
+				for (var i:int = 0; i < length; i++){
+					if (name == companies[i].stockname) {
+						compdatag.dataProvider=companies[i];
+						ac1.dataProvider=historicalPoints[i];
+						compdrop.selectedIndex=i;
+						found = true;
+					}
+				} 
+				if (found == false){
+					compdatag.dataProvider=companies[0];
+					ac1.dataProvider=historicalPoints[0];
+					compdrop.selectedIndex=0;
+				}
+				compdatag.selectedIndex=0;
+			}
+			
+			
+			protected function dropdownlist1_changeHandler(event:IndexChangeEvent):void
+			{
+				compdatag.dataProvider=companies[compdrop.selectedIndex];
+				ac1.dataProvider=historicalPoints[compdrop.selectedIndex];
+				compdatag.selectedIndex = 0;			//new: ensures after changing company selection that the row is selected
+			}
+			
+			
+			protected function oneWeekClickHandler(event:MouseEvent):void
+			{
+				historicalPoints=new ArrayCollection();
+				historicalPoints=historicalPointsWeek;
+				ac1.dataProvider=historicalPoints[compdrop.selectedIndex];
+				ac2.dataProvider=historicalPoints[compdrop.selectedIndex];
+				ac3.dataProvider=historicalPoints[compdrop.selectedIndex];
+			}
+			
+			protected function oneMonthClickHandler(event:MouseEvent):void
+			{
+				historicalPoints=new ArrayCollection();
+				historicalPoints=historicalPointsMonth;
+				ac1.dataProvider=historicalPoints[compdrop.selectedIndex];
+				ac2.dataProvider=historicalPoints[compdrop.selectedIndex];
+				ac3.dataProvider=historicalPoints[compdrop.selectedIndex];
+			}
+			
+			protected function threeMonthClickHandler(event:MouseEvent):void
+			{
+				historicalPoints=new ArrayCollection();
+				historicalPoints=historicalPointsThreeMonth;
+				ac1.dataProvider=historicalPoints[compdrop.selectedIndex];
+				ac2.dataProvider=historicalPoints[compdrop.selectedIndex];
+				ac3.dataProvider=historicalPoints[compdrop.selectedIndex];
+			}
+			
+			protected function someSharesRad_clickHandler(event:MouseEvent):void
+			{
+				if(sellSomeSharesRadioButton.selected) {
+					sellSharesTextBox.enabled = true;
+				}else {
+					sellSharesTextBox.enabled = false;
+				}
+				// TODO Auto-generated method stub
+			}
+			
+			protected function radiobutton1_clickHandler(event:MouseEvent):void
+			{
+				if(sellSomeSharesRadioButton.selected) {
+					sellSharesTextBox.enabled = true;
+				}else {
+					sellSharesTextBox.enabled = false;
+				}
+				// TODO Auto-generated method stub
+			}
+			
+			protected function buyButtonStateClickHandler(event:MouseEvent):void {
+				currentState = 'BuyStock';
+				buycompdatag.dataProvider=companies[compdrop.selectedIndex];
+				buycompdatag.selectedIndex=0;
+				ac2.dataProvider=historicalPoints[compdrop.selectedIndex];
+				buyAccountDropDown.selectedIndex = 0;
+				buyBalanceTextBox.text = balanceData[buyAccountDropDown.selectedIndex];
+			}
+			
+			protected function sellButtonStateClickHandler(event:MouseEvent):void {
+				if (positionsData.length > 0) {
+					currentState = 'SellStock';
+					positionData = new ArrayCollection([{
+						id: positionDataGrid.selectedItem.id,
+						stockname: positionDataGrid.selectedItem.stockname,
+						symbol: positionDataGrid.selectedItem.symbol,
+						shares: positionDataGrid.selectedItem.shares,
+						costbasis: positionDataGrid.selectedItem.costbasis,
+						lastprice: positionDataGrid.selectedItem.lastprice,
+						marketvalue: positionDataGrid.selectedItem.marketvalue,
+						totalgain: positionDataGrid.selectedItem.totalgain,
+						daygain: positionDataGrid.selectedItem.daygain}]);
+					
+					sellPositionDataGrid.dataProvider=positionData;
+					sellPositionDataGrid.selectedIndex=0;
+					ac3.dataProvider=historicalPoints[compdrop.selectedIndex];
+					sellAccountDropDown.selectedIndex = 0;
+					sellBalanceTextBox.text = balanceData[sellAccountDropDown.selectedIndex];
+				} else {
+					Alert.show("There are currently no available stock positions owned by this customer to sell", "No Stock Positions");
+				}
+			}
+			
+			// Function to handle buyPosition, sellPosition, and getPositions web service call results
+			private function positionsResultHandler(event:ResultEvent):void {
+				paraBankService.getAccounts("12212");  	//to be replaced with retreval of customerId from session
+				var result:XML = new XML(event.result);
+				var positionList:XMLList = result.children();
+				positionsData = new ArrayCollection();
+				for each(var xml:XML in positionList){
+					var positionId:int = parseInt(xml.descendants("positionId").toString());
+					var name:String = xml.descendants("name").toString();
+					var sym:String = xml.descendants("symbol").toString();
+					var share:int = parseInt(xml.descendants("shares").toString());
+					var purprice:String = parseFloat(xml.descendants("purchasePrice").toString()).toFixed(2);
+					var basis:String = (share * parseFloat(purprice)).toFixed(2);
+					positionsData.addItem({id: positionId, stockname: name, symbol: sym, shares: share, costbasis: "$" + basis, lastprice: "$" + purprice, marketvalue: "$0.00", totalgain: "$0.00", daygain: "$0.00"});
+				}
+				if (positionsData.length > 0){
+					positionDataGrid.selectedIndex = 0;
+					var compname:String = positionDataGrid.selectedItem.stockname;
+					var length:int = companies.length;
+					var found:Boolean = false;
+					for (var i:int = 0; i < length; i++){
+						if (compname == companies[i].stockname) {
+							compdatag.dataProvider=companies[i];
+							ac1.dataProvider=historicalPoints[i];
+							compdrop.selectedIndex=i;
+							found = true;
+						}
+					} 
+					if (found == false){
+						compdatag.dataProvider=companies[0];
+						ac1.dataProvider=historicalPoints[0];
+						compdrop.selectedIndex=0;
+					}
+				} else {
+					compdatag.dataProvider=companies[0];
+					ac1.dataProvider=historicalPoints[0];
+					compdrop.selectedIndex=0;
+				}
+				compdatag.selectedIndex=0;
+				currentState = 'Initial';
+			}
+			
+			// Function to handle getAccounts web service call results
+			private function accountsResultHandler(event:ResultEvent):void {
+				var result:XML = new XML(event.result);
+				var accountsList:XMLList = result.children();
+				accountsData = new ArrayCollection();
+				balanceData = new Array();
+				for each(var xml:XML in accountsList){
+					var accountId:int = parseInt(xml.descendants("id").toString());
+					var balance:String = "$" + xml.descendants("balance").toString();
+					accountsData.addItem({label: accountId, value: accountId});
+					balanceData.push(balance);
+				} 
+				
+			}
+			
+			// Function to handle fault events from Web Service Calls
+			public function faultHandler(event:FaultEvent):void {
+				//deal with event.fault.faultString, etc.
+				if (event.fault is SOAPFault) {
+					var fault:SOAPFault=event.fault as SOAPFault;
+					var faultElement:XML=fault.element;
+					// You could use E4X to traverse the raw fault element returned in the SOAP envelope.
+					// ...
+				}     
+			}
+			
+			// Function for the sell operation, taking customerId (from session), account ID (from account selector), position ID (from dataGrid), shares (from shares input), salePrice (from dataGrid)
+			protected function sellPositionButtonClickHandler(event:MouseEvent):void
+			{
+				if (sellAllSharesRadioButton.selected) {
+					paraBankService.sellPosition(12212, parseInt(sellAccountDropDown.selectedItem.label), parseInt(sellPositionDataGrid.selectedItem.id), parseInt(sellPositionDataGrid.selectedItem.shares), Number(sellPositionDataGrid.selectedItem.lastprice.substr(1)));	
+				}
+				if (sellSomeSharesRadioButton.selected) {
+					var shares:int = parseInt(sellSharesTextBox.text);
+					var ownedShares:int = parseInt(sellPositionDataGrid.selectedItem.shares);
+					if (isNaN(shares) || shares <= 0 || shares > ownedShares) {
+						Alert.show("Please enter a valid shares amount", "Invalid Shares Amount");
+					} else {
+						paraBankService.sellPosition(12212, parseInt(sellAccountDropDown.selectedItem.label), parseInt(sellPositionDataGrid.selectedItem.id), parseInt(sellSharesTextBox.text), Number(sellPositionDataGrid.selectedItem.lastprice.substr(1)));
+					}
+				}
+			}
+			
+			// Function for the buy operation, taking customerId (from session), account ID (from account selector), stockName (from dataGrid), symbol (from dataGrid), shares (from shares input), buyPrice (from dataGrid)
+			protected function buyStockButtonClickHandler(event:MouseEvent):void
+			{
+				var shares:int = parseInt(buySharesTextBox.text);
+				var costbasis:Number = Number(Number(buycompdatag.selectedItem.marketvalue.substr(1))*shares);
+				var balance:Number = Number(buyBalanceTextBox.text.substr(1));
+				if (isNaN(shares) || shares <= 0 ) {
+					Alert.show("Please enter a valid shares amount", "Invalid Shares Amount");
+				} else if (balance < costbasis) {
+					Alert.show("Insufficient funds to make this stock purchase", "Insufficient Funds");
+				} else {
+					paraBankService.buyPosition(12212, parseInt(buyAccountDropDown.selectedItem.label), buycompdatag.selectedItem.stockname.toString(), buycompdatag.selectedItem.symbol.toString(), shares, Number(buycompdatag.selectedItem.marketvalue.toString().substr(1)));
+				}
+			}
+			
+			
+			protected function buyAccountDropDown_changeHandler(event:IndexChangeEvent):void
+			{
+				buyBalanceTextBox.text = balanceData[buyAccountDropDown.selectedIndex];				
+			}
+			
+			protected function sellAccountDropDown_changeHandler(event:IndexChangeEvent):void
+			{
+				sellBalanceTextBox.text = balanceData[sellAccountDropDown.selectedIndex];				
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<mx:DateFormatter id="DateDisplay" formatString="KA ,EEE" />
+		
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<mx:SolidColor id="sc1" color="blue" alpha=".1"/>
+		<mx:SolidColorStroke color="0x000000" alpha="1" id = "s1"/>
+		
+		<s:WebService id="paraBankService" wsdl="http://localhost:8080/parabank/services/ParaBank?wsdl">
+			<s:operation name="getPositions" resultFormat="xml" result="positionsResultHandler(event)" fault="faultHandler(event)"/>
+			<s:operation name="sellPosition" resultFormat="xml" result="positionsResultHandler(event)" fault="faultHandler(event)"/>
+			<s:operation name="buyPosition" resultFormat="xml" result="positionsResultHandler(event)" fault="faultHandler(event)"/>
+			<s:operation name="getAccounts" resultFormat="xml" result="accountsResultHandler(event)" fault="faultHandler(event)"/>
+		</s:WebService>
+		
+	</fx:Declarations>
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
+	<s:states>
+		<s:State name="Initial"/>
+		<s:State name="BuyStock"/>
+		<s:State name="SellStock"/>
+	</s:states>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:BorderContainer width="950" height="680" fontWeight="normal" includeIn="Initial">
+		<s:Label x="350" y="40" fontSize="22" fontWeight="bold" color="#3979AA" text="John's Stock Positions">
+			<s:filters>
+				<s:DropShadowFilter distance="3" angle="45" alpha=".25"/>
+			</s:filters>
+		</s:Label>
+		<s:BorderContainer y="69" width="910" height="217" cornerRadius="3" dropShadowVisible="true" x="18">
+			<mx:DataGrid id="positionDataGrid" x="4" y="4" width="900" dropShadowVisible="false" dataProvider="{positionsData}" change="positionDataGridChangeHandler(event)" editable="false" rowCount="6">
+				<mx:columns>
+					<mx:DataGridColumn dataField="stockname" resizable="false" width="220" headerText="Name"/>
+					<mx:DataGridColumn headerText="Symbol" dataField="symbol" width="60"/>
+					<mx:DataGridColumn headerText="# Shares" dataField="shares" resizable="false" width="65"/>
+					<mx:DataGridColumn headerText="Cost Basis" resizable="false" width="84" dataField="costbasis"/>
+					<mx:DataGridColumn headerText="Last Price" resizable="false" width="70" dataField="lastprice"/>
+					<mx:DataGridColumn headerText="Market Value" resizable="false" width="84" dataField="marketvalue"/>
+					<mx:DataGridColumn headerText="Total Gain $" resizable="false" width="84" dataField="totalgain"/>
+					<mx:DataGridColumn headerText="Total Gain %" width="84"/>
+					<mx:DataGridColumn headerText="Day's Gain $" width="84" dataField="daysgain"/>
+					<mx:DataGridColumn headerText="Day's Gain %" width="84"/>
+				</mx:columns>
+			</mx:DataGrid>
+			<s:Button x="800" y="190" label="Sell" width="90" click="sellButtonStateClickHandler(event);"/>
+		</s:BorderContainer>
+		<s:BorderContainer x="18" y="295" width="910" height="361" cornerRadius="3" dropShadowVisible="true">
+			<mx:AreaChart id="ac1" height="233" width="850"
+						  paddingLeft="5" paddingRight="5" 
+						  showDataTips="true" dataProvider="{apple}" y="29" x="53" textAlign="left" fontSize="10" layoutDirection="rtl" dataTipMode="multiple" dataTipItemsSet="true">
+				
+				<mx:horizontalAxis>
+					<mx:CategoryAxis categoryField="Month"/>
+				</mx:horizontalAxis>
+				
+				<mx:series>
+					<mx:AreaSeries yField="StockPrice" displayName="StockPrice" areaStroke="{s1}" areaFill="{sc1}"/>
+				</mx:series>
+			</mx:AreaChart>
+			<s:VGroup x="1" y="40" width="49" height="210" verticalAlign="top" horizontalAlign="center">
+				<s:Label text="Zoom" verticalAlign="middle" textAlign="center" paddingLeft="1" paddingTop="2" height="24" width="49"/>
+				<s:Button label="1w" width="41" height="23" click="oneWeekClickHandler(event)"/>
+				<s:Button label="1m" width="40" height="23" click="oneMonthClickHandler(event)"/>
+				<s:Button label="3m" width="39" height="23" click="threeMonthClickHandler(event)"/>
+				<s:Button label="1y" width="38" height="23"/>
+				<s:Button label="3y" width="38" height="23"/>
+				<s:Button label="5y" width="38" height="23"/>
+			</s:VGroup>
+			<mx:Legend dataProvider="{ac1}" x="802" y="5" height="26" width="100"/>
+			<mx:DataGrid id="compdatag" x="4" y="262" dataProvider ="{companies}" dropShadowVisible="false"  change="positionDataGridChangeHandler(event)" height="47" width="900">
+				<mx:columns>
+					<mx:DataGridColumn headerText="Stock Name" dataField="stockname" resizable="false" sortable="false" width="300"/>
+					<mx:DataGridColumn headerText="Symbol" dataField="symbol" width="60" resizable="false" sortable="false"/>
+					<mx:DataGridColumn headerText="Last Price" resizable="false" width="70" dataField="lastprice" sortable="false"/>
+					<mx:DataGridColumn headerText="Market Value" resizable="false" width="84" dataField="marketvalue" sortable="false"/>
+					<mx:DataGridColumn headerText="Day's Gain $" width="84" dataField="daysgain" sortable="false"/>
+					<mx:DataGridColumn headerText="Days Gain %" width="84" sortable="false"/>
+					<mx:DataGridColumn headerText="Total Gain $" resizable="false" width="84" dataField="totalgain" sortable="false"/>
+					<mx:DataGridColumn headerText="Total Gain %" width="84" sortable="false"/>
+				</mx:columns>
+			</mx:DataGrid>
+			<s:DropDownList width = "200" dataProvider="{depts}" prompt="Select Company" change="dropdownlist1_changeHandler(event)" id="compdrop" x="4" y="4">
+			</s:DropDownList>
+			<s:Button id="buyButtonState" width="90" cornerRadius="4" enabled="true" click="buyButtonStateClickHandler(event);" x="800" y="320" label="Buy"/>
+		</s:BorderContainer>
+	</s:BorderContainer>
+	<s:BorderContainer width="950" height="680" fontWeight="normal" includeIn="SellStock">
+		<s:layout>
+			<s:BasicLayout/>
+		</s:layout>
+		<s:Label x="350" y="40" text="Sell Owned Position" fontSize="22" fontWeight="bold" color="#3979AA">
+			<s:filters>
+				<s:DropShadowFilter distance="3" angle="45" alpha=".25"/>
+			</s:filters>
+		</s:Label>
+		<s:BorderContainer x="18" y="69" width="910" height="320" cornerRadius="3" dropShadowVisible="true">
+			<mx:AreaChart id="ac3" height="233" width="850"
+						  paddingLeft="5" paddingRight="5" 
+						  showDataTips="true" dataProvider="{apple}" y="29" x="53" textAlign="left" fontSize="10" layoutDirection="rtl" dataTipMode="multiple" dataTipItemsSet="true">
+				
+				<mx:horizontalAxis>
+					<mx:CategoryAxis categoryField="Month"/>
+				</mx:horizontalAxis>
+				
+				<mx:series>
+					<mx:AreaSeries yField="StockPrice" displayName="StockPrice" areaStroke="{s1}" areaFill="{sc1}"/>
+				</mx:series>
+			</mx:AreaChart>
+			<s:VGroup x="1" y="40" width="49" height="210" verticalAlign="top" horizontalAlign="center">
+				<s:Label text="Zoom" verticalAlign="middle" textAlign="center" paddingLeft="1" paddingTop="2" height="24" width="49"/>
+				<s:Button label="1w" width="41" height="23" click="oneWeekClickHandler(event)"/>
+				<s:Button label="1m" width="40" height="23" click="oneMonthClickHandler(event)"/>
+				<s:Button label="3m" width="39" height="23" click="threeMonthClickHandler(event)"/>
+				<s:Button label="1y" width="38" height="23"/>
+				<s:Button label="3y" width="38" height="23"/>
+				<s:Button label="5y" width="38" height="23"/>
+			</s:VGroup>
+			<mx:Legend dataProvider="{ac2}" x="802" y="5" height="26" width="100"/>
+			<mx:DataGrid id="sellPositionDataGrid" x="4" y="262" width="900" dropShadowVisible="false" dataProvider="{positionsData}" change="positionDataGridChangeHandler(event)" editable="false" rowCount="1">
+				<mx:columns>
+					<mx:DataGridColumn dataField="stockname" resizable="false" width="220" headerText="Name"/>
+					<mx:DataGridColumn headerText="Symbol" dataField="symbol" width="60"/>
+					<mx:DataGridColumn headerText="# Shares" dataField="shares" resizable="false" width="65"/>
+					<mx:DataGridColumn headerText="Cost Basis" resizable="false" width="84" dataField="costbasis"/>
+					<mx:DataGridColumn headerText="Last Price" resizable="false" width="70" dataField="lastprice"/>
+					<mx:DataGridColumn headerText="Market Value" resizable="false" width="84" dataField="marketvalue"/>
+					<mx:DataGridColumn headerText="Total Gain $" resizable="false" width="84" dataField="totalgain"/>
+					<mx:DataGridColumn headerText="Total Gain %" width="84"/>
+					<mx:DataGridColumn headerText="Day's Gain $" width="84" dataField="daysgain"/>
+					<mx:DataGridColumn headerText="Day's Gain %" width="84"/>
+				</mx:columns>
+			</mx:DataGrid>
+		</s:BorderContainer>
+		<s:BorderContainer x="18" y="399" width="910" height="260" cornerRadius="3" dropShadowVisible="true">
+			<mx:Form x="301.45" y="4" width="342" height="223">
+				<s:HGroup width="304" height="25" verticalAlign="middle">
+					<s:Label text="Company:"/>
+					<s:Label width="236" text = "{sellPositionDataGrid.selectedItem.stockname}"/>
+				</s:HGroup>
+				<mx:FormItem label="Shares:" height="57">
+					<s:VGroup width="196" height="81">
+						<s:RadioButton id="sellAllSharesRadioButton" label="All Shares" groupName="radiogroup1" selected="true" click="radiobutton1_clickHandler(event)"/>
+						<s:HGroup width="193" height="24">
+							<s:RadioButton id="sellSomeSharesRadioButton" label="Some Shares:" groupName="radiogroup1" click="someSharesRad_clickHandler(event)"/>
+							<s:TextInput id="sellSharesTextBox" width="125" enabled="false"/>
+						</s:HGroup>
+					</s:VGroup>
+				</mx:FormItem>
+				<mx:FormItem label="Choose Account">
+					<s:DropDownList id="sellAccountDropDown" dataProvider="{accountsData}" width="125" change="sellAccountDropDown_changeHandler(event)"></s:DropDownList>
+				</mx:FormItem>
+				<s:HGroup width="305" height="24" verticalAlign="middle">
+					<s:Label text="Balance:"/>
+					<s:TextInput id="sellBalanceTextBox" width="125" editable="false"/>
+				</s:HGroup>
+				<s:HGroup width="200" height="29">
+					<s:Button label="Sell" id="sellPositionButton" click="sellPositionButtonClickHandler(event)" width="89" />
+					<s:Button label="Cancel" click="currentState = 'Initial'"/>
+				</s:HGroup>
+			</mx:Form>
+		</s:BorderContainer>
+	</s:BorderContainer>
+	<s:BorderContainer width="950" height="680" fontWeight="normal"  includeIn="BuyStock">
+		<s:layout>
+			<s:BasicLayout/>
+		</s:layout>
+		<s:Label x="350" y="40" text="Buy Company Stock" fontSize="22" fontWeight="bold" color="#3979AA">
+			<s:filters>
+				<s:DropShadowFilter distance="3" angle="45" alpha=".25"/>
+			</s:filters>
+		</s:Label>
+		<s:BorderContainer x="18" y="69" width="910" height="320" cornerRadius="3" dropShadowVisible="true">
+			<mx:AreaChart id="ac2" height="233" width="850"
+						  paddingLeft="5" paddingRight="5" 
+						  showDataTips="true" dataProvider="{apple}" y="29" x="53" textAlign="left" fontSize="10" layoutDirection="rtl" dataTipMode="multiple" dataTipItemsSet="true">
+				
+				<mx:horizontalAxis>
+					<mx:CategoryAxis categoryField="Month"/>
+				</mx:horizontalAxis>
+				
+				<mx:series>
+					<mx:AreaSeries yField="StockPrice" displayName="StockPrice" areaStroke="{s1}" areaFill="{sc1}"/>
+				</mx:series>
+			</mx:AreaChart>
+			<s:VGroup x="1" y="40" width="49" height="210" verticalAlign="top" horizontalAlign="center">
+				<s:Label text="Zoom" verticalAlign="middle" textAlign="center" paddingLeft="1" paddingTop="2" height="24" width="49"/>
+				<s:Button label="1w" width="41" height="23" click="oneWeekClickHandler(event)"/>
+				<s:Button label="1m" width="40" height="23" click="oneMonthClickHandler(event)"/>
+				<s:Button label="3m" width="39" height="23" click="threeMonthClickHandler(event)"/>
+				<s:Button label="1y" width="38" height="23"/>
+				<s:Button label="3y" width="38" height="23"/>
+				<s:Button label="5y" width="38" height="23"/>
+			</s:VGroup>
+			<mx:Legend dataProvider="{ac2}" x="802" y="5" height="26" width="100"/>
+			<mx:DataGrid id="buycompdatag" x="4" y="262" dataProvider ="{companies}" dropShadowVisible="false"  change="positionDataGridChangeHandler(event)" height="47" width="900">
+				<mx:columns>
+					<mx:DataGridColumn headerText="Stock Name" dataField="stockname" resizable="false" sortable="false" width="300"/>
+					<mx:DataGridColumn headerText="Symbol" dataField="symbol" width="60" resizable="false" sortable="false"/>
+					<mx:DataGridColumn headerText="Last Price" resizable="false" width="70" dataField="lastprice" sortable="false"/>
+					<mx:DataGridColumn headerText="Market Value" resizable="false" width="84" dataField="marketvalue" sortable="false"/>
+					<mx:DataGridColumn headerText="Day's Gain $" width="84" dataField="daysgain" sortable="false"/>
+					<mx:DataGridColumn headerText="Days Gain %" width="84" sortable="false"/>
+					<mx:DataGridColumn headerText="Total Gain $" resizable="false" width="84" dataField="totalgain" sortable="false"/>
+					<mx:DataGridColumn headerText="Total Gain %" width="84" sortable="false"/>
+				</mx:columns>
+			</mx:DataGrid>
+		</s:BorderContainer>
+		<s:BorderContainer x="18" y="399" width="910" height="260" cornerRadius="3" dropShadowVisible="true">
+			<mx:Form x="301.45" y="4" width="342" height="223">
+				<s:HGroup width="306" height="25" verticalAlign="middle">
+					<s:Label text="Company:"/>
+					<s:Label width="243" text = "{compdatag.selectedItem.stockname.toString()}"/>
+				</s:HGroup>
+				<s:HGroup width="193" height="24" verticalAlign="middle">
+					<s:Label text="# of Shares:"/>
+					<s:TextInput id="buySharesTextBox" width="125"/>
+				</s:HGroup>
+				<mx:FormItem label="Choose Account">
+					<s:DropDownList id="buyAccountDropDown" dataProvider="{accountsData}" width="125" change="buyAccountDropDown_changeHandler(event)"></s:DropDownList>
+				</mx:FormItem>
+				<s:HGroup width="305" height="24" verticalAlign="middle">
+					<s:Label text="Balance:"/>
+					<s:TextInput id="buyBalanceTextBox" width="125" editable="false"/>
+				</s:HGroup>
+				<s:HGroup width="200" height="29">
+					<s:Button label="Buy" id="buyPositionButton" click="buyStockButtonClickHandler(event)" width="89" />
+					<s:Button label="Cancel" click="currentState = 'Initial'"/>
+				</s:HGroup>
+			</mx:Form>
+		</s:BorderContainer>
+	</s:BorderContainer>
+	
+	<s:Label height="43" x="40" y="20" color="#3979AA" fontSize="50" fontWeight="bold" fontFamily="Georgia" text="Portfolio" width="235">
+		<s:filters>
+			<s:DropShadowFilter distance="5" angle="45" alpha=".25"/>
+		</s:filters>
+	</s:Label>
+	
+	
+</s:Application>
