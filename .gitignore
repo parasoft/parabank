@@ -2,3 +2,4 @@
 /target/
 hs_err_*.log
 *.log
+soatest/.metadata/
