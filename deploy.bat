@@ -6,7 +6,7 @@ echo ====================================================
 echo Deploying Parabank build.id=%BUILD_ID%
 echo ====================================================
 
-call mvn clean compile jtest:monitor
+rem call mvn clean compile jtest:monitor
 copy /Y target\parabank.war %PARABANK-TOMCAT%\webapps
 
 pushd %PARABANK-TOMCAT%\bin
