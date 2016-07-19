@@ -1,4 +1,8 @@
 @echo off
+IF %1.==. GOTO IncorrectUsage
+IF %2.==. GOTO IncorrectUsage
+
+call set-vars
 IF %1.==. (
   echo "Incorrect usage ... requires build_id (e.g. PARABANK3-%date:~10,4%%date:~4,2%%date:~7,2%-<BUILD_NUMBER>)"
   echo "Usage: jtest-mt-cov.bat <BUILD_ID> <REPORT XML>"
@@ -18,7 +22,7 @@ IF NOT EXIST %2 (
 IF NOT EXIST set-vars.bat (
   echo "Incorrect usage ... running script in wrong directory, cannot find setvars.bat"
   GOTO End
-)  
+)
 call set-vars
 
 set BUILD_ID=%1
@@ -39,5 +43,10 @@ call erase /Q %APP_COVERAGE_DIR%\monitor\runtime_coverage\__default__\runtime_co
 echo =================================================================
 echo Finished processing Manual test results for build.id=%BUILD_ID%
 echo =================================================================
+
+:IncorrectUsage
+  echo "Incorrect usage ... requires build_id and location of report.xml and runtime_coverage directory for coverage data"
+  echo "Usage: jtest-mt-cov.bat <BUILD_ID> <DATA DIRECTORY>"
+GOTO End
 
 :End

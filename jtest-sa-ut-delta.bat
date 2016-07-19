@@ -2,7 +2,7 @@
 IF NOT EXIST set-vars.bat (
   echo "Incorrect usage ... running script in wrong directory, cannot find setvars.bat"
   GOTO End
-) 
+)
 call set-vars
 
 set BUILD_ID=%BUILD_ID%delta
