@@ -1,5 +1,10 @@
 @echo off
+IF NOT EXIST set-vars.bat (
+  echo "Incorrect usage ... running script in wrong directory, cannot find setvars.bat"
+  GOTO End
+) 
 call set-vars
+
 set BUILD_ID=PARABANK3-%date:~10,4%%date:~4,2%%date:~7,2%-%BUILD_NUMBER%delta
 
 echo ===================================================================
@@ -21,3 +26,5 @@ call mvn process-test-classes jtest:agent test jtest:jtest -Djtest.config="built
 echo =================================================================
 echo Finished Static Analysis and Unit Testing of CHANGED CODE build.id=%BUILD_ID%
 echo =================================================================
+
+:End

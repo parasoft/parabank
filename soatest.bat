@@ -1,4 +1,9 @@
 @echo off
+IF NOT EXIST set-vars.bat (
+  echo "Incorrect usage ... running script in wrong directory, cannot find setvars.bat"
+  GOTO End
+) 
+
 call set-vars
 
 echo ===================================================================
@@ -43,3 +48,5 @@ popd
 echo =================================================================
 echo Finished Functional Tests of build.id=%BUILD_ID%
 echo =================================================================
+
+:End
