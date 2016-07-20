@@ -7,7 +7,7 @@ IF NOT EXIST set-vars.bat (
 call set-vars
 
 echo ===================================================================
-echo Calculating Application Coverage against build.id=%BUILD_ID%
+echo Running Functional Tests against build.id=%BUILD_ID%
 echo ===================================================================
 
 echo **1/2** Calculating coverage
@@ -17,7 +17,7 @@ echo **2/2** Cleaning up processed coverage data
 call erase /Q %APP_COVERAGE_DIR%\monitor\runtime_coverage\__default__\runtime_coverage*
 
 echo =================================================================
-echo Finished Calculating Application Coverage for build.id=%BUILD_ID%
+echo Finished Functional Tests of build.id=%BUILD_ID%
 echo =================================================================
 
 :End
