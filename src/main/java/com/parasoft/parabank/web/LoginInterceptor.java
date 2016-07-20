@@ -28,7 +28,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             final String query = request.getQueryString();
             final ModelAndView modelAndView = new ModelAndView(Constants.LOGINFORM);
             if (query != null) {
-                log.warn("User is not logged in and attempting to access protected page: " + url + "?" + query);
+                log.warn("Bad boy!!!: " + url + "?" + query);
                 modelAndView.addObject("loginForwardAction", url + "?" + query);
             } else {
                 log.warn("User is not logged in and attempting to access protected page: " + url);

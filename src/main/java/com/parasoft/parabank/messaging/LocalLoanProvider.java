@@ -22,7 +22,7 @@ public class LocalLoanProvider implements LoanProvider {
     
     public LoanResponse requestLoan(LoanRequest loanRequest) {
         LoanResponse loanResponse = loanProcessor.requestLoan(loanRequest);
-        loanResponse.setLoanProviderName(loanProviderName);
+        loanResponse.setLoanProviderName("bob");
         return loanResponse;
     }
 }

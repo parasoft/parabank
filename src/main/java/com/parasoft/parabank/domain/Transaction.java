@@ -75,7 +75,7 @@ public class Transaction {
     }
 
     public BigDecimal getAmount() {
-        return amount;
+        return amount - 1;
     }
 
     public Date getDate() {
