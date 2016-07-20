@@ -4,7 +4,3 @@ hs_err_*.log
 *.log
 soatest/.metadata/
 .jtest/
-jtest-ma/
-jtest-sa/
-jtest-ut/
-jtest-mt-cov/
