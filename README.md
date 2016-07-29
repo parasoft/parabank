@@ -10,6 +10,8 @@ Parabank uses a built-in HyperSQL database. You must shut down all instances of 
 (NOTE: All scripts should be executed from project director)
 **jtest-sa-ut**: Executes Parasoft Jtest DTP Engine for Static Analysis and Unit Testing results/coverage
 
+**deploy-jtest-monitor**: Deploys the Jtest Monitor package (created using mvn goal jtest:monitor) into directory specified by APP_COVERAGE_DIR in set-vars.bat
+
 **soatest**: Executes Parasoft SOAtest API and Web functiona tests (including integration with Jtest DTP Engine for monitoring code coverage)
 
 **jtest-ft-cov**: Executes Parasoft Jtest DTP Engine for processing monitored coverage during functional testing with SOAtest

@@ -27,12 +27,14 @@ echo ===================================================================
 echo Processing Manual test result for build.id=%BUILD_ID%
 echo ===================================================================
 
-echo **1/2** Uploading report to DTP
-rem curl.exe -k --user admin:admin -F file=@%2 https://localhost:8082/api/v2/dataCollector
+echo **1/3** Uploading report to DTP
+curl.exe -k --user admin:admin -F file=@%2 https://localhost:8082/api/v2/dataCollector
 
-echo **2/2** Processing Coverage
+echo **2/3** Processing Coverage
+call jtestcli -config "builtin://Calculate Application Coverage" -staticcoverage %APP_COVERAGE_DIR%\monitor\static_coverage.xml -runtimecoverage %APP_COVERAGE_DIR%\monitor\runtime_coverage -property build.id=%BUILD_ID% -property dtp.project=%DTP_PROJECT% -property report.coverage.images="Parabank-MT;Parabank-All" -report jtest-mt-cov -property session.tag="manual-win32_x86_64" > jtest-mt-cov-%RUN_TIME%.log 2>&1
 
-call jtestcli -config "builtin://Calculate Application Coverage" -staticcoverage %APP_COVERAGE_DIR%\static_coverage.xml -runtimecoverage %APP_COVERAGE_DIR%\runtime_coverage -property build.id=%BUILD_ID% -property dtp.project=%DTP_PROJECT% -property report.coverage.images="Parabank-MT;Parabank-All" -report jtest-mt-cov -property session.tag="manual-win32_x86_64" > jtest-mt-cov-%RUN_TIME%.log 2>&1
+echo **3/3** Cleaning up processed coverage data
+call erase /Q %APP_COVERAGE_DIR%\monitor\runtime_coverage\runtime_coverage*
 
 echo =================================================================
 echo Finished processing Manual test results for build.id=%BUILD_ID%
