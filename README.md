@@ -1,5 +1,5 @@
 # Introduction
-The Parabank demo web application from Parasoft.
+The Parabank demo web application and associated web services (SOAP and REST) from Parasoft.
 
 # Build and Install
 Build the Parabank application using Maven ("mvn clean install"). After a successful build, deploy the parabank.war (located in "/target") onto a Tomcat 8 web server.
