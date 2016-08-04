@@ -5,7 +5,7 @@ IF NOT EXIST set-vars.bat (
 ) 
 call set-vars
 
-set BUILD_ID=PARABANK3-%date:~10,4%%date:~4,2%%date:~7,2%-%BUILD_NUMBER%delta
+set BUILD_ID=%BUILD_ID%delta
 
 echo ===================================================================
 echo Running Static Analysis and Unit Tests against CHANGED CODE build.id=%BUILD_ID%

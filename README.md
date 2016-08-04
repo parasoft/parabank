@@ -1,5 +1,5 @@
 # Introduction
-The Parabank demo web application from Parasoft.
+The Parabank demo web application and associated web services (SOAP and REST) from Parasoft.
 
 # Build and Install
 Build the Parabank application using Maven ("mvn clean install"). After a successful build, deploy the parabank.war (located in "/target") onto a Tomcat 8 web server.
@@ -9,6 +9,8 @@ Parabank uses a built-in HyperSQL database. You must shut down all instances of 
 # Test scripts 
 (NOTE: All scripts should be executed from project director)
 **jtest-sa-ut**: Executes Parasoft Jtest DTP Engine for Static Analysis and Unit Testing results/coverage
+
+**deploy-jtest-monitor**: Deploys the Jtest Monitor package (created using mvn goal jtest:monitor) into directory specified by APP_COVERAGE_DIR in set-vars.bat
 
 **soatest**: Executes Parasoft SOAtest API and Web functiona tests (including integration with Jtest DTP Engine for monitoring code coverage)
 
