@@ -1,17 +1,17 @@
 @echo off
 IF %1.==. (
   echo "Incorrect usage ... requires build_id (e.g. PARABANK3-%date:~10,4%%date:~4,2%%date:~7,2%-<BUILD_NUMBER>)"
-  echo "Usage: jtest-mt-cov.bat <BUILD_ID> <REPORT XML>
+  echo "Usage: jtest-mt-cov.bat <BUILD_ID> <REPORT XML>"
   GOTO End
 )
 IF %2.==. (
   echo "Incorrect usage ... requires report.xml file)"
-  echo "Usage: jtest-mt-cov.bat <BUILD_ID> <REPORT XML>
+  echo "Usage: jtest-mt-cov.bat <BUILD_ID> <REPORT XML>"
   GOTO End
 )
 IF NOT EXIST %2 (
   echo "Incorrect usage ... %2 does not exist"
-  echo "Usage: jtest-mt-cov.bat <BUILD_ID> <REPORT XML>
+  echo "Usage: jtest-mt-cov.bat <BUILD_ID> <REPORT XML>"
   GOTO End
 )
 
