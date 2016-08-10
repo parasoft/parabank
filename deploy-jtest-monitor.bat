@@ -17,7 +17,8 @@ echo **2/2** Copy and unzip monitor package
 copy target\jtest\monitor\monitor.zip %APP_COVERAGE_DIR%
 
 pushd %APP_COVERAGE_DIR%
-7z x -y monitor.zip
+7z x -y -omonitor-cpy monitor.zip
+copy /y monitor-cpy/monitor monitor
 popd
 
 echo ===================================================================
