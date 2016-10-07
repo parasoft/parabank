@@ -36,7 +36,7 @@ import com.parasoft.parabank.domain.LoanResponse;
 public class LoanRequestTestConfig implements InitializingBean {
     private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(LoanRequestTestConfig.class);
 
-    public static final Set<String> NOT_AMOUNTS = new HashSet(Arrays.asList(new String[] { "wsdl" }));
+    public static final Set<String> NOT_AMOUNTS = new HashSet<>(Arrays.asList(new String[] { "wsdl" }));
 
     public static final String AMMOUNT_MATCH_REGEX = ".*%1$s</loanAmount.*";
 

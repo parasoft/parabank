@@ -1,8 +1,7 @@
 package com.parasoft.parabank.test.util;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
@@ -99,7 +98,7 @@ public abstract class AbstractParaBankDataSourceTest extends JdbcDaoSupport {
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     @Rule
-    public WireMockRule wireMockRule = new WireMockRule(9089);
+    public WireMockRule wireMockRule = new WireMockRule(19089);
 
     @javax.annotation.Resource(name = "resources")
     private List<LoanRequestTestConfig> resources;
@@ -185,7 +184,7 @@ public abstract class AbstractParaBankDataSourceTest extends JdbcDaoSupport {
             date = getDateFormat().parse(dateValue);
         } catch (final ParseException ex) {
             log.error("caught {} Error : ", ex.getClass().getSimpleName() //$NON-NLS-1$ {0xD}
-            , ex);
+                , ex);
         }
         assertNotNull(date);
         return date;
@@ -398,7 +397,7 @@ public abstract class AbstractParaBankDataSourceTest extends JdbcDaoSupport {
         response = new MockHttpServletResponse();
 
         if (getTestResponses().isEmpty()) {
-            getAdminDao().setParameter("endpoint", "http://localhost:9089/parabank/services/LoanProcessor");
+            getAdminDao().setParameter("endpoint", "http://localhost:19089/parabank/services/LoanProcessor");
             for (final LoanRequestTestConfig key : getResources()) {
                 if (key.isLoanRequest()) {
                     stubFor(post(urlPathMatching("/parabank/services/LoanProcessor")).atPriority(10)
