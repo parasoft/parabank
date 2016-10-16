@@ -33,19 +33,19 @@ public class JdbcNewsDao extends JdbcDaoSupport implements NewsDao {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see com.parasoft.parabank.dao.NewsDao#getLatestNewsDate()
      */
     @Override
     public Date getLatestNewsDate() {
         final String SQL = "SELECT MAX(date) FROM News";
 
-        return getJdbcTemplate().queryForObject(SQL, Date.class);
+        return getJdbcTemplate().queryForObject(SQL, java.sql.Date.class);
     }
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see com.parasoft.parabank.dao.NewsDao#getNews()
      */
     @Override
@@ -60,7 +60,7 @@ public class JdbcNewsDao extends JdbcDaoSupport implements NewsDao {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see com.parasoft.parabank.dao.NewsDao#getNewsForDate(java.util.Date)
      */
     @Override

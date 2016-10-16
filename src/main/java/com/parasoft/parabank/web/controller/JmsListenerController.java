@@ -1,7 +1,10 @@
 package com.parasoft.parabank.web.controller;
 
+import javax.annotation.PreDestroy;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,10 +22,22 @@ import com.parasoft.parabank.web.form.AdminForm;
  */
 @Controller("/jms.htm")
 @RequestMapping("/jms.htm")
-public class JmsListenerController extends AbstractBaseAdminController {
+public class JmsListenerController extends AbstractBaseAdminController implements DisposableBean {
 
     private static final Logger log = LoggerFactory.getLogger(JmsListenerController.class);
 
+    @Override
+    @PreDestroy
+    public void destroy() {
+        try {
+            log.info("JMS Broker Shutdown sequence initiated");
+            getAdminManager().shutdownJmsListener();
+            log.info("JMS Broker Shutdown sequence completed");
+        } catch (final Exception ex) {
+            log.error("caught {} Error : ", ex.getClass().getSimpleName() //$NON-NLS-1$
+                , ex);
+        }
+    }
     @Override
     @ModelAttribute(Constants.ADMINFORM)
     public AdminForm getForm() throws Exception {

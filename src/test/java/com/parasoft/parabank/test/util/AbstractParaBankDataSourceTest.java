@@ -4,7 +4,6 @@ import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.junit.Assert.*;
 
 import java.lang.reflect.InvocationTargetException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
@@ -64,6 +63,48 @@ public abstract class AbstractParaBankDataSourceTest extends JdbcDaoSupport {
     // public static final String AMMOUNT_MATCH_REGEX =
     // ".*%1$s.00</loanAmount.*";
 
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+    /**
+     * <DL>
+     * <DT>Description:</DT>
+     * <DD>parse passed string to date YYYY-MM-DD</DD>
+     * <DT>Date:</DT>
+     * <DD>Oct 20, 2015</DD>
+     * </DL>
+     *
+     * @param date
+     * @param dateValue
+     * @return
+     */
+    public static java.sql.Date convertDate(final String dateValue) {
+        java.sql.Date date = null;
+
+        try {
+            date = java.sql.Date.valueOf(dateValue);
+            //new java.sql.Date(getDateFormat().parse(dateValue).getTime());
+        } catch (final IllegalArgumentException ex) {
+            log.error("caught {} Error : ", ex.getClass().getSimpleName() //$NON-NLS-1$ {0xD}
+                , ex);
+        }
+        assertNotNull(date);
+        return date;
+    }
+
+    /**
+     * <DL>
+     * <DT>Description:</DT>
+     * <DD>Getter for the dateFormat property</DD>
+     * <DT>Date:</DT>
+     * <DD>Oct 15, 2015</DD>
+     * </DL>
+     *
+     * @return the value of dateFormat field
+     */
+    public static SimpleDateFormat getDateFormat() {
+        return dateFormat;
+    }
+
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
     }
@@ -95,8 +136,6 @@ public abstract class AbstractParaBankDataSourceTest extends JdbcDaoSupport {
 
     private Map<String, String> errorMap = new HashMap<>();
 
-    private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
     @Rule
     public WireMockRule wireMockRule = new WireMockRule(19089);
 
@@ -106,7 +145,7 @@ public abstract class AbstractParaBankDataSourceTest extends JdbcDaoSupport {
     @Resource(name = "adminDao")
     private AdminDao adminDao;
 
-    private Map<String, String> testResponses = new HashMap<>();
+    private Map<String, String> testResponses = new HashMap<>();;
 
     /**
      * <DL>
@@ -131,7 +170,7 @@ public abstract class AbstractParaBankDataSourceTest extends JdbcDaoSupport {
             assertEquals(fieldErrors.get(fieldName), fe.getCode());
         }
         // return errorName;
-    }
+    };
 
     /**
      * <DL>
@@ -146,7 +185,7 @@ public abstract class AbstractParaBankDataSourceTest extends JdbcDaoSupport {
      */
     protected void assertError(final ModelAndView mav, final Map<String, String> fieldErrors) {
         assertError(mav, fieldErrors.size(), fieldErrors);
-    };
+    }
 
     /**
      * <DL>
@@ -164,30 +203,6 @@ public abstract class AbstractParaBankDataSourceTest extends JdbcDaoSupport {
         final Map<String, String> fieldErrors = new HashMap<>();
         fieldErrors.put(fieldName, errorCode);
         assertError(mav, 1, fieldErrors);
-    };
-
-    /**
-     * <DL>
-     * <DT>Description:</DT>
-     * <DD>parse passed string to date YYYY-MM-DD</DD>
-     * <DT>Date:</DT>
-     * <DD>Oct 20, 2015</DD>
-     * </DL>
-     *
-     * @param date
-     * @param dateValue
-     * @return
-     */
-    public java.util.Date convertDate(final String dateValue) {
-        java.util.Date date = null;
-        try {
-            date = getDateFormat().parse(dateValue);
-        } catch (final ParseException ex) {
-            log.error("caught {} Error : ", ex.getClass().getSimpleName() //$NON-NLS-1$ {0xD}
-                , ex);
-        }
-        assertNotNull(date);
-        return date;
     }
 
     /**
@@ -239,20 +254,6 @@ public abstract class AbstractParaBankDataSourceTest extends JdbcDaoSupport {
      */
     public ApplicationContext getApplicationContext() {
         return applicationContext;
-    }
-
-    /**
-     * <DL>
-     * <DT>Description:</DT>
-     * <DD>Getter for the dateFormat property</DD>
-     * <DT>Date:</DT>
-     * <DD>Oct 15, 2015</DD>
-     * </DL>
-     *
-     * @return the value of dateFormat field
-     */
-    public SimpleDateFormat getDateFormat() {
-        return dateFormat;
     };
 
     /**

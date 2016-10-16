@@ -336,11 +336,11 @@ xmlns:xsd="http://www.w3.org/2001/XMLSchema">
       <soap:operation soapAction="" style="document"/>
       <wsdl:input name="addNewItemToInventory" >
         <wsp:PolicyReference URI="#MessageLevelSecurityInput"/>
-        <soap:body use="literal" />
+        <soap:body parts="parameters" use="literal" />
       </wsdl:input>
       <wsdl:output name="addNewItemToInventoryResponse">
         <wsp:PolicyReference URI="#MessageLevelSecurityOutput"/>
-        <soap:body use="literal"/>
+        <soap:body parts="parameters" use="literal"/>
       </wsdl:output>
       <wsdl:fault name="Exception">
         <soap:fault name="Exception" use="literal"/>
@@ -350,11 +350,11 @@ xmlns:xsd="http://www.w3.org/2001/XMLSchema">
       <soap:operation soapAction="" style="document"/>
       <wsdl:input name="updateItemInCart">
         <wsp:PolicyReference URI="#MessageLevelSecurityInput"/>
-        <soap:body use="literal"/>
+        <soap:body parts="parameters" use="literal"/>
       </wsdl:input>
       <wsdl:output name="updateItemInCartResponse">
         <wsp:PolicyReference URI="#MessageLevelSecurityOutput"/>
-        <soap:body use="literal"/>
+        <soap:body parts="parameters" use="literal"/>
       </wsdl:output>
       <wsdl:fault name="Exception">
         <soap:fault name="Exception" use="literal"/>
@@ -364,11 +364,11 @@ xmlns:xsd="http://www.w3.org/2001/XMLSchema">
       <soap:operation soapAction="" style="document"/>
       <wsdl:input name="addItemToCart">
         <wsp:PolicyReference URI="#MessageLevelSecurityInput"/>
-        <soap:body use="literal"/>
+        <soap:body parts="parameters"  use="literal"/>
       </wsdl:input>
       <wsdl:output name="addItemToCartResponse">
         <wsp:PolicyReference URI="#MessageLevelSecurityOutput"/>
-        <soap:body use="literal"/>
+        <soap:body parts="parameters"  use="literal"/>
       </wsdl:output>
       <wsdl:fault name="Exception">
         <soap:fault name="Exception" use="literal"/>
@@ -378,11 +378,11 @@ xmlns:xsd="http://www.w3.org/2001/XMLSchema">
       <soap:operation soapAction="" style="document"/>
       <wsdl:input name="getItemsInCart">
         <wsp:PolicyReference URI="#MessageLevelSecurityInput"/>
-        <soap:body use="literal"/>
+        <soap:body parts="parameters"  use="literal"/>
       </wsdl:input>
       <wsdl:output name="getItemsInCartResponse">
         <wsp:PolicyReference URI="#MessageLevelSecurityOutput"/>
-        <soap:body use="literal"/>
+        <soap:body parts="parameters"  use="literal"/>
       </wsdl:output>
       <wsdl:fault name="Exception">
         <soap:fault name="Exception" use="literal"/>
@@ -392,11 +392,11 @@ xmlns:xsd="http://www.w3.org/2001/XMLSchema">
       <soap:operation soapAction="" style="document"/>
       <wsdl:input name="getItemByTitle">
         <wsp:PolicyReference URI="#MessageLevelSecurityInput"/>
-        <soap:body use="literal"/>
+        <soap:body parts="parameters"  use="literal"/>
       </wsdl:input>
       <wsdl:output name="getItemByTitleResponse">
         <wsp:PolicyReference URI="#MessageLevelSecurityOutput"/>
-        <soap:body use="literal"/>
+        <soap:body parts="parameters"  use="literal"/>
       </wsdl:output>
       <wsdl:fault name="Exception">
         <soap:fault name="Exception" use="literal"/>
@@ -406,11 +406,11 @@ xmlns:xsd="http://www.w3.org/2001/XMLSchema">
       <soap:operation soapAction="" style="document"/>
       <wsdl:input name="getItemById">
         <wsp:PolicyReference URI="#MessageLevelSecurityInput"/>
-        <soap:body use="literal"/>
+        <soap:body parts="parameters" use="literal"/>
       </wsdl:input>
       <wsdl:output name="getItemByIdResponse">
         <wsp:PolicyReference URI="#MessageLevelSecurityOutput"/>
-        <soap:body use="literal"/>
+        <soap:body parts="parameters" use="literal"/>
       </wsdl:output>
       <wsdl:fault name="Exception">
         <soap:fault name="Exception" use="literal"/>
@@ -420,11 +420,11 @@ xmlns:xsd="http://www.w3.org/2001/XMLSchema">
       <soap:operation soapAction="" style="document"/>
       <wsdl:input name="submitOrder">
         <wsp:PolicyReference URI="#MessageLevelSecurityInput"/>
-        <soap:body use="literal"/>
+        <soap:body parts="parameters" use="literal"/>
       </wsdl:input>
       <wsdl:output name="submitOrderResponse">
         <wsp:PolicyReference URI="#MessageLevelSecurityOutput"/>
-        <soap:body use="literal"/>
+        <soap:body parts="parameters" use="literal"/>
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
