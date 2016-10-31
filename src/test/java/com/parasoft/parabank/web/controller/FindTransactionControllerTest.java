@@ -34,7 +34,7 @@ public class FindTransactionControllerTest extends AbstractValidatingBankControl
 
     public void assertTransactions(final FindTransactionForm form, final int expectedSize) throws Exception {
         final ModelAndView mav =
-                processPostRequest(form, registerSession(new MockHttpServletRequest()), new MockHttpServletResponse());
+            processPostRequest(form, registerSession(new MockHttpServletRequest()), new MockHttpServletResponse());
         //final ModelAndView mav = controller.onSubmit(form);
         assertEquals("transactionResults", mav.getViewName());
         @SuppressWarnings("unchecked")
@@ -62,7 +62,7 @@ public class FindTransactionControllerTest extends AbstractValidatingBankControl
     @Test
     public void testHandleGetRequest() throws Exception {
         final ModelAndView mav =
-                processGetRequest(registerSession(new MockHttpServletRequest()), new MockHttpServletResponse());
+            processGetRequest(registerSession(new MockHttpServletRequest()), new MockHttpServletResponse());
         //final ModelAndView mav = controller.handleRequest(request, response);
         assertReferenceData(mav);
     }
@@ -71,13 +71,13 @@ public class FindTransactionControllerTest extends AbstractValidatingBankControl
     public void testOnSubmit() throws Exception {
         final Calendar c = Calendar.getInstance();
         final Date today = new Date(c.getTimeInMillis());
-        c.add(Calendar.MONTH, -1);
-        final Date oneMonthAgo = new Date(c.getTimeInMillis());
-        c.add(Calendar.MONTH, 1); //back to today
         c.add(Calendar.DAY_OF_MONTH, -11); //11 days ago (2 transactions)
         final Date elevenDaysAgo = new Date(c.getTimeInMillis());
+        c.add(Calendar.DAY_OF_MONTH, 11); //forward to today
+        c.add(Calendar.MONTH, -1); //back one month
+        final Date oneMonthAgo = new Date(c.getTimeInMillis());
         log.debug("----------------------------------------------");
-        log.debug("elevenDaysAgo : {}",elevenDaysAgo.toString());
+        log.debug("elevenDaysAgo : {}", elevenDaysAgo.toString());
         log.debug("----------------------------------------------");
         FindTransactionForm form = getFindTransactionForm();
         form.getCriteria().setSearchType(SearchType.ACTIVITY);
@@ -111,7 +111,7 @@ public class FindTransactionControllerTest extends AbstractValidatingBankControl
         form.getCriteria().setSearchType(SearchType.ID);
         form.getCriteria().setTransactionId(null);
         ModelAndView mav =
-                processPostRequest(form, registerSession(new MockHttpServletRequest()), new MockHttpServletResponse());
+            processPostRequest(form, registerSession(new MockHttpServletRequest()), new MockHttpServletResponse());
         assertError(mav, "criteria.transactionId", "error.empty.transaction.id");
 
         form.getCriteria().setSearchType(SearchType.DATE);
