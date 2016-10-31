@@ -6,7 +6,9 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.springframework.jms.listener.AbstractJmsListeningContainer;
 import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.parasoft.parabank.domain.logic.AdminManager;
 import com.parasoft.parabank.test.util.AbstractAdminOperationsTest;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class AdminManagerImplTest extends AbstractAdminOperationsTest {
     private static final String TEST_PARAMETER = "loanProcessorThreshold";
 
@@ -27,31 +30,7 @@ public class AdminManagerImplTest extends AbstractAdminOperationsTest {
     }
 
     @Test
-    @Transactional
-    @Commit
-    public void testCleanDB() throws Exception {
-        assertDBClean(new DBCleaner() {
-            @Override
-            public void cleanDB() throws Exception {
-                adminManager.cleanDB();
-            }
-        });
-        assertDBInitialized(new DBInitializer() {
-            @Override
-            public void initializeDB() throws Exception {
-                adminManager.initializeDB();
-            }
-        });
-    }
-
-    @Test
-    public void testGetParameter() {
-        assertEquals(EXPECTED_VALUE, adminManager.getParameter(TEST_PARAMETER));
-        assertNull(adminManager.getParameter("unknown"));
-    }
-
-    @Test
-    public void testGetParameters() {
+    public void test010GetParameters() {
         final Map<String, String> parameters = adminManager.getParameters();
         assertNotNull(parameters);
         assertTrue(parameters.size() > 0);
@@ -60,17 +39,18 @@ public class AdminManagerImplTest extends AbstractAdminOperationsTest {
     @Test
     @Transactional
     @Commit
-    public void testInitializeDB() throws Exception {
-        assertDBInitialized(new DBInitializer() {
-            @Override
-            public void initializeDB() throws Exception {
-                adminManager.initializeDB();
-            }
-        });
+    public void test010InitializeDB() throws Exception {
+        assertDBInitialized(() -> adminManager.initializeDB());
     }
 
     @Test
-    public void testSetParameter() {
+    public void test020GetParameter() {
+        assertEquals(EXPECTED_VALUE, adminManager.getParameter(TEST_PARAMETER));
+        assertNull(adminManager.getParameter("unknown"));
+    }
+
+    @Test
+    public void test030SetParameter() {
         final String newValue = "30";
 
         assertEquals(EXPECTED_VALUE, adminManager.getParameter(TEST_PARAMETER));
@@ -79,29 +59,26 @@ public class AdminManagerImplTest extends AbstractAdminOperationsTest {
     }
 
     @Test
-    public void testShutdownJmsListener() {
+    public void test040StartupJmsListener() {
         final AbstractJmsListeningContainer jmsOrig = adminManager.getJmsListener();
         adminManager.setJmsListener(getJmsListener());
-        assertJmsShutdown(new JmsShutdownManager() {
-            @Override
-            public void shutdownJmsListener() {
-                adminManager.shutdownJmsListener();
-
-            }
-        });
+        assertJmsStartup(() -> adminManager.startupJmsListener());
         adminManager.setJmsListener(jmsOrig);
     }
 
     @Test
-    public void testStartupJmsListener() {
+    public void test050ShutdownJmsListener() {
         final AbstractJmsListeningContainer jmsOrig = adminManager.getJmsListener();
         adminManager.setJmsListener(getJmsListener());
-        assertJmsStartup(new JmsStartupManager() {
-            @Override
-            public void startupJmsListener() {
-                adminManager.startupJmsListener();
-            }
-        });
+        assertJmsShutdown(() -> adminManager.shutdownJmsListener());
         adminManager.setJmsListener(jmsOrig);
+    }
+
+    @Test
+    @Transactional
+    @Commit
+    public void test099CleanDB() throws Exception {
+        //       assertDBInitialized(() -> adminManager.initializeDB());
+        assertDBClean(() -> adminManager.cleanDB());
     }
 }

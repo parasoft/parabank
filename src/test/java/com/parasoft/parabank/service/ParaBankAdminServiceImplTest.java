@@ -1,16 +1,19 @@
 package com.parasoft.parabank.service;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import javax.annotation.Resource;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.springframework.jms.listener.AbstractJmsListeningContainer;
 import org.springframework.test.annotation.Commit;
 
 import com.parasoft.parabank.domain.logic.AdminManager;
 import com.parasoft.parabank.test.util.AbstractAdminOperationsTest;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ParaBankAdminServiceImplTest extends AbstractAdminOperationsTest {
     @Resource(name = "paraBankService")
     private ParaBankService paraBankService;
@@ -20,28 +23,13 @@ public class ParaBankAdminServiceImplTest extends AbstractAdminOperationsTest {
     }
 
     @Test
-    public void testCleanDB() throws Exception {
-        assertDBClean(new DBCleaner() {
-            @Override
-            public void cleanDB() throws Exception {
-                paraBankService.cleanDB();
-            }
-        });
-    }
-
-    @Test
     @Commit
-    public void testInitializeDB() throws Exception {
-        assertDBInitialized(new DBInitializer() {
-            @Override
-            public void initializeDB() throws Exception {
-                paraBankService.initializeDB();
-            }
-        });
+    public void test010InitializeDB() throws Exception {
+        assertDBInitialized(() -> paraBankService.initializeDB());
     }
 
     @Test
-    public void testSetParameter() {
+    public void test020SetParameter() {
         final String paramName = "loanProvider";
         final String paramValue = "test";
         final String SQL = "SELECT value FROM Parameter WHERE name = ?";
@@ -52,30 +40,25 @@ public class ParaBankAdminServiceImplTest extends AbstractAdminOperationsTest {
     }
 
     @Test
-    public void testShutdownJmsListener() {
+    public void test030StartupJmsListener() {
         final AdminManager am = ((AdminManagerAware) paraBankService).getAdminManager();
         final AbstractJmsListeningContainer jl = am.getJmsListener();
         am.setJmsListener(getJmsListener());
-        assertJmsShutdown(new JmsShutdownManager() {
-            @Override
-            public void shutdownJmsListener() {
-                paraBankService.shutdownJmsListener();
-            }
-        });
+        assertJmsStartup(() -> paraBankService.startupJmsListener());
         am.setJmsListener(jl);
     }
 
     @Test
-    public void testStartupJmsListener() {
+    public void test040ShutdownJmsListener() {
         final AdminManager am = ((AdminManagerAware) paraBankService).getAdminManager();
         final AbstractJmsListeningContainer jl = am.getJmsListener();
         am.setJmsListener(getJmsListener());
-        assertJmsStartup(new JmsStartupManager() {
-            @Override
-            public void startupJmsListener() {
-                paraBankService.startupJmsListener();
-            }
-        });
+        assertJmsShutdown(() -> paraBankService.shutdownJmsListener());
         am.setJmsListener(jl);
+    }
+
+    @Test
+    public void test099CleanDB() throws Exception {
+        assertDBClean(() -> paraBankService.cleanDB());
     }
 }

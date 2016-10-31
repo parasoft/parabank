@@ -6,13 +6,16 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.springframework.dao.DataAccessException;
 import org.springframework.test.annotation.Commit;
 
 import com.parasoft.parabank.dao.AdminDao;
 import com.parasoft.parabank.test.util.AbstractAdminOperationsTest;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class JdbcAdminDaoTest extends AbstractAdminOperationsTest {
     private static final String TEST_PARAMETER = "loanProcessorThreshold";
 
@@ -21,22 +24,35 @@ public class JdbcAdminDaoTest extends AbstractAdminOperationsTest {
     @Resource(name = "adminDao")
     private AdminDao adminDao;
 
+    @Override
     public void setAdminDao(final AdminDao adminDao) {
         this.adminDao = adminDao;
     }
 
     @Test
-    public void testCleanDB() throws Exception {
-        assertDBClean(new DBCleaner() {
-            @Override
-            public void cleanDB() {
-                adminDao.cleanDB();
-            }
-        });
+    @Commit
+    public void test010InitalizeDB() throws Exception {
+        assertDBInitialized(() -> adminDao.initializeDB());
     }
 
     @Test
-    public void testGetParameter() {
+    public void test020SetParameter() {
+        final String newValue = "30";
+
+        assertEquals(EXPECTED_VALUE, adminDao.getParameter(TEST_PARAMETER));
+        adminDao.setParameter("loanProcessorThreshold", newValue);
+        assertEquals(newValue, adminDao.getParameter(TEST_PARAMETER));
+    }
+
+    @Test
+    public void test030GetParameters() {
+        final Map<String, String> parameters = adminDao.getParameters();
+        assertNotNull(parameters);
+        assertTrue(parameters.size() > 0);
+    }
+
+    @Test
+    public void test040GetParameter() {
         assertEquals(EXPECTED_VALUE, adminDao.getParameter(TEST_PARAMETER));
 
         try {
@@ -49,29 +65,7 @@ public class JdbcAdminDaoTest extends AbstractAdminOperationsTest {
     }
 
     @Test
-    public void testGetParameters() {
-        final Map<String, String> parameters = adminDao.getParameters();
-        assertNotNull(parameters);
-        assertTrue(parameters.size() > 0);
-    }
-
-    @Test
-    @Commit
-    public void testInitalizeDB() throws Exception {
-        assertDBInitialized(new DBInitializer() {
-            @Override
-            public void initializeDB() {
-                adminDao.initializeDB();
-            }
-        });
-    }
-
-    @Test
-    public void testSetParameter() {
-        final String newValue = "30";
-
-        assertEquals(EXPECTED_VALUE, adminDao.getParameter(TEST_PARAMETER));
-        adminDao.setParameter("loanProcessorThreshold", newValue);
-        assertEquals(newValue, adminDao.getParameter(TEST_PARAMETER));
+    public void test099CleanDB() throws Exception {
+        assertDBClean(() -> adminDao.cleanDB());
     }
 }
