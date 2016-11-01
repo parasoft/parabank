@@ -19,7 +19,7 @@ echo session.tag=%DTP_PROJECT%-${config_name} >> localsettings.properties
 echo ======================Parabank==============================
 
 echo **1/3** Importing project into SOAtest
-soatestcli -data . -import TestAssets
+soatestcli -J-Xms512m -J-Xmx512m -J-Xverify:none -J-XX:+UseCompressedOops -data . -import TestAssets
 
 echo **2/3** Running SOAtest (Parabank)
 call erase /Q report-parabank\*.*
