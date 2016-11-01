@@ -30,6 +30,11 @@ public class JdbcAdminDaoTest extends AbstractAdminOperationsTest {
     }
 
     @Test
+    public void test005CleanDB() throws Exception {
+        assertDBClean(() -> adminDao.cleanDB());
+    }
+
+    @Test
     @Commit
     public void test010InitalizeDB() throws Exception {
         assertDBInitialized(() -> adminDao.initializeDB());

@@ -1,5 +1,6 @@
 package com.parasoft.parabank.dao.jdbc;
 
+import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -10,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.jdbc.datasource.init.ScriptUtils;
@@ -41,10 +42,33 @@ public class JdbcAdminDao extends JdbcDaoSupport implements AdminDao {
      */
     @Override
     public void cleanDB() {
-        log.info("Resetting parabank database...");
-        ScriptUtils.executeSqlScript(getConnection(), RESET_RESOURCE);
-        // JdbcTestUtils.executeSqlScript(getJdbcTemplate(), resource, true);
-        log.info("Database parabank reset");
+        ResultSet rs = null;
+        try {
+            log.info("Validating parabank database has been initialized...");
+            final DatabaseMetaData md = getConnection().getMetaData();
+            rs = md.getTables("PUBLIC", "PUBLIC", "STOCK", null);
+            if (rs.last()) {
+                rs.close();
+                performReset();
+            } else {
+                initializeDB();
+                performReset();
+            }
+        } catch (final CannotGetJdbcConnectionException ex) {
+            log.error("caught {} Error : ", ex.getClass().getSimpleName() //$NON-NLS-1$
+                , ex);
+        } catch (final SQLException ex) {
+            log.error("caught {} Error : ", ex.getClass().getSimpleName() //$NON-NLS-1$
+                , ex);
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (final SQLException ex) {
+                    //don't care;
+                }
+            }
+        }
     }
 
     /*
@@ -68,15 +92,12 @@ public class JdbcAdminDao extends JdbcDaoSupport implements AdminDao {
     public Map<String, String> getParameters() {
         final String SQL = "SELECT name, value FROM Parameter";
 
-        return getJdbcTemplate().query(SQL, new ResultSetExtractor<Map<String, String>>() {
-            @Override
-            public Map<String, String> extractData(final ResultSet rs) throws SQLException, DataAccessException {
-                final Map<String, String> parameters = new HashMap<String, String>();
-                while (rs.next()) {
-                    parameters.put(rs.getString("name"), rs.getString("value"));
-                }
-                return parameters;
+        return getJdbcTemplate().query(SQL, (ResultSetExtractor<Map<String, String>>) rs -> {
+            final Map<String, String> parameters = new HashMap<>();
+            while (rs.next()) {
+                parameters.put(rs.getString("name"), rs.getString("value"));
             }
+            return parameters;
         });
     }
 
@@ -106,6 +127,21 @@ public class JdbcAdminDao extends JdbcDaoSupport implements AdminDao {
 
     }
 
+    /**
+     * <DL>
+     * <DT>Description:</DT>
+     * <DD>TODO add performReset description</DD>
+     * <DT>Date:</DT>
+     * <DD>Nov 1, 2016</DD>
+     * </DL>
+     */
+    private void performReset() {
+        log.info("Resetting parabank database...");
+        ScriptUtils.executeSqlScript(getConnection(), RESET_RESOURCE);
+        // JdbcTestUtils.executeSqlScript(getJdbcTemplate(), resource, true);
+        log.info("Database parabank reset");
+    }
+
     public void setInserters(final List<DynamicDataInserter> inserters) {
         this.inserters = inserters;
     }
@@ -113,8 +149,7 @@ public class JdbcAdminDao extends JdbcDaoSupport implements AdminDao {
     /*
      * (non-Javadoc)
      *
-     * @see com.parasoft.parabank.dao.AdminDao#setParameter(java.lang.String,
-     * java.lang.String)
+     * @see com.parasoft.parabank.dao.AdminDao#setParameter(java.lang.String, java.lang.String)
      */
     @Override
     public void setParameter(final String name, final String value) {
