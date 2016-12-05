@@ -8,3 +8,7 @@ jtest-ma/
 jtest-sa/
 jtest-ut/
 jtest-mt-cov/
+.idea/
+jtest-ft-cov/
+soatest/report-bookstore/
+soatest/report-parabank/
