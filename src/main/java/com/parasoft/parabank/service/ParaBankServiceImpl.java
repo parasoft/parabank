@@ -464,7 +464,7 @@ public class ParaBankServiceImpl implements ParaBankService, AdminManagerAware, 
             updatedCustomer.setPassword(password);
             bankManager.updateCustomer(updatedCustomer);
         } catch (final UnsupportedEncodingException e) {
-            throw new ParaBankServiceException("Unsupported encoding");
+            throw new ParaBankServiceException("Unsupported encoding"); // parasoft-suppress EXCEPT.CTE "No need for chained exception in this case per higher level design. Reviewed and found appropriate."
         }
         return "Successfully updated customer profile";
     }

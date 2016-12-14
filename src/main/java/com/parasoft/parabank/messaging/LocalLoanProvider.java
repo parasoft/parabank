@@ -1,7 +1,8 @@
 package com.parasoft.parabank.messaging;
 
-import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.domain.logic.*;
+import com.parasoft.parabank.domain.LoanRequest;
+import com.parasoft.parabank.domain.LoanResponse;
+import com.parasoft.parabank.domain.logic.LoanProvider;
 
 /**
  * Loan request client that does not use messaging and delegates to a loan
@@ -9,8 +10,8 @@ import com.parasoft.parabank.domain.logic.*;
  */
 public class LocalLoanProvider implements LoanProvider {
     private LoanProvider loanProcessor;
-    private String loanProviderName;
-
+    private String loanProviderName; // parasoft-suppress OPT.CTLV "intended for future refactoring. Reviewed and found appropriate."
+    
     public void setLoanProcessor(LoanProvider loanProcessor) {
         this.loanProcessor = loanProcessor;
     }
