@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <faceted-project>
-  <runtime name="Apache Tomcat v7.0.63"/>
+  <runtime name="Apache Tomcat v8.5"/>
   <fixed facet="wst.jsdt.web"/>
   <installed facet="wst.jsdt.web" version="1.0"/>
   <installed facet="jst.jaxrs" version="2.0"/>
