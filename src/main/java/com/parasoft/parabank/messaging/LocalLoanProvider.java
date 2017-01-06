@@ -10,7 +10,7 @@ import com.parasoft.parabank.domain.logic.LoanProvider;
  */
 public class LocalLoanProvider implements LoanProvider {
     private LoanProvider loanProcessor;
-    private String loanProviderName;
+    private String loanProviderName; // parasoft-suppress OPT.CTLV "intended for future refactoring. Reviewed and found appropriate."
     
     public void setLoanProcessor(LoanProvider loanProcessor) {
         this.loanProcessor = loanProcessor;

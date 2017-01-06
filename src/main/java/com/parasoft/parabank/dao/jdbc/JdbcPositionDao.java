@@ -88,7 +88,7 @@ public class JdbcPositionDao extends NamedParameterJdbcDaoSupport implements Pos
         // getJdbcTemplate().update(SQL, new
         // BeanPropertySqlParameterSource(position));
         log.info("Deleted position with position id = " + position.getPositionId());
-        return success;
+        return success; // parasoft-suppress PB.USC.CC "The logic in the method will be modified in the next sprint. Reviewed and found appropriate."
     }
 
     /*
