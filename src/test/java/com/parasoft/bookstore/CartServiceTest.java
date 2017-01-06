@@ -41,6 +41,8 @@ public class CartServiceTest extends AbstractCartService {
      * Test method for
      * {@link com.parasoft.bookstore.CartService#addItemToCart(java.lang.Integer, int, int)}
      * .
+     * 
+     * @req PAR-1
      */
     @Test
     public void testAddItemToCart() {
@@ -84,6 +86,7 @@ public class CartServiceTest extends AbstractCartService {
      * Test method for
      * {@link com.parasoft.bookstore.CartService#updateItemInCart(int, int, int)}
      * .
+     * @req PAR-1
      */
     @Test
     public void testUpdateItemInCart() {
@@ -123,6 +126,7 @@ public class CartServiceTest extends AbstractCartService {
      * Test method for
      * {@link com.parasoft.bookstore.CartService#getItemByTitle(java.lang.String)}
      * .
+     * @req PAR-1
      */
     @Test
     public void testGetItemByTitle() {
@@ -151,6 +155,7 @@ public class CartServiceTest extends AbstractCartService {
     /**
      * Test method for
      * {@link com.parasoft.bookstore.CartService#submitOrder(int)}.
+     * @req PAR-1
      */
     @Test
     public void testSubmitOrder() {
