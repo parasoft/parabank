@@ -29,18 +29,20 @@ public class JdbcNewsDaoTest extends AbstractParaBankDataSourceTest {
 
     @Test
     public void testGetNewsForDate() {
-        @SuppressWarnings("deprecation")
-        final List<News> news = newsDao.getNewsForDate(new Date(110, 8, 13));
+        //@SuppressWarnings("deprecation")
+        final Date today = new Date(new java.util.Date().getTime());
+        final List<News> news = newsDao.getNewsForDate(today);
         assertEquals(3, news.size());
         final News item = news.get(0);
         assertEquals(6, item.getId());
-        assertEquals("2010-09-13", item.getDate().toString());
-        assertEquals("ParaBank Is Now Re-Open", item.getHeadline());
+        assertEquals(today.toString(), item.getDate().toString());
+        assertEquals("ParaBank Is Now Re-Opened", item.getHeadline());
         assertNotNull(item.getStory());
     }
 
     @Test
     public void testLastestNewsDate() {
-        assertEquals("2010-09-13 00:00:00.0", newsDao.getLatestNewsDate().toString());
+        final Date today = new Date(new java.util.Date().getTime());
+        assertEquals(today.toString(), newsDao.getLatestNewsDate().toString());
     }
 }

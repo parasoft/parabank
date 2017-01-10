@@ -88,7 +88,7 @@
 	<bean id="wsLoanProvider" class="com.parasoft.parabank.messaging.WebServiceLoanProvider">
 		<property name="adminManager" ref="adminManager" />
 		<property name="wsdlUrl"
-			value="http://localhost:9089/wsdl/parabank/services/LoanProcessor?wsdl" />
+			value="http://localhost:19089/wsdl/parabank/services/LoanProcessor?wsdl" />
 	</bean>
 	<util:list id="resources" value-type="com.parasoft.parabank.test.util.LoanRequestTestConfig">
 		<bean id="wsdl" class="com.parasoft.parabank.test.util.LoanRequestTestConfig">

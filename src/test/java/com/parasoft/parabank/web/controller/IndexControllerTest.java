@@ -2,6 +2,7 @@ package com.parasoft.parabank.web.controller;
 
 import static org.junit.Assert.*;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -43,7 +44,7 @@ public class IndexControllerTest extends AbstractControllerTest<IndexController>
     public void testDatabaseUninitialized() throws Exception {
         getJdbcTemplate().execute("DROP TABLE News");
         ModelAndView mav =
-            processGetRequest(registerSession(new MockHttpServletRequest()), new MockHttpServletResponse());
+                processGetRequest(registerSession(new MockHttpServletRequest()), new MockHttpServletResponse());
 
         //final ModelAndView mav = controller.handleRequest(request, response);
         assertNotNull(mav);
@@ -58,14 +59,17 @@ public class IndexControllerTest extends AbstractControllerTest<IndexController>
 
     @Test
     public void testHandleGetRequest() throws Exception {
+        final Calendar c = Calendar.getInstance();
+        final java.sql.Date today = new java.sql.Date(c.getTimeInMillis());
+
         final ModelAndView mav =
-            processGetRequest(registerSession(new MockHttpServletRequest()), new MockHttpServletResponse());
+                processGetRequest(registerSession(new MockHttpServletRequest()), new MockHttpServletResponse());
         //        final ModelAndView mav = controller.handleRequest(request, response);
 
         assertEquals(Constants.INDEX, mav.getViewName());
 
         final Date date = (Date) getModelValue(mav, "date");
-        assertEquals("2010-09-13", date.toString());
+        assertEquals(today.toString(), date.toString());
 
         final List<News> news = (List<News>) getModelValue(mav, Constants.NEWS);
         assertEquals(3, news.size());

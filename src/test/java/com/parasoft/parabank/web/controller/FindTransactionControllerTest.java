@@ -1,8 +1,10 @@
 package com.parasoft.parabank.web.controller;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import org.junit.Test;
@@ -21,7 +23,7 @@ import com.parasoft.parabank.web.form.FindTransactionForm;
 
 // @SuppressWarnings({ "unchecked" })
 public class FindTransactionControllerTest extends AbstractValidatingBankControllerTest<FindTransactionController> {
-    @SuppressWarnings("unused")
+    //@SuppressWarnings("unused")
     private static final Logger log = LoggerFactory.getLogger(FindTransactionControllerTest.class);
 
     private void assertReferenceData(final ModelAndView mav) {
@@ -67,6 +69,16 @@ public class FindTransactionControllerTest extends AbstractValidatingBankControl
 
     @Test
     public void testOnSubmit() throws Exception {
+        final Calendar c = Calendar.getInstance();
+        final Date today = new Date(c.getTimeInMillis());
+        c.add(Calendar.DAY_OF_MONTH, -11); //11 days ago (2 transactions)
+        final Date elevenDaysAgo = new Date(c.getTimeInMillis());
+        c.add(Calendar.DAY_OF_MONTH, 11); //forward to today
+        c.add(Calendar.MONTH, -1); //back one month
+        final Date oneMonthAgo = new Date(c.getTimeInMillis());
+        log.debug("----------------------------------------------");
+        log.debug("elevenDaysAgo : {}", elevenDaysAgo.toString());
+        log.debug("----------------------------------------------");
         FindTransactionForm form = getFindTransactionForm();
         form.getCriteria().setSearchType(SearchType.ACTIVITY);
         assertTransactions(form, 7);
@@ -78,14 +90,17 @@ public class FindTransactionControllerTest extends AbstractValidatingBankControl
 
         form = getFindTransactionForm();
         form.getCriteria().setSearchType(SearchType.DATE);
-        form.getCriteria().setOnDate(getDateFormat().parse("2010-08-23"));//new Date(110, 7, 23));
+        form.getCriteria().setOnDate(elevenDaysAgo);//new Date(110, 7, 23));
         assertTransactions(form, 2);
 
-        form = getFindTransactionForm();
-        form.getCriteria().setSearchType(SearchType.DATE_RANGE);
-        form.getCriteria().setFromDate(getDateFormat().parse("2010-08-01"));//new Date(110, 7, 1));
-        form.getCriteria().setToDate(getDateFormat().parse("2010-08-31"));//new Date(110, 7, 31));
-        assertTransactions(form, 5);
+        final int month = Calendar.getInstance().get(Calendar.MONTH);
+        if (month != 0 && month != 11) {
+            form = getFindTransactionForm();
+            form.getCriteria().setSearchType(SearchType.DATE_RANGE);
+            form.getCriteria().setFromDate(oneMonthAgo);//new Date(110, 7, 1));
+            form.getCriteria().setToDate(today);//new Date(110, 7, 31));
+            assertTransactions(form, 5);
+        }
 
         form = getFindTransactionForm();
         form.getCriteria().setSearchType(SearchType.AMOUNT);

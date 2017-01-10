@@ -63,24 +63,18 @@ public class DatabaseControllerTest extends AbstractAdminOperationsTest {
         assertEquals("admin", mav.getViewName());
         assertEquals("error.invalid.action.parameter", mav.getModel().get("error"));
 
-        assertDBClean(new DBCleaner() {
-            @Override
-            public void cleanDB() throws Exception {
-                final MockHttpServletRequest lRequest = new MockHttpServletRequest();
-                lRequest.setParameter("action", "CLEAN");
-                processPostRequest(null, lRequest, new MockHttpServletResponse());
-                //controller.handleRequest(request, new MockHttpServletResponse());
-            }
+        assertDBClean(() -> {
+            final MockHttpServletRequest lRequest1 = new MockHttpServletRequest();
+            lRequest1.setParameter("action", "CLEAN");
+            processPostRequest(null, lRequest1, new MockHttpServletResponse());
+            //controller.handleRequest(request, new MockHttpServletResponse());
         });
-        assertDBInitialized(new DBInitializer() {
-            @Override
-            public void initializeDB() throws Exception {
-                final MockHttpServletRequest lRequest = new MockHttpServletRequest();
-                lRequest.setParameter("action", "INIT");
-                processPostRequest(null, lRequest, new MockHttpServletResponse());
+        assertDBInitialized(() -> {
+            final MockHttpServletRequest lRequest1 = new MockHttpServletRequest();
+            lRequest1.setParameter("action", "INIT");
+            processPostRequest(null, lRequest1, new MockHttpServletResponse());
 
-                //controller.handleRequest(request, new MockHttpServletResponse());
-            }
+            //controller.handleRequest(request, new MockHttpServletResponse());
         });
     }
 }

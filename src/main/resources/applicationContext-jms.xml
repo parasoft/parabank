@@ -60,12 +60,12 @@
 		<property name="jndiName" value="${jndi.factory.connection}" />
 	</bean>
 
-	<amq:broker useJmx="false" persistent="false">
+	<amq:broker useJmx="false" persistent="false" useShutdownHook="true" >
 		<amq:destinationInterceptors>
 			<amq:mirroredQueue copyMessage="true" postfix=".mirror" prefix="" />
 		</amq:destinationInterceptors>
 		<amq:transportConnectors>
-			<amq:transportConnector uri="tcp://localhost:61616" />
+			<amq:transportConnector uri="tcp://localhost:61616?transport.daemon=true" />
 		</amq:transportConnectors>
 	</amq:broker>
 

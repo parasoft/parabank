@@ -1,9 +1,13 @@
 package com.parasoft.parabank.util;
 
 import java.sql.Connection;
+import java.sql.Driver;
+import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Enumeration;
 import java.util.Properties;
 
+import javax.annotation.PreDestroy;
 import javax.sql.DataSource;
 
 import org.hsqldb.Server;
@@ -69,45 +73,47 @@ public class ServerBean implements InitializingBean, DisposableBean, Application
         log.info("HSQL Server listening on " + portMsg);
     }
 
-    @Override
-    public void destroy() {
-        log.info("HSQL Server Shutdown sequence initiated");
-        if (dataSource != null) {
-            Connection con = null;
+    /**
+     * <DL><DT>Description:</DT><DD>
+     * remove registered JDBC Drivers -- this will prevent Memory Leak messages from Tomcat
+     * </DD>
+     * <DT>Date:</DT><DD>Oct 16, 2016</DD>
+     * </DL>
+     */
+    private void deregisterJDBCDrivers() {
+        for (final Enumeration<Driver> drivers = DriverManager.getDrivers(); drivers.hasMoreElements();) {
+            final Driver driver = drivers.nextElement();
             try {
-                con = dataSource.getConnection();
-                con.createStatement().execute("SHUTDOWN");
+                DriverManager.deregisterDriver(driver);
             } catch (final SQLException e) {
-                log.error("HSQL Server Shutdown failed: " + e.getMessage());
+                log.error("Exception caught while deregistering JDBC drivers", e);
             } finally {
-                try {
-                    if (con != null) {
-                        con.close();
-                    }
-                } catch (final Exception e) {
-                }
-            }
-        } else {
-            log.warn("HSQL ServerBean needs a dataSource property set to shutdown database safely.");
-        }
-        server.signalCloseAllServerConnections();
-        int status = server.stop();
-        final long timeout = System.currentTimeMillis() + 5000;
-        while (status != ServerConstants.SERVER_STATE_SHUTDOWN && System.currentTimeMillis() < timeout) {
-            try {
-                Thread.sleep(100);
-                status = server.getState();
-            } catch (final InterruptedException e) {
-                log.error("Error while shutting down HSQL Server: " + e.getMessage());
-                break;
+                log.debug("De-register HSQLDB Driver {} completed", driver.getClass().getName());
+
             }
         }
+        log.info("De-register HSQLDB Driver completed");
+    }
+
+    /** {@inheritDoc}
+     * <DL><DT>Description:</DT><DD>
+     * Shutdown the HSQLDB gracefully at application unload. The intent is to prevent memory and resource leaks. Also unregister all JDBC drivers
+     * </DD>
+     * <DT>Date:</DT><DD>Oct 16, 2016</DD>
+     * </DL>
+     */
+    @Override
+    @PreDestroy
+    public void destroy() {
+        final int status = shutdownHSQLDBServer();
         if (status != ServerConstants.SERVER_STATE_SHUTDOWN) {
             log.warn("HSQL Server failed to shutdown properly.");
         } else {
             log.info("HSQL Server Shutdown completed");
         }
         server = null;
+        deregisterJDBCDrivers();
+
     }
 
     /**
@@ -251,5 +257,50 @@ public class ServerBean implements InitializingBean, DisposableBean, Application
 
     public void setServerProperties(final Properties serverProperties) {
         this.serverProperties = serverProperties;
+    }
+
+    /**
+     * <DL><DT>Description:</DT><DD>
+     * shutdown HSQLDB Server. wait for the server  to finish shutting down (or timeout 5 seconds). return current state
+     * </DD>
+     * <DT>Date:</DT><DD>Oct 16, 2016</DD>
+     * </DL>
+     * @return the status from the server.getState() command
+     */
+    private int shutdownHSQLDBServer() {
+        log.info("HSQL Server Shutdown sequence initiated");
+        if (dataSource != null) {
+            Connection con = null;
+            try {
+                con = dataSource.getConnection();
+                con.createStatement().execute("SHUTDOWN");
+            } catch (final SQLException ex) {
+                log.error("HSQL Server Shutdown failed: ", ex);
+            } finally {
+                try {
+                    if (con != null) {
+                        con.close();
+                    }
+                } catch (final Exception e) {
+                }
+            }
+        } else {
+            log.warn("HSQL ServerBean needs a dataSource property set to shutdown database safely.");
+        }
+        server.signalCloseAllServerConnections();
+        server.shutdownWithCatalogs(org.hsqldb.Database.CLOSEMODE_NORMAL);
+
+        int status = server.stop();
+        final long timeout = System.currentTimeMillis() + 5000;
+        while (status != ServerConstants.SERVER_STATE_SHUTDOWN && System.currentTimeMillis() < timeout) {
+            try {
+                Thread.sleep(100);
+                status = server.getState();
+            } catch (final InterruptedException e) {
+                log.error("Error while shutting down HSQL Server: ", e);
+                break;
+            }
+        }
+        return status;
     }
 }
