@@ -259,8 +259,6 @@
 		</bean>
 
 		<bean name="/logout.htm" class="com.parasoft.parabank.web.controller.LogoutController" />
-
-		<bean name="/portfolio.htm" class="com.parasoft.parabank.web.controller.PortfolioController" />
 	-->
 
 

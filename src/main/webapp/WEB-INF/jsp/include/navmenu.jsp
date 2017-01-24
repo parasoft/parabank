@@ -7,7 +7,6 @@
   <li><a href="<c:url value="/billpay.htm"/>"><fmt:message key="bill.pay"/></a></li>
   <li><a href="<c:url value="/findtrans.htm"/>"><fmt:message key="find.transactions"/></a></li>
   <li><a href="<c:url value="/updateprofile.htm"/>"><fmt:message key="update.contact.info"/></a></li>
-  <li><a href="<c:url value="/portfolio.htm"/>"><fmt:message key="review.portfolio"/></a></li>
   <li><a href="<c:url value="/requestloan.htm"/>"><fmt:message key="request.loan"/></a></li>
   <li><a href="<c:url value="/logout.htm"/>"><fmt:message key="logout"/></a></li>
 </ul>
