@@ -13,7 +13,7 @@
 	</configs>
 	<autoconfigs>
 		<config>src/main/webapp/WEB-INF/parabank-servlet.xml</config>
-		<config>java:com.parasoft.parabank.util.ParabankBeanPostProcessor</config>
+		<config>java:com.parasoft.parabank.util.ParaBankBeanPostProcessor</config>
 		<config>java:com.parasoft.parabank.util.AccessModeController</config>
 	</autoconfigs>
 	<configSets>

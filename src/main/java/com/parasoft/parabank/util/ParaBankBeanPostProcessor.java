@@ -21,8 +21,8 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
  *
  */
 @Component("parabankBeanPostProcessor")
-public class ParabankBeanPostProcessor implements BeanPostProcessor {
-    private static org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(ParabankBeanPostProcessor.class);
+public class ParaBankBeanPostProcessor implements BeanPostProcessor {
+    private static org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(ParaBankBeanPostProcessor.class);
 
     //@Resource(name = "sessionArgResolver")
     private SessionParamArgumentResolver resolver;
@@ -73,7 +73,7 @@ public class ParabankBeanPostProcessor implements BeanPostProcessor {
     @Override
     public Object postProcessAfterInitialization(final Object aParamObject, final String aParamString)
             throws BeansException {
-        log.trace("ParabankBeanPostProcessor got {}", aParamString);
+        log.trace("ParaBankBeanPostProcessor got {}", aParamString);
 
         if (aParamObject instanceof RequestMappingHandlerAdapter) {
             final RequestMappingHandlerAdapter rmha = (RequestMappingHandlerAdapter) aParamObject;

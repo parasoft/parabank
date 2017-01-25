@@ -298,7 +298,7 @@ public class ParaBankServiceImplTest extends AbstractParaBankDataSourceTest {
             paraBankService.requestLoan(-1, ONE_HUNDRED_DOLLARS, ONE_HUNDRED_DOLLARS, ACCOUNT1_ID);
             paraBankService.requestLoan(CUSTOMER_ID, ONE_HUNDRED_DOLLARS, ONE_HUNDRED_DOLLARS, -1);
             paraBankService.requestLoan(-1, ONE_HUNDRED_DOLLARS, ONE_HUNDRED_DOLLARS, -1);
-            fail("Did not throw expected ParabankServiceException");
+            fail("Did not throw expected ParaBankServiceException");
         } catch (final ParaBankServiceException e) {
         }
     }

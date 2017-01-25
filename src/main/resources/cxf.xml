@@ -164,7 +164,7 @@
     <bean id="swagger2Feature" class="com.parasoft.parabank.util.CustomSwagger2Feature">
 <!--
 	 	<property name="version" value="3.0.0" />
-    	<property name="title" value="Parabank REST Services" />
+    	<property name="title" value="ParaBank REST Services" />
     	<property name="contact" value="webadmin@parabank.parasoft.com" />
     	<property name="description" value="This API provides access to the ParaBank operations." />
         

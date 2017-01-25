@@ -252,7 +252,7 @@ accessed within 20 minutes will be removed from the database.</td>
 </table>
 <br>
 <br>
-<span class="heading">Available Parabank SOAP services:</span><br>
+<span class="heading">Available ParaBank SOAP services:</span><br>
 <table style="text-align: left; width: 925px;" border="1"
  cellpadding="1" cellspacing="1" width="100%">
   <tbody>
@@ -287,7 +287,7 @@ address:</span> <span class="value">http://<%= hostname%>:<%= port%>/parabank/se
 </table>
 <br>
 <br>
-<span class="heading">Parabank services:</span><br>
+<span class="heading">ParaBank services:</span><br>
 <table style="text-align: left; width: 925px;" border="1"
  cellpadding="1" cellspacing="1" width="100%">
   <tbody>

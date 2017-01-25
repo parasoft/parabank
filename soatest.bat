@@ -16,12 +16,12 @@ echo build.id=%BUILD_ID% >> localsettings.properties
 echo general.project=%DTP_PROJECT% >> localsettings.properties
 echo session.tag=%DTP_PROJECT%-${config_name} >> localsettings.properties
 
-echo ======================Parabank==============================
+echo ======================ParaBank==============================
 
 echo **1/3** Importing project into SOAtest
 soatestcli -J-Xms512m -J-Xmx512m -J-Xverify:none -J-XX:+UseCompressedOops -data . -import TestAssets
 
-echo **2/3** Running SOAtest (Parabank)
+echo **2/3** Running SOAtest (ParaBank)
 call erase /Q report-parabank\*.*
 soatestcli -config "user://Example Configuration" -data . -resource TestAssets -report report-parabank -localsettings localsettings.properties > soatest-parabank-%RUN_TIME%.log 2>&1
 
