@@ -2,7 +2,7 @@
 The Parabank demo web application and associated web services (SOAP and REST) from Parasoft.
 
 # Build and Install
-1. Build the Parabank application using Maven (`mvn clean install`). After a successful build, deploy the `parabank.war` (located in `/target`) onto a Tomcat 8.5.6 container.
+1. Build the Parabank application using Maven (`mvn clean install`). After a successful build, deploy the `parabank.war` (located in `/target`) onto a Tomcat 8.5.11 container.
 
 NOTE: if using the coverage agent when running the functional/manual tests (see below), execute the build using "mvn -Dmaven.test.skip=true clean install jtest:monitor"
 
@@ -11,9 +11,9 @@ Otherwise several tests may fail, since there are a number of ports that are sha
 
 ## Tomcat notes
 1. The minimum Java JDK version expected is `1.8.0`. Oracle JDK is preferred.
-1. The minimum Tomcat version is now 8.5.6, this is the expected default build compliance, if earlier version is preferred use the
+1. The minimum Tomcat version is now 8.5.11, this is the expected default build compliance, if earlier version is preferred use the
 `-Dtomcat.version=X.X.X` .
-1. The version built with 8.5.6 was validated against both `8.5.6` and `9.0.M10`.
+1. The version built with 8.5.11 was validated against both `8.5.11` and `9.0.M10`.
  1. At the time of this writing the version of 9.0 tested was __M10__  (emphasis on M meaning milestone and therefore unstable). I'm assuming that in the future the **Parabank** will no longer function with `9.0.x` use the  `-Dtomcat.version=9.0.x` when building for now, to insure stability and compliance. Once Tomcat 9.0 is GA the default will be updated to reflect that fact.
  1. Example:	
  ```bash
