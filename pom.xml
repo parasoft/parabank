@@ -513,7 +513,7 @@
 						</goals>
 						<configuration>
 							<descriptors>
-								<descriptor>src/main/assembly/sources-soavirt.xml</descriptor>
+								<descriptor>src/main/assembly/sources-jst_web.xml</descriptor>
 							</descriptors>
 						</configuration>
 					</execution>
