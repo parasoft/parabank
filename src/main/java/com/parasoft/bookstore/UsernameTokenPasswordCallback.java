@@ -4,7 +4,7 @@ import java.io.*;
 
 import javax.security.auth.callback.*;
 
-import org.apache.ws.security.*;
+import org.apache.wss4j.common.ext.*;
 
 public class UsernameTokenPasswordCallback implements CallbackHandler {
     private final String NL_USERNAME = "soatest";

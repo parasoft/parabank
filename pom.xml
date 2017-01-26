@@ -16,7 +16,6 @@
 		<maven-source-plugin.version>3.0.1</maven-source-plugin.version>
 		<maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
 		<spring.version>4.2.1.RELEASE</spring.version>
-		<wss4j.version>1.6.18</wss4j.version>
 		<mysql.version>5.1.36</mysql.version>
 		<jaxb.version>2.2.11</jaxb.version>
 		<gson.version>2.4</gson.version>
@@ -174,11 +173,6 @@
 		</dependency>
 
 		<!-- Security Database JSON, XML, etc -->
-		<dependency>
-			<groupId>org.apache.ws.security</groupId>
-			<artifactId>wss4j</artifactId>
-			<version>${wss4j.version}</version>
-		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
