@@ -34,7 +34,7 @@ public class ErrorController extends AbstractBankController {
             log.warn("Page not found: " + request.getAttribute(WebUtils.ERROR_REQUEST_URI_ATTRIBUTE));
             model.put("message", "error.not.found");
             model.put("parameters", new Object[] { request.getAttribute(WebUtils.ERROR_REQUEST_URI_ATTRIBUTE) });
-        } else if (obj instanceof Exception && ((Exception) obj).getCause() instanceof Fault) {
+        } else if (obj instanceof Fault || obj instanceof Throwable && ((Throwable) obj).getCause() instanceof Fault) {
             response.setStatus(400);
             response.setContentType("text/plain");
             response.getWriter().write(((Exception) obj).getCause().getLocalizedMessage());
@@ -50,7 +50,6 @@ public class ErrorController extends AbstractBankController {
 
     @Override
     public void setAccessModeController(final AccessModeController aAccessModeController) {
-        // TODO Auto-generated method stub
-
+        // nothing to do
     }
 }
