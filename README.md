@@ -2,24 +2,18 @@
 The ParaBank demo web application and associated web services (SOAP and REST) from Parasoft.
 
 # Build and Install
-1. Build the ParaBank application using Maven (`mvn clean install`). After a successful build, deploy the `parabank.war` (located in `/target`) onto a Tomcat 8.5.11 container.
+1. Build the ParaBank application using Maven (`mvn clean install`). After a successful build, deploy the `parabank.war` (located in `/target`) into an Apache Tomcat 8.5.11 container.
 
 NOTE: if using the coverage agent when running the functional/manual tests (see below), execute the build using "mvn -Dmaven.test.skip=true clean install jtest:monitor"
 
 1. ParaBank uses a built-in HyperSQL database. You must shut down all running instances of **ParaBank** and *HyperSQL* for the build to succeed
 Otherwise several tests may fail, since there are a number of ports that are shared between the test instances and the real thing.
 
-## Tomcat notes
-1. The minimum Java JDK version expected is `1.8.0`. Oracle JDK is preferred.
-1. The minimum Tomcat version is now 8.5.11, this is the expected default build compliance, if earlier version is preferred use the
-`-Dtomcat.version=X.X.X` .
-1. The version was validated against both `8.5.11` and `9.0.M10`.
- 1. At the time of this writing the version of 9.0 tested was __M10__  (emphasis on M meaning milestone and therefore unstable). I'm assuming that in the future the **ParaBank** will no longer function with `9.0.x` use the  `-Dtomcat.version=9.0.x` when building for now, to insure stability and compliance. Once Tomcat 9.0 is GA the default will be updated to reflect that fact.
- 1. Example:	
- ```bash
-	#replace the X.X.X with the correct version of tomcat like 8.0.37
-	mvn clean install -Dtomcat.version=X.X.X
- ```	
+## Apache Tomcat notes
+1. The minimum Java JDK version is `1.8.0`. Oracle JDK is preferred.
+1. The minimum Apache Tomcat version is now `8.5.11`.
+1. The version was validated against both Apache Tomcat `8.5.11` and `9.0.M10`.
+ 1. At the time of this writing the version of 9.0 tested was __M10__  (emphasis on M meaning milestone and therefore unstable).
 
 1. To prevent verbose cache warnings in the tomcat log::
 
