@@ -226,13 +226,7 @@
 			<version>${log4j.version}</version>
 		</dependency>
 
-
 		<!-- SWAGGER Dependencies -->
-		<dependency>
-			<groupId>io.swagger</groupId>
-			<artifactId>swagger-jaxrs</artifactId>
-			<version>${swagger-jaxrs.version}</version>
-		</dependency>
 		<dependency>
 			<groupId>io.swagger</groupId>
 			<artifactId>swagger-jersey2-jaxrs</artifactId>
