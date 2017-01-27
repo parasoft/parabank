@@ -3,17 +3,17 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:jaxrs="http://cxf.apache.org/jaxrs" xmlns:util="http://www.springframework.org/schema/util" xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jaxws="http://cxf.apache.org/jaxws"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
-           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-           http://www.springframework.org/schema/aop 
-           http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
-           http://www.springframework.org/schema/tx 
-           http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
-           http://cxf.apache.org/jaxws
-           http://cxf.apache.org/schemas/jaxws.xsd
-           http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
-           http://www.springframework.org/schema/util
-           http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+			http://www.springframework.org/schema/aop
+			http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+			http://www.springframework.org/schema/tx
+			http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+			http://cxf.apache.org/jaxws
+			http://cxf.apache.org/schemas/jaxws.xsd
+			http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
+			http://www.springframework.org/schema/util
+			http://www.springframework.org/schema/util/spring-util-2.0.xsd">
 
 	<!-- the context definition for the cxf application -->
 
@@ -143,9 +143,9 @@
 <!--			<ref bean="jsonProviderJackson" /> -->
 			<ref bean="wadlGenerator" />
  			<bean id="jsonProvider" class="org.apache.cxf.jaxrs.provider.json.JSONProvider" />
-            <ref bean="cors-filter" />
+			<ref bean="cors-filter" />
  		</jaxrs:providers>
-		
+
 		<jaxrs:features>
 			<ref bean="swagger2Feature" />
 		</jaxrs:features>
@@ -158,29 +158,29 @@
 	<bean id="cors-filter" class="org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter"/>
 
   <!-- JAXRS providers -->
-    <bean id="jsonProviderJackson" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider" />
- 
-    <!-- CXF Swagger2Feature --> 
-    <bean id="swagger2Feature" class="com.parasoft.parabank.util.CustomSwagger2Feature">
+	<bean id="jsonProviderJackson" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider" />
+
+	<!-- CXF Swagger2Feature -->
+	<bean id="swagger2Feature" class="com.parasoft.parabank.util.CustomSwagger2Feature">
 <!--
 	 	<property name="version" value="3.0.0" />
-    	<property name="title" value="ParaBank REST Services" />
-    	<property name="contact" value="webadmin@parabank.parasoft.com" />
-    	<property name="description" value="This API provides access to the ParaBank operations." />
-        
+		<property name="title" value="ParaBank REST Services" />
+		<property name="contact" value="webadmin@parabank.parasoft.com" />
+		<property name="description" value="This API provides access to the ParaBank operations." />
 
-         <property name="schemes" >
+
+		 <property name="schemes" >
 			<array value-type="java.lang.String">
 				<value>"http"</value>
-			</array>        
-        </property>
- -->    	
-        <!-- customize some of the properties -->
+			</array>
+		</property>
+ -->
+		<!-- customize some of the properties -->
  		<property name="resourcePackage" value="io.swagger.resources,com.parasoft.parabank.service" />
-        <property name="host"  ref="hostAndPortStr" />
-        <property name="basePath" value="/parabank/services/bank"/>
-        <property name="prettyPrint" value="true" />
-    </bean>
+		<property name="host"  ref="hostAndPortStr" />
+		<property name="basePath" value="/parabank/services/bank"/>
+		<property name="prettyPrint" value="true" />
+	</bean>
 
 	<bean id="hostAndPortStr" factory-method="getHostPortString" class="com.parasoft.parabank.util.Util" />
 
@@ -223,6 +223,7 @@
 				<entry key="action" value="Encrypt" />
 				<entry key="decryptionPropFile" value="com/parasoft/bookstore/resources/keystore.properties" />
 				<entry key="passwordCallbackClass" value="com.parasoft.bookstore.KeystorePasswordCallback" />
+				<entry key="allowRSA15KeyTransportAlgorithm" value="true" />
 			</map>
 		</constructor-arg>
 	</bean>
