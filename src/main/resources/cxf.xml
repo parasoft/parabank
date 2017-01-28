@@ -128,6 +128,7 @@
 			<entry key="ws-security.signature.properties" value="com/parasoft/bookstore/resources/keystore.properties" />
 			<entry key="ws-security.encryption.properties" value="com/parasoft/bookstore/resources/keystore.properties" />
 			<entry key="ws-security.callback-handler" value="com.parasoft.bookstore.KeystorePasswordCallback" />
+			<entry key="allowRSA15KeyTransportAlgorithm" value="true" />
 		</jaxws:properties>
 	</jaxws:endpoint>
 
