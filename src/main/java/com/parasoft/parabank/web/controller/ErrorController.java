@@ -1,5 +1,6 @@
 package com.parasoft.parabank.web.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,11 +35,10 @@ public class ErrorController extends AbstractBankController {
             log.warn("Page not found: " + request.getAttribute(WebUtils.ERROR_REQUEST_URI_ATTRIBUTE));
             model.put("message", "error.not.found");
             model.put("parameters", new Object[] { request.getAttribute(WebUtils.ERROR_REQUEST_URI_ATTRIBUTE) });
-        } else if (obj instanceof Fault || obj instanceof Throwable && ((Throwable) obj).getCause() instanceof Fault) {
-            response.setStatus(400);
-            response.setContentType("text/plain");
-            response.getWriter().write(((Exception) obj).getCause().getLocalizedMessage());
-            return null;
+        } else if (obj instanceof Fault) {
+            return handleFault((Fault) obj, response);
+        } else if (obj instanceof Throwable && ((Throwable) obj).getCause() instanceof Fault) {
+            return handleFault((Fault) ((Throwable) obj).getCause(), response);
         } else {
             if (obj instanceof Throwable) {
                 log.error("Caught Error: {} : {}", obj.getClass().getName(), ((Throwable) obj).getMessage(), obj);
@@ -46,6 +46,14 @@ public class ErrorController extends AbstractBankController {
             model.put("message", "error.internal");
         }
         return new ModelAndView("error", "model", model);
+    }
+
+    private static ModelAndView handleFault(final Fault fault, final HttpServletResponse response)
+            throws IOException {
+        response.setStatus(400);
+        response.setContentType("text/plain");
+        response.getWriter().write(fault.getLocalizedMessage());
+        return null;
     }
 
     @Override
