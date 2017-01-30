@@ -1,27 +1,3 @@
-/*
- * $RCSfile: CartServiceTest.java,v $ $Revision: 1.1 $
- *
- * Comments:
- *
- * (C) Copyright ParaSoft Corporation 2011. All rights reserved. THIS IS
- * UNPUBLISHED PROPRIETARY SOURCE CODE OF ParaSoft The copyright notice above
- * does not evidence any actual or intended publication of such source code.
- *
- * $Author: jfulmer $ $Locker: $ $Date: 2012/10/30 00:27:32 $ $Log:
- * CartServiceTest.java,v $ Revision 1.1 2012/10/30 00:27:32 jfulmer
- * 
- * @task 45549 - PR 102758 - Added bookstore version 2 to parabank bookstore
- * tutorial.
- *
- * Revision 1.1 2011/11/09 23:27:33 dchung
- * 
- * @task 38201 - Restore WS-Security Web Services, refactor Bookstore Web
- * service, store Bookstore Web service on Parabank2
- *
- * Revision 1.2 2015/10/06 23:27:33 nrapoport Re-factored for use in maven
- * builds and leverage the spring configuration
- */
-
 package com.parasoft.bookstore2;
 
 import static org.junit.Assert.*;

@@ -1,7 +1,3 @@
-/**
- * @author nrapo - Nick Rapoport
- * @copyright Copyright 2015 ( Oct 13, 2015 ) Nick Rapoport all rights reserved.
- */
 package com.parasoft.parabank.util;
 
 import javax.servlet.http.HttpServletRequest;

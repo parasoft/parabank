@@ -1,11 +1,3 @@
-/**
- * 
- * <p>
- * Copyright 2016 ( Jun 6, 2016 ) Nick Rapoport all rights reserved.
- * </p>
- * 
- * @author dev - Nick Rapoport
- */
 package com.parasoft.parabank.service;
 
 /**

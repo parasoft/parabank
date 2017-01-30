@@ -1,14 +1,3 @@
-/**
- * <DL>
- * <DT>Description:</DT>
- * <DD>TODO add copyright</DD>
- * <DT>Date:</DT>
- * <DD>Oct 9, 2015</DD>
- * </DL>
- *
- * @author nrapo - Nick Rapoport
- *
- */
 package com.parasoft.parabank.util;
 
 /**
