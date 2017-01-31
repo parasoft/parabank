@@ -98,6 +98,9 @@
 				</constructor-arg>
 			</bean>
 		</jaxws:inInterceptors>
+		<jaxws:properties>
+			<entry key="ws-security.return.security.error" value="true" />
+		</jaxws:properties>
 	</jaxws:endpoint>
 
 	<jaxws:endpoint id="store-02" implementor="#bookstoreService" address="/store-wss-02">
@@ -109,6 +112,9 @@
 			<bean class="org.apache.cxf.binding.soap.saaj.SAAJOutInterceptor" />
 			<ref bean="store-02-Response" />
 		</jaxws:outInterceptors>
+		<jaxws:properties>
+			<entry key="ws-security.return.security.error" value="true" />
+		</jaxws:properties>
 	</jaxws:endpoint>
 
 	<jaxws:endpoint id="store-03" implementor="#bookstoreService" address="/store-wss-03">
@@ -120,6 +126,9 @@
 			<bean class="org.apache.cxf.binding.soap.saaj.SAAJOutInterceptor" />
 			<ref bean="store-03-Response" />
 		</jaxws:outInterceptors>
+		<jaxws:properties>
+			<entry key="ws-security.return.security.error" value="true" />
+		</jaxws:properties>
 	</jaxws:endpoint>
 
 	<jaxws:endpoint id="store-04" wsdlLocation="store-04.wsdl" implementor="#bookstoreService" address="/store-wss-04">
@@ -129,6 +138,7 @@
 			<entry key="ws-security.encryption.properties" value="com/parasoft/bookstore/resources/keystore.properties" />
 			<entry key="ws-security.callback-handler" value="com.parasoft.bookstore.KeystorePasswordCallback" />
 			<entry key="allowRSA15KeyTransportAlgorithm" value="true" />
+			<entry key="ws-security.return.security.error" value="true" />
 		</jaxws:properties>
 	</jaxws:endpoint>
 
@@ -143,9 +153,9 @@
 		<jaxrs:providers>
 <!--			<ref bean="jsonProviderJackson" /> -->
 			<ref bean="wadlGenerator" />
- 			<bean id="jsonProvider" class="org.apache.cxf.jaxrs.provider.json.JSONProvider" />
+			<bean id="jsonProvider" class="org.apache.cxf.jaxrs.provider.json.JSONProvider" />
 			<ref bean="cors-filter" />
- 		</jaxrs:providers>
+		</jaxrs:providers>
 
 		<jaxrs:features>
 			<ref bean="swagger2Feature" />
@@ -164,7 +174,7 @@
 	<!-- CXF Swagger2Feature -->
 	<bean id="swagger2Feature" class="com.parasoft.parabank.util.CustomSwagger2Feature">
 <!--
-	 	<property name="version" value="3.0.0" />
+		<property name="version" value="3.0.0" />
 		<property name="title" value="ParaBank REST Services" />
 		<property name="contact" value="webadmin@parabank.parasoft.com" />
 		<property name="description" value="This API provides access to the ParaBank operations." />
@@ -177,7 +187,7 @@
 		</property>
  -->
 		<!-- customize some of the properties -->
- 		<property name="resourcePackage" value="io.swagger.resources,com.parasoft.parabank.service" />
+		<property name="resourcePackage" value="io.swagger.resources,com.parasoft.parabank.service" />
 		<property name="host"  ref="hostAndPortStr" />
 		<property name="basePath" value="/parabank/services/bank"/>
 		<property name="prettyPrint" value="true" />
