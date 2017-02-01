@@ -15,18 +15,18 @@ xmlns:xsd="http://www.w3.org/2001/XMLSchema">
           <wsp:Policy>
             <sp:InitiatorToken>
               <wsp:Policy>
-                <sp:X509Token>
+                <sp:X509Token sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
                   <wsp:Policy>
-                    <sp:WssX509v3Token10/>
+                    <sp:WssX509V3Token10/>
                   </wsp:Policy>
                 </sp:X509Token>
               </wsp:Policy>
             </sp:InitiatorToken>
             <sp:RecipientToken>
               <wsp:Policy>
-                <sp:X509Token>
+                <sp:X509Token sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/Never">
                   <wsp:Policy>
-                    <sp:WssX509v3Token10/>
+                    <sp:WssX509V3Token10/>
                   </wsp:Policy>
                 </sp:X509Token>
               </wsp:Policy>
