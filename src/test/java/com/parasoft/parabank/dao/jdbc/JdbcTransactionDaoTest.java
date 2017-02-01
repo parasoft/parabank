@@ -4,15 +4,12 @@ import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.test.annotation.Rollback;
 
@@ -26,7 +23,6 @@ import com.parasoft.parabank.test.util.AbstractParaBankDataSourceTest;
 // @SuppressWarnings("deprecation")
 @Rollback
 public class JdbcTransactionDaoTest extends AbstractParaBankDataSourceTest {
-    private static final Logger log = LoggerFactory.getLogger(JdbcTransactionDaoTest.class);
 
     //private static final int ACCOUNT_ID = 201;
     private static final int ACCOUNT_ID = 12456;
@@ -40,8 +36,6 @@ public class JdbcTransactionDaoTest extends AbstractParaBankDataSourceTest {
     private static final String DESCRIPTION = "44444";
 
     private static final Date MILLENNIAL_BEGINNING_OF_TIME = convertDate("2000-01-01");
-
-    private static final SimpleDateFormat FMT_MONTH = new SimpleDateFormat("MMMM");
 
     @Resource(name = "transactionDao")
     private TransactionDao transactionDao;
@@ -119,29 +113,9 @@ public class JdbcTransactionDaoTest extends AbstractParaBankDataSourceTest {
     public void testGetTransactionsForAccountWithActivityCriterion() {
         final TransactionCriteria criteria = new TransactionCriteria();
         criteria.setSearchType(SearchType.ACTIVITY);
-        final Calendar cal = Calendar.getInstance();
-        final java.util.Date today = cal.getTime();
-        final int month = Calendar.getInstance().get(Calendar.MONTH);
-        cal.add(Calendar.MONTH, -1);
-        final java.util.Date lastMonth = cal.getTime();
-
-        final String currentMonth = FMT_MONTH.format(today);
-        final String previousMonth = FMT_MONTH.format(lastMonth);
 
         List<Transaction> transactions = transactionDao.getTransactionsForAccount(12345, criteria);
         assertEquals(7, transactions.size());
-
-        if (month != 0 && month != 11) {
-            criteria.setMonth(currentMonth);
-            transactions = transactionDao.getTransactionsForAccount(12345, criteria);
-            log.info("This month ('{}'), expected count: {}", currentMonth, transactions.size());
-            assertEquals(0, transactions.size());
-
-            criteria.setMonth(previousMonth);
-            transactions = transactionDao.getTransactionsForAccount(12345, criteria);
-            log.info("Privious month ('{}'), expected count: {}", previousMonth, transactions.size());
-            assertEquals(2, transactions.size());
-        }
 
         criteria.setMonth("All");
         transactions = transactionDao.getTransactionsForAccount(12345, criteria);
@@ -162,13 +136,6 @@ public class JdbcTransactionDaoTest extends AbstractParaBankDataSourceTest {
         criteria.setTransactionType("All");
         transactions = transactionDao.getTransactionsForAccount(12345, criteria);
         assertEquals(7, transactions.size());
-
-        if (month != 0 && month != 11) {
-            criteria.setMonth(previousMonth);
-            criteria.setTransactionType("Debit");
-            transactions = transactionDao.getTransactionsForAccount(12345, criteria);
-            assertEquals(1, transactions.size());
-        }
     }
 
     @Test
