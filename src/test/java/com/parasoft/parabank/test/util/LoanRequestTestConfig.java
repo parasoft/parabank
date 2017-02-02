@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -80,7 +81,7 @@ public class LoanRequestTestConfig implements InitializingBean {
             ex.fillInStackTrace();
             throw ex;
         }
-        final String results = FileUtils.readFileToString(getResponse().getFile());
+        final String results = FileUtils.readFileToString(getResponse().getFile(), Charset.defaultCharset());
         LOG.trace("loading key {} value {} ", getAmount(), results);
         setResponseData(results);
 
