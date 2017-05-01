@@ -13,6 +13,8 @@ fi
 export RUN_TIME=`date +%Y%m%d%H%M`
 
 export APP_COVERAGE_DIR=~/tmp
+export REPORT_DIR=target/reports/$BUILD_ID
+export LOG_DIR=target/logs
 
 echo ===================================================================
 echo DTP Project:$DTP_PROJECT "(BUILD_ID:"$BUILD_ID", RUN_TIME:"$RUN_TIME")"

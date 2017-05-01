@@ -20,11 +20,12 @@ if [ -f "set-vars.sh" ]; then
 	soatestcli -data . -import TestAssets
 
 	echo "**2/3** Running SOAtest (ParaBank)"
-	rm report-parabank/*.*
-	soatestcli -config "user://Example Configuration" -data . -resource TestAssets -report report-parabank -localsettings localsettings.properties > soatest-parabank-$RUN_TIME.log 2>&1
+	
+	rm ../$REPORT_DIR/soa-parabank/*.*
+	soatestcli -config "user://Example Configuration" -data . -resource TestAssets -report ../$REPORT_DIR/soa-parabank -localsettings localsettings.properties > ../$LOG_DIR/soatest-parabank-$RUN_TIME.log 2>&1
 
 	echo **3/3** Uploading report to DTP
-	curl -k --user admin:admin -F file=@report-parabank/report.xml https://localhost:8082/api/v2/dataCollector
+	curl -k --user admin:admin -F file=@../$REPORT_DIR/soa-parabank/report.xml https://localhost:8082/api/v2/dataCollector
 	popd
 
 	echo ======================Bookstore==============================
@@ -34,11 +35,11 @@ if [ -f "set-vars.sh" ]; then
 	soatestcli -data . -import Bookstore
 
 	echo "**2/3** Running SOAtest (Bookstore)"
-	rm report-bookstore/*.*
-	soatestcli -config "ApplicationCoverage.properties" -data . -resource Bookstore -report report-bookstore -localsettings localsettings.properties > soatest-bookstore-$RUN_TIME.log 2>&1
+	rm ../$REPORT_DIR/soa-bookstore/*.*
+	soatestcli -config "ApplicationCoverage.properties" -data . -resource Bookstore -report ../$REPORT_DIR/soa-bookstore -localsettings localsettings.properties > ../$LOG_DIR/soatest-bookstore-$RUN_TIME.log 2>&1
 
 	echo **3/3** Uploading report to DTP
-	curl -k --user admin:admin -F file=@report-bookstore/report.xml https://localhost:8082/api/v2/dataCollector
+	curl -k --user admin:admin -F file=@../$REPORT_DIR/soa-bookstore/report.xml https://localhost:8082/api/v2/dataCollector
 	popd
 
 	echo =================================================================
