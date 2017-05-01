@@ -20,7 +20,7 @@ if [ -f "set-vars.sh" ]; then
 	soatestcli -data . -import TestAssets
 
 	echo "**2/3** Running SOAtest (ParaBank)"
-	
+
 	rm ../$REPORT_DIR/soa-parabank/*.*
 	soatestcli -config "user://Example Configuration" -data . -resource TestAssets -report ../$REPORT_DIR/soa-parabank -localsettings localsettings.properties > ../$LOG_DIR/soatest-parabank-$RUN_TIME.log 2>&1
 

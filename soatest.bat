@@ -10,7 +10,6 @@ echo ===================================================================
 echo Running Functional Tests against build.id=%BUILD_ID%
 echo ===================================================================
 
-echo on
 pushd soatest
 call copy /Y templatesettings.properties localsettings.properties
 echo build.id=%BUILD_ID% >> localsettings.properties
@@ -31,7 +30,7 @@ if EXIST "..\%REPORT_DIR%\soa-parabank\" (
 soatestcli -config "user://Example Configuration" -data . -resource TestAssets -report ..\%REPORT_DIR%\soa-parabank -localsettings localsettings.properties > ..\%LOG_DIR%\soatest-parabank-%RUN_TIME%.log 2>&1
 
 echo **3/3** Uploading report to DTP
-REM curl.exe -k --user admin:admin -F file=@../%REPORT_DIR%/soa-parabank/report.xml https://localhost:8082/api/v2/dataCollector
+curl.exe -k --user admin:admin -F file=@report-parabank/report.xml https://localhost:8082/api/v2/dataCollector
 popd
 
 echo ======================Bookstore==============================
