@@ -22,6 +22,8 @@ echo =========================================================================
 echo DTP Project: %DTP_PROJECT% (BUILD_ID:%BUILD_ID%, RUN_TIME:%RUN_TIME%)
 echo =========================================================================
 
+echo "Setup DTP Engine & SOAtest intallation"
 SET JTEST_HOME=C:\Parasoft\Jtest
 SET SOATEST_HOME=C:\Program files\Parasoft\SOAtest\9.10
+
 set PATH=%SOATEST_HOME%;C:\Program Files\7-zip;%PATH%
