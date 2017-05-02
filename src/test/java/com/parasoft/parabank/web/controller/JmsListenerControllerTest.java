@@ -13,6 +13,10 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.parasoft.parabank.domain.logic.AdminManager;
 import com.parasoft.parabank.test.util.AbstractAdminOperationsTest;
 
+/**
+ * @req PAR-7
+ *
+ */
 public class JmsListenerControllerTest extends AbstractAdminOperationsTest { //AbstractControllerTest<JmsListenerController> {
     @Resource(name = "adminManager")
     private AdminManager adminManager;

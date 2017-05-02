@@ -14,6 +14,10 @@ import com.parasoft.parabank.util.Constants;
 import com.parasoft.parabank.web.UserSession;
 import com.parasoft.parabank.web.form.CustomerForm;
 
+/**
+ * @req PAR-3
+ *
+ */
 public class RegisterCustomerControllerTest extends AbstractCustomerControllerTest<RegisterCustomerController> {
     private static final Logger log = LoggerFactory.getLogger(RegisterCustomerControllerTest.class);
     //    @Override
@@ -32,7 +36,6 @@ public class RegisterCustomerControllerTest extends AbstractCustomerControllerTe
     /** {@inheritDoc} */
     @Override
     public void onSetUp() throws Exception {
-        // TODO Auto-generated method stub
         super.onSetUp();
         setPath("/register.htm");
         setFormName(Constants.CUSTOMERFORM);

@@ -20,6 +20,11 @@ import com.parasoft.parabank.domain.validator.PayeeValidator;
 import com.parasoft.parabank.util.Constants;
 import com.parasoft.parabank.web.form.BillPayForm;
 
+/**
+ * @req PAR-26
+ * @author sang
+ *
+ */
 @SuppressWarnings({ "unchecked" })
 public class BillPayControllerTest extends AbstractValidatingBankControllerTest<BillPayController> {
 

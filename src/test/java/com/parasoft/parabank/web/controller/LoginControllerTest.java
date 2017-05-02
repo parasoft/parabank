@@ -11,6 +11,12 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.parasoft.parabank.util.Constants;
 import com.parasoft.parabank.web.UserSession;
 
+/**
+ * @req PAR-4
+ * @req PAR-2
+ * @req PAR-3
+ *
+ */
 public class LoginControllerTest extends AbstractBankControllerTest<LoginController> {
 
     public void assertError(final String message) throws Exception {

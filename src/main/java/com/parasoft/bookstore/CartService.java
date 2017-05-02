@@ -79,9 +79,9 @@ public class CartService implements ICartService {
      */
     public Book[] getItemByTitle(String title) throws Exception {
         ++invocationCounter;
-        Book[] books = BookStoreDB.getByTitleLike(title != null? title : "");
+        Book[] books = BookStoreDB.getByTitleLike(title != null? title : "No Title");
         for (Book b : books) {
-            b.inflatePrice(new BigDecimal((invocationCounter/5)));
+            b.inflatePrice(new BigDecimal((invocationCounter/3)));
         }
         return books;
     }
@@ -141,7 +141,7 @@ public class CartService implements ICartService {
                 while (itr.hasNext()) {
                     Order order = itr.next();
                     long difference = 
-                        System.currentTimeMillis() - order.getTimestamp();
+                        System.currentTimeMillis() - order.getTimestamp() - 1;
                     if (difference > timeoutInMilliseconds) {
                         itr.remove();
                     }
@@ -155,7 +155,7 @@ public class CartService implements ICartService {
             while (iterator.hasNext()) {
                 Map.Entry<Integer, TempBook> entry = iterator.next();
                 long difference = 
-                    System.currentTimeMillis() - entry.getValue().getTimestamp();
+                    System.currentTimeMillis() - entry.getValue().getTimestamp() - 1;
                 if (difference > timeoutInMilliseconds) {
                     BookStoreDB.clearAddedBooks(entry.getValue());
                     iterator.remove();

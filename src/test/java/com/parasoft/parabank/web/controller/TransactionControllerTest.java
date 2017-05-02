@@ -10,6 +10,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.parasoft.parabank.domain.Transaction;
 import com.parasoft.parabank.util.Constants;
 
+/**
+ * @req PAR-30
+ * @req PAR-29
+ * @req PAR-28
+ * @req PAR-27
+ *
+ */
 public class TransactionControllerTest extends AbstractBankControllerTest<TransactionController> {
 
     @Override

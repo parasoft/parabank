@@ -14,6 +14,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.parasoft.parabank.domain.News;
 import com.parasoft.parabank.util.Constants;
 
+/**
+ * @req PAR-46
+ *
+ */
 @SuppressWarnings("unchecked")
 public class NewsControllerTest extends AbstractControllerTest<NewsController> {
     //    @Resource(name = "newsManager")

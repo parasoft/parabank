@@ -21,6 +21,11 @@ import com.parasoft.parabank.domain.TransactionCriteria.SearchType;
 import com.parasoft.parabank.util.Constants;
 import com.parasoft.parabank.web.form.FindTransactionForm;
 
+/**
+ * @req PAR-30
+ * @author sang
+ *
+ */
 // @SuppressWarnings({ "unchecked" })
 public class FindTransactionControllerTest extends AbstractValidatingBankControllerTest<FindTransactionController> {
     //@SuppressWarnings("unused")

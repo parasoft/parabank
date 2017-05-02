@@ -16,6 +16,10 @@ import com.parasoft.parabank.domain.Account;
 import com.parasoft.parabank.util.Constants;
 import com.parasoft.parabank.web.form.TransferForm;
 
+/**
+ * @req PAR-25
+ *
+ */
 @SuppressWarnings({ "unchecked" })
 public class TransferControllerTest extends AbstractBankControllerTest<TransferController> {
     private void assertReferenceData(final ModelAndView mav) {

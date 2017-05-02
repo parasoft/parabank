@@ -22,6 +22,10 @@ public class TemplateViewResolverTest extends AbstractParaBankTest {
         this.viewResolver = viewResolver;
     }
 
+    /**
+     * @req PAR-10
+     * @throws Exception
+     */
     @Test
     public void testResolveViewName() throws Exception {
         final View view = viewResolver.resolveViewName("test", Locale.getDefault());

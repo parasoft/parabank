@@ -14,6 +14,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.parasoft.parabank.domain.logic.AdminManager;
 import com.parasoft.parabank.test.util.AbstractAdminOperationsTest;
 
+/**
+ * @req PAR-12
+ * @author sang
+ *
+ */
 public class DatabaseControllerTest extends AbstractAdminOperationsTest {
     //    @Resource(name = "databaseController")
     //    private DatabaseController controller;

@@ -201,7 +201,7 @@ public class BookStoreDB extends DB {
                 while (enum_var.hasMoreElements()) {
                     TempBook b = (TempBook)enum_var.nextElement();
                     if (b.getBook().getId() == id) {
-                        b.refreshTimestamp();
+                        //b.refreshTimestamp();
                         return b.getBook();
                     }
                 }

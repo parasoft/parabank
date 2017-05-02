@@ -31,7 +31,7 @@ public abstract class AbstractBeanTestCase<T> extends AbstractParaBankTest {
                 o2 = classUnderTest.newInstance();
 
                 assertEquals("Instance o1 is not equal to itself", o1, o1);
-                assertFalse("Instance o1 is equal to null", o1.equals(null));
+                assertFalse("Instance o1 is equal to null", o1.equals(null)); // parasoft-suppress PB.API.EQNL "This is intended use of equals method"
                 assertFalse("Instance o1 is equal to an instance of Object", o1.equals(new Object()));
 
                 final Field field = fields[i];

@@ -20,6 +20,11 @@ import com.parasoft.parabank.domain.logic.AdminManager;
 import com.parasoft.parabank.util.Constants;
 import com.parasoft.parabank.web.form.RequestLoanForm;
 
+/**
+ * @req PAR-32
+ * @req PAR-18
+ *
+ */
 @SuppressWarnings({ "unchecked" })
 public class RequestLoanControllerTest extends AbstractBankControllerTest<RequestLoanController> {
 

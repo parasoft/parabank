@@ -15,6 +15,10 @@ public class ViewUtilTest extends AbstractParaBankTest {
 
     private static final String[] PARAMS = new String[] { "param1", "param2" };
 
+    /**
+     * @req PAR-11
+     * @req PAR-21
+     */
     @Test
     public void testCreateErrorView() {
         ModelAndView mav = ViewUtil.createErrorView(ERROR_MESSAGE);

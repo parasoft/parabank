@@ -43,6 +43,10 @@ public class LoginInterceptorTest extends AbstractParaBankTest {
         response = new MockHttpServletResponse();
     }
 
+    /**
+     * @req PAR-2
+     * @throws Exception
+     */
     @Test
     public void testLoginInterceptor() throws Exception {
         final LoginInterceptor interceptor = new LoginInterceptor();

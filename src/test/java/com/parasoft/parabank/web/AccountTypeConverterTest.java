@@ -8,6 +8,9 @@ import com.parasoft.parabank.domain.Account.AccountType;
 import com.parasoft.parabank.test.util.AbstractParaBankTest;
 
 public class AccountTypeConverterTest extends AbstractParaBankTest {
+	/**
+	 * @req PAR-21
+	 */
     @Test
     public void testConvert() {
         final AccountTypeConverter converter = new AccountTypeConverter();

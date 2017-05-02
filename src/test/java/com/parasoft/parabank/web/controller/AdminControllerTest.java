@@ -20,6 +20,12 @@ import com.parasoft.parabank.domain.logic.impl.LoanProviderMapAware;
 import com.parasoft.parabank.util.Constants;
 import com.parasoft.parabank.web.form.AdminForm;
 
+/**
+ * @req PAR-13
+ * @req PAR-18
+ * @author sang
+ *
+ */
 public class AdminControllerTest extends AbstractValidatingBankControllerTest<AdminController> {
     @SuppressWarnings("unused")
     private static final Logger log = LoggerFactory.getLogger(RegisterCustomerControllerTest.class);

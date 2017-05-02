@@ -11,6 +11,11 @@ import org.springframework.web.util.WebUtils;
 
 import com.parasoft.parabank.service.ParaBankServiceException;
 
+/**
+ * @req PAR-18
+ * @author sang
+ *
+ */
 public class ErrorControllerTest extends AbstractControllerTest<ErrorController> {
     private void assertError(final String message) throws Exception {
         //        final ModelAndView mav = controller.handleRequest(request, response);

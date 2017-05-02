@@ -24,6 +24,7 @@ import com.parasoft.parabank.test.util.AbstractAdminOperationsTest;
  * </DL>
  *
  * @author nrapo - Nick Rapoport
+ * @req PAR-5
  *
  */
 public class InitializeDBControllerTest extends AbstractAdminOperationsTest {

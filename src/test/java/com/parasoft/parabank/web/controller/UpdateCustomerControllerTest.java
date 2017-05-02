@@ -12,6 +12,11 @@ import com.parasoft.parabank.domain.Customer;
 import com.parasoft.parabank.util.Constants;
 import com.parasoft.parabank.web.form.CustomerForm;
 
+/**
+ * @req PAR-4
+ * @req PAR-31
+ *
+ */
 public class UpdateCustomerControllerTest extends AbstractCustomerControllerTest<UpdateCustomerController> {
     @Override
     protected CustomerForm createCustomerForm() throws Exception {

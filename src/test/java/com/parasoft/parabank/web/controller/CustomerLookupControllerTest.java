@@ -14,6 +14,11 @@ import com.parasoft.parabank.domain.Customer;
 import com.parasoft.parabank.util.Constants;
 import com.parasoft.parabank.web.form.LookupForm;
 
+/**
+ * @req PAR-33
+ * @author sang
+ *
+ */
 public class CustomerLookupControllerTest extends AbstractValidatingBankControllerTest<CustomerLookupController> {
     /**
      * <DL>
