@@ -2,9 +2,9 @@ package com.parasoft.parabank.util;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
+import org.junit.*;
 
-import com.parasoft.parabank.test.util.AbstractParaBankTest;
+import com.parasoft.parabank.test.util.*;
 
 public class UtilTest extends AbstractParaBankTest {
     @Test

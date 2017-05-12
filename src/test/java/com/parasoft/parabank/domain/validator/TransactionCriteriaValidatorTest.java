@@ -2,12 +2,12 @@ package com.parasoft.parabank.domain.validator;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-import org.springframework.validation.Validator;
+import org.junit.*;
+import org.springframework.validation.*;
 
-import com.parasoft.parabank.domain.TransactionCriteria;
-import com.parasoft.parabank.domain.TransactionCriteria.SearchType;
-import com.parasoft.parabank.test.util.AbstractParaBankTest;
+import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.TransactionCriteria.*;
+import com.parasoft.parabank.test.util.*;
 
 public class TransactionCriteriaValidatorTest extends AbstractParaBankTest {
     private Validator validator;

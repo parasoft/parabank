@@ -1,11 +1,8 @@
 package com.parasoft.bookstore;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import org.junit.*;
 
-import com.parasoft.parabank.test.util.AbstractParaBankTest;
+import com.parasoft.parabank.test.util.*;
 
 public abstract class AbstractCartService extends AbstractParaBankTest {
 
@@ -19,7 +16,7 @@ public abstract class AbstractCartService extends AbstractParaBankTest {
      * <DT>Date:</DT>
      * <DD>Oct 6, 2015</DD>
      * </DL>
-     * 
+     *
      * @throws java.lang.Exception
      */
     @BeforeClass
@@ -35,7 +32,7 @@ public abstract class AbstractCartService extends AbstractParaBankTest {
      * <DT>Date:</DT>
      * <DD>Oct 6, 2015</DD>
      * </DL>
-     * 
+     *
      * @throws java.lang.Exception
      */
     @AfterClass
@@ -68,9 +65,10 @@ public abstract class AbstractCartService extends AbstractParaBankTest {
      * <DT>Date:</DT>
      * <DD>Oct 6, 2015</DD>
      * </DL>
-     * 
+     *
      * @throws java.lang.Exception
      */
+    @Override
     @Before
     public void setUp() throws Exception {
     }
@@ -82,9 +80,10 @@ public abstract class AbstractCartService extends AbstractParaBankTest {
      * <DT>Date:</DT>
      * <DD>Oct 6, 2015</DD>
      * </DL>
-     * 
+     *
      * @throws java.lang.Exception
      */
+    @Override
     @After
     public void tearDown() throws Exception {
     }
@@ -103,7 +102,7 @@ public abstract class AbstractCartService extends AbstractParaBankTest {
 
     /**
      * <DL><DT>Description:</DT><DD>
-     * Setter for the service property 
+     * Setter for the service property
      * </DD>
      * <DT>Date:</DT><DD>Oct 7, 2015</DD>
      * </DL>

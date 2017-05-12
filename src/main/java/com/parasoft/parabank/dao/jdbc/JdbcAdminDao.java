@@ -1,23 +1,17 @@
 package com.parasoft.parabank.dao.jdbc;
 
-import java.sql.DatabaseMetaData;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.sql.*;
+import java.util.*;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
-import org.springframework.jdbc.CannotGetJdbcConnectionException;
-import org.springframework.jdbc.core.ResultSetExtractor;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
-import org.springframework.jdbc.datasource.init.ScriptUtils;
+import org.slf4j.*;
+import org.springframework.core.io.*;
+import org.springframework.jdbc.*;
+import org.springframework.jdbc.core.*;
+import org.springframework.jdbc.core.support.*;
+import org.springframework.jdbc.datasource.init.*;
 
-import com.parasoft.parabank.dao.AdminDao;
-import com.parasoft.parabank.dao.internal.DynamicDataInserter;
+import com.parasoft.parabank.dao.*;
+import com.parasoft.parabank.dao.internal.*;
 
 /*
  * JDBC implementation of AdminDao

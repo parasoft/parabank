@@ -1,14 +1,13 @@
 package com.parasoft.parabank.web.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.stereotype.*;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.*;
+import org.springframework.web.servlet.view.*;
 
-import com.parasoft.parabank.util.AccessModeController;
+import com.parasoft.parabank.util.*;
 
 /**
  * Controller for logging out a customer

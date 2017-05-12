@@ -9,7 +9,8 @@ import org.apache.wss4j.common.ext.*;
 public class KeystorePasswordCallback implements CallbackHandler{
     private final String NL_USERNAME = "soatest";
     private final String NL_PASSWORD = "security";
-    
+
+    @Override
     public void handle(Callback[] callbacks) throws IOException, UnsupportedCallbackException {
         WSPasswordCallback pc = (WSPasswordCallback) callbacks[0];
 

@@ -1,15 +1,12 @@
 package com.parasoft.parabank.domain;
 
-import java.math.BigDecimal;
+import java.math.*;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import com.google.gson.JsonObject;
-import com.parasoft.parabank.util.Util;
+import com.fasterxml.jackson.annotation.*;
+import com.google.gson.*;
+import com.parasoft.parabank.util.*;
 
 /**
  * Domain object representing a customer's bank account
@@ -105,8 +102,8 @@ public class Account {
         int result = 1;
         result = prime * result + id;
         result = prime * result + customerId;
-        result = prime * result + ((type == null) ? 0 : type.hashCode());
-        result = prime * result + ((balance == null) ? 0 : balance.hashCode());
+        result = prime * result + (type == null ? 0 : type.hashCode());
+        result = prime * result + (balance == null ? 0 : balance.hashCode());
         return result;
     }
 

@@ -1,11 +1,10 @@
 package com.parasoft.parabank.domain;
 
-import java.math.BigDecimal;
+import java.math.*;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
-import com.parasoft.parabank.util.Util;
+import com.parasoft.parabank.util.*;
 
 /**
  * Domain object representing a stock position
@@ -23,31 +22,31 @@ public class Position {
     public int getPositionId() {
         return positionId;
     }
-    
+
     public void setPositionId(int id) {
-        this.positionId = id;
+        positionId = id;
     }
 
     public int getCustomerId() {
         return customerId;
     }
-    
+
     public void setCustomerId(int id) {
-        this.customerId = id;
+        customerId = id;
     }
-    
+
     public String getName() {
         return name;
     }
-    
+
     public void setName(String name) {
         this.name = name;
     }
-    
+
     public String getSymbol() {
         return symbol;
     }
-    
+
     public void setSymbol(String symbol) {
         this.symbol = symbol;
     }
@@ -55,19 +54,19 @@ public class Position {
     public int getShares() {
         return shares;
     }
-    
+
     public void setShares(int shares) {
         this.shares = shares;
     }
 
     public BigDecimal getPurchasePrice() {
-        return purchasePrice; 
+        return purchasePrice;
     }
-    
+
     public void setPurchasePrice(BigDecimal price) {
-        this.purchasePrice = price;
+        purchasePrice = price;
     }
-    
+
     public BigDecimal getCostBasis() {
         return purchasePrice.multiply(new BigDecimal(shares));
     }
@@ -78,10 +77,10 @@ public class Position {
         int result = 1;
         result = prime * result + positionId;
         result = prime * result + customerId;
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + ((symbol == null) ? 0 : symbol.hashCode());
+        result = prime * result + (name == null ? 0 : name.hashCode());
+        result = prime * result + (symbol == null ? 0 : symbol.hashCode());
         result = prime * result + shares;
-        result = prime * result + ((purchasePrice == null) ? 0 : purchasePrice.hashCode());
+        result = prime * result + (purchasePrice == null ? 0 : purchasePrice.hashCode());
         return result;
     }
 

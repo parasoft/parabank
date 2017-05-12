@@ -2,13 +2,11 @@ package com.parasoft.parabank.test.util;
 
 import static org.junit.Assert.*;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-import java.lang.reflect.ParameterizedType;
-import java.math.BigDecimal;
-import java.util.Date;
+import java.lang.reflect.*;
+import java.math.*;
+import java.util.*;
 
-import org.junit.Test;
+import org.junit.*;
 
 public abstract class AbstractBeanTestCase<T> extends AbstractParaBankTest {
     private static final String TEST_STRING_VAL1 = "Some Value";
@@ -26,7 +24,7 @@ public abstract class AbstractBeanTestCase<T> extends AbstractParaBankTest {
             assertTrue("Instances with default constructor not equal (o2.equals(o1))", o2.equals(o1));
 
             final Field[] fields = classUnderTest.getDeclaredFields();
-            for (int i = 0; i < fields.length; i++) {
+            for (final Field field : fields) {
                 o1 = classUnderTest.newInstance();
                 o2 = classUnderTest.newInstance();
 
@@ -34,7 +32,6 @@ public abstract class AbstractBeanTestCase<T> extends AbstractParaBankTest {
                 assertFalse("Instance o1 is equal to null", o1.equals(null));
                 assertFalse("Instance o1 is equal to an instance of Object", o1.equals(new Object()));
 
-                final Field field = fields[i];
                 if (Modifier.isStatic(field.getModifiers()) || Modifier.isFinal(field.getModifiers())) {
                     continue;
                 }
@@ -53,8 +50,8 @@ public abstract class AbstractBeanTestCase<T> extends AbstractParaBankTest {
                     // Let's walk one of them
                     // to see if we can find a field to set
                     final Field[] paramFields = field.get(o1).getClass().getDeclaredFields();
-                    for (int j = 0; j < paramFields.length; j++) {
-                        toggleField(paramFields[j], field.get(o1), true);
+                    for (Field paramField : paramFields) {
+                        toggleField(paramField, field.get(o1), true);
                     }
                     assertFalse(
                         "After setting o2 with a different " + field.getName() + " than what is in o1, the two objects in the field are equal. "
@@ -77,11 +74,10 @@ public abstract class AbstractBeanTestCase<T> extends AbstractParaBankTest {
     static void assertMeetsHashCodeContract(final Class<?> classUnderTest) {
         try {
             final Field[] fields = classUnderTest.getDeclaredFields();
-            for (int i = 0; i < fields.length; i++) {
+            for (final Field field : fields) {
                 final Object o1 = classUnderTest.newInstance();
                 final int initialHashCode = o1.hashCode();
 
-                final Field field = fields[i];
                 if (Modifier.isStatic(field.getModifiers()) || Modifier.isFinal(field.getModifiers())) {
                     continue;
                 }
@@ -110,8 +106,7 @@ public abstract class AbstractBeanTestCase<T> extends AbstractParaBankTest {
                 str.startsWith(classUnderTest.getSimpleName()));
 
             final Field[] fields = classUnderTest.getDeclaredFields();
-            for (int i = 0; i < fields.length; i++) {
-                final Field field = fields[i];
+            for (final Field field : fields) {
                 if (Modifier.isStatic(field.getModifiers()) || Modifier.isFinal(field.getModifiers())) {
                     continue;
                 }

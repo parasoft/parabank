@@ -2,16 +2,15 @@ package com.parasoft.parabank.service;
 
 import static org.junit.Assert.*;
 
-import javax.annotation.Resource;
+import javax.annotation.*;
 
-import org.junit.FixMethodOrder;
-import org.junit.Test;
-import org.junit.runners.MethodSorters;
-import org.springframework.jms.listener.AbstractJmsListeningContainer;
-import org.springframework.test.annotation.Commit;
+import org.junit.*;
+import org.junit.runners.*;
+import org.springframework.jms.listener.*;
+import org.springframework.test.annotation.*;
 
-import com.parasoft.parabank.domain.logic.AdminManager;
-import com.parasoft.parabank.test.util.AbstractAdminOperationsTest;
+import com.parasoft.parabank.domain.logic.*;
+import com.parasoft.parabank.test.util.*;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ParaBankAdminServiceImplTest extends AbstractAdminOperationsTest {

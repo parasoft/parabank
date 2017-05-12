@@ -1,24 +1,18 @@
 package com.parasoft.parabank.web.controller;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-import javax.annotation.Resource;
+import javax.annotation.*;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.Validator;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.stereotype.*;
+import org.springframework.ui.*;
+import org.springframework.validation.*;
+import org.springframework.validation.annotation.*;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.*;
 
-import com.parasoft.parabank.util.AccessModeController;
-import com.parasoft.parabank.util.Constants;
-import com.parasoft.parabank.web.form.ContactForm;
+import com.parasoft.parabank.util.*;
+import com.parasoft.parabank.web.form.*;
 
 /**
  * Controller for collecting customer support messages (currently ignores the message)

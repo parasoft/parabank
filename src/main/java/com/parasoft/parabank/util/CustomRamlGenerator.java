@@ -1,16 +1,14 @@
 package com.parasoft.parabank.util;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.*;
+import org.springframework.context.*;
+import org.springframework.stereotype.*;
 
-import com._8x8.cloud.swagger2raml.model.Api;
-import com._8x8.cloud.swagger2raml.reader.SwaggerApiReader;
-import com._8x8.cloud.swagger2raml.writer.ApiWriter;
+import com._8x8.cloud.swagger2raml.model.*;
+import com._8x8.cloud.swagger2raml.reader.*;
+import com._8x8.cloud.swagger2raml.writer.*;
 
 @Component("customRamlGenerator")
 public class CustomRamlGenerator implements ApplicationContextAware {

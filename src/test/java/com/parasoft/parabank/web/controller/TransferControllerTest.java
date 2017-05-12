@@ -1,20 +1,19 @@
 package com.parasoft.parabank.web.controller;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
-import java.math.BigDecimal;
-import java.util.List;
+import java.math.*;
+import java.util.*;
 
-import org.junit.Test;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.servlet.ModelAndView;
+import org.junit.*;
+import org.springframework.mock.web.*;
+import org.springframework.test.annotation.*;
+import org.springframework.transaction.annotation.*;
+import org.springframework.web.servlet.*;
 
-import com.parasoft.parabank.domain.Account;
-import com.parasoft.parabank.util.Constants;
-import com.parasoft.parabank.web.form.TransferForm;
+import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.util.*;
+import com.parasoft.parabank.web.form.*;
 
 @SuppressWarnings({ "unchecked" })
 public class TransferControllerTest extends AbstractBankControllerTest<TransferController> {

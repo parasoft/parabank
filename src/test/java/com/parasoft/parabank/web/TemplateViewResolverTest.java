@@ -2,17 +2,15 @@ package com.parasoft.parabank.web;
 
 import static org.junit.Assert.*;
 
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
-import javax.annotation.Resource;
+import javax.annotation.*;
 
-import org.junit.Test;
-import org.springframework.web.servlet.View;
-import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.view.AbstractView;
+import org.junit.*;
+import org.springframework.web.servlet.*;
+import org.springframework.web.servlet.view.*;
 
-import com.parasoft.parabank.test.util.AbstractParaBankTest;
+import com.parasoft.parabank.test.util.*;
 
 public class TemplateViewResolverTest extends AbstractParaBankTest {
     @Resource(name = "viewResolver")

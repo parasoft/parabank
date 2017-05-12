@@ -1,16 +1,12 @@
 package com.parasoft.parabank.dao.jdbc;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.text.*;
+import java.util.*;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 
-import com.parasoft.parabank.domain.Transaction.TransactionType;
-import com.parasoft.parabank.domain.TransactionCriteria;
+import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.Transaction.*;
 
 /**
  * Takes a transaction criteria object and returns SQL restriction clauses corresponding to the given criteria
@@ -69,7 +65,7 @@ class JdbcTransactionQueryRestrictor {
 
     /**
      * Create a SQL query fragment restricting transactions to the given criteria
-     * 
+     *
      * @param criteria
      *            the search criteria
      * @param params

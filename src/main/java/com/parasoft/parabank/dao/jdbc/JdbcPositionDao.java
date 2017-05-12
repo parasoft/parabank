@@ -1,19 +1,15 @@
 package com.parasoft.parabank.dao.jdbc;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.*;
 import java.util.Date;
-import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
+import org.slf4j.*;
+import org.springframework.jdbc.core.*;
+import org.springframework.jdbc.core.namedparam.*;
 
-import com.parasoft.parabank.dao.PositionDao;
-import com.parasoft.parabank.domain.HistoryPoint;
-import com.parasoft.parabank.domain.Position;
+import com.parasoft.parabank.dao.*;
+import com.parasoft.parabank.domain.*;
 
 /*
  * JDBC implementation of PositionDao

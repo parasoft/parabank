@@ -14,6 +14,7 @@ public class UsernameTokenPasswordCallback implements CallbackHandler {
     private final String NL_USERNAME3 = "admin";
     private final String NL_PASSWORD3 = "admin";
 
+    @Override
     public void handle(Callback[] callbacks) throws IOException, UnsupportedCallbackException {
         WSPasswordCallback pc = (WSPasswordCallback) callbacks[0];
 

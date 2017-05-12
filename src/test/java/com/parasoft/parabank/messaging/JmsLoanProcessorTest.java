@@ -2,23 +2,20 @@ package com.parasoft.parabank.messaging;
 
 import static org.junit.Assert.*;
 
-import java.io.StringReader;
-import java.math.BigDecimal;
+import java.io.*;
+import java.math.*;
 
-import javax.annotation.Resource;
-import javax.jms.JMSException;
-import javax.jms.TextMessage;
-import javax.xml.transform.stream.StreamSource;
+import javax.annotation.*;
+import javax.jms.*;
+import javax.xml.transform.stream.*;
 
-import org.apache.activemq.command.ActiveMQTextMessage;
-import org.junit.Test;
-import org.springframework.jms.core.JmsTemplate;
-import org.springframework.oxm.Marshaller;
-import org.springframework.oxm.Unmarshaller;
+import org.apache.activemq.command.*;
+import org.junit.*;
+import org.springframework.jms.core.*;
+import org.springframework.oxm.*;
 
-import com.parasoft.parabank.domain.LoanRequest;
-import com.parasoft.parabank.domain.LoanResponse;
-import com.parasoft.parabank.test.util.AbstractParaBankDataSourceTest;
+import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.test.util.*;
 
 public class JmsLoanProcessorTest extends AbstractParaBankDataSourceTest {
     private static final String TEST_PROVIDER = "Test Provider";

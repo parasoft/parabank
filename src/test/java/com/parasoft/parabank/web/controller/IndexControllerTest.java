@@ -2,23 +2,20 @@ package com.parasoft.parabank.web.controller;
 
 import static org.junit.Assert.*;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
-import javax.annotation.Resource;
+import javax.annotation.*;
 
-import org.junit.Test;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.test.annotation.Commit;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
+import org.junit.*;
+import org.springframework.mock.web.*;
+import org.springframework.test.annotation.*;
+import org.springframework.transaction.annotation.*;
+import org.springframework.web.servlet.*;
+import org.springframework.web.servlet.view.*;
 
-import com.parasoft.parabank.domain.News;
-import com.parasoft.parabank.domain.logic.NewsManager;
-import com.parasoft.parabank.util.Constants;
+import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.logic.*;
+import com.parasoft.parabank.util.*;
 
 @SuppressWarnings({ "unchecked" })
 public class IndexControllerTest extends AbstractControllerTest<IndexController> {

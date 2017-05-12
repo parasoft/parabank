@@ -1,15 +1,13 @@
 package com.parasoft.parabank.domain;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
-import java.math.BigDecimal;
-import java.util.Calendar;
-import java.util.Date;
+import java.math.*;
+import java.util.*;
 
-import org.junit.Test;
+import org.junit.*;
 
-import com.parasoft.parabank.test.util.AbstractBeanTestCase;
+import com.parasoft.parabank.test.util.*;
 
 public class HistoryPointTest extends AbstractBeanTestCase<HistoryPoint> {
     private static final String SYMBOL = "AAR";

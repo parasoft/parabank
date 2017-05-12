@@ -1,21 +1,16 @@
 package com.parasoft.parabank.dao.jdbc.internal;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Random;
+import java.sql.*;
+import java.text.*;
+import java.util.*;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.ResultSetExtractor;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.slf4j.*;
+import org.springframework.dao.*;
+import org.springframework.jdbc.core.*;
+import org.springframework.jdbc.core.support.*;
 
-import com.parasoft.parabank.dao.internal.DynamicDataInserter;
-import com.parasoft.parabank.dao.jdbc.JdbcSequenceDao;
+import com.parasoft.parabank.dao.internal.*;
+import com.parasoft.parabank.dao.jdbc.*;
 
 public class StockDataInserter extends JdbcDaoSupport implements DynamicDataInserter {
     private static final Logger log = LoggerFactory.getLogger(StockDataInserter.class);

@@ -2,14 +2,12 @@ package com.parasoft.parabank.dao.test;
 
 import static org.junit.Assert.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-import org.junit.Test;
+import org.junit.*;
 
-import com.parasoft.parabank.dao.AdminDao;
-import com.parasoft.parabank.dao.InMemoryAdminDao;
-import com.parasoft.parabank.test.util.AbstractParaBankTest;
+import com.parasoft.parabank.dao.*;
+import com.parasoft.parabank.test.util.*;
 
 public class InMemoryAdminDaoTest extends AbstractParaBankTest {
     private static final String NAME1 = "name1";

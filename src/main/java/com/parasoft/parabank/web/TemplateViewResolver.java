@@ -1,10 +1,9 @@
 package com.parasoft.parabank.web;
 
-import java.util.Locale;
+import java.util.*;
 
-import org.springframework.web.servlet.View;
-import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.*;
+import org.springframework.web.servlet.view.*;
 
 /**
  * Override default view resolver behavior to forward to template page
@@ -12,7 +11,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 public class TemplateViewResolver extends InternalResourceViewResolver implements ViewResolver {
     static final String VIEW_ATTRIBUTE = "view";
     static final String TEMPLATE_VIEW_NAME = "template";
-    
+
     @Override
     public View resolveViewName(String viewName, Locale locale)
             throws Exception {

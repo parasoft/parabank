@@ -1,11 +1,11 @@
 package com.parasoft.parabank.domain.logic;
 
-import java.util.Map;
+import java.util.*;
 
-import org.springframework.jms.listener.AbstractJmsListeningContainer;
+import org.springframework.jms.listener.*;
 
-import com.parasoft.parabank.dao.AdminDao;
-import com.parasoft.parabank.web.form.AdminForm;
+import com.parasoft.parabank.dao.*;
+import com.parasoft.parabank.web.form.*;
 
 /**
  * Interface for bank system management
@@ -58,7 +58,7 @@ public interface AdminManager {
      * <DT>Date:</DT>
      * <DD>Oct 24, 2015</DD>
      * </DL>
-     * 
+     *
      * @param form
      *            the form to populate
      * @return populated form

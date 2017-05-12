@@ -2,16 +2,15 @@ package com.parasoft.parabank.messaging;
 
 import static org.junit.Assert.*;
 
-import java.math.BigDecimal;
+import java.math.*;
 
-import javax.annotation.Resource;
+import javax.annotation.*;
 
-import org.junit.Test;
+import org.junit.*;
 
-import com.parasoft.parabank.domain.LoanRequest;
-import com.parasoft.parabank.domain.LoanResponse;
-import com.parasoft.parabank.domain.logic.impl.ConfigurableLoanProvider;
-import com.parasoft.parabank.test.util.AbstractParaBankDataSourceTest;
+import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.logic.impl.*;
+import com.parasoft.parabank.test.util.*;
 
 public class LocalLoanProviderTest extends AbstractParaBankDataSourceTest {
     private static final String TEST_PROVIDER = "Test Provider";

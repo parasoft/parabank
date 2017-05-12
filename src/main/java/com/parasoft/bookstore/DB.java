@@ -1,10 +1,7 @@
 package com.parasoft.bookstore;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.ResourceBundle;
+import java.sql.*;
+import java.util.*;
 
 public abstract class DB {
     private static org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(DB.class);
@@ -78,7 +75,7 @@ public abstract class DB {
 
     /**
      * Call close() when finished.
-     * 
+     *
      * @param query
      *            an SQL statement
      */

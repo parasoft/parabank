@@ -2,11 +2,11 @@ package com.parasoft.parabank.domain;
 
 import static org.junit.Assert.*;
 
-import java.math.BigDecimal;
+import java.math.*;
 
-import org.junit.Test;
+import org.junit.*;
 
-import com.parasoft.parabank.test.util.AbstractBeanTestCase;
+import com.parasoft.parabank.test.util.*;
 
 public class PositionTest extends AbstractBeanTestCase<Position> {
     private static final int POSITION1_ID = 1;

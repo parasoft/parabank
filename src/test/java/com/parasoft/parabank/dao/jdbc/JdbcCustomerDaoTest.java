@@ -2,15 +2,14 @@ package com.parasoft.parabank.dao.jdbc;
 
 import static org.junit.Assert.*;
 
-import javax.annotation.Resource;
+import javax.annotation.*;
 
-import org.junit.Test;
-import org.springframework.dao.DataAccessException;
+import org.junit.*;
+import org.springframework.dao.*;
 
-import com.parasoft.parabank.dao.CustomerDao;
-import com.parasoft.parabank.domain.Address;
-import com.parasoft.parabank.domain.Customer;
-import com.parasoft.parabank.test.util.AbstractParaBankDataSourceTest;
+import com.parasoft.parabank.dao.*;
+import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.test.util.*;
 
 public class JdbcCustomerDaoTest extends AbstractParaBankDataSourceTest {
     private static final String FIRST_NAME = "Steve";
@@ -76,7 +75,7 @@ public class JdbcCustomerDaoTest extends AbstractParaBankDataSourceTest {
 
     @Test
     public void testCreateCustomer() {
-        final int id = customerDao.createCustomer(this.customer);
+        final int id = customerDao.createCustomer(customer);
         assertEquals("wrong expected id?", 12434, id);
 
         final Customer customer = customerDao.getCustomer(id);
@@ -121,7 +120,7 @@ public class JdbcCustomerDaoTest extends AbstractParaBankDataSourceTest {
 
     @Test
     public void testUpdateCustomer() {
-        final int id = customerDao.createCustomer(this.customer);
+        final int id = customerDao.createCustomer(customer);
 
         final Customer customer = customerDao.getCustomer(id);
         assertFalse(this.customer == customer);

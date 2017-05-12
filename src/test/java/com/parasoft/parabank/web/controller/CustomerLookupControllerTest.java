@@ -2,17 +2,15 @@ package com.parasoft.parabank.web.controller;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.servlet.ModelAndView;
+import org.junit.*;
+import org.springframework.mock.web.*;
+import org.springframework.test.annotation.*;
+import org.springframework.transaction.annotation.*;
+import org.springframework.web.servlet.*;
 
-import com.parasoft.parabank.domain.Address;
-import com.parasoft.parabank.domain.Customer;
-import com.parasoft.parabank.util.Constants;
-import com.parasoft.parabank.web.form.LookupForm;
+import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.util.*;
+import com.parasoft.parabank.web.form.*;
 
 public class CustomerLookupControllerTest extends AbstractValidatingBankControllerTest<CustomerLookupController> {
     /**

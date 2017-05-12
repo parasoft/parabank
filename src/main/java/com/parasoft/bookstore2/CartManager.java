@@ -10,11 +10,11 @@ public class CartManager {
     private static AtomicInteger generatedNewCartId = new AtomicInteger(0);
     private int cartId;
     private List<Order> list;
-    
+
     public CartManager() {
         //default implementation
     }
-    
+
     public CartManager(int cartId) throws Exception {
         if (!cartIdToOrderMap.containsKey(cartId)) {
             throw new Exception("cartId: " +
@@ -23,13 +23,13 @@ public class CartManager {
         setCartId(cartId);
         setItem(cartIdToOrderMap.get(cartId));
     }
-    
+
     public void addNewItemToCart(Order order) {
         List<Order> list = new ArrayList<Order>();
         list.add(order);
         cartIdToOrderMap.put(generatedNewCartId.incrementAndGet(), list);
     }
-    
+
     public Order addExistingItemToCart(int cartId, Order order) throws Exception {
         //cartId exists
         if (cartIdToOrderMap.containsKey(cartId)) {
@@ -54,7 +54,7 @@ public class CartManager {
         }
         return null;
     }
-    
+
     public Order updateExistingItem(int cartId, int itemId, int quantity) throws Exception {
         //cartId exists
         if (cartIdToOrderMap.containsKey(cartId)) {
@@ -66,7 +66,7 @@ public class CartManager {
                 Book book = order.getBook();
                 if (itemId == book.getProductInfo().getId()) {
                     if (quantity > book.getProductInfo().getStockQuantity()) {
-                        throw new Exception("Did not update order with cartId " + 
+                        throw new Exception("Did not update order with cartId " +
                                 cartId + ", " + quantity + " is greater than " +
                                 "the quantity in stock: " + book.getProductInfo().getStockQuantity());
                     }
@@ -76,7 +76,7 @@ public class CartManager {
                 }
             }
             if(!found) {
-                throw new Exception("Did not update order with cartId " + 
+                throw new Exception("Did not update order with cartId " +
                         cartId + ", order does not exist.");
             }
         } else { //cartId doesn't exist
@@ -86,7 +86,7 @@ public class CartManager {
         //should never get here
         return null;
     }
-    
+
     /**
      * <DL><DT>Description:</DT><DD>
      * return the number of carts
@@ -98,29 +98,29 @@ public class CartManager {
     public int getCartSize() {
         return cartIdToOrderMap.size();
     }
-    
+
     /**
      * <DL><DT>Description:</DT><DD>
-     * return the number of line items in a cart 
+     * return the number of line items in a cart
      * </DD>
      * <DT>Date:</DT><DD>Oct 7, 2015</DD>
      * </DL>
      * @param cartId cart to return the number of ites for
      * @return
-     * @throws Exception - if a non-existent cart is passed in 
+     * @throws Exception - if a non-existent cart is passed in
      */
     public int getCartSize(int cartId) throws Exception {
         if (cartIdToOrderMap.containsKey(cartId)) {
             return cartIdToOrderMap.get(cartId).size();
-        } 
+        }
         throw new Exception("cartId: " +
                 cartId + " doesn't exist.");
     }
-    
+
     public Map<Integer, List<Order>> getCart() {
         return cartIdToOrderMap;
     }
-    
+
     public void removeEmptyMappings() {
         Iterator<Map.Entry<Integer, List<Order>>> itr = cartIdToOrderMap.entrySet().iterator();
         while (itr.hasNext()) {
@@ -129,7 +129,7 @@ public class CartManager {
             }
         }
     }
-    
+
     public boolean removeOrder(int cartId) {
         boolean found = false;
         if (cartIdToOrderMap.containsKey(cartId)) {
@@ -138,23 +138,23 @@ public class CartManager {
         }
         return found;
     }
-    
+
     public void setCartId(int cartId) {
         this.cartId = cartId;
     }
-    
+
     public int getCartId() {
         return cartId;
     }
-    
+
     public void setItem(List<Order> list) {
         this.list = list;
     }
-    
+
     public List<Order> getItem() {
         return list;
     }
-    
+
     public int getStaticCart_Id() {
         return generatedNewCartId.get();
     }

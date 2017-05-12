@@ -2,24 +2,19 @@ package com.parasoft.parabank.web.controller;
 
 import static org.junit.Assert.*;
 
-import java.math.BigDecimal;
+import java.math.*;
 import java.sql.Date;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.web.servlet.ModelAndView;
+import org.junit.*;
+import org.slf4j.*;
+import org.springframework.mock.web.*;
+import org.springframework.web.servlet.*;
 
-import com.parasoft.parabank.domain.Account;
-import com.parasoft.parabank.domain.Transaction;
-import com.parasoft.parabank.domain.TransactionCriteria;
-import com.parasoft.parabank.domain.TransactionCriteria.SearchType;
-import com.parasoft.parabank.util.Constants;
-import com.parasoft.parabank.web.form.FindTransactionForm;
+import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.TransactionCriteria.*;
+import com.parasoft.parabank.util.*;
+import com.parasoft.parabank.web.form.*;
 
 // @SuppressWarnings({ "unchecked" })
 public class FindTransactionControllerTest extends AbstractValidatingBankControllerTest<FindTransactionController> {

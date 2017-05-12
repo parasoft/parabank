@@ -1,6 +1,6 @@
 package com.parasoft.parabank.web.form;
 
-import com.parasoft.parabank.domain.Address;
+import com.parasoft.parabank.domain.*;
 
 /**
  * Backing class for customer login lookup form
@@ -14,31 +14,31 @@ public class LookupForm {
     public String getFirstName() {
         return firstName;
     }
-    
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-    
+
     public String getLastName() {
         return lastName;
     }
-    
+
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-    
+
     public Address getAddress() {
         return address;
     }
-    
+
     public void setAddress(Address address) {
         this.address = address;
     }
-    
+
     public String getSsn() {
         return ssn;
     }
-    
+
     public void setSsn(String ssn) {
         this.ssn = ssn;
     }

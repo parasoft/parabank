@@ -1,10 +1,10 @@
 package com.parasoft.parabank.service;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
-import org.junit.Test;
+import org.junit.*;
 
-import com.parasoft.parabank.test.util.AbstractParaBankTest;
+import com.parasoft.parabank.test.util.*;
 
 public class ParaBankServiceConfigurationTest extends AbstractParaBankTest {
     private ParaBankServiceConfiguration configuration;

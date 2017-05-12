@@ -2,16 +2,14 @@ package com.parasoft.parabank.dao.test;
 
 import static org.junit.Assert.*;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+import java.math.*;
+import java.util.*;
 
-import org.junit.Test;
+import org.junit.*;
 
-import com.parasoft.parabank.dao.AccountDao;
-import com.parasoft.parabank.dao.InMemoryAccountDao;
-import com.parasoft.parabank.domain.Account;
-import com.parasoft.parabank.test.util.AbstractParaBankTest;
+import com.parasoft.parabank.dao.*;
+import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.test.util.*;
 
 public class InMemoryAccountDaoTest extends AbstractParaBankTest {
     private static final int ACCOUNT1_ID = 1;

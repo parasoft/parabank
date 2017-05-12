@@ -1,6 +1,6 @@
 package com.parasoft.parabank.service;
 
-import com.parasoft.parabank.domain.logic.LoanProvider;
+import com.parasoft.parabank.domain.logic.*;
 
 /**
  * <DL><DT>Description:</DT><DD>
@@ -8,7 +8,7 @@ import com.parasoft.parabank.domain.logic.LoanProvider;
  * </DD>
  * <DT>Date:</DT><DD>Jun 6, 2016</DD>
  * </DL>
- * 
+ *
  * @author dev - Nick Rapoport
  *
  */

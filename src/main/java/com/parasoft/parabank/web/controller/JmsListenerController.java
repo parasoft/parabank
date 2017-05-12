@@ -1,21 +1,17 @@
 package com.parasoft.parabank.web.controller;
 
-import javax.annotation.PreDestroy;
+import javax.annotation.*;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.DisposableBean;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
+import org.slf4j.*;
+import org.springframework.beans.factory.*;
+import org.springframework.stereotype.*;
+import org.springframework.ui.*;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.*;
+import org.springframework.web.servlet.view.*;
 
-import com.parasoft.parabank.util.Constants;
-import com.parasoft.parabank.util.Util;
-import com.parasoft.parabank.web.form.AdminForm;
+import com.parasoft.parabank.util.*;
+import com.parasoft.parabank.web.form.*;
 
 /**
  * Controller for starting/stopping JMS listener

@@ -1,8 +1,8 @@
 package com.parasoft.parabank.domain;
 
-import java.util.Date;
+import java.util.*;
 
-import com.parasoft.parabank.util.Util;
+import com.parasoft.parabank.util.*;
 
 /**
  * Domain object representing a bank news item
@@ -12,35 +12,35 @@ public class News {
     private Date date;
     private String headline;
     private String story;
-    
+
     public int getId() {
         return id;
     }
-    
+
     public void setId(int id) {
         this.id = id;
     }
-    
+
     public Date getDate() {
         return date;
     }
-    
+
     public void setDate(Date date) {
         this.date = date;
     }
-    
+
     public String getHeadline() {
         return headline;
     }
-    
+
     public void setHeadline(String headline) {
         this.headline = headline;
     }
-    
+
     public String getStory() {
         return story;
     }
-    
+
     public void setStory(String story) {
         this.story = story;
     }
@@ -50,9 +50,9 @@ public class News {
         final int prime = 31;
         int result = 1;
         result = prime * result + id;
-        result = prime * result + ((date == null) ? 0 : date.hashCode());
-        result = prime * result + ((headline == null) ? 0 : headline.hashCode());
-        result = prime * result + ((story == null) ? 0 : story.hashCode());
+        result = prime * result + (date == null ? 0 : date.hashCode());
+        result = prime * result + (headline == null ? 0 : headline.hashCode());
+        result = prime * result + (story == null ? 0 : story.hashCode());
         return result;
     }
 

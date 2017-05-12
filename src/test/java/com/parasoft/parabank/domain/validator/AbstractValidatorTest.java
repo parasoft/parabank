@@ -2,19 +2,14 @@ package com.parasoft.parabank.domain.validator;
 
 import static org.junit.Assert.*;
 
-import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.lang.reflect.*;
+import java.util.*;
 
-import org.junit.Test;
-import org.springframework.beans.BeanWrapper;
-import org.springframework.beans.BeanWrapperImpl;
-import org.springframework.validation.BindException;
-import org.springframework.validation.Validator;
+import org.junit.*;
+import org.springframework.beans.*;
+import org.springframework.validation.*;
 
-import com.parasoft.parabank.test.util.AbstractBeanTestCase;
-import com.parasoft.parabank.test.util.AbstractParaBankTest;
+import com.parasoft.parabank.test.util.*;
 
 public abstract class AbstractValidatorTest extends AbstractParaBankTest {
     private Class<?> beanClass;

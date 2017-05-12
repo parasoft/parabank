@@ -1,6 +1,6 @@
 package com.parasoft.parabank.domain;
 
-import com.parasoft.parabank.util.Util;
+import com.parasoft.parabank.util.*;
 
 /**
  * Domain object representing the recipient of a bill payment
@@ -10,35 +10,35 @@ public class Payee {
     private Address address;
     private String phoneNumber;
     private Integer accountNumber;
-    
+
     public String getName() {
         return name;
     }
-    
+
     public void setName(String name) {
         this.name = name;
     }
-    
+
     public Address getAddress() {
         return address;
     }
-    
+
     public void setAddress(Address address) {
         this.address = address;
     }
-    
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
-    
+
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-    
+
     public Integer getAccountNumber() {
         return accountNumber;
     }
-    
+
     public void setAccountNumber(Integer accountNumber) {
         this.accountNumber = accountNumber;
     }
@@ -47,10 +47,10 @@ public class Payee {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + ((address == null) ? 0 : address.hashCode());
-        result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
-        result = prime * result + ((accountNumber == null) ? 0 : accountNumber.hashCode());
+        result = prime * result + (name == null ? 0 : name.hashCode());
+        result = prime * result + (address == null ? 0 : address.hashCode());
+        result = prime * result + (phoneNumber == null ? 0 : phoneNumber.hashCode());
+        result = prime * result + (accountNumber == null ? 0 : accountNumber.hashCode());
         return result;
     }
 

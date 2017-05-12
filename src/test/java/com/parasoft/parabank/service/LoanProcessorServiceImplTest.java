@@ -3,20 +3,17 @@ package com.parasoft.parabank.service;
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.junit.Assert.*;
 
-import java.math.BigDecimal;
-import java.util.List;
+import java.math.*;
+import java.util.*;
 
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.junit.*;
+import org.slf4j.*;
 
-import com.github.tomakehurst.wiremock.verification.LoggedRequest;
-import com.parasoft.parabank.domain.LoanRequest;
-import com.parasoft.parabank.domain.LoanResponse;
-import com.parasoft.parabank.domain.logic.LoanProvider;
-import com.parasoft.parabank.domain.logic.impl.LoanProviderMapAware;
-import com.parasoft.parabank.test.util.AbstractParaBankDataSourceTest;
-import com.parasoft.parabank.test.util.LoanRequestTestConfig;
+import com.github.tomakehurst.wiremock.verification.*;
+import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.logic.*;
+import com.parasoft.parabank.domain.logic.impl.*;
+import com.parasoft.parabank.test.util.*;
 
 public class LoanProcessorServiceImplTest extends AbstractParaBankDataSourceTest {
     private final static Logger log = LoggerFactory.getLogger(LoanProcessorServiceImplTest.class);

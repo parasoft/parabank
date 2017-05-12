@@ -1,18 +1,12 @@
 package com.parasoft.parabank.messaging;
 
-import java.io.IOException;
-import java.io.StringReader;
-import java.io.StringWriter;
-import java.io.Writer;
+import java.io.*;
 
-import javax.xml.transform.Source;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
+import javax.xml.transform.*;
+import javax.xml.transform.stream.*;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.oxm.Marshaller;
-import org.springframework.oxm.Unmarshaller;
+import org.slf4j.*;
+import org.springframework.oxm.*;
 
 /**
  * Utility class for marshalling/unmarshalling JAXB objects

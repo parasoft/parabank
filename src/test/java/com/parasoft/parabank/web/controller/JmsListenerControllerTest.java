@@ -2,16 +2,15 @@ package com.parasoft.parabank.web.controller;
 
 import static org.junit.Assert.*;
 
-import javax.annotation.Resource;
+import javax.annotation.*;
 
-import org.junit.Test;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
+import org.junit.*;
+import org.springframework.mock.web.*;
+import org.springframework.web.servlet.*;
+import org.springframework.web.servlet.view.*;
 
-import com.parasoft.parabank.domain.logic.AdminManager;
-import com.parasoft.parabank.test.util.AbstractAdminOperationsTest;
+import com.parasoft.parabank.domain.logic.*;
+import com.parasoft.parabank.test.util.*;
 
 public class JmsListenerControllerTest extends AbstractAdminOperationsTest { //AbstractControllerTest<JmsListenerController> {
     @Resource(name = "adminManager")

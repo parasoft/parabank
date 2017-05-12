@@ -1,48 +1,25 @@
 package com.parasoft.parabank.util;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.math.BigDecimal;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.*;
+import java.math.*;
+import java.net.*;
+import java.text.*;
+import java.util.*;
 
-import javax.annotation.Resource;
-import javax.ws.rs.core.MediaType;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.namespace.QName;
-import javax.xml.ws.BindingProvider;
+import javax.annotation.*;
+import javax.ws.rs.core.*;
+import javax.xml.bind.*;
+import javax.xml.namespace.*;
+import javax.xml.ws.*;
 import javax.xml.ws.Service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
+import org.slf4j.*;
+import org.springframework.stereotype.*;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.parasoft.parabank.domain.Account;
-import com.parasoft.parabank.domain.Address;
-import com.parasoft.parabank.domain.Customer;
-import com.parasoft.parabank.domain.LoanResponse;
-import com.parasoft.parabank.domain.Transaction;
-import com.parasoft.parabank.domain.TransactionCriteria;
-import com.parasoft.parabank.domain.logic.AdminManager;
-import com.parasoft.parabank.domain.logic.BankManager;
-import com.parasoft.parabank.service.CustomerConstants;
-import com.parasoft.parabank.service.ParaBankService;
-import com.parasoft.parabank.service.ParaBankServiceException;
+import com.google.gson.*;
+import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.logic.*;
+import com.parasoft.parabank.service.*;
 
 // This class delegates all the function calls according to the access mode Viz.
 // SOAP, REST XML , REST JSON, JDBC(Default)
@@ -77,7 +54,7 @@ public class AccessModeController {
     private BankManager bankManager;
 
     public AccessModeController() {
-        this.catalinaPort = getCatalinaPort();
+        catalinaPort = getCatalinaPort();
         LOG.info("Getting Tomcat HTTP port = " + catalinaPort);
     }
 
@@ -508,7 +485,7 @@ public class AccessModeController {
 
             final HttpURLConnection conn = getConnection(url, MediaType.APPLICATION_JSON, GET);
 
-            final BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+            final BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 
             String output;
 
@@ -995,7 +972,7 @@ public class AccessModeController {
             BufferedReader br = null;
 
             try {
-                br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+                br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             } catch (final IOException e) {
             }
 

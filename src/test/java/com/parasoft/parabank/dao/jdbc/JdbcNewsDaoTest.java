@@ -3,15 +3,15 @@ package com.parasoft.parabank.dao.jdbc;
 import static org.junit.Assert.*;
 
 import java.sql.Date;
-import java.util.List;
+import java.util.*;
 
-import javax.annotation.Resource;
+import javax.annotation.*;
 
-import org.junit.Test;
+import org.junit.*;
 
-import com.parasoft.parabank.dao.NewsDao;
-import com.parasoft.parabank.domain.News;
-import com.parasoft.parabank.test.util.AbstractParaBankDataSourceTest;
+import com.parasoft.parabank.dao.*;
+import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.test.util.*;
 
 public class JdbcNewsDaoTest extends AbstractParaBankDataSourceTest {
     @Resource(name = "newsDao")

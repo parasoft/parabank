@@ -1,18 +1,17 @@
 package com.parasoft.parabank.web.controller;
 
-import javax.annotation.Resource;
+import javax.annotation.*;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
+import org.slf4j.*;
+import org.springframework.stereotype.*;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.*;
+import org.springframework.web.servlet.view.*;
 
-import com.parasoft.parabank.dao.AdminDao;
-import com.parasoft.parabank.domain.logic.AdminManager;
-import com.parasoft.parabank.util.AccessModeController;
-import com.parasoft.parabank.web.ViewUtil;
+import com.parasoft.parabank.dao.*;
+import com.parasoft.parabank.domain.logic.*;
+import com.parasoft.parabank.util.*;
+import com.parasoft.parabank.web.*;
 
 /**
  * Controller for creating database tables and populating with sample data
@@ -35,11 +34,11 @@ public class InitializeDBController extends AbstractBankController {
      * <DT>Date:</DT>
      * <DD>Oct 19, 2015</DD>
      * </DL>
-     * 
+     *
      * @return the value of adminManager field
      */
     public AdminManager getAdminManager() {
-        return this.adminManager;
+        return adminManager;
     }
 
     /**
@@ -49,7 +48,7 @@ public class InitializeDBController extends AbstractBankController {
      * <DT>Date:</DT>
      * <DD>Oct 19, 2015</DD>
      * </DL>
-     * 
+     *
      * @return the value of bookstoreAdminDao field
      */
     public AdminDao getBookstoreAdminDao() {

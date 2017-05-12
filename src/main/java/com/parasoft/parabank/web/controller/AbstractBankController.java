@@ -1,17 +1,15 @@
 package com.parasoft.parabank.web.controller;
 
-import javax.annotation.Resource;
+import javax.annotation.*;
 
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
-import org.springframework.ui.Model;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.beans.*;
+import org.springframework.context.*;
+import org.springframework.ui.*;
+import org.springframework.web.servlet.*;
 
 // import org.springframework.web.servlet.mvc.SimpleFormController;
-
-import com.parasoft.parabank.domain.logic.BankManager;
-import com.parasoft.parabank.util.IAccessModeControllerAware;
+import com.parasoft.parabank.domain.logic.*;
+import com.parasoft.parabank.util.*;
 
 /**
  * Abstract controller that depends on banking functions
@@ -38,7 +36,7 @@ abstract class AbstractBankController implements IAccessModeControllerAware, App
      * <DT>Date:</DT>
      * <DD>Oct 25, 2015</DD>
      * </DL>
-     * 
+     *
      * @return the value of applicationContext field
      */
     public ApplicationContext getApplicationContext() {

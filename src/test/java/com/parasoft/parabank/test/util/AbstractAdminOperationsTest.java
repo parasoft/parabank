@@ -2,13 +2,11 @@ package com.parasoft.parabank.test.util;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
-import javax.annotation.Resource;
+import javax.annotation.*;
 
-import com.parasoft.parabank.messaging.MockJmsListeningContainer;
+import com.parasoft.parabank.messaging.*;
 
 public abstract class AbstractAdminOperationsTest extends AbstractParaBankDataSourceTest {
     protected interface DBCleaner {
@@ -39,7 +37,7 @@ public abstract class AbstractAdminOperationsTest extends AbstractParaBankDataSo
             new IntQuery(0, "SELECT COUNT(id) FROM Transaction") })); //$NON-NLS-1$
 
         for (final IntQuery intQuery : tests) {
-            intQuery.validate(this.getJdbcTemplate());
+            intQuery.validate(getJdbcTemplate());
         }
         // assertEquals(1, getJdbcTemplate().queryForInt("SELECT COUNT(id) FROM
         // Customer"));
@@ -58,7 +56,7 @@ public abstract class AbstractAdminOperationsTest extends AbstractParaBankDataSo
             new IntQuery(21, "SELECT COUNT(id) FROM Transaction"), //$NON-NLS-1$
             new IntQuery(9, "SELECT COUNT(*) FROM Parameter") })); //$NON-NLS-1$
         for (final IntQuery intQuery : tests) {
-            intQuery.validate(this.getJdbcTemplate());
+            intQuery.validate(getJdbcTemplate());
         }
         // assertEquals(2, getJdbcTemplate().queryForInt("SELECT COUNT(id) FROM
         // Customer"));
@@ -85,7 +83,7 @@ public abstract class AbstractAdminOperationsTest extends AbstractParaBankDataSo
     }
 
     public MockJmsListeningContainer getJmsListener() {
-        return this.jmsListener;
+        return jmsListener;
     }
 
     public void setJmsListener(final MockJmsListeningContainer jmsListener) {

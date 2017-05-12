@@ -1,11 +1,8 @@
 package com.parasoft.parabank.domain;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
-
-import com.parasoft.parabank.util.Util;
+import com.parasoft.parabank.util.*;
 
 /**
  * Domain object representing a bank customer
@@ -23,73 +20,73 @@ public class Customer {
 	private String ssn;
 	private String username;
 	private String password;
-	
+
 	public int getId() {
         return id;
     }
-	
+
 	public void setId(int id) {
         this.id = id;
     }
-	
+
 	public String getFirstName() {
         return firstName;
     }
-	
+
 	public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-	
+
 	public String getLastName() {
         return lastName;
     }
-	
+
 	public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-	
+
 	public String getFullName() {
 	    return firstName + " " + lastName;
 	}
-	
+
 	public Address getAddress() {
         return address;
     }
-	
+
 	public void setAddress(Address address) {
         this.address = address;
     }
-	
+
 	public String getPhoneNumber() {
         return phoneNumber;
     }
-	
+
 	public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-	
+
 	public String getSsn() {
         return ssn;
     }
-	
+
 	public void setSsn(String ssn) {
         this.ssn = ssn;
     }
-	
+
 	@XmlTransient
 	public String getUsername() {
         return username;
     }
-	
+
 	public void setUsername(String username) {
         this.username = username;
     }
-	
+
 	@XmlTransient
 	public String getPassword() {
         return password;
     }
-	
+
 	public void setPassword(String password) {
         this.password = password;
     }
@@ -99,13 +96,13 @@ public class Customer {
         final int prime = 31;
         int result = 1;
         result = prime * result + id;
-        result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-        result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-        result = prime * result + ((address == null) ? 0 : address.hashCode());
-        result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
-        result = prime * result + ((ssn == null) ? 0 : ssn.hashCode());        
-        result = prime * result + ((password == null) ? 0 : password.hashCode());
-        result = prime * result + ((username == null) ? 0 : username.hashCode());
+        result = prime * result + (firstName == null ? 0 : firstName.hashCode());
+        result = prime * result + (lastName == null ? 0 : lastName.hashCode());
+        result = prime * result + (address == null ? 0 : address.hashCode());
+        result = prime * result + (phoneNumber == null ? 0 : phoneNumber.hashCode());
+        result = prime * result + (ssn == null ? 0 : ssn.hashCode());
+        result = prime * result + (password == null ? 0 : password.hashCode());
+        result = prime * result + (username == null ? 0 : username.hashCode());
         return result;
     }
 

@@ -1,9 +1,10 @@
 package com.parasoft.parabank.domain.logic.impl;
 
-import java.math.BigDecimal;
-
-import com.parasoft.parabank.domain.LoanResponse;
 import static org.junit.Assert.*;
+
+import java.math.*;
+
+import com.parasoft.parabank.domain.*;
 
 public class AvailableFundsLoanProcessorTest
 extends AbstractLoanProcessorTest<AvailableFundsLoanProcessor> {
@@ -15,13 +16,13 @@ extends AbstractLoanProcessorTest<AvailableFundsLoanProcessor> {
         assertTrue(response.isApproved());
         assertNotNull(response.getResponseDate());
         assertNull(response.getMessage());
-        
+
         loanRequest.setLoanAmount(new BigDecimal("5000.00"));
         response = processor.requestLoan(loanRequest);
         assertTrue(response.isApproved());
         assertNotNull(response.getResponseDate());
         assertNull(response.getMessage());
-        
+
         loanRequest.setLoanAmount(new BigDecimal("5100.00"));
         response = processor.requestLoan(loanRequest);
         assertFalse(response.isApproved());

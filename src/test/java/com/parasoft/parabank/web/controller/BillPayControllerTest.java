@@ -2,47 +2,33 @@ package com.parasoft.parabank.web.controller;
 
 import static org.junit.Assert.*;
 
-import java.lang.reflect.InvocationTargetException;
-import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.*;
+import java.math.*;
+import java.util.*;
 
-import javax.annotation.Resource;
+import javax.annotation.*;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.mock.web.MockHttpSession;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
-import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.web.servlet.HandlerExecutionChain;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
-import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
+import org.junit.*;
+import org.junit.runner.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.context.*;
+import org.springframework.mock.web.*;
+import org.springframework.test.annotation.*;
+import org.springframework.test.context.*;
+import org.springframework.test.context.junit4.*;
+import org.springframework.test.context.support.*;
+import org.springframework.test.context.transaction.*;
+import org.springframework.transaction.annotation.*;
+import org.springframework.ui.*;
+import org.springframework.validation.*;
+import org.springframework.web.servlet.*;
+import org.springframework.web.servlet.mvc.method.annotation.*;
 
-import com.parasoft.parabank.domain.Account;
-import com.parasoft.parabank.domain.Address;
-import com.parasoft.parabank.domain.Customer;
-import com.parasoft.parabank.domain.Payee;
-import com.parasoft.parabank.domain.logic.BankManager;
-import com.parasoft.parabank.util.AccessModeController;
-import com.parasoft.parabank.util.Constants;
-import com.parasoft.parabank.web.UserSession;
-import com.parasoft.parabank.web.form.BillPayForm;
+import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.logic.*;
+import com.parasoft.parabank.util.*;
+import com.parasoft.parabank.web.*;
+import com.parasoft.parabank.web.form.*;
 
 @SuppressWarnings({ "unchecked" })
 @RunWith(SpringJUnit4ClassRunner.class)

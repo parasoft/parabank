@@ -1,21 +1,17 @@
 package com.parasoft.parabank.web.controller;
 
-import javax.annotation.Resource;
+import javax.annotation.*;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.dao.DataAccessException;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+import org.slf4j.*;
+import org.springframework.dao.*;
+import org.springframework.stereotype.*;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.*;
 
-import com.parasoft.parabank.domain.Transaction;
-import com.parasoft.parabank.domain.logic.AdminManager;
-import com.parasoft.parabank.util.AccessModeController;
-import com.parasoft.parabank.util.Constants;
-import com.parasoft.parabank.util.Util;
-import com.parasoft.parabank.web.ViewUtil;
+import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.logic.*;
+import com.parasoft.parabank.util.*;
+import com.parasoft.parabank.web.*;
 
 /**
  * Controller for displaying transaction details

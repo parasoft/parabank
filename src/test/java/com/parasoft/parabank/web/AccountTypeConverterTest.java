@@ -2,10 +2,10 @@ package com.parasoft.parabank.web;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
+import org.junit.*;
 
-import com.parasoft.parabank.domain.Account.AccountType;
-import com.parasoft.parabank.test.util.AbstractParaBankTest;
+import com.parasoft.parabank.domain.Account.*;
+import com.parasoft.parabank.test.util.*;
 
 public class AccountTypeConverterTest extends AbstractParaBankTest {
     @Test

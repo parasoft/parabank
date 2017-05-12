@@ -1,7 +1,7 @@
 package com.parasoft.parabank.domain.logic;
 
 /**
- * Parameter name constants for configurable application parameters 
+ * Parameter name constants for configurable application parameters
  */
 public interface AdminParameters {
     String ENDPOINT = "endpoint";
@@ -12,5 +12,5 @@ public interface AdminParameters {
     String LOAN_PROVIDER = "loanProvider";
     String LOAN_PROCESSOR = "loanProcessor";
     String LOAN_PROCESSOR_THRESHOLD = "loanProcessorThreshold";
-    String ACCESSMODE = "accessmode"; 
+    String ACCESSMODE = "accessmode";
 }

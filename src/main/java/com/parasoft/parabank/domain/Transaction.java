@@ -1,22 +1,17 @@
 package com.parasoft.parabank.domain;
 
-import java.math.BigDecimal;
-import java.text.ParseException;
-import java.util.Date;
+import java.math.*;
+import java.text.*;
+import java.util.*;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.*;
+import org.joda.time.format.*;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import com.google.gson.JsonObject;
-import com.parasoft.parabank.util.Constants;
-import com.parasoft.parabank.util.Util;
+import com.fasterxml.jackson.annotation.*;
+import com.google.gson.*;
+import com.parasoft.parabank.util.*;
 
 /**
  * Domain object representing a bank account transaction
@@ -106,10 +101,10 @@ public class Transaction {
         int result = 1;
         result = prime * result + id;
         result = prime * result + accountId;
-        result = prime * result + ((type == null) ? 0 : type.hashCode());
-        result = prime * result + ((date == null) ? 0 : date.toString().hashCode());
-        result = prime * result + ((amount == null) ? 0 : amount.hashCode());
-        result = prime * result + ((description == null) ? 0 : description.hashCode());
+        result = prime * result + (type == null ? 0 : type.hashCode());
+        result = prime * result + (date == null ? 0 : date.toString().hashCode());
+        result = prime * result + (amount == null ? 0 : amount.hashCode());
+        result = prime * result + (description == null ? 0 : description.hashCode());
         return result;
     }
 

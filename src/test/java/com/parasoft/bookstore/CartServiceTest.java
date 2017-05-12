@@ -2,7 +2,7 @@ package com.parasoft.bookstore;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
+import org.junit.*;
 
 /**
  * <DL>
@@ -11,7 +11,7 @@ import org.junit.Test;
  * <DT>Date:</DT>
  * <DD>Oct 6, 2015</DD>
  * </DL>
- * 
+ *
  * @author nrapo - Nick Rapoport
  *
  */
@@ -23,7 +23,7 @@ public class CartServiceTest extends AbstractCartService {
      * Test method for
      * {@link com.parasoft.bookstore.CartService#addItemToCart(java.lang.Integer, int, int)}
      * .
-     * 
+     *
      * @req PAR-1
      */
     @Test
@@ -42,7 +42,7 @@ public class CartServiceTest extends AbstractCartService {
             no = getService().addItemToCart(0, 1, 1);
             int newCartId = no.getCartId();
             getCurrentCartId(); // just logging the the new cart
-            assertEquals((cartId + 1), newCartId);
+            assertEquals(cartId + 1, newCartId);
             Book book = no.getItem().getBook();
             assertEquals(book.getId(), 1);
             assertEquals(book.getStockQuantity(), 20);
@@ -79,7 +79,7 @@ public class CartServiceTest extends AbstractCartService {
         try {
             no = getService().addItemToCart(0, 1, 1);
             newCartId = no.getCartId();
-            assertEquals(newCartId, (cartId + 1));
+            assertEquals(newCartId, cartId + 1);
             getCurrentCartId();
             no = null;
             no = getService().updateItemInCart(newCartId, 1, -1);

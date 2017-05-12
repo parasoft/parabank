@@ -1,22 +1,15 @@
 package com.parasoft.parabank.messaging;
 
-import java.util.Date;
+import java.util.*;
 
-import javax.jms.JMSException;
-import javax.jms.Message;
-import javax.jms.Session;
-import javax.jms.TextMessage;
+import javax.jms.*;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.jms.core.JmsTemplate;
-import org.springframework.jms.core.MessageCreator;
-import org.springframework.oxm.Marshaller;
-import org.springframework.oxm.Unmarshaller;
+import org.slf4j.*;
+import org.springframework.jms.core.*;
+import org.springframework.oxm.*;
 
-import com.parasoft.parabank.domain.LoanRequest;
-import com.parasoft.parabank.domain.LoanResponse;
-import com.parasoft.parabank.domain.logic.LoanProvider;
+import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.logic.*;
 
 /**
  * Message client for generating and sending loan requests over JMS

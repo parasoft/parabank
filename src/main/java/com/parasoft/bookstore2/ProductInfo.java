@@ -17,48 +17,48 @@ public class ProductInfo implements Serializable
     public ProductInfo() {
         // for serialization only
     }
-    
+
     protected ProductInfo(int id, String name, BigDecimal amount, int quantity)
         throws ItemNotFoundException {
         this.id = id;
-        this.title = name;
+        title = name;
         this.amount = amount;
         quantity_in_stock = quantity;
     }
-    
+
     public String getName() {
         return title;
     }
-    
+
     public void setName(String title) {
         this.title = title;
     }
-    
+
     public int getId() {
         return id;
     }
-    
+
     public void setId(int id) {
         this.id = id;
     }
-    
+
     public int getStockQuantity() {
         return quantity_in_stock;
     }
-    
+
     public void setStockQuantity(int quantity_in_stock) {
         this.quantity_in_stock = quantity_in_stock;
     }
-    
+
     public BigDecimal getAmount() {
         return amount;
     }
-    
+
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
-    
+
     public void inflateAmount(BigDecimal inflate) {
-        setAmount(amount.add(inflate)); 
+        setAmount(amount.add(inflate));
     }
 }

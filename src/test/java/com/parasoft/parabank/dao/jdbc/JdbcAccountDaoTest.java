@@ -2,19 +2,19 @@ package com.parasoft.parabank.dao.jdbc;
 
 import static org.junit.Assert.*;
 
-import java.math.BigDecimal;
-import java.util.List;
+import java.math.*;
+import java.util.*;
 
-import javax.annotation.Resource;
+import javax.annotation.*;
 
-import org.junit.Test;
-import org.springframework.dao.DataAccessException;
-import org.springframework.test.annotation.Rollback;
+import org.junit.*;
+import org.springframework.dao.*;
+import org.springframework.test.annotation.*;
 
-import com.parasoft.parabank.dao.AccountDao;
-import com.parasoft.parabank.domain.Account;
-import com.parasoft.parabank.domain.Account.AccountType;
-import com.parasoft.parabank.test.util.AbstractParaBankDataSourceTest;
+import com.parasoft.parabank.dao.*;
+import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.Account.*;
+import com.parasoft.parabank.test.util.*;
 
 @Rollback
 public class JdbcAccountDaoTest extends AbstractParaBankDataSourceTest {
@@ -51,7 +51,7 @@ public class JdbcAccountDaoTest extends AbstractParaBankDataSourceTest {
 
     @Test
     public void testCreateAccount() {
-        final int id = accountDao.createAccount(this.account);
+        final int id = accountDao.createAccount(account);
         assertEquals("wrong expected id?", 13566, id);
 
         final Account account = accountDao.getAccount(id);
@@ -87,7 +87,7 @@ public class JdbcAccountDaoTest extends AbstractParaBankDataSourceTest {
 
     @Test
     public void testUpdateAccount() {
-        final int id = accountDao.createAccount(this.account);
+        final int id = accountDao.createAccount(account);
 
         final Account account = accountDao.getAccount(id);
         assertFalse(this.account == account);

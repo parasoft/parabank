@@ -1,18 +1,15 @@
 package com.parasoft.parabank.dao.jdbc;
 
-import java.math.BigDecimal;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
+import java.math.*;
+import java.sql.*;
+import java.util.*;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
+import org.slf4j.*;
+import org.springframework.jdbc.core.*;
+import org.springframework.jdbc.core.namedparam.*;
 
-import com.parasoft.parabank.dao.AccountDao;
-import com.parasoft.parabank.domain.Account;
+import com.parasoft.parabank.dao.*;
+import com.parasoft.parabank.domain.*;
 
 /*
  * JDBC implementation of AccountDao

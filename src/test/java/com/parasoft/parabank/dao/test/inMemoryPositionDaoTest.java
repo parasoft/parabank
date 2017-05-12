@@ -2,19 +2,14 @@ package com.parasoft.parabank.dao.test;
 
 import static org.junit.Assert.*;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.math.*;
+import java.util.*;
 
-import org.junit.Test;
+import org.junit.*;
 
-import com.parasoft.parabank.dao.InMemoryPositionDao;
-import com.parasoft.parabank.dao.PositionDao;
-import com.parasoft.parabank.domain.HistoryPoint;
-import com.parasoft.parabank.domain.Position;
-import com.parasoft.parabank.test.util.AbstractParaBankTest;
+import com.parasoft.parabank.dao.*;
+import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.test.util.*;
 
 public class inMemoryPositionDaoTest extends AbstractParaBankTest {
     private static final int POSITION1_ID = 1;

@@ -1,21 +1,16 @@
 package com.parasoft.parabank.util;
 
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.Method;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.text.DateFormat;
-import java.util.ArrayList;
+import java.io.*;
+import java.lang.reflect.*;
+import java.net.*;
+import java.text.*;
+import java.util.*;
 
-import javax.management.MBeanServer;
-import javax.management.MBeanServerFactory;
-import javax.management.ObjectName;
+import javax.management.*;
 
-import org.apache.commons.io.FileUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationContext;
+import org.apache.commons.io.*;
+import org.slf4j.*;
+import org.springframework.context.*;
 
 /**
  * Utility methods for ParaBank
@@ -38,7 +33,7 @@ public final class Util {
      * @return true if objects are both null or equal, false otherwise
      */
     public static final boolean equals(final Object o1, final Object o2) {
-        return (o1 == o2) || (o1 != null && o1.equals(o2));
+        return o1 == o2 || o1 != null && o1.equals(o2);
     }
 
     public static String getCurrentPath(final ApplicationContext context) {
@@ -169,8 +164,8 @@ public final class Util {
      *         </DL>
      */
     public static boolean isEmpty(final Object aAttribute) {
-        return ((aAttribute == null)
-            || (String.class.isAssignableFrom(aAttribute.getClass()) && isEmpty((String) aAttribute)));
+        return aAttribute == null
+            || String.class.isAssignableFrom(aAttribute.getClass()) && isEmpty((String) aAttribute);
     }
 
     /**
@@ -191,7 +186,7 @@ public final class Util {
      * <DT>Date:</DT>
      * <DD>Oct 25, 2015</DD>
      * </DL>
-     * 
+     *
      * @param outputFileFolder
      * @throws IOException
      */

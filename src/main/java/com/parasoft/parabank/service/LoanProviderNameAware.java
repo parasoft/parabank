@@ -6,7 +6,7 @@ package com.parasoft.parabank.service;
  * </DD>
  * <DT>Date:</DT><DD>Jun 6, 2016</DD>
  * </DL>
- * 
+ *
  * @author dev - Nick Rapoport
  *
  */

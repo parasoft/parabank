@@ -1,29 +1,20 @@
 package com.parasoft.parabank.messaging;
 
-import java.lang.reflect.Method;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
+import java.lang.reflect.*;
+import java.net.*;
+import java.util.*;
 
-import javax.annotation.Resource;
-import javax.management.MBeanServer;
-import javax.management.MBeanServerFactory;
-import javax.management.ObjectName;
-import javax.xml.namespace.QName;
-import javax.xml.ws.BindingProvider;
-import javax.xml.ws.Service;
+import javax.annotation.*;
+import javax.management.*;
+import javax.xml.namespace.*;
+import javax.xml.ws.*;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 
-import com.parasoft.parabank.domain.LoanRequest;
-import com.parasoft.parabank.domain.LoanResponse;
-import com.parasoft.parabank.domain.logic.AdminManager;
-import com.parasoft.parabank.domain.logic.AdminParameters;
-import com.parasoft.parabank.domain.logic.LoanProvider;
-import com.parasoft.parabank.service.LoanProcessorService;
-import com.parasoft.parabank.service.ParaBankServiceException;
-import com.parasoft.parabank.util.Util;
+import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.logic.*;
+import com.parasoft.parabank.service.*;
+import com.parasoft.parabank.util.*;
 
 /**
  * Message client for generating and sending loan requests over SOAP

@@ -1,15 +1,14 @@
 package com.parasoft.parabank.util;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.core.*;
 
-import org.apache.cxf.jaxrs.model.ClassResourceInfo;
-import org.apache.cxf.jaxrs.model.wadl.WadlGenerator;
-import org.apache.cxf.message.Message;
+import org.apache.cxf.jaxrs.model.*;
+import org.apache.cxf.jaxrs.model.wadl.*;
+import org.apache.cxf.message.*;
 
-import io.swagger.jaxrs.listing.ApiListingResource;
+import io.swagger.jaxrs.listing.*;
 
 public class CustomWadlGenerator extends WadlGenerator {
 

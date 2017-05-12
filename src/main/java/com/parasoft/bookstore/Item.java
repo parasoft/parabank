@@ -16,48 +16,48 @@ public class Item implements Serializable {
     public Item() {
         // for serialization only
     }
-    
+
     public Item(int id, String name, BigDecimal price, int quantity)
         throws ItemNotFoundException {
         this.id = id;
-        this.title = name;
+        title = name;
         this.price = price;
         quantity_in_stock = quantity;
     }
-    
+
     public String getName() {
         return title;
     }
-    
+
     public void setName(String title) {
         this.title = title;
     }
-    
+
     public int getId() {
         return id;
     }
-    
+
     public void setId(int id) {
         this.id = id;
     }
-    
+
     public int getStockQuantity() {
         return quantity_in_stock;
     }
-    
+
     public void setStockQuantity(int quantity_in_stock) {
         this.quantity_in_stock = quantity_in_stock;
     }
-    
+
     public BigDecimal getPrice() {
         return price;
     }
-    
+
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
-    
+
     public void inflatePrice(BigDecimal amount) {
-        setPrice(price.add(amount)); 
+        setPrice(price.add(amount));
     }
 }

@@ -1,26 +1,21 @@
 package com.parasoft.parabank.web.controller;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
+import javax.annotation.*;
+import javax.servlet.http.*;
+import javax.validation.*;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import org.slf4j.*;
+import org.springframework.dao.*;
+import org.springframework.stereotype.*;
+import org.springframework.ui.*;
+import org.springframework.validation.*;
 import org.springframework.validation.Validator;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.*;
 
-import com.parasoft.parabank.util.AccessModeController;
-import com.parasoft.parabank.util.Constants;
-import com.parasoft.parabank.web.UserSession;
-import com.parasoft.parabank.web.form.CustomerForm;
+import com.parasoft.parabank.util.*;
+import com.parasoft.parabank.web.*;
+import com.parasoft.parabank.web.form.*;
 
 /**
  * Controller for creating a new bank customer

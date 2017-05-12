@@ -2,21 +2,17 @@ package com.parasoft.parabank.messaging;
 
 import static org.junit.Assert.*;
 
-import javax.annotation.Resource;
-import javax.jms.JMSException;
+import javax.annotation.*;
+import javax.jms.*;
 import javax.jms.Message;
-import javax.jms.Session;
-import javax.jms.TextMessage;
 
-import org.apache.activemq.command.ActiveMQTextMessage;
-import org.junit.Test;
-import org.springframework.jms.core.JmsTemplate;
-import org.springframework.jms.core.MessageCreator;
-import org.springframework.oxm.Marshaller;
+import org.apache.activemq.command.*;
+import org.junit.*;
+import org.springframework.jms.core.*;
+import org.springframework.oxm.*;
 
-import com.parasoft.parabank.domain.LoanRequest;
-import com.parasoft.parabank.domain.LoanResponse;
-import com.parasoft.parabank.test.util.AbstractParaBankDataSourceTest;
+import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.test.util.*;
 
 public class JmsLoanProviderTest extends AbstractParaBankDataSourceTest {
     @Resource(name = "jmsLoanProvider")

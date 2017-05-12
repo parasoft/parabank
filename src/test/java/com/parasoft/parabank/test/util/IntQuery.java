@@ -1,10 +1,9 @@
 package com.parasoft.parabank.test.util;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.slf4j.*;
+import org.springframework.jdbc.core.*;
 
 /**
  * <DL>
@@ -54,7 +53,7 @@ public class IntQuery {
      */
     public void validate(final JdbcTemplate aTemplate) {
         final Number number = aTemplate.queryForObject(query, Integer.class);
-        final int result = (number != null ? number.intValue() : 0);
+        final int result = number != null ? number.intValue() : 0;
         log.debug("Testing: {}, expect {}", query, result);
         assertEquals(expected, result);
     }

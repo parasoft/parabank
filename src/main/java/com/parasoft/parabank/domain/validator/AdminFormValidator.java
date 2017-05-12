@@ -1,10 +1,8 @@
 package com.parasoft.parabank.domain.validator;
 
-import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
-import org.springframework.validation.Validator;
+import org.springframework.validation.*;
 
-import com.parasoft.parabank.web.form.AdminForm;
+import com.parasoft.parabank.web.form.*;
 
 public class AdminFormValidator implements Validator {
     @SuppressWarnings("unused")

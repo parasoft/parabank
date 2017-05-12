@@ -2,15 +2,13 @@ package com.parasoft.parabank.dao.test;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import org.junit.Test;
+import org.junit.*;
 
-import com.parasoft.parabank.dao.CustomerDao;
-import com.parasoft.parabank.dao.InMemoryCustomerDao;
-import com.parasoft.parabank.domain.Customer;
-import com.parasoft.parabank.test.util.AbstractParaBankTest;
+import com.parasoft.parabank.dao.*;
+import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.test.util.*;
 
 public class InMemoryCustomerDaoTest extends AbstractParaBankTest {
     private static final int CUSTOMER1_ID = 1;

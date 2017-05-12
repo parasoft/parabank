@@ -1,11 +1,8 @@
 package com.parasoft.parabank.service;
 
-import javax.jws.WebParam;
-import javax.jws.WebResult;
-import javax.jws.WebService;
+import javax.jws.*;
 
-import com.parasoft.parabank.domain.LoanRequest;
-import com.parasoft.parabank.domain.LoanResponse;
+import com.parasoft.parabank.domain.*;
 
 /**
  * Java interface for loan web service
@@ -13,10 +10,10 @@ import com.parasoft.parabank.domain.LoanResponse;
 @WebService(targetNamespace=LoanProcessorService.TNS)
 public interface LoanProcessorService {
     String TNS = "http://service.parabank.parasoft.com/";
-    
+
     /**
      * Request a loan
-     * 
+     *
      * @param customerId the customer id to lookup
      * @return the customer
      * @throws ParaBankServiceException

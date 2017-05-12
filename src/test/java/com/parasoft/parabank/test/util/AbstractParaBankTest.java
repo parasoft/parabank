@@ -1,17 +1,12 @@
 package com.parasoft.parabank.test.util;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
+import org.junit.*;
+import org.junit.runner.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.context.*;
+import org.springframework.test.context.*;
+import org.springframework.test.context.junit4.*;
+import org.springframework.test.context.support.*;
 
 // @SuppressWarnings("deprecation")
 @RunWith(SpringJUnit4ClassRunner.class)

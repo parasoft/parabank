@@ -1,8 +1,8 @@
 package com.parasoft.parabank.test.util;
 
-import org.junit.Test;
+import org.junit.*;
 
-import com.parasoft.parabank.util.Util;
+import com.parasoft.parabank.util.*;
 
 public class BeanTestCaseTest extends AbstractParaBankTest {
     @Test
@@ -34,12 +34,12 @@ public class BeanTestCaseTest extends AbstractParaBankTest {
         public int hashCode() {
             final int prime = 31;
             int result = 1;
-            result = prime * result + ((str == null) ? 0 : str.hashCode());
+            result = prime * result + (str == null ? 0 : str.hashCode());
             result = prime * result + (bool ? 1231 : 1237);
             result = prime * result + shrt;
-            result = prime * result + (int) (lng ^ (lng >>> 32));
+            result = prime * result + (int) (lng ^ lng >>> 32);
             result = prime * result + Float.floatToIntBits(flt);
-            result = prime * result + ((co == null) ? 0 : co.hashCode());
+            result = prime * result + (co == null ? 0 : co.hashCode());
             return result;
         }
 
@@ -75,7 +75,7 @@ public class BeanTestCaseTest extends AbstractParaBankTest {
             result = prime * result + ch;
             long temp;
             temp = Double.doubleToLongBits(dbl);
-            result = prime * result + (int) (temp ^ (temp >>> 32));
+            result = prime * result + (int) (temp ^ temp >>> 32);
             return result;
         }
 

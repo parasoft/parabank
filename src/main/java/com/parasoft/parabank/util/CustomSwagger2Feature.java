@@ -1,6 +1,6 @@
 package com.parasoft.parabank.util;
 
-import org.apache.cxf.jaxrs.swagger.Swagger2Feature;
+import org.apache.cxf.jaxrs.swagger.*;
 
 /**
  * <DL>

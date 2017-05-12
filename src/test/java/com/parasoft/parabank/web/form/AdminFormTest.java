@@ -1,15 +1,14 @@
 package com.parasoft.parabank.web.form;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
-import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
+import java.math.*;
+import java.util.*;
 
-import org.junit.Test;
+import org.junit.*;
 
-import com.parasoft.parabank.domain.logic.AdminParameters;
-import com.parasoft.parabank.test.util.AbstractParaBankTest;
+import com.parasoft.parabank.domain.logic.*;
+import com.parasoft.parabank.test.util.*;
 
 public class AdminFormTest extends AbstractParaBankTest {
     private static final String ENDPOINT = "http://parabank";

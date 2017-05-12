@@ -1,10 +1,9 @@
 package com.parasoft.parabank.web.form;
 
-import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
+import java.math.*;
+import java.util.*;
 
-import com.parasoft.parabank.domain.logic.AdminParameters;
+import com.parasoft.parabank.domain.logic.*;
 
 /**
  * Backing class for admin settings form

@@ -2,18 +2,17 @@ package com.parasoft.parabank.dao.jdbc;
 
 import static org.junit.Assert.*;
 
-import java.util.Map;
+import java.util.*;
 
-import javax.annotation.Resource;
+import javax.annotation.*;
 
-import org.junit.FixMethodOrder;
-import org.junit.Test;
-import org.junit.runners.MethodSorters;
-import org.springframework.dao.DataAccessException;
-import org.springframework.test.annotation.Commit;
+import org.junit.*;
+import org.junit.runners.*;
+import org.springframework.dao.*;
+import org.springframework.test.annotation.*;
 
-import com.parasoft.parabank.dao.AdminDao;
-import com.parasoft.parabank.test.util.AbstractAdminOperationsTest;
+import com.parasoft.parabank.dao.*;
+import com.parasoft.parabank.test.util.*;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class JdbcAdminDaoTest extends AbstractAdminOperationsTest {

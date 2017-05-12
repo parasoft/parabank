@@ -1,16 +1,14 @@
 package com.parasoft.bookstore.jdbc;
 
-import java.util.Map;
+import java.util.*;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
-import org.springframework.jdbc.datasource.init.ScriptUtils;
+import org.slf4j.*;
+import org.springframework.core.io.*;
+import org.springframework.jdbc.core.support.*;
+import org.springframework.jdbc.datasource.init.*;
 
-import com.parasoft.parabank.dao.AdminDao;
-import com.parasoft.parabank.dao.jdbc.JdbcAdminDao;
+import com.parasoft.parabank.dao.*;
+import com.parasoft.parabank.dao.jdbc.*;
 
 public class JdbcBookstoreDao extends JdbcDaoSupport implements AdminDao {
     private static final Logger log = LoggerFactory.getLogger(JdbcAdminDao.class);

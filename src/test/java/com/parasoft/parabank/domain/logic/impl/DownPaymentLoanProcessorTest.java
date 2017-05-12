@@ -1,9 +1,10 @@
 package com.parasoft.parabank.domain.logic.impl;
 
-import java.math.BigDecimal;
-
-import com.parasoft.parabank.domain.LoanResponse;
 import static org.junit.Assert.*;
+
+import java.math.*;
+
+import com.parasoft.parabank.domain.*;
 
 public class DownPaymentLoanProcessorTest extends AbstractLoanProcessorTest<DownPaymentLoanProcessor> {
     @Override

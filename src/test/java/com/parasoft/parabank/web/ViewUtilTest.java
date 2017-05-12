@@ -2,13 +2,13 @@ package com.parasoft.parabank.web;
 
 import static org.junit.Assert.*;
 
-import java.util.Map;
+import java.util.*;
 
-import org.junit.Test;
-import org.springframework.test.web.ModelAndViewAssert;
-import org.springframework.web.servlet.ModelAndView;
+import org.junit.*;
+import org.springframework.test.web.*;
+import org.springframework.web.servlet.*;
 
-import com.parasoft.parabank.test.util.AbstractParaBankTest;
+import com.parasoft.parabank.test.util.*;
 
 public class ViewUtilTest extends AbstractParaBankTest {
     private static final String ERROR_MESSAGE = "error message";

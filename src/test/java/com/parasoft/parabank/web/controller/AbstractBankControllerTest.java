@@ -1,12 +1,11 @@
 package com.parasoft.parabank.web.controller;
 
-import javax.annotation.Resource;
+import javax.annotation.*;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 
-import com.parasoft.parabank.domain.logic.BankManager;
-import com.parasoft.parabank.util.AccessModeController;
+import com.parasoft.parabank.domain.logic.*;
+import com.parasoft.parabank.util.*;
 
 abstract class AbstractBankControllerTest<T extends AbstractBankController> extends AbstractControllerTest<T> {
     private final static Logger log = LoggerFactory.getLogger(AbstractControllerTest.class);

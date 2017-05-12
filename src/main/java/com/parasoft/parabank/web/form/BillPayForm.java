@@ -1,8 +1,8 @@
 package com.parasoft.parabank.web.form;
 
-import java.math.BigDecimal;
+import java.math.*;
 
-import com.parasoft.parabank.domain.Payee;
+import com.parasoft.parabank.domain.*;
 
 /**
  * Backing class for online bill pay form
@@ -12,35 +12,35 @@ public class BillPayForm {
     private Integer verifyAccount;
     private BigDecimal amount;
     private int fromAccountId;
-    
+
     public Payee getPayee() {
         return payee;
     }
-    
+
     public void setPayee(Payee payee) {
         this.payee = payee;
     }
-    
+
     public Integer getVerifyAccount() {
         return verifyAccount;
     }
-    
+
     public void setVerifyAccount(Integer verifyAccount) {
         this.verifyAccount = verifyAccount;
     }
-    
+
     public BigDecimal getAmount() {
         return amount;
     }
-    
+
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
-    
+
     public int getFromAccountId() {
         return fromAccountId;
     }
-    
+
     public void setFromAccountId(int fromAccountId) {
         this.fromAccountId = fromAccountId;
     }

@@ -1,17 +1,12 @@
 package com.parasoft.parabank.domain.logic.impl;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 
-import com.parasoft.parabank.dao.NewsDao;
-import com.parasoft.parabank.domain.News;
-import com.parasoft.parabank.domain.logic.NewsManager;
+import com.parasoft.parabank.dao.*;
+import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.logic.*;
 
 /*
  * Implementation of news manager
@@ -41,7 +36,7 @@ public class NewsManagerImpl implements NewsManager {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see com.parasoft.parabank.domain.logic.NewsManager#getLatestNews()
      */
     @Override
@@ -52,7 +47,7 @@ public class NewsManagerImpl implements NewsManager {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see com.parasoft.parabank.domain.logic.NewsManager#getNews()
      */
     @Override

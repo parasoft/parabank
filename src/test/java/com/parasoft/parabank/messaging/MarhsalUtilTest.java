@@ -2,19 +2,16 @@ package com.parasoft.parabank.messaging;
 
 import static org.junit.Assert.*;
 
-import java.io.IOException;
+import java.io.*;
 
-import javax.annotation.Resource;
-import javax.xml.transform.Result;
-import javax.xml.transform.Source;
+import javax.annotation.*;
+import javax.xml.transform.*;
 
-import org.junit.Test;
-import org.springframework.oxm.Marshaller;
-import org.springframework.oxm.Unmarshaller;
-import org.springframework.oxm.XmlMappingException;
+import org.junit.*;
+import org.springframework.oxm.*;
 
-import com.parasoft.parabank.domain.LoanRequest;
-import com.parasoft.parabank.test.util.AbstractParaBankDataSourceTest;
+import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.test.util.*;
 
 public class MarhsalUtilTest extends AbstractParaBankDataSourceTest {
     private static final String XML =

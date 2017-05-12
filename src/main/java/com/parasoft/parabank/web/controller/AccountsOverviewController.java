@@ -1,25 +1,19 @@
 package com.parasoft.parabank.web.controller;
 
-import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.math.*;
+import java.util.*;
 
-import javax.annotation.Resource;
+import javax.annotation.*;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.slf4j.*;
+import org.springframework.stereotype.*;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.*;
 
-import com.parasoft.parabank.domain.Account;
-import com.parasoft.parabank.domain.Customer;
-import com.parasoft.parabank.domain.logic.AdminManager;
-import com.parasoft.parabank.util.AccessModeController;
-import com.parasoft.parabank.util.Constants;
-import com.parasoft.parabank.util.SessionParam;
-import com.parasoft.parabank.web.UserSession;
+import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.logic.*;
+import com.parasoft.parabank.util.*;
+import com.parasoft.parabank.web.*;
 
 /**
  * Controller for displaying all user accounts

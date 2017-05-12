@@ -1,38 +1,19 @@
 package com.parasoft.parabank.service;
 
-import java.math.BigDecimal;
-import java.util.List;
+import java.math.*;
+import java.util.*;
 
-import javax.jws.WebParam;
-import javax.jws.WebResult;
-import javax.jws.WebService;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
+import javax.jws.*;
+import javax.ws.rs.*;
+import javax.ws.rs.core.*;
 
-import org.apache.cxf.jaxrs.ext.xml.ElementClass;
-import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
+import org.apache.cxf.jaxrs.ext.xml.*;
+import org.apache.cxf.rs.security.cors.*;
 
-import com.parasoft.parabank.domain.Account;
-import com.parasoft.parabank.domain.Customer;
-import com.parasoft.parabank.domain.HistoryPoint;
-import com.parasoft.parabank.domain.LoanResponse;
-import com.parasoft.parabank.domain.Position;
-import com.parasoft.parabank.domain.Transaction;
-import com.parasoft.parabank.util.Constants;
+import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.util.*;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.Contact;
-import io.swagger.annotations.Info;
-import io.swagger.annotations.License;
-import io.swagger.annotations.SwaggerDefinition;
-import io.swagger.annotations.Tag;
+import io.swagger.annotations.*;
 
 /**
  * Java interface for ParaBank web service

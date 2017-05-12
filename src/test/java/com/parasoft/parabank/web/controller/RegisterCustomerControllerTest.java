@@ -2,17 +2,15 @@ package com.parasoft.parabank.web.controller;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.web.servlet.ModelAndView;
+import org.junit.*;
+import org.slf4j.*;
+import org.springframework.mock.web.*;
+import org.springframework.web.servlet.*;
 
-import com.parasoft.parabank.domain.Customer;
-import com.parasoft.parabank.util.Constants;
-import com.parasoft.parabank.web.UserSession;
-import com.parasoft.parabank.web.form.CustomerForm;
+import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.util.*;
+import com.parasoft.parabank.web.*;
+import com.parasoft.parabank.web.form.*;
 
 public class RegisterCustomerControllerTest extends AbstractCustomerControllerTest<RegisterCustomerController> {
     private static final Logger log = LoggerFactory.getLogger(RegisterCustomerControllerTest.class);

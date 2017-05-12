@@ -2,16 +2,13 @@ package com.parasoft.parabank.web;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.mock.web.MockHttpSession;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.ModelAndViewDefiningException;
+import org.junit.*;
+import org.springframework.mock.web.*;
+import org.springframework.web.servlet.*;
 
-import com.parasoft.parabank.domain.Customer;
-import com.parasoft.parabank.test.util.AbstractParaBankTest;
-import com.parasoft.parabank.util.Constants;
+import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.test.util.*;
+import com.parasoft.parabank.util.*;
 
 public class LoginInterceptorTest extends AbstractParaBankTest {
     private static final String SERVLET_PATH = "/test.htm";

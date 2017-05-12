@@ -1,10 +1,10 @@
 package com.parasoft.parabank.domain;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
-import org.junit.Test;
+import org.junit.*;
 
-import com.parasoft.parabank.test.util.AbstractBeanTestCase;
+import com.parasoft.parabank.test.util.*;
 
 public class CustomerTest extends AbstractBeanTestCase<Customer> {
     @Test

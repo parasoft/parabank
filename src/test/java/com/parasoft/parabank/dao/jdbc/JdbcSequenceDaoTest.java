@@ -2,12 +2,12 @@ package com.parasoft.parabank.dao.jdbc;
 
 import static org.junit.Assert.*;
 
-import javax.annotation.Resource;
+import javax.annotation.*;
 
-import org.junit.Test;
-import org.springframework.dao.DataAccessException;
+import org.junit.*;
+import org.springframework.dao.*;
 
-import com.parasoft.parabank.test.util.AbstractParaBankDataSourceTest;
+import com.parasoft.parabank.test.util.*;
 
 public class JdbcSequenceDaoTest extends AbstractParaBankDataSourceTest {
     @Resource(name = "sequenceDao")

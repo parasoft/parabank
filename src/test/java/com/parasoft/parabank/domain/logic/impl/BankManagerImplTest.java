@@ -2,34 +2,17 @@ package com.parasoft.parabank.domain.logic.impl;
 
 import static org.junit.Assert.*;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.math.*;
+import java.util.*;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.springframework.test.annotation.Rollback;
+import org.junit.*;
+import org.springframework.test.annotation.*;
 
-import com.parasoft.parabank.dao.AccountDao;
-import com.parasoft.parabank.dao.AdminDao;
-import com.parasoft.parabank.dao.CustomerDao;
-import com.parasoft.parabank.dao.InMemoryAccountDao;
-import com.parasoft.parabank.dao.InMemoryAdminDao;
-import com.parasoft.parabank.dao.InMemoryCustomerDao;
-import com.parasoft.parabank.dao.InMemoryPositionDao;
-import com.parasoft.parabank.dao.InMemoryTransactionDao;
-import com.parasoft.parabank.dao.PositionDao;
-import com.parasoft.parabank.dao.TransactionDao;
-import com.parasoft.parabank.domain.Account;
-import com.parasoft.parabank.domain.Customer;
-import com.parasoft.parabank.domain.HistoryPoint;
-import com.parasoft.parabank.domain.Position;
-import com.parasoft.parabank.domain.Transaction;
-import com.parasoft.parabank.domain.Transaction.TransactionType;
-import com.parasoft.parabank.domain.logic.AdminParameters;
-import com.parasoft.parabank.domain.logic.BankManager;
-import com.parasoft.parabank.test.util.AbstractParaBankTest;
+import com.parasoft.parabank.dao.*;
+import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.Transaction.*;
+import com.parasoft.parabank.domain.logic.*;
+import com.parasoft.parabank.test.util.*;
 
 public class BankManagerImplTest extends AbstractParaBankTest {
     private static final int ACCOUNT1_ID = 1;
@@ -177,8 +160,8 @@ public class BankManagerImplTest extends AbstractParaBankTest {
         for (final Position pos : positions) {
             boolean found = false;
             final int id = pos.getPositionId();
-            for (int i = 0; i < positionIds.length; i++) {
-                if (id == positionIds[i]) {
+            for (int positionId : positionIds) {
+                if (id == positionId) {
                     found = true;
                 }
             }

@@ -2,14 +2,13 @@ package com.parasoft.parabank.web.controller;
 
 import static org.junit.Assert.*;
 
-import org.apache.cxf.interceptor.Fault;
-import org.junit.Test;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.util.WebUtils;
+import org.apache.cxf.interceptor.*;
+import org.junit.*;
+import org.springframework.mock.web.*;
+import org.springframework.web.servlet.*;
+import org.springframework.web.util.*;
 
-import com.parasoft.parabank.service.ParaBankServiceException;
+import com.parasoft.parabank.service.*;
 
 public class ErrorControllerTest extends AbstractControllerTest<ErrorController> {
     private void assertError(final String message) throws Exception {

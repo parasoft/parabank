@@ -1,38 +1,25 @@
 package com.parasoft.parabank.web.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.*;
+import java.util.*;
 
-import javax.annotation.Resource;
+import javax.annotation.*;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.Validator;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.ModelAndView;
+import org.slf4j.*;
+import org.springframework.beans.propertyeditors.*;
+import org.springframework.stereotype.*;
+import org.springframework.ui.*;
+import org.springframework.validation.*;
+import org.springframework.validation.annotation.*;
+import org.springframework.web.bind.*;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.*;
 
-import com.parasoft.parabank.domain.Account;
-import com.parasoft.parabank.domain.Customer;
-import com.parasoft.parabank.domain.Transaction;
-import com.parasoft.parabank.domain.logic.AdminManager;
-import com.parasoft.parabank.util.AccessModeController;
-import com.parasoft.parabank.util.Constants;
-import com.parasoft.parabank.util.SessionParam;
-import com.parasoft.parabank.web.UserSession;
-import com.parasoft.parabank.web.form.FindTransactionForm;
+import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.logic.*;
+import com.parasoft.parabank.util.*;
+import com.parasoft.parabank.web.*;
+import com.parasoft.parabank.web.form.*;
 
 /**
  * Controller for searching transactions

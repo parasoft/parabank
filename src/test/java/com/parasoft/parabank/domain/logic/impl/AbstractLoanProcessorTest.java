@@ -2,17 +2,16 @@ package com.parasoft.parabank.domain.logic.impl;
 
 import static org.junit.Assert.*;
 
-import java.lang.reflect.ParameterizedType;
-import java.math.BigDecimal;
+import java.lang.reflect.*;
+import java.math.*;
 
-import javax.annotation.Resource;
+import javax.annotation.*;
 
-import org.junit.Test;
+import org.junit.*;
 
-import com.parasoft.parabank.domain.LoanRequest;
-import com.parasoft.parabank.domain.LoanResponse;
-import com.parasoft.parabank.domain.logic.AdminManager;
-import com.parasoft.parabank.test.util.AbstractParaBankDataSourceTest;
+import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.logic.*;
+import com.parasoft.parabank.test.util.*;
 
 public abstract class AbstractLoanProcessorTest<T extends AbstractLoanProcessor>
         extends AbstractParaBankDataSourceTest {

@@ -1,11 +1,9 @@
 package com.parasoft.parabank.domain.validator;
 
-import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
-import org.springframework.validation.Validator;
+import org.springframework.validation.*;
 
-import com.parasoft.parabank.domain.LoanResponse;
-import com.parasoft.parabank.web.form.RequestLoanForm;
+import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.web.form.*;
 
 /**
  * Provides basic empty field validation for RequestLoanForm object

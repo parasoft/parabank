@@ -1,30 +1,15 @@
 package com.parasoft.parabank.domain.logic.impl;
 
-import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
+import java.math.*;
+import java.util.*;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 
-import com.parasoft.parabank.dao.AccountDao;
-import com.parasoft.parabank.dao.AdminDao;
-import com.parasoft.parabank.dao.CustomerDao;
-import com.parasoft.parabank.dao.PositionDao;
-import com.parasoft.parabank.dao.TransactionDao;
-import com.parasoft.parabank.domain.Account;
-import com.parasoft.parabank.domain.Account.AccountType;
-import com.parasoft.parabank.domain.Customer;
-import com.parasoft.parabank.domain.HistoryPoint;
-import com.parasoft.parabank.domain.LoanRequest;
-import com.parasoft.parabank.domain.LoanResponse;
-import com.parasoft.parabank.domain.Position;
-import com.parasoft.parabank.domain.Transaction;
-import com.parasoft.parabank.domain.Transaction.TransactionType;
-import com.parasoft.parabank.domain.TransactionCriteria;
-import com.parasoft.parabank.domain.logic.AdminParameters;
-import com.parasoft.parabank.domain.logic.BankManager;
-import com.parasoft.parabank.domain.logic.LoanProvider;
+import com.parasoft.parabank.dao.*;
+import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.Account.*;
+import com.parasoft.parabank.domain.Transaction.*;
+import com.parasoft.parabank.domain.logic.*;
 
 public class BankManagerImpl implements BankManager {
     private static final Logger log = LoggerFactory.getLogger(BankManagerImpl.class);

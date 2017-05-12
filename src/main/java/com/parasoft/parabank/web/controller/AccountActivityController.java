@@ -1,42 +1,27 @@
 package com.parasoft.parabank.web.controller;
 
-import java.io.IOException;
-import java.text.DateFormatSymbols;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.io.*;
+import java.text.*;
+import java.util.*;
 
-import javax.annotation.Resource;
-import javax.xml.bind.JAXBException;
+import javax.annotation.*;
+import javax.xml.bind.*;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.dao.DataAccessException;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.ModelAndView;
+import org.slf4j.*;
+import org.springframework.dao.*;
+import org.springframework.stereotype.*;
+import org.springframework.ui.*;
+import org.springframework.validation.*;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.*;
 
-import com.parasoft.parabank.domain.Account;
-import com.parasoft.parabank.domain.Transaction;
-import com.parasoft.parabank.domain.Transaction.TransactionType;
-import com.parasoft.parabank.domain.TransactionCriteria;
-import com.parasoft.parabank.domain.TransactionCriteria.SearchType;
-import com.parasoft.parabank.domain.logic.AdminManager;
-import com.parasoft.parabank.service.ParaBankServiceException;
-import com.parasoft.parabank.util.AccessModeController;
-import com.parasoft.parabank.util.Constants;
-import com.parasoft.parabank.util.Util;
-import com.parasoft.parabank.web.ViewUtil;
+import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.Transaction.*;
+import com.parasoft.parabank.domain.TransactionCriteria.*;
+import com.parasoft.parabank.domain.logic.*;
+import com.parasoft.parabank.service.*;
+import com.parasoft.parabank.util.*;
+import com.parasoft.parabank.web.*;
 
 /**
  * Controller for displaying user account activity
@@ -159,7 +144,7 @@ public class AccountActivityController extends AbstractBankController {
 
     @Override
     public void setAccessModeController(final AccessModeController aAccessModeController) {
-        this.accessModeController = aAccessModeController;
+        accessModeController = aAccessModeController;
     };
 
     public void setAdminManager(final AdminManager adminManager) {

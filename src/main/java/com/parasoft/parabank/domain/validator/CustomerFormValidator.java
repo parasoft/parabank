@@ -1,13 +1,11 @@
 package com.parasoft.parabank.domain.validator;
 
-import javax.annotation.Resource;
+import javax.annotation.*;
 
-import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
-import org.springframework.validation.Validator;
+import org.springframework.validation.*;
 
-import com.parasoft.parabank.domain.Customer;
-import com.parasoft.parabank.web.form.CustomerForm;
+import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.web.form.*;
 
 /**
  * Provides basic empty field validation for Customer object
@@ -17,7 +15,7 @@ public class CustomerFormValidator implements Validator {
     private Validator customerValidator;
 
     public void setCustomerValidator(final Validator addressValidator) {
-        this.customerValidator = addressValidator;
+        customerValidator = addressValidator;
     }
 
     @Override
