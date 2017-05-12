@@ -22,8 +22,8 @@
 		</property>
 	</bean>
 
-		<import resource="classpath*:/**/applicationContext-jms.xml"  />
-		<import resource="classpath*:/**/applicationContext-hsqldb.xml" />
-		<import resource="classpath*:/**/applicationContext-base.xml" />
+	<import resource="classpath*:/**/applicationContext-jms.xml"  />
+	<import resource="classpath*:/**/applicationContext-hsqldb.xml" />
+	<import resource="classpath*:/**/applicationContext-base.xml" />
 	
 </beans>
