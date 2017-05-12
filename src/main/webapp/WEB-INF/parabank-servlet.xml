@@ -92,7 +92,6 @@
 	<util:constant id="about" static-field="com.parasoft.parabank.util.Constants.ABOUT" />
 	<util:constant id="activity" static-field="com.parasoft.parabank.util.Constants.ACTIVITY" />
 	<util:constant id="admin" static-field="com.parasoft.parabank.util.Constants.ADMIN" />
-	<util:constant id="billpay" static-field="com.parasoft.parabank.util.Constants.BILLPAY" />
 	<util:constant id="contact" static-field="com.parasoft.parabank.util.Constants.CONTACT" />
 	<util:constant id="findtrans" static-field="com.parasoft.parabank.util.Constants.FINDTRANS" />
 	<util:constant id="index" static-field="com.parasoft.parabank.util.Constants.INDEX" />
@@ -113,7 +112,6 @@
 	<util:constant id="classLookupForm" static-field="com.parasoft.parabank.util.Constants.CLASS_LOOKUPFORM" />
 	<util:constant id="classCustomerForm" static-field="com.parasoft.parabank.util.Constants.CLASS_CUSTOMERFORM" />
 	<util:constant id="classTransactionCriteria" static-field="com.parasoft.parabank.util.Constants.CLASS_TRANSACTIONCRITERIA" />
-	<util:constant id="classBillPayForm" static-field="com.parasoft.parabank.util.Constants.CLASS_BILLPAYFORM" />
 	<util:constant id="classFindTransactionForm" static-field="com.parasoft.parabank.util.Constants.CLASS_FINDTRANSACTIONFORM" />
 	<util:constant id="classOpenAccountForm" static-field="com.parasoft.parabank.util.Constants.CLASS_OPENACCOUNTFORM" />
 	<util:constant id="classRequestLoanForm" static-field="com.parasoft.parabank.util.Constants.CLASS_REQUESTLOANFORM" />
@@ -127,7 +125,6 @@
 	<util:constant id="customerForm" static-field="com.parasoft.parabank.util.Constants.CUSTOMERFORM" />
 	<util:constant id="customerFormUpdate" static-field="com.parasoft.parabank.util.Constants.CUSTOMERFORMUPDATE" />
 	<util:constant id="transactionCriteria" static-field="com.parasoft.parabank.util.Constants.TRANSACTIONCRITERIA" />
-	<util:constant id="billPayForm" static-field="com.parasoft.parabank.util.Constants.BILLPAYFORM" />
 	<util:constant id="findTransactionForm" static-field="com.parasoft.parabank.util.Constants.FINDTRANSACTIONFORM" />
 	<util:constant id="openAccountForm" static-field="com.parasoft.parabank.util.Constants.OPENACCOUNTFORM" />
 	<util:constant id="requestLoanForm" static-field="com.parasoft.parabank.util.Constants.REQUESTLOANFORM" />

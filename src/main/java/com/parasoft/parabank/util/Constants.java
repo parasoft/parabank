@@ -15,8 +15,6 @@ public interface Constants {
 
     static final String CLASS_ADMINFORM = "com.parasoft.parabank.web.form.AdminForm";
 
-    static final String CLASS_BILLPAYFORM = "com.parasoft.parabank.web.form.BillPayForm";
-
     static final String CLASS_CONTACTFORM = "com.parasoft.parabank.web.form.ContactForm";
 
     static final String CLASS_CUSTOMERFORM = "com.parasoft.parabank.web.form.CustomerForm";

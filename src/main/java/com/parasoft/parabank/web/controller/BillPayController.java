@@ -3,8 +3,6 @@ package com.parasoft.parabank.web.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
@@ -19,7 +17,6 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -39,16 +36,8 @@ import com.parasoft.parabank.web.form.BillPayForm;
 @RequestMapping("/billpay.htm")
 public class BillPayController {
 
-    @Resource(name = Constants.BILLPAY)
-    private String formView;
-
-    @Resource(name = Constants.BILLPAYFORM)
-    private String commandName;
-
-    @Resource(name = "classBillPayForm")
-    private Class<?> commandClass;
-
-    @Resource(name = "messageSource")
+    @Autowired
+    @Qualifier("messageSource")
     private MessageSource messageSource;
 
     @Autowired
@@ -75,29 +64,20 @@ public class BillPayController {
 
     @GetMapping
     public ModelAndView getForm(final Model model) throws Exception {
-        final Object command = commandClass.newInstance();
-        final ModelAndView mav = new ModelAndView(formView);
-        if (model == null) {
-            mav.addObject(commandName, command);
-        } else {
-            model.addAttribute(commandName, command);
-            mav.addAllObjects(model.asMap());
-        }
-        return mav;
+        model.addAttribute(Constants.BILLPAYFORM, new BillPayForm());
+        return new ModelAndView(Constants.BILLPAY, model.asMap());
     }
 
     @PostMapping
     public ModelAndView onSubmit(@Validated @ModelAttribute(Constants.BILLPAYFORM) final BillPayForm billPayForm,
         final BindingResult errors, final Model model, final java.util.Locale locale) throws Exception {
-        // final BillPayForm billPayForm = (BillPayForm) command;
         if (errors.hasErrors()) {
-            return new ModelAndView(formView, errors.getModel());
+            return new ModelAndView(Constants.BILLPAY, errors.getModel());
         }
 
         bankManager.withdraw(billPayForm.getFromAccountId(), billPayForm.getAmount(),
             messageSource.getMessage("bill.payment.to", new Object[] { billPayForm.getPayee().getName() }, locale));
 
-        // final Map<String, Object> model = new HashMap<String, Object>();
         model.addAttribute("payeeName", billPayForm.getPayee().getName());
         model.addAttribute("amount", billPayForm.getAmount());
         model.addAttribute("fromAccountId", billPayForm.getFromAccountId());
