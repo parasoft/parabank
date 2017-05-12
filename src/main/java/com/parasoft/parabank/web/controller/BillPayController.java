@@ -5,13 +5,19 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -19,7 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.parasoft.parabank.domain.Account;
 import com.parasoft.parabank.domain.Customer;
-import com.parasoft.parabank.util.AccessModeController;
+import com.parasoft.parabank.domain.logic.BankManager;
 import com.parasoft.parabank.util.Constants;
 import com.parasoft.parabank.util.SessionParam;
 import com.parasoft.parabank.web.UserSession;
@@ -31,14 +37,28 @@ import com.parasoft.parabank.web.form.BillPayForm;
 @Controller("secure_billpay")
 @SessionAttributes(Constants.BILLPAYFORM)
 @RequestMapping("/billpay.htm")
-public class BillPayController extends AbstractValidatingBankController {
+public class BillPayController {
+
+    @Resource(name = Constants.BILLPAY)
+    private String formView;
+
+    @Resource(name = Constants.BILLPAYFORM)
+    private String commandName;
+
+    @Resource(name = "classBillPayForm")
+    private Class<?> commandClass;
 
     @Resource(name = "messageSource")
     private MessageSource messageSource;
 
-    //    @ModelAttribute("accounts")
-    //    public List<Integer> getAccountIds(final HttpServletRequest request) {
-    //        final UserSession userSession = (UserSession) WebUtils.getRequiredSessionAttribute(request, Constants.USERSESSION);
+    @Autowired
+    @Qualifier("bankManager")
+    private BankManager bankManager;
+
+    @Autowired
+    @Qualifier("billPayFormValidator")
+    private Validator validator;
+
     @ModelAttribute("accounts")
     public List<Integer> getAccountIds(@SessionParam(Constants.USERSESSION) final UserSession userSession)
             throws Exception {
@@ -53,18 +73,25 @@ public class BillPayController extends AbstractValidatingBankController {
         return accountIds;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping
     public ModelAndView getForm(final Model model) throws Exception {
-        final ModelAndView mv = super.prepForm(model);
-        return mv;
+        final Object command = commandClass.newInstance();
+        final ModelAndView mav = new ModelAndView(formView);
+        if (model == null) {
+            mav.addObject(commandName, command);
+        } else {
+            model.addAttribute(commandName, command);
+            mav.addAllObjects(model.asMap());
+        }
+        return mav;
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @PostMapping
     public ModelAndView onSubmit(@Validated @ModelAttribute(Constants.BILLPAYFORM) final BillPayForm billPayForm,
         final BindingResult errors, final Model model, final java.util.Locale locale) throws Exception {
         // final BillPayForm billPayForm = (BillPayForm) command;
         if (errors.hasErrors()) {
-            return new ModelAndView(getFormView(), errors.getModel());
+            return new ModelAndView(formView, errors.getModel());
         }
 
         bankManager.withdraw(billPayForm.getFromAccountId(), billPayForm.getAmount(),
@@ -78,98 +105,12 @@ public class BillPayController extends AbstractValidatingBankController {
         return new ModelAndView("billpayConfirm", "model", model);
     }
 
-    @Override
-    public void setAccessModeController(final AccessModeController aAccessModeController) {
-        // TODO Add AccessModeController implementation
-
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    @Resource(name = "classBillPayForm")
-    public void setCommandClass(final Class<?> aCommandClass) {
-        super.setCommandClass(aCommandClass);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    @Resource(name = Constants.BILLPAYFORM)
-    public void setCommandName(final String aCommandName) {
-        super.setCommandName(aCommandName);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    @Resource(name = Constants.BILLPAY)
-    public void setFormView(final String aFormView) {
-        super.setFormView(aFormView);
-    }
-
     public void setMessageSource(final MessageSource messageSource) {
         this.messageSource = messageSource;
     }
 
-    @Override
-    @Resource(name = "billPayFormValidator")
-    public void setValidator(final Validator aValidator) {
-        validator = aValidator;
+    @InitBinder
+    protected void initBinder(final WebDataBinder binder) {
+        binder.addValidators(validator);
     }
-
-    //    @Override
-    //    protected Object formBackingObject(final HttpServletRequest request) throws Exception {
-    //        return new BillPayForm();
-    //    }
-    //
-    //    @Override
-    //    protected void onBindAndValidate(final HttpServletRequest request, final Object command, final BindException errors)
-    //            throws Exception {
-    //        final BillPayForm billPayForm = (BillPayForm) command;
-    //        final Payee payee = billPayForm.getPayee();
-    //
-    //        try {
-    //            errors.pushNestedPath("payee");
-    //            getValidator().validate(payee, errors);
-    //        } finally {
-    //            errors.popNestedPath();
-    //        }
-    //
-    //        ValidationUtils.rejectIfEmpty(errors, "amount", "error.amount.empty");
-    //
-    //        if (payee.getAccountNumber() != null && !payee.getAccountNumber().equals(billPayForm.getVerifyAccount())) {
-    //            errors.rejectValue("verifyAccount", "error.account.number.mismatch");
-    //        }
-    //    } // @Override
-    //
-    //    protected ModelAndView onSubmit(final HttpServletRequest request, final HttpServletResponse response,
-    //        final Object command, final BindException errors) throws Exception {
-    //        final BillPayForm billPayForm = (BillPayForm) command;
-    //
-    //        bankManager.withdraw(billPayForm.getFromAccountId(), billPayForm.getAmount(), messageSource
-    //            .getMessage("bill.payment.to", new Object[] { billPayForm.getPayee().getName() }, request.getLocale()));
-    //
-    //        final Map<String, Object> model = new HashMap<String, Object>();
-    //        model.put("payeeName", billPayForm.getPayee().getName());
-    //        model.put("amount", billPayForm.getAmount());
-    //        model.put("fromAccountId", billPayForm.getFromAccountId());
-    //
-    //        return new ModelAndView("billpayConfirm", "model", model);
-    //    }
-    //
-    //    @Override
-    //    protected Map<String, Object> referenceData(final HttpServletRequest request) throws Exception {
-    //        final UserSession userSession = (UserSession) WebUtils.getRequiredSessionAttribute(request, Constants.USERSESSION);
-    //
-    //        final Customer customer = userSession.getCustomer();
-    //        final List<Account> accounts = bankManager.getAccountsForCustomer(customer);
-    //
-    //        final List<Integer> accountIds = new ArrayList<Integer>();
-    //        for (final Account account : accounts) {
-    //            accountIds.add(account.getId());
-    //        }
-    //
-    //        final Map<String, Object> model = new HashMap<String, Object>();
-    //        model.put("accounts", accountIds);
-    //
-    //        return model;
-    //    }
 }

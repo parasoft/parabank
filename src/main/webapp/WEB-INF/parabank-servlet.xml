@@ -98,7 +98,6 @@
 	<util:constant id="index" static-field="com.parasoft.parabank.util.Constants.INDEX" />
 	<util:constant id="loginform" static-field="com.parasoft.parabank.util.Constants.LOGINFORM" />
 	<util:constant id="lookup" static-field="com.parasoft.parabank.util.Constants.LOOKUP" />
-	<util:constant id="news" static-field="com.parasoft.parabank.util.Constants.NEWS" />
 	<util:constant id="openaccount" static-field="com.parasoft.parabank.util.Constants.OPENACCOUNT" />
 	<util:constant id="register" static-field="com.parasoft.parabank.util.Constants.REGISTER" />
 	<util:constant id="requestloan" static-field="com.parasoft.parabank.util.Constants.REQUESTLOAN" />

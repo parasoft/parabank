@@ -2,26 +2,83 @@ package com.parasoft.parabank.web.controller;
 
 import static org.junit.Assert.*;
 
+import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.annotation.Resource;
+
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.servlet.HandlerExecutionChain;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import com.parasoft.parabank.domain.Account;
 import com.parasoft.parabank.domain.Address;
+import com.parasoft.parabank.domain.Customer;
 import com.parasoft.parabank.domain.Payee;
-import com.parasoft.parabank.domain.validator.AddressValidator;
-import com.parasoft.parabank.domain.validator.PayeeValidator;
+import com.parasoft.parabank.domain.logic.BankManager;
+import com.parasoft.parabank.util.AccessModeController;
 import com.parasoft.parabank.util.Constants;
+import com.parasoft.parabank.web.UserSession;
 import com.parasoft.parabank.web.form.BillPayForm;
 
 @SuppressWarnings({ "unchecked" })
-public class BillPayControllerTest extends AbstractValidatingBankControllerTest<BillPayController> {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath*:/**/test-context.xml" })
+@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DirtiesContextTestExecutionListener.class,
+    TransactionalTestExecutionListener.class })
+@Transactional
+public class BillPayControllerTest {
+
+    @Autowired
+    protected BillPayController controller;
+
+    @Autowired
+    private ApplicationContext applicationContext;
+
+    protected MockHttpServletRequest request;
+
+    protected MockHttpServletResponse response;
+
+    @Autowired
+    private RequestMappingHandlerAdapter handlerAdapter;
+
+    @Autowired
+    private RequestMappingHandlerMapping handlerMapping;
+
+    private String path;
+
+    private String formName;
+
+    private String resultClassName = BindingResult.class.getName();
+
+    @Resource(name = "bankManager")
+    protected BankManager bankManager;
+
+    @Resource(name = "accessModeController")
+    protected AccessModeController amc;
 
     private void assertReferenceData(final ModelAndView mav) {
         final List<Account> accounts = (List<Account>) mav.getModel().get("accounts");
@@ -47,25 +104,69 @@ public class BillPayControllerTest extends AbstractValidatingBankControllerTest<
         return form;
     }
 
-    @Override
+    @Before
     public void onSetUp() throws Exception {
-        super.onSetUp();
-        final PayeeValidator validator = new PayeeValidator();
-        validator.setAddressValidator(new AddressValidator());
-        controller.setValidator(validator);
-        controller.setMessageSource(getApplicationContext());
-        setPath("/billpay.htm");
-        setFormName(Constants.BILLPAYFORM);
+        controller.setMessageSource(applicationContext);
+        path = "/billpay.htm";
+        formName = Constants.BILLPAYFORM;
+        request = new MockHttpServletRequest();
+        response = new MockHttpServletResponse();
         registerSession(request);
+    }
+
+    protected final MockHttpServletRequest registerSession(final MockHttpServletRequest aRequest) {
+        return registerSession(aRequest, 12212);
+    }
+
+    protected final MockHttpServletRequest registerSession(final MockHttpServletRequest aRequest, final int custId) {
+        final MockHttpSession session = new MockHttpSession();
+        final Customer customer = new Customer();
+        customer.setId(custId);
+        session.setAttribute(Constants.USERSESSION, new UserSession(customer));
+        aRequest.setSession(session);
+        return aRequest;
+    }
+
+    protected ModelAndView processPostRequest(final Object form, final MockHttpServletRequest aRequest, final MockHttpServletResponse aResponse)
+            throws IllegalAccessException, InvocationTargetException, NoSuchMethodException, Exception {
+        Object handler;
+        ModelAndView mav;
+        aRequest.setMethod("POST");
+        aRequest.setServletPath(path);
+        if (form != null) {
+            aRequest.getSession().setAttribute(formName, form);
+        }
+        // aRequest.setParameters(BeanUtils.describe(form));
+        handler = handlerMapping.getHandler(aRequest).getHandler();
+        mav = handlerAdapter.handle(aRequest, aResponse, handler);
+        return mav;
+    }
+
+    protected ModelAndView processGetRequest(final MockHttpServletRequest aRequest, final MockHttpServletResponse aResponse)
+            throws IllegalAccessException, InvocationTargetException, NoSuchMethodException, Exception {
+        Object handler;
+        ModelAndView mav;
+        aRequest.setMethod("GET");
+        aRequest.setServletPath(path);
+        final HandlerExecutionChain chain = handlerMapping.getHandler(aRequest);
+        handler = chain.getHandler();
+        mav = handlerAdapter.handle(aRequest, aResponse, handler);
+        return mav;
     }
 
     @Test
     public void testHandleGetRequest() throws Exception {
         final ModelAndView mav = processGetRequest(request, new MockHttpServletResponse());
-        final BillPayForm form = (BillPayForm) mav.getModel().get(getFormName());
+        final BillPayForm form = (BillPayForm) mav.getModel().get(formName);
         assertNotNull("BillPayForm was not returned by a get request ", form);
         //final ModelAndView mav = controller.handleRequest(request, response);
         assertReferenceData(mav);
+    }
+
+    protected final Object getModelValue(final ModelAndView mav, final String name) {
+        final ModelMap model = mav.getModelMap();
+        final Map<String, Object> map = (Map<String, Object>) model.get("model");
+        return map.get(name);
     }
 
     @Test
@@ -108,10 +209,23 @@ public class BillPayControllerTest extends AbstractValidatingBankControllerTest<
         mav = processPostRequest(form, registerSession(new MockHttpServletRequest()), new MockHttpServletResponse());
         assertError(mav, "verifyAccount", "error.account.number.mismatch");
     }
-}
 
-//"name", "error.payee.name.required"
-//"phoneNumber", "error.phone.number.required"
-//"accountNumber", "error.account.number.required"
-//"amount", "error.amount.empty"
-//"verifyAccount", "error.account.number.mismatch"
+    protected void assertError(final ModelAndView mav, final int errorCount, final Map<String, String> fieldErrors) {
+        final String errorName = String.format("%1$s.%2$s", resultClassName, formName);
+        final BindingResult errors = (BindingResult) mav.getModel().get(errorName);
+        assertEquals(errorCount, errors.getErrorCount());
+        for (final String fieldName : fieldErrors.keySet()) {
+            final FieldError fe = errors.getFieldError(fieldName);
+            assertNotNull("missing FieldError for " + fieldName, fe);
+            assertEquals(fieldName, fe.getField());
+            assertEquals(fieldErrors.get(fieldName), fe.getCode());
+        }
+        // return errorName;
+    }
+
+    protected void assertError(final ModelAndView mav, final String fieldName, final String errorCode) {
+        final Map<String, String> fieldErrors = new HashMap<>();
+        fieldErrors.put(fieldName, errorCode);
+        assertError(mav, 1, fieldErrors);
+    }
+}
