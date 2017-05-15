@@ -7,12 +7,23 @@ import com.parasoft.parabank.util.*;
 /**
  * Domain object representing a bank news item
  */
-public class News {
+public class News implements Comparable<News> {
     private int id;
     private Date date;
     private String headline;
     private String story;
-
+    
+    public News() {
+        // Do nothing by default
+    }
+    
+    public News(int id, Date date, String headline, String story) {
+        this.id = id;
+        this.date = date;
+        this.headline = headline;
+        this.story = story;
+    }
+    
     public int getId() {
         return id;
     }
@@ -75,5 +86,10 @@ public class News {
     public String toString() {
         return "News [id=" + id + ", date=" + date + ", headline=" + headline
                 + ", story=" + story + "]";
+    }
+
+    @Override
+    public int compareTo(News o) {
+        return date.compareTo(o.date);
     }
 }
