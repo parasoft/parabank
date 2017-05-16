@@ -12,18 +12,18 @@ public class News implements Comparable<News> {
     private Date date;
     private String headline;
     private String story;
-    
+
     public News() {
         // Do nothing by default
     }
-    
+
     public News(int id, Date date, String headline, String story) {
         this.id = id;
         this.date = date;
         this.headline = headline;
         this.story = story;
     }
-    
+
     public int getId() {
         return id;
     }

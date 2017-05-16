@@ -9,7 +9,7 @@ import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.*;
 
-import com.parasoft.parabank.domain.News;
+import com.parasoft.parabank.domain.*;
 import com.parasoft.parabank.domain.logic.*;
 import com.parasoft.parabank.util.*;
 
