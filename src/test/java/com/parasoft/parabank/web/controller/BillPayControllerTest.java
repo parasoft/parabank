@@ -1,31 +1,26 @@
 package com.parasoft.parabank.web.controller;
 
-import static org.junit.Assert.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.hamcrest.collection.IsIterableWithSize.iterableWithSize;
 
-import java.lang.reflect.*;
 import java.math.*;
-import java.util.*;
-
-import javax.annotation.*;
 
 import org.junit.*;
 import org.junit.runner.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.context.*;
-import org.springframework.mock.web.*;
+import org.springframework.http.*;
 import org.springframework.test.annotation.*;
 import org.springframework.test.context.*;
 import org.springframework.test.context.junit4.*;
 import org.springframework.test.context.support.*;
 import org.springframework.test.context.transaction.*;
+import org.springframework.test.web.servlet.*;
+import org.springframework.test.web.servlet.setup.*;
 import org.springframework.transaction.annotation.*;
-import org.springframework.ui.*;
-import org.springframework.validation.*;
-import org.springframework.web.servlet.*;
-import org.springframework.web.servlet.mvc.method.annotation.*;
 
 import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.domain.logic.*;
 import com.parasoft.parabank.util.*;
 import com.parasoft.parabank.web.*;
 import com.parasoft.parabank.web.form.*;
@@ -38,38 +33,17 @@ import com.parasoft.parabank.web.form.*;
 @Transactional
 public class BillPayControllerTest {
 
+    private static final String BILLPAY_CONFIRM = "billpayConfirm";
+
+    private static final String PATH = "/billpay.htm";
+
     @Autowired
     protected BillPayController controller;
 
     @Autowired
     private ApplicationContext applicationContext;
 
-    protected MockHttpServletRequest request;
-
-    protected MockHttpServletResponse response;
-
-    @Autowired
-    private RequestMappingHandlerAdapter handlerAdapter;
-
-    @Autowired
-    private RequestMappingHandlerMapping handlerMapping;
-
-    private String path;
-
-    private String formName;
-
-    private String resultClassName = BindingResult.class.getName();
-
-    @Resource(name = "bankManager")
-    protected BankManager bankManager;
-
-    @Resource(name = "accessModeController")
-    protected AccessModeController amc;
-
-    private void assertReferenceData(final ModelAndView mav) {
-        final List<Account> accounts = (List<Account>) mav.getModel().get("accounts");
-        assertEquals(11, accounts.size());
-    }
+    MockMvc mockMvc;
 
     private BillPayForm getBillPayForm() {
         final BillPayForm form = new BillPayForm();
@@ -93,125 +67,103 @@ public class BillPayControllerTest {
     @Before
     public void onSetUp() throws Exception {
         controller.setMessageSource(applicationContext);
-        path = "/billpay.htm";
-        formName = Constants.BILLPAYFORM;
-        request = new MockHttpServletRequest();
-        response = new MockHttpServletResponse();
-        registerSession(request);
+        mockMvc = MockMvcBuilders.standaloneSetup(controller).setCustomArgumentResolvers(new SessionParamArgumentResolver()).build();
     }
 
-    protected final MockHttpServletRequest registerSession(final MockHttpServletRequest aRequest) {
-        return registerSession(aRequest, 12212);
-    }
-
-    protected final MockHttpServletRequest registerSession(final MockHttpServletRequest aRequest, final int custId) {
-        final MockHttpSession session = new MockHttpSession();
-        final Customer customer = new Customer();
-        customer.setId(custId);
-        session.setAttribute(Constants.USERSESSION, new UserSession(customer));
-        aRequest.setSession(session);
-        return aRequest;
-    }
-
-    protected ModelAndView processPostRequest(final Object form, final MockHttpServletRequest aRequest, final MockHttpServletResponse aResponse)
-            throws IllegalAccessException, InvocationTargetException, NoSuchMethodException, Exception {
-        Object handler;
-        ModelAndView mav;
-        aRequest.setMethod("POST");
-        aRequest.setServletPath(path);
-        if (form != null) {
-            aRequest.getSession().setAttribute(formName, form);
-        }
-        // aRequest.setParameters(BeanUtils.describe(form));
-        handler = handlerMapping.getHandler(aRequest).getHandler();
-        mav = handlerAdapter.handle(aRequest, aResponse, handler);
-        return mav;
-    }
-
-    protected ModelAndView processGetRequest(final MockHttpServletRequest aRequest, final MockHttpServletResponse aResponse)
-            throws IllegalAccessException, InvocationTargetException, NoSuchMethodException, Exception {
-        Object handler;
-        ModelAndView mav;
-        aRequest.setMethod("GET");
-        aRequest.setServletPath(path);
-        final HandlerExecutionChain chain = handlerMapping.getHandler(aRequest);
-        handler = chain.getHandler();
-        mav = handlerAdapter.handle(aRequest, aResponse, handler);
-        return mav;
-    }
-
+    /**
+     * This test should verify that a new customer who doesn't have an ID
+     */
     @Test
-    public void testHandleGetRequest() throws Exception {
-        final ModelAndView mav = processGetRequest(request, new MockHttpServletResponse());
-        final BillPayForm form = (BillPayForm) mav.getModel().get(formName);
-        assertNotNull("BillPayForm was not returned by a get request ", form);
-        //final ModelAndView mav = controller.handleRequest(request, response);
-        assertReferenceData(mav);
+    public void testGetForm()
+        throws Throwable
+    {
+        mockMvc.perform(get(PATH)
+            .sessionAttr(Constants.USERSESSION, new UserSession(new Customer())))
+                .andExpect(status().isOk())
+                .andExpect(view().name(Constants.BILLPAY))
+                .andExpect(model().attributeExists(Constants.BILLPAYFORM))
+                .andExpect(model().hasNoErrors());
     }
 
-    protected final Object getModelValue(final ModelAndView mav, final String name) {
-        final ModelMap model = mav.getModelMap();
-        final Map<String, Object> map = (Map<String, Object>) model.get("model");
-        return map.get(name);
+    /**
+     * This test should verify that a customer who has an ID
+     */
+    @Test
+    public void testHandleGetRequest() throws Exception 
+    {
+        Customer customer = new Customer();
+        customer.setId(12212);
+        mockMvc.perform(get(PATH)
+            .sessionAttr(Constants.USERSESSION, new UserSession(customer)))
+                .andExpect(status().isOk())
+                .andExpect(view().name(Constants.BILLPAY))
+                .andExpect(model().attributeExists(Constants.BILLPAYFORM))
+                .andExpect(model().hasNoErrors())
+                .andExpect(model().attribute("accounts", iterableWithSize(11)));
     }
 
+    /**
+     * This test should verify that a user successfully submits a form
+     */
     @Test
     @Transactional
     @Rollback
-    public void testOnSubmit() throws Exception {
-        final BillPayForm form = getBillPayForm();
-        //final BindException errors = new BindException(form, Constants.BILLPAYFORM);
-        //final ModelAndView mav = controller.onSubmit(request, response, form, errors);
-        final ModelAndView mav =
-            processPostRequest(form, registerSession(new MockHttpServletRequest()), new MockHttpServletResponse());
-        assertEquals("billpayConfirm", mav.getViewName());
-        assertEquals("payee name", getModelValue(mav, "payeeName"));
-        assertEquals(new BigDecimal("100.0"), getModelValue(mav, "amount"));
-        assertEquals(12345, getModelValue(mav, "fromAccountId"));
+    public void testOnSubmit()
+        throws Throwable
+    {
+        mockMvc.perform(post(PATH)
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .sessionAttr(Constants.BILLPAYFORM, getBillPayForm())
+            .sessionAttr(Constants.USERSESSION, new UserSession(new Customer())))
+                .andExpect(status().isOk())
+                .andExpect(view().name(BILLPAY_CONFIRM))
+                .andExpect(model().attribute("payeeName", "payee name"))
+                .andExpect(model().attribute("fromAccountId", 12345))
+                .andExpect(model().attribute("amount", new BigDecimal("100.0")));
     }
 
+    /**
+     * This test should verify that a user fails to submit an incomplete form
+     */
     @Test
     @Transactional
     @Rollback
-    public void testValidate() throws Exception {
+    public void testValidate() throws Exception 
+    {
         BillPayForm form = getBillPayForm();
         form.getPayee().setPhoneNumber(null);
-        ModelAndView mav =
-            processPostRequest(form, registerSession(new MockHttpServletRequest()), new MockHttpServletResponse());
-        assertError(mav, "payee.phoneNumber", "error.phone.number.required");
+        mockMvc.perform(post(PATH)
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .sessionAttr(Constants.BILLPAYFORM, form)
+            .sessionAttr(Constants.USERSESSION, new UserSession(new Customer())))
+                .andExpect(model().hasErrors())
+                .andExpect(model().attributeHasFieldErrorCode(Constants.BILLPAYFORM, "payee.phoneNumber", "error.phone.number.required"));
 
         form = getBillPayForm();
         form.setAmount(null);
-        mav = processPostRequest(form, registerSession(new MockHttpServletRequest()), new MockHttpServletResponse());
-        assertError(mav, "amount", "error.amount.empty");
+        mockMvc.perform(post(PATH)
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .sessionAttr(Constants.BILLPAYFORM, form)
+            .sessionAttr(Constants.USERSESSION, new UserSession(new Customer())))
+                .andExpect(model().hasErrors())
+                .andExpect(model().attributeHasFieldErrorCode(Constants.BILLPAYFORM, "amount", "error.amount.empty"));
 
         form = getBillPayForm();
         form.getPayee().setAccountNumber(null);
-        mav = processPostRequest(form, registerSession(new MockHttpServletRequest()), new MockHttpServletResponse());
-        assertError(mav, "payee.accountNumber", "error.account.number.required");
+        mockMvc.perform(post(PATH)
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .sessionAttr(Constants.BILLPAYFORM, form)
+            .sessionAttr(Constants.USERSESSION, new UserSession(new Customer())))
+                .andExpect(model().hasErrors())
+                .andExpect(model().attributeHasFieldErrorCode(Constants.BILLPAYFORM, "payee.accountNumber", "error.account.number.required"));
 
         form = getBillPayForm();
         form.setVerifyAccount(200);
-        mav = processPostRequest(form, registerSession(new MockHttpServletRequest()), new MockHttpServletResponse());
-        assertError(mav, "verifyAccount", "error.account.number.mismatch");
-    }
-
-    protected void assertError(final ModelAndView mav, final int errorCount, final Map<String, String> fieldErrors) {
-        final String errorName = String.format("%1$s.%2$s", resultClassName, formName);
-        final BindingResult errors = (BindingResult) mav.getModel().get(errorName);
-        assertEquals(errorCount, errors.getErrorCount());
-        for (final String fieldName : fieldErrors.keySet()) {
-            final FieldError fe = errors.getFieldError(fieldName);
-            assertNotNull("missing FieldError for " + fieldName, fe);
-            assertEquals(fieldName, fe.getField());
-            assertEquals(fieldErrors.get(fieldName), fe.getCode());
-        }
-        // return errorName;
-    }
-
-    protected void assertError(final ModelAndView mav, final String fieldName, final String errorCode) {
-        final Map<String, String> fieldErrors = new HashMap<>();
-        fieldErrors.put(fieldName, errorCode);
-        assertError(mav, 1, fieldErrors);
+        mockMvc.perform(post(PATH)
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .sessionAttr(Constants.BILLPAYFORM, form)
+            .sessionAttr(Constants.USERSESSION, new UserSession(new Customer())))
+                .andExpect(model().hasErrors())
+                .andExpect(model().attributeHasFieldErrorCode(Constants.BILLPAYFORM, "verifyAccount", "error.account.number.mismatch"));
     }
 }
