@@ -30,7 +30,7 @@
 	</bean>
 
 	<bean id="newsManager" class="com.parasoft.parabank.domain.logic.impl.NewsManagerImpl">
-		<property name="newsDao" ref="newsDao" />
+		<constructor-arg ref="newsDao" />
 	</bean>
 
 	<!-- ========================= DAOS ========================= -->
