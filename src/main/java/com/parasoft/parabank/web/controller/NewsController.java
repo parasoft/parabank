@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.*;
 
 import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.domain.logic.*;
+import com.parasoft.parabank.domain.logic.impl.*;
 import com.parasoft.parabank.util.*;
 
 /**
@@ -22,7 +22,7 @@ public class NewsController {
 
     @Autowired
     @Qualifier("newsManager")
-    private NewsManager newsManager;
+    private NewsManagerImpl newsManager;
 
     @GetMapping
     public ModelAndView handleRequest(Model model) throws Exception {
