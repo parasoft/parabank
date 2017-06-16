@@ -11,6 +11,12 @@ import org.springframework.web.servlet.*;
 import com.parasoft.parabank.util.*;
 import com.parasoft.parabank.web.form.*;
 
+/**
+ * @req PAR-12
+ * @req PAR-15
+ * @req PAR-16
+ *
+ */
 public class ContactControllerTest extends AbstractValidatingBankControllerTest<ContactController> {
     private ContactForm getContactForm() {
         final ContactForm form = new ContactForm();

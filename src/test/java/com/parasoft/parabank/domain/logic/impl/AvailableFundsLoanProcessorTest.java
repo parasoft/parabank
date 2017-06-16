@@ -6,6 +6,10 @@ import java.math.*;
 
 import com.parasoft.parabank.domain.*;
 
+/**
+ * @req PAR-32
+ *
+ */
 public class AvailableFundsLoanProcessorTest
 extends AbstractLoanProcessorTest<AvailableFundsLoanProcessor> {
     @Override

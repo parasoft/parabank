@@ -15,6 +15,10 @@ import org.springframework.transaction.annotation.*;
 import com.parasoft.parabank.domain.logic.*;
 import com.parasoft.parabank.test.util.*;
 
+/**
+ * @req PAR-31
+ *
+ */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class AdminManagerImplTest extends AbstractAdminOperationsTest {
     private static final String TEST_PARAMETER = "loanProcessorThreshold";

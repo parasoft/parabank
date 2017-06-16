@@ -10,6 +10,10 @@ import org.springframework.web.servlet.*;
 
 import com.parasoft.parabank.test.util.*;
 
+/**
+ * @req PAR-5
+ *
+ */
 public class ViewUtilTest extends AbstractParaBankTest {
     private static final String ERROR_MESSAGE = "error message";
 

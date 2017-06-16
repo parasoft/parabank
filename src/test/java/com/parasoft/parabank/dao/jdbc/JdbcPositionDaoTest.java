@@ -17,6 +17,10 @@ import com.parasoft.parabank.domain.*;
 import com.parasoft.parabank.service.*;
 import com.parasoft.parabank.test.util.*;
 
+/**
+ * @req PAR-16
+ *
+ */
 public class JdbcPositionDaoTest extends AbstractParaBankDataSourceTest {
     private static final Logger log = LoggerFactory.getLogger(ParaBankServiceImplTest.class);
 

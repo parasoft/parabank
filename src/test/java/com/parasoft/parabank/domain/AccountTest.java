@@ -9,6 +9,10 @@ import org.junit.*;
 import com.parasoft.parabank.domain.Account.*;
 import com.parasoft.parabank.test.util.*;
 
+/**
+ * @req PAR-27
+ *
+ */
 public class AccountTest extends AbstractBeanTestCase<Account> {
     private static final BigDecimal ONE_HUNDRED_DOLLARS = new BigDecimal(100.00);
     @Test

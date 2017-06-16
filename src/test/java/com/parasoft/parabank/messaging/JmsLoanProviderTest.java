@@ -14,6 +14,10 @@ import org.springframework.oxm.*;
 import com.parasoft.parabank.domain.*;
 import com.parasoft.parabank.test.util.*;
 
+/**
+ * @req PAR-38
+ *
+ */
 public class JmsLoanProviderTest extends AbstractParaBankDataSourceTest {
     @Resource(name = "jmsLoanProvider")
     private JmsLoanProvider jmsLoanProvider;

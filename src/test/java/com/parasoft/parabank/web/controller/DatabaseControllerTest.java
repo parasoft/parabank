@@ -13,6 +13,12 @@ import org.springframework.web.servlet.*;
 import com.parasoft.parabank.domain.logic.*;
 import com.parasoft.parabank.test.util.*;
 
+/**
+ * @req PAR-22
+ * @req PAR-33
+ * @req PAR-44
+ *
+ */
 public class DatabaseControllerTest extends AbstractAdminOperationsTest {
     //    @Resource(name = "databaseController")
     //    private DatabaseController controller;

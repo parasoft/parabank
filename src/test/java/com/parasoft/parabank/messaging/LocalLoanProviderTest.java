@@ -12,6 +12,10 @@ import com.parasoft.parabank.domain.*;
 import com.parasoft.parabank.domain.logic.impl.*;
 import com.parasoft.parabank.test.util.*;
 
+/**
+ * @req PAR-39
+ *
+ */
 public class LocalLoanProviderTest extends AbstractParaBankDataSourceTest {
     private static final String TEST_PROVIDER = "Test Provider";
 

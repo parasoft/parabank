@@ -10,6 +10,10 @@ import org.junit.*;
 import com.parasoft.parabank.domain.logic.*;
 import com.parasoft.parabank.test.util.*;
 
+/**
+ * @req PAR-3
+ * @req PAR-5
+ */
 public class AdminFormTest extends AbstractParaBankTest {
     private static final String ENDPOINT = "http://parabank";
 

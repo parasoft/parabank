@@ -6,6 +6,10 @@ import org.junit.*;
 
 import com.parasoft.parabank.test.util.*;
 
+/**
+ * @req PAR-43
+ *
+ */
 public class ParaBankServiceConfigurationTest extends AbstractParaBankTest {
     private ParaBankServiceConfiguration configuration;
 

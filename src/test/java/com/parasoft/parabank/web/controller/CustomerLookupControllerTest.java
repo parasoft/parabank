@@ -12,6 +12,12 @@ import com.parasoft.parabank.domain.*;
 import com.parasoft.parabank.util.*;
 import com.parasoft.parabank.web.form.*;
 
+/**
+ * @req PAR-28
+ * @req PAR-29
+ * @req PAR-30
+ *
+ */
 public class CustomerLookupControllerTest extends AbstractValidatingBankControllerTest<CustomerLookupController> {
     /**
      * <DL>

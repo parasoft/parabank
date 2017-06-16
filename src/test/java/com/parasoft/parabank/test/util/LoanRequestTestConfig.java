@@ -22,6 +22,7 @@ import com.parasoft.parabank.domain.*;
  * </DL>
  *
  * @author dev - Nick Rapoport
+ * @req PAR-44
  *
  */
 public class LoanRequestTestConfig implements InitializingBean {

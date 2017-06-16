@@ -19,6 +19,12 @@ import com.parasoft.parabank.domain.logic.*;
 import com.parasoft.parabank.util.*;
 import com.parasoft.parabank.web.form.*;
 
+/**
+ * @req PAR-43
+ * @req PAR-26
+ * @req PAR-42
+ *
+ */
 // @SuppressWarnings({ "unchecked" })
 public class OpenAccountControllerTest extends AbstractBankControllerTest<OpenAccountController> {
     @Resource(name = "adminManager")

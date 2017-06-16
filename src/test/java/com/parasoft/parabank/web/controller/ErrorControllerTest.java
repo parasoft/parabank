@@ -10,6 +10,12 @@ import org.springframework.web.util.*;
 
 import com.parasoft.parabank.service.*;
 
+/**
+ * @req PAR-18
+ * @req PAR-29
+ * @req PAR-40
+ *
+ */
 public class ErrorControllerTest extends AbstractControllerTest<ErrorController> {
     private void assertError(final String message) throws Exception {
         //        final ModelAndView mav = controller.handleRequest(request, response);

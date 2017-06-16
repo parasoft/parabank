@@ -6,6 +6,10 @@ import java.math.*;
 
 import com.parasoft.parabank.domain.*;
 
+/**
+ * @req PAR-35
+ *
+ */
 public class DownPaymentLoanProcessorTest extends AbstractLoanProcessorTest<DownPaymentLoanProcessor> {
     @Override
     public void assertProcessor() {

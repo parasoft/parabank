@@ -14,6 +14,10 @@ import org.springframework.test.annotation.*;
 import com.parasoft.parabank.dao.*;
 import com.parasoft.parabank.test.util.*;
 
+/**
+ * @req PAR-12
+ *
+ */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class JdbcAdminDaoTest extends AbstractAdminOperationsTest {
     private static final String TEST_PARAMETER = "loanProcessorThreshold";

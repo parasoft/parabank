@@ -4,6 +4,10 @@ import org.springframework.validation.*;
 
 import com.parasoft.parabank.domain.*;
 
+/**
+ * @req PAR-35
+ *
+ */
 public class AddressValidatorTest extends AbstractValidatorTest {
     public AddressValidatorTest() {
         super(Address.class, new String[] { "street", "city", "state", "zipCode" });

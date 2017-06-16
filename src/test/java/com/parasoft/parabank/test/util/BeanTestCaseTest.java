@@ -4,6 +4,10 @@ import org.junit.*;
 
 import com.parasoft.parabank.util.*;
 
+/**
+ * @req PAR-44
+ *
+ */
 public class BeanTestCaseTest extends AbstractParaBankTest {
     @Test
     public void testEqualsContractMet() {

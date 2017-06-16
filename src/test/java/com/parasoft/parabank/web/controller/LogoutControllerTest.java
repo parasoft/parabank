@@ -10,6 +10,12 @@ import org.springframework.web.servlet.view.*;
 import com.parasoft.parabank.util.*;
 import com.parasoft.parabank.web.*;
 
+/**
+ * @req PAR-27
+ * @req PAR-45
+ * @req PAR-43
+ *
+ */
 public class LogoutControllerTest extends AbstractControllerTest<LogoutController> {
     @Override
     public void onSetUp() throws Exception {

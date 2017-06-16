@@ -18,6 +18,10 @@ import com.parasoft.parabank.domain.Transaction.*;
 import com.parasoft.parabank.domain.TransactionCriteria.*;
 import com.parasoft.parabank.test.util.*;
 
+/**
+ * @req PAR-20
+ *
+ */
 // @SuppressWarnings("deprecation")
 @Rollback
 public class JdbcTransactionDaoTest extends AbstractParaBankDataSourceTest {

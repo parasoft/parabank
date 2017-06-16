@@ -25,6 +25,12 @@ import com.parasoft.parabank.util.*;
 import com.parasoft.parabank.web.*;
 import com.parasoft.parabank.web.form.*;
 
+/**
+ * @req PAR-11
+ * @req PAR-12
+ * @req PAR-15
+ *
+ */
 @SuppressWarnings({ "unchecked" })
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:/**/test-context.xml" })

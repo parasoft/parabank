@@ -12,6 +12,10 @@ import org.springframework.test.annotation.*;
 import com.parasoft.parabank.domain.logic.*;
 import com.parasoft.parabank.test.util.*;
 
+/**
+ * @req PAR-41
+ *
+ */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ParaBankAdminServiceImplTest extends AbstractAdminOperationsTest {
     @Resource(name = "paraBankService")

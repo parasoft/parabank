@@ -12,6 +12,10 @@ import org.springframework.web.servlet.view.*;
 
 import com.parasoft.parabank.test.util.*;
 
+/**
+ * @req PAR-6
+ *
+ */
 public class TemplateViewResolverTest extends AbstractParaBankTest {
     @Resource(name = "viewResolver")
     private ViewResolver viewResolver;

@@ -10,6 +10,10 @@ import com.parasoft.parabank.domain.*;
 import com.parasoft.parabank.test.util.*;
 import com.parasoft.parabank.util.*;
 
+/**
+ * @req PAR-46
+ *
+ */
 public class LoginInterceptorTest extends AbstractParaBankTest {
     private static final String SERVLET_PATH = "/test.htm";
 

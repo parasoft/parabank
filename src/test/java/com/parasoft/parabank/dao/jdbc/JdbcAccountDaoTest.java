@@ -16,6 +16,10 @@ import com.parasoft.parabank.domain.*;
 import com.parasoft.parabank.domain.Account.*;
 import com.parasoft.parabank.test.util.*;
 
+/**
+ * @req PAR-11
+ *
+ */
 @Rollback
 public class JdbcAccountDaoTest extends AbstractParaBankDataSourceTest {
     //private static final int CUSTOMER_ID = 101;

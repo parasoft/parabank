@@ -9,6 +9,10 @@ import org.springframework.dao.*;
 
 import com.parasoft.parabank.test.util.*;
 
+/**
+ * @req PAR-19
+ *
+ */
 public class JdbcSequenceDaoTest extends AbstractParaBankDataSourceTest {
     @Resource(name = "sequenceDao")
     private JdbcSequenceDao sequenceDao;

@@ -9,6 +9,10 @@ import org.springframework.web.servlet.*;
 import com.parasoft.parabank.domain.*;
 import com.parasoft.parabank.util.*;
 
+/**
+ * @req PAR-34
+ * @req PAR-14
+ */
 public class TransactionControllerTest extends AbstractBankControllerTest<TransactionController> {
 
     @Override

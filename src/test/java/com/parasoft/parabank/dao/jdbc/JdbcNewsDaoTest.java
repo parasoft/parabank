@@ -13,6 +13,10 @@ import com.parasoft.parabank.dao.*;
 import com.parasoft.parabank.domain.*;
 import com.parasoft.parabank.test.util.*;
 
+/**
+ * @req PAR-14
+ *
+ */
 public class JdbcNewsDaoTest extends AbstractParaBankDataSourceTest {
     @Resource(name = "newsDao")
     private NewsDao newsDao;

@@ -6,6 +6,10 @@ import org.junit.*;
 
 import com.parasoft.parabank.test.util.*;
 
+/**
+ * @req PAR-26
+ *
+ */
 public class CustomerTest extends AbstractBeanTestCase<Customer> {
     @Test
     public void testGetFullName() {

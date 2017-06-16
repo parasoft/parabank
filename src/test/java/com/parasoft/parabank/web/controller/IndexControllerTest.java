@@ -17,6 +17,12 @@ import com.parasoft.parabank.domain.*;
 import com.parasoft.parabank.domain.logic.*;
 import com.parasoft.parabank.util.*;
 
+/**
+ * @req PAR-8
+ * @req PAR-9
+ * @req PAR-10
+ *
+ */
 @SuppressWarnings({ "unchecked" })
 public class IndexControllerTest extends AbstractControllerTest<IndexController> {
     @Resource(name = "newsManager")

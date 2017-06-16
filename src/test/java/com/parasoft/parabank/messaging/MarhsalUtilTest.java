@@ -13,6 +13,10 @@ import org.springframework.oxm.*;
 import com.parasoft.parabank.domain.*;
 import com.parasoft.parabank.test.util.*;
 
+/**
+ * @req PAR-40
+ *
+ */
 public class MarhsalUtilTest extends AbstractParaBankDataSourceTest {
     private static final String XML =
         "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><loanRequest xmlns:ns2=\"http://service.parabank.parasoft.com/\"><customerId>0</customerId></loanRequest>";

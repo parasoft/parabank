@@ -10,6 +10,10 @@ import com.parasoft.parabank.dao.*;
 import com.parasoft.parabank.domain.*;
 import com.parasoft.parabank.test.util.*;
 
+/**
+ * @req PAR-25
+ *
+ */
 public class InMemoryCustomerDaoTest extends AbstractParaBankTest {
     private static final int CUSTOMER1_ID = 1;
 

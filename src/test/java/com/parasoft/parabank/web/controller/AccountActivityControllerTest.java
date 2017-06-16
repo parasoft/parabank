@@ -15,6 +15,12 @@ import org.springframework.web.servlet.*;
 import com.parasoft.parabank.domain.*;
 import com.parasoft.parabank.util.*;
 
+/**
+ * @req PAR-8
+ * @req PAR-9
+ * @req PAR-10
+ *
+ */
 @SuppressWarnings({ "unchecked" })
 public class AccountActivityControllerTest extends AbstractBankControllerTest<AccountActivityController> {
     private void assertInvalidRequest(final boolean get) throws Exception {

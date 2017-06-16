@@ -9,6 +9,10 @@ import org.junit.*;
 import com.parasoft.parabank.dao.*;
 import com.parasoft.parabank.test.util.*;
 
+/**
+ * @req PAR-22
+ *
+ */
 public class InMemoryAdminDaoTest extends AbstractParaBankTest {
     private static final String NAME1 = "name1";
 

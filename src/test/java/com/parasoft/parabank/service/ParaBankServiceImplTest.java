@@ -17,6 +17,10 @@ import com.parasoft.parabank.domain.*;
 import com.parasoft.parabank.test.util.*;
 import com.parasoft.parabank.util.*;
 
+/**
+ * @req PAR-43
+ *
+ */
 @Transactional
 public class ParaBankServiceImplTest extends AbstractParaBankDataSourceTest {
     private static final Logger log = LoggerFactory.getLogger(ParaBankServiceImplTest.class);

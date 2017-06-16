@@ -8,6 +8,10 @@ import org.junit.*;
 
 import com.parasoft.parabank.test.util.*;
 
+/**
+ * @req PAR-30
+ *
+ */
 public class PositionTest extends AbstractBeanTestCase<Position> {
     private static final int POSITION1_ID = 1;
 

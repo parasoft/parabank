@@ -6,6 +6,10 @@ import org.junit.*;
 
 import com.parasoft.parabank.test.util.*;
 
+/**
+ * @req PAR-44
+ *
+ */
 public class UtilTest extends AbstractParaBankTest {
     @Test
     public void testEmpty() {

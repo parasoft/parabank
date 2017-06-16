@@ -5,6 +5,10 @@ import static org.junit.Assert.*;
 import java.math.*;
 
 import com.parasoft.parabank.domain.*;
+/**
+ * @req PAR-34
+ *
+ */
 public class CombinedLoanProcessorTest
 extends AbstractLoanProcessorTest<CombinedLoanProcessor> {
     @Override

@@ -14,6 +14,10 @@ import com.parasoft.parabank.domain.Transaction.*;
 import com.parasoft.parabank.domain.logic.*;
 import com.parasoft.parabank.test.util.*;
 
+/**
+ * @req PAR-33
+ *
+ */
 public class BankManagerImplTest extends AbstractParaBankTest {
     private static final int ACCOUNT1_ID = 1;
 

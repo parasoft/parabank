@@ -13,7 +13,7 @@ import org.junit.Test;
  * </DL>
  * 
  * @author nrapo - Nick Rapoport
- *
+ * @req PAR-39
  */
 
 public class CartServiceTest extends AbstractCartService {

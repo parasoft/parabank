@@ -15,6 +15,10 @@ import com.parasoft.parabank.domain.logic.*;
 import com.parasoft.parabank.domain.logic.impl.*;
 import com.parasoft.parabank.test.util.*;
 
+/**
+ * @req PAR-41
+ *
+ */
 public class LoanProcessorServiceImplTest extends AbstractParaBankDataSourceTest {
     private final static Logger log = LoggerFactory.getLogger(LoanProcessorServiceImplTest.class);
 

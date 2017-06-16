@@ -9,6 +9,10 @@ import com.parasoft.parabank.domain.*;
 import com.parasoft.parabank.domain.TransactionCriteria.*;
 import com.parasoft.parabank.test.util.*;
 
+/**
+ * @req PAR-37
+ *
+ */
 public class TransactionCriteriaValidatorTest extends AbstractParaBankTest {
     private Validator validator;
 

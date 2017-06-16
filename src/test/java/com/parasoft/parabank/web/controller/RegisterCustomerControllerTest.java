@@ -12,6 +12,12 @@ import com.parasoft.parabank.util.*;
 import com.parasoft.parabank.web.*;
 import com.parasoft.parabank.web.form.*;
 
+/**
+ * @req PAR-38
+ * @req PAR-29
+ * @req PAR-10
+ *
+ */
 public class RegisterCustomerControllerTest extends AbstractCustomerControllerTest<RegisterCustomerController> {
     private static final Logger log = LoggerFactory.getLogger(RegisterCustomerControllerTest.class);
     //    @Override

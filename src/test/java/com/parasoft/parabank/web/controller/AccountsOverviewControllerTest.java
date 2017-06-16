@@ -10,6 +10,12 @@ import org.springframework.web.servlet.*;
 
 import com.parasoft.parabank.domain.*;
 
+/**
+ * @req PAR-11
+ * @req PAR-9
+ * @req PAR-10
+ *
+ */
 @SuppressWarnings("unchecked")
 public class AccountsOverviewControllerTest extends AbstractBankControllerTest<AccountsOverviewController> {
     private void assertUserAccounts(final int id, final int expectedSize) throws Exception {

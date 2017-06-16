@@ -9,6 +9,10 @@ import org.junit.*;
 
 import com.parasoft.parabank.test.util.*;
 
+/**
+ * @req PAR-28
+ *
+ */
 public class HistoryPointTest extends AbstractBeanTestCase<HistoryPoint> {
     private static final String SYMBOL = "AAR";
 

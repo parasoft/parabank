@@ -18,6 +18,12 @@ import com.parasoft.parabank.domain.logic.impl.*;
 import com.parasoft.parabank.util.*;
 import com.parasoft.parabank.web.form.*;
 
+/**
+ * @req PAR-8
+ * @req PAR-6
+ * @req PAR-7
+ *
+ */
 public class AdminControllerTest extends AbstractValidatingBankControllerTest<AdminController> {
     @SuppressWarnings("unused")
     private static final Logger log = LoggerFactory.getLogger(RegisterCustomerControllerTest.class);

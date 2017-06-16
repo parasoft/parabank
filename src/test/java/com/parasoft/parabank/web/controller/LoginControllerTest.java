@@ -10,6 +10,12 @@ import org.springframework.web.servlet.view.*;
 import com.parasoft.parabank.util.*;
 import com.parasoft.parabank.web.*;
 
+/**
+ * @req PAR-3
+ * @req PAR-18
+ * @req PAR-39
+ *
+ */
 public class LoginControllerTest extends AbstractBankControllerTest<LoginController> {
 
     public void assertError(final String message) throws Exception {

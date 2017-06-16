@@ -10,7 +10,10 @@ import org.springframework.dao.*;
 import com.parasoft.parabank.dao.*;
 import com.parasoft.parabank.domain.*;
 import com.parasoft.parabank.test.util.*;
-
+/**
+ * @req PAR-13
+ *
+ */
 public class JdbcCustomerDaoTest extends AbstractParaBankDataSourceTest {
     private static final String FIRST_NAME = "Steve";
 

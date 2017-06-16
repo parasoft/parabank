@@ -7,6 +7,10 @@ import org.junit.*;
 import com.parasoft.parabank.domain.Account.*;
 import com.parasoft.parabank.test.util.*;
 
+/**
+ * @req PAR-45
+ *
+ */
 public class AccountTypeConverterTest extends AbstractParaBankTest {
     @Test
     public void testConvert() {
