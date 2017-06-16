@@ -30,7 +30,7 @@ if [ -f "set-vars.sh" ]; then
 	curl -k --user admin:admin -F file=@$2 https://localhost:8082/api/v2/dataCollector
 
 	echo **2/3** Processing Coverage
-	jtestcli -config "builtin://Calculate Application Coverage" -staticcoverage $APP_COVERAGE_DIR/monitor/static_coverage.xml -runtimecoverage $APP_COVERAGE_DIR/monitor/runtime_coverage -property build.id=$BUILD_ID -property dtp.project=$DTP_PROJECT -property report.coverage.images="Parabank-MT;Parabank-All" -report jtest-mt-cov -property session.tag="manual-win32_x86_64" > jtest-mt-cov-$RUN_TIME.log 2>&1
+	jtestcli -config "builtin://Calculate Application Coverage" -staticcoverage $APP_COVERAGE_DIR/monitor/static_coverage.xml -runtimecoverage $APP_COVERAGE_DIR/monitor/runtime_coverage -property build.id=$BUILD_ID -property dtp.project=$DTP_PROJECT -property report.coverage.images="Parabank-MT;Parabank-All" -report $REPORT_DIR/jtest-mt-cov -property session.tag="manual-win32_x86_64" > $LOG_DIR/jtest-mt-cov-$RUN_TIME.log 2>&1
 
 	echo **3/3** Cleaning up processed coverage data
 	rm $APP_COVERAGE_DIR/monitor/runtime_coverage/runtime_coverage*

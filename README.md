@@ -36,9 +36,9 @@ Otherwise several tests may fail, since there are a number of ports that are sha
 # Test scripts
 * All scripts exist in two flavors (.bat and .sh) for Windows and Linux respectively.
 * All scripts should be executed from project directory and require the following Parasoft products (and versions)
-** Parasoft DTP 5.3.0
-** Parasoft Jtest 10.3.0
-** Parasoft SOAtest 9.10.0
+** Parasoft DTP 5.3.2
+** Parasoft Jtest 10.3.2
+** Parasoft SOAtest 9.10.1
 
  Script                                |Description
 :------------------------------------- |:---
@@ -49,3 +49,8 @@ __jtest-sa-ut(.sh\|.bat)__             | Executes Parasoft Jtest DTP Engine for 
 __jtest-sa-ut-delta(.sh\|.bat)__       | Same operation as `jtest-sa-ut(.sh|.bat)` but used to rescan code based for localized changes - used for demonstration purposes when scanning 'dirty' branch
 __set-vars(.sh\|.bat)__                | Utility script called by other scripts to consistently set BUILD_ID and the Project name sent to DTP
 __soatest(.sh\|.bat)__                 | Executes Parasoft SOAtest API and Web functional tests (including integration with Jtest DTP Engine for monitoring code coverage)
+
+## Setup
+set-vars.(.sh\|.bat): setup JTEST_HOME and SOATEST_HOME environment variable before running any script.
+all reports will be stored under target/report/<build ID> directory.
+on Windows, 7zip must be installed (default to C:\Program Files\7-zip) to run deploy-jtest-monitor.bat script.

@@ -5,15 +5,17 @@ IF NOT EXIST set-vars.bat (
 ) 
 
 call set-vars
-
 echo ===================================================================
 echo Deploying Jtest Application Coverage Monitor for build.id=%BUILD_ID%
 echo ===================================================================
 
-echo **1/2** Cleaning up old coverage data
+echo **1/3** Generate montior package
+call mvn package jtest:monitor -Dmaven.test.failure.ignore=true > %LOG_DIR%\jtest-monitor-%RUN_TIME%.log
+
+echo **2/3** Cleaning up old coverage data
 call erase /Q /S %APP_COVERAGE_DIR%\monitor\runtime_coverage\*
 
-echo **2/2** Copy and unzip monitor package
+echo **3/3** Copy and unzip monitor package
 copy /Y target\jtest\monitor\monitor.zip %APP_COVERAGE_DIR%
 
 pushd %APP_COVERAGE_DIR%
