@@ -22,9 +22,9 @@ echo =========================================================================
 echo DTP Project: %DTP_PROJECT% (BUILD_ID:%BUILD_ID%, RUN_TIME:%RUN_TIME%)
 echo =========================================================================
 
-echo Setup DTP Engine & SOAtest intallation
-SET JTEST_HOME=
-SET SOATEST_HOME=
+echo Setup DTP Engine and SOAtest intallation
+SET JTEST_HOME=C:\Parasoft\jtest
+SET SOATEST_HOME=C:\Program Files\Parasoft\SOAtest\9.10
 
 IF "%JTEST_HOME%"=="" (
 	echo JTEST_HOME is not set

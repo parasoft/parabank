@@ -4,23 +4,26 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.hamcrest.collection.IsIterableWithSize.iterableWithSize;
 
-import java.math.BigDecimal;
-import java.util.List;
+import java.math.*;
 
-import org.junit.Test;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.servlet.ModelAndView;
+import org.junit.*;
+import org.junit.runner.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.context.*;
+import org.springframework.http.*;
+import org.springframework.test.annotation.*;
+import org.springframework.test.context.*;
+import org.springframework.test.context.junit4.*;
+import org.springframework.test.context.support.*;
+import org.springframework.test.context.transaction.*;
+import org.springframework.test.web.servlet.*;
+import org.springframework.test.web.servlet.setup.*;
+import org.springframework.transaction.annotation.*;
 
-import com.parasoft.parabank.domain.Account;
-import com.parasoft.parabank.domain.Address;
-import com.parasoft.parabank.domain.Payee;
-import com.parasoft.parabank.domain.validator.AddressValidator;
-import com.parasoft.parabank.domain.validator.PayeeValidator;
-import com.parasoft.parabank.util.Constants;
-import com.parasoft.parabank.web.form.BillPayForm;
+import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.util.*;
+import com.parasoft.parabank.web.*;
+import com.parasoft.parabank.web.form.*;
 
 /**
  * @req PAR-11
@@ -92,7 +95,7 @@ public class BillPayControllerTest {
      * This test should verify that a customer who has an ID
      */
     @Test
-    public void testHandleGetRequest() throws Exception
+    public void testHandleGetRequest() throws Exception 
     {
         Customer customer = new Customer();
         customer.setId(12212);
@@ -131,7 +134,7 @@ public class BillPayControllerTest {
     @Test
     @Transactional
     @Rollback
-    public void testValidate() throws Exception
+    public void testValidate() throws Exception 
     {
         BillPayForm form = getBillPayForm();
         form.getPayee().setPhoneNumber(null);
@@ -170,9 +173,3 @@ public class BillPayControllerTest {
                 .andExpect(model().attributeHasFieldErrorCode(Constants.BILLPAYFORM, "verifyAccount", "error.account.number.mismatch"));
     }
 }
-
-//"name", "error.payee.name.required"
-//"phoneNumber", "error.phone.number.required"
-//"accountNumber", "error.account.number.required"
-//"amount", "error.amount.empty"
-//"verifyAccount", "error.account.number.mismatch"

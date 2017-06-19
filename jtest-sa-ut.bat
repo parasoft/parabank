@@ -1,6 +1,6 @@
 @echo off
 IF NOT EXIST set-vars.bat (
-  echo "Incorrect usage ... running script in wrong directory, cannot find setvars.bat"
+  echo "Incorrect usage ... running script in wrong directory, cannot find set-vars.bat"
   GOTO End
 )
 call set-vars
