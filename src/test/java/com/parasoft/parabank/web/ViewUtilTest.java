@@ -2,13 +2,13 @@ package com.parasoft.parabank.web;
 
 import static org.junit.Assert.*;
 
-import java.util.*;
+import java.util.Map;
 
-import org.junit.*;
-import org.springframework.test.web.*;
-import org.springframework.web.servlet.*;
+import org.junit.Test;
+import org.springframework.test.web.ModelAndViewAssert;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.parasoft.parabank.test.util.*;
+import com.parasoft.parabank.test.util.AbstractParaBankTest;
 
 /**
  * @req PAR-5
@@ -19,6 +19,10 @@ public class ViewUtilTest extends AbstractParaBankTest {
 
     private static final String[] PARAMS = new String[] { "param1", "param2" };
 
+    /**
+     * @req PAR-11
+     * @req PAR-21
+     */
     @Test
     public void testCreateErrorView() {
         ModelAndView mav = ViewUtil.createErrorView(ERROR_MESSAGE);

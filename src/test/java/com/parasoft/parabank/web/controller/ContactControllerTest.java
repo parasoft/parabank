@@ -2,19 +2,21 @@ package com.parasoft.parabank.web.controller;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
-import org.springframework.mock.web.*;
-import org.springframework.test.annotation.*;
-import org.springframework.transaction.annotation.*;
-import org.springframework.web.servlet.*;
+import org.junit.Test;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.parasoft.parabank.util.*;
-import com.parasoft.parabank.web.form.*;
+import com.parasoft.parabank.util.Constants;
+import com.parasoft.parabank.web.form.ContactForm;
 
 /**
  * @req PAR-12
  * @req PAR-15
  * @req PAR-16
+ * @req PAR-41
  *
  */
 public class ContactControllerTest extends AbstractValidatingBankControllerTest<ContactController> {

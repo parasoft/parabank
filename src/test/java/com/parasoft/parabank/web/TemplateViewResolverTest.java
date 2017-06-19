@@ -2,15 +2,17 @@ package com.parasoft.parabank.web;
 
 import static org.junit.Assert.*;
 
-import java.util.*;
+import java.util.Locale;
+import java.util.Map;
 
-import javax.annotation.*;
+import javax.annotation.Resource;
 
-import org.junit.*;
-import org.springframework.web.servlet.*;
-import org.springframework.web.servlet.view.*;
+import org.junit.Test;
+import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.view.AbstractView;
 
-import com.parasoft.parabank.test.util.*;
+import com.parasoft.parabank.test.util.AbstractParaBankTest;
 
 /**
  * @req PAR-6
@@ -24,6 +26,10 @@ public class TemplateViewResolverTest extends AbstractParaBankTest {
         this.viewResolver = viewResolver;
     }
 
+    /**
+     * @req PAR-10
+     * @throws Exception
+     */
     @Test
     public void testResolveViewName() throws Exception {
         final View view = viewResolver.resolveViewName("test", Locale.getDefault());

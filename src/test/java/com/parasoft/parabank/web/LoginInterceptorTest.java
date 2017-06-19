@@ -2,13 +2,16 @@ package com.parasoft.parabank.web;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
-import org.springframework.mock.web.*;
-import org.springframework.web.servlet.*;
+import org.junit.Test;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.mock.web.MockHttpSession;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.ModelAndViewDefiningException;
 
-import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.test.util.*;
-import com.parasoft.parabank.util.*;
+import com.parasoft.parabank.domain.Customer;
+import com.parasoft.parabank.test.util.AbstractParaBankTest;
+import com.parasoft.parabank.util.Constants;
 
 /**
  * @req PAR-46
@@ -44,6 +47,10 @@ public class LoginInterceptorTest extends AbstractParaBankTest {
         response = new MockHttpServletResponse();
     }
 
+    /**
+     * @req PAR-2
+     * @throws Exception
+     */
     @Test
     public void testLoginInterceptor() throws Exception {
         final LoginInterceptor interceptor = new LoginInterceptor();

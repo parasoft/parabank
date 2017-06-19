@@ -2,13 +2,14 @@ package com.parasoft.parabank.web.controller;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
-import org.springframework.mock.web.*;
-import org.springframework.web.servlet.*;
-import org.springframework.web.servlet.view.*;
+import org.junit.Test;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
-import com.parasoft.parabank.util.*;
-import com.parasoft.parabank.web.*;
+import com.parasoft.parabank.util.Constants;
+import com.parasoft.parabank.web.UserSession;
 
 /**
  * @req PAR-3

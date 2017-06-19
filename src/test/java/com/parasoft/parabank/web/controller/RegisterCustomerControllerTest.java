@@ -2,17 +2,20 @@ package com.parasoft.parabank.web.controller;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
-import org.slf4j.*;
-import org.springframework.mock.web.*;
-import org.springframework.web.servlet.*;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.util.*;
-import com.parasoft.parabank.web.*;
-import com.parasoft.parabank.web.form.*;
+import com.parasoft.parabank.domain.Customer;
+import com.parasoft.parabank.util.Constants;
+import com.parasoft.parabank.web.UserSession;
+import com.parasoft.parabank.web.form.CustomerForm;
 
 /**
+ * @req PAR-3
  * @req PAR-38
  * @req PAR-29
  * @req PAR-10
@@ -36,7 +39,6 @@ public class RegisterCustomerControllerTest extends AbstractCustomerControllerTe
     /** {@inheritDoc} */
     @Override
     public void onSetUp() throws Exception {
-        // TODO Auto-generated method stub
         super.onSetUp();
         setPath("/register.htm");
         setFormName(Constants.CUSTOMERFORM);

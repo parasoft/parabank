@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Bookstore Web Service implementation
  */
 @WebService(
-        endpointInterface = "com.parasoft.bookstore.ICartService",
+        endpointInterface = "com.parasoft.bookstore.ICartService", 
         serviceName = "Bookstore")
 public class CartService implements ICartService {
     /**
@@ -26,7 +26,7 @@ public class CartService implements ICartService {
     }
 
     private static final long timeoutInMilliseconds = 1200000; // 20 minutes
-    private static final Map<Integer, TempBook> addedBookIds =
+    private static final Map<Integer, TempBook> addedBookIds = 
         Collections.synchronizedMap(new ConcurrentHashMap<Integer, TempBook>());
     private final CartManager cart = new CartManager();
     private int invocationCounter = 0;
@@ -54,8 +54,8 @@ public class CartService implements ICartService {
         return new DisplayOrder(cart.addExistingItemToCart(cartId, newOrder), cartId);
     }
 
-    /*
-     * (non-Javadoc)
+    /**
+     *
      * @see com.parasoft.parabank.store.ICart#updateItemInCart(int, int, int)
      */
     @Override
@@ -69,19 +69,19 @@ public class CartService implements ICartService {
             throw new Exception("Did not update order with cartId " + cartId +
                    ", no orders were submitted.");
         }
-
+        
         return new DisplayOrder(
                 cart.updateExistingItem(cartId, itemId, quantity), cartId);
     }
-
-    /*
-     * (non-Javadoc)
+    
+    /**
+     *
      * @see com.parasoft.parabank.store.ICart#getItemByTitle(java.lang.String)
      */
     @Override
     public Book[] getItemByTitle(String title) throws Exception {
         ++invocationCounter;
-        Book[] books = BookStoreDB.getByTitleLike(title != null? title : "No Title");
+        Book[] books = BookStoreDB.getByTitleLike(title != null? title : "");
         for (Book b : books) {
             b.inflatePrice(new BigDecimal(invocationCounter/5));
         }

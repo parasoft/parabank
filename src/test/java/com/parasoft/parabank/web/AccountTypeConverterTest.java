@@ -2,10 +2,10 @@ package com.parasoft.parabank.web;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
+import org.junit.Test;
 
-import com.parasoft.parabank.domain.Account.*;
-import com.parasoft.parabank.test.util.*;
+import com.parasoft.parabank.domain.Account.AccountType;
+import com.parasoft.parabank.test.util.AbstractParaBankTest;
 
 /**
  * @req PAR-45
