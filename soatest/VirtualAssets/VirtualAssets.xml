@@ -1,0 +1,47 @@
+<stubs version="2"><jms providerURL="" initialContext="" useReplyTo="true" type="" messageSelector="" queueConnectionFactory="" destinationQueue="" replyToQueue="" topicConnectionFactory="" publishTopic="" subscribeTopic="" username="" password="" workerCount="1">
+<jmsProperties>
+</jmsProperties>
+<jmsSharedSettings xmlVersion="5" productVersion="0">
+ <JMSSharedSettings className="com.parasoft.net.jms.JMSSharedSettings" version="1.1">
+  <putConnectionId>null</putConnectionId>
+  <getConnectionId>null</getConnectionId>
+ </JMSSharedSettings>
+</jmsSharedSettings></jms><mq queueManager="" channel="" putQueue="" getQueue="" mq_host="" applicationIdData="" mq_port="1414" useReplyTo="false" username="" password="AA==" ccdtFile="" settingsMode="default" workerCount="1"><mqSharedSettings xmlVersion="5" productVersion="0">
+ <MQSharedSettings className="com.parasoft.net.mq.MQSharedSettings" version="1.1">
+  <putManagerId>null</putManagerId>
+  <getManagerId>null</getManagerId>
+ </MQSharedSettings>
+</mqSharedSettings></mq><custom selected="-1"></custom><reporting xmlVersion="5" productVersion="0">
+ <ReportingConfiguration className="com.parasoft.stub.report.ReportingConfiguration" version="1.5">
+  <JMSConnectionSelector className="com.parasoft.net.jms.JMSConnectionSelector" version="1.2">
+   <BuiltinJMSProviderSettings className="com.parasoft.net.jms.BuiltinJMSProviderSettings" version="1.2.5.2">
+    <password>AgAAAAA=</password>
+    <uri>vm://ParasoftJDBCBroker?create=false</uri>
+    <initialContext>org.apache.activemq.jndi.ActiveMQInitialContextFactory</initialContext>
+    <connectionFactory>ConnectionFactory</connectionFactory>
+    <destination>PARASOFT_SERVER_JDBC</destination>
+   </BuiltinJMSProviderSettings>
+  </JMSConnectionSelector>
+  <JMSConnectionSelector className="com.parasoft.net.jms.JMSConnectionSelector" version="1.2">
+   <BuiltinJMSProviderSettings className="com.parasoft.net.jms.BuiltinJMSProviderSettings" version="1.2.5.2">
+    <password>AgAAAAA=</password>
+    <uri>vm://ParasoftStatisticsBroker?create=false</uri>
+    <initialContext>org.apache.activemq.jndi.ActiveMQInitialContextFactory</initialContext>
+    <connectionFactory>ConnectionFactory</connectionFactory>
+    <destination>PARASOFT_SERVER_STATISTICS</destination>
+   </BuiltinJMSProviderSettings>
+  </JMSConnectionSelector>
+  <JMSConnectionSelector className="com.parasoft.net.jms.JMSConnectionSelector" version="1.2">
+   <BuiltinJMSProviderSettings className="com.parasoft.net.jms.BuiltinJMSProviderSettings" version="1.2.5.2">
+    <password>AgAAAAA=</password>
+    <uri>vm://ParasoftMonitoringBroker?create=false&amp;jms.optimizeAcknowledge=true&amp;jms.copyMessageOnSend=false&amp;jms.useAsyncSend=true&amp;jms.dispatchAsync=true&amp;jms.alwaysSessionAsync=false</uri>
+    <initialContext>org.apache.activemq.jndi.ActiveMQInitialContextFactory</initialContext>
+    <connectionFactory>ConnectionFactory</connectionFactory>
+    <destination>PARASOFT_SERVER_EVENTS</destination>
+   </BuiltinJMSProviderSettings>
+  </JMSConnectionSelector>
+ </ReportingConfiguration>
+</reporting><connectionConfigurations xmlVersion="5" productVersion="0">
+ <ConnectionConfigurations className="com.parasoft.stub.connection.ConnectionConfigurations" version="1.2">
+ </ConnectionConfigurations>
+</connectionConfigurations></stubs>

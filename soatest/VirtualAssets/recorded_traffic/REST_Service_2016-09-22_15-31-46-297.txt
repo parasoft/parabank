@@ -1,0 +1,620 @@
+GET /parabank/services/bank/login/john/demo HTTP/1.1
+cache-control: no-cache
+connection: keep-alive
+host: localhost:9080
+accept: application/json
+parasoftproxyhops: 1
+user-agent: Java/1.8.0_45
+parasoftproxypath: REST Service-Proxy /parabank/services/bank
+pragma: no-cache
+
+
+
+HTTP/1.1 200 OK
+Date: Thu, 22 Sep 2016 22:33:11 GMT
+Content-Length: 200
+Content-Type: application/json
+Server: Apache-Coyote/1.1
+
+{"customer":{"id":12212,"firstName":"John","lastName":"Smith","address":{"street":"1431 Main St","city":"Beverly Hills","state":"CA","zipCode":90210},"phoneNumber":"310-447-4121","ssn":"622-11-9999"}}
+
+GET /parabank/services/bank/customers/12212/accounts HTTP/1.1
+cache-control: no-cache
+connection: keep-alive
+host: localhost:9080
+accept: application/json
+parasoftproxyhops: 1
+user-agent: Java/1.8.0_45
+parasoftproxypath: REST Service-Proxy /parabank/services/bank
+pragma: no-cache
+
+
+
+HTTP/1.1 200 OK
+Date: Thu, 22 Sep 2016 22:33:11 GMT
+Content-Length: 1070
+Content-Type: application/json
+Server: Apache-Coyote/1.1
+
+{"account":[{"id":13566,"customerId":12212,"type":"LOAN","balance":"9977.00"},{"id":13899,"customerId":12212,"type":"LOAN","balance":"9999.00"},{"id":13455,"customerId":12212,"type":"LOAN","balance":"9955.00"},{"id":14010,"customerId":12212,"type":"LOAN","balance":"9999.00"},{"id":14121,"customerId":12212,"type":"LOAN","balance":"9999.00"},{"id":14232,"customerId":12212,"type":"LOAN","balance":"9999.00"},{"id":14343,"customerId":12212,"type":"LOAN","balance":"9999.00"},{"id":14454,"customerId":12212,"type":"LOAN","balance":"9999.00"},{"id":14565,"customerId":12212,"type":"LOAN","balance":"9999.00"},{"id":14676,"customerId":12212,"type":"LOAN","balance":"9999.00"},{"id":13344,"customerId":12212,"type":"CHECKING","balance":4824.93},{"id":14787,"customerId":12212,"type":"LOAN","balance":"666.00"},{"id":13677,"customerId":12212,"type":"LOAN","balance":"9932.00"},{"id":14898,"customerId":12212,"type":"LOAN","balance":"1000.00"},{"id":15009,"customerId":12212,"type":"LOAN","balance":"1000.00"},{"id":13788,"customerId":12212,"type":"LOAN","balance":"9979.00"}]}
+
+POST /parabank/services/bank/requestLoan?amount=9999&customerId=12212&downPayment=22&fromAccountId=13344 HTTP/1.1
+cache-control: no-cache
+connection: keep-alive
+host: localhost:9080
+accept: application/json
+parasoftproxyhops: 1
+user-agent: Java/1.8.0_45
+parasoftproxypath: REST Service-Proxy /parabank/services/bank
+pragma: no-cache
+
+
+
+HTTP/1.1 200 OK
+Date: Thu, 22 Sep 2016 22:33:18 GMT
+Content-Length: 163
+Content-Type: application/json
+Server: Apache-Coyote/1.1
+
+{"ns2.loanResponse":{"responseDate":"2016-09-22T15:33:18.399-07:00","loanProviderName":"Wealth Securities Dynamic Loans (WSDL)","approved":true,"accountId":15120}}
+
+GET /parabank/services/bank/accounts/15120 HTTP/1.1
+cache-control: no-cache
+connection: keep-alive
+host: localhost:9080
+accept: application/json
+parasoftproxyhops: 1
+user-agent: Java/1.8.0_45
+parasoftproxypath: REST Service-Proxy /parabank/services/bank
+pragma: no-cache
+
+
+
+HTTP/1.1 200 OK
+Date: Thu, 22 Sep 2016 22:33:19 GMT
+Content-Length: 77
+Content-Type: application/json
+Server: Apache-Coyote/1.1
+
+{"account":{"id":15120,"customerId":12212,"type":"LOAN","balance":"9999.00"}}
+
+GET /parabank/services/bank/accounts/15120/transactions HTTP/1.1
+cache-control: no-cache
+connection: keep-alive
+host: localhost:9080
+accept: application/json
+parasoftproxyhops: 1
+user-agent: Java/1.8.0_45
+parasoftproxypath: REST Service-Proxy /parabank/services/bank
+pragma: no-cache
+
+
+
+HTTP/1.1 200 OK
+Date: Thu, 22 Sep 2016 22:33:20 GMT
+Content-Length: 18
+Content-Type: application/json
+Server: Apache-Coyote/1.1
+
+{"transaction":[]}
+
+GET /parabank/services/bank/customers/12212/accounts HTTP/1.1
+cache-control: no-cache
+connection: keep-alive
+host: localhost:9080
+accept: application/json
+parasoftproxyhops: 1
+user-agent: Java/1.8.0_45
+parasoftproxypath: REST Service-Proxy /parabank/services/bank
+pragma: no-cache
+
+
+
+HTTP/1.1 200 OK
+Date: Thu, 22 Sep 2016 22:33:21 GMT
+Content-Length: 1136
+Content-Type: application/json
+Server: Apache-Coyote/1.1
+
+{"account":[{"id":13566,"customerId":12212,"type":"LOAN","balance":"9977.00"},{"id":13899,"customerId":12212,"type":"LOAN","balance":"9999.00"},{"id":13455,"customerId":12212,"type":"LOAN","balance":"9955.00"},{"id":14010,"customerId":12212,"type":"LOAN","balance":"9999.00"},{"id":14121,"customerId":12212,"type":"LOAN","balance":"9999.00"},{"id":14232,"customerId":12212,"type":"LOAN","balance":"9999.00"},{"id":14343,"customerId":12212,"type":"LOAN","balance":"9999.00"},{"id":14454,"customerId":12212,"type":"LOAN","balance":"9999.00"},{"id":14565,"customerId":12212,"type":"LOAN","balance":"9999.00"},{"id":14676,"customerId":12212,"type":"LOAN","balance":"9999.00"},{"id":14787,"customerId":12212,"type":"LOAN","balance":"666.00"},{"id":13677,"customerId":12212,"type":"LOAN","balance":"9932.00"},{"id":14898,"customerId":12212,"type":"LOAN","balance":"1000.00"},{"id":15009,"customerId":12212,"type":"LOAN","balance":"1000.00"},{"id":13788,"customerId":12212,"type":"LOAN","balance":"9979.00"},{"id":15120,"customerId":12212,"type":"LOAN","balance":"9999.00"},{"id":13344,"customerId":12212,"type":"CHECKING","balance":4802.93}]}
+
+GET /parabank/services/bank/accounts/13344 HTTP/1.1
+cache-control: no-cache
+connection: keep-alive
+host: localhost:9080
+accept: application/json
+parasoftproxyhops: 1
+user-agent: Java/1.8.0_45
+parasoftproxypath: REST Service-Proxy /parabank/services/bank
+pragma: no-cache
+
+
+
+HTTP/1.1 200 OK
+Date: Thu, 22 Sep 2016 22:33:22 GMT
+Content-Length: 79
+Content-Type: application/json
+Server: Apache-Coyote/1.1
+
+{"account":{"id":13344,"customerId":12212,"type":"CHECKING","balance":4802.93}}
+
+GET /parabank/services/bank/accounts/13344/transactions HTTP/1.1
+cache-control: no-cache
+connection: keep-alive
+host: localhost:9080
+accept: application/json
+parasoftproxyhops: 1
+user-agent: Java/1.8.0_45
+parasoftproxypath: REST Service-Proxy /parabank/services/bank
+pragma: no-cache
+
+
+
+HTTP/1.1 200 OK
+Date: Thu, 22 Sep 2016 22:33:22 GMT
+Content-Length: 1457
+Content-Type: application/json
+Server: Apache-Coyote/1.1
+
+{"transaction":[{"id":14476,"accountId":13344,"type":"Debit","date":"2016-09-22T00:00:00-07:00","amount":"22.00","description":"Down Payment for Loan # 13455"},{"id":14698,"accountId":13344,"type":"Debit","date":"2016-09-22T00:00:00-07:00","amount":"22.00","description":"Down Payment for Loan # 13677"},{"id":15031,"accountId":13344,"type":"Debit","date":"2016-09-22T00:00:00-07:00","amount":"22.00","description":"Down Payment for Loan # 14010"},{"id":15142,"accountId":13344,"type":"Debit","date":"2016-09-22T00:00:00-07:00","amount":"22.00","description":"Down Payment for Loan # 14121"},{"id":15253,"accountId":13344,"type":"Debit","date":"2016-09-22T00:00:00-07:00","amount":"22.00","description":"Down Payment for Loan # 14232"},{"id":15364,"accountId":13344,"type":"Debit","date":"2016-09-22T00:00:00-07:00","amount":"22.00","description":"Down Payment for Loan # 14343"},{"id":15475,"accountId":13344,"type":"Debit","date":"2016-09-22T00:00:00-07:00","amount":"22.00","description":"Down Payment for Loan # 14454"},{"id":15586,"accountId":13344,"type":"Debit","date":"2016-09-22T00:00:00-07:00","amount":"22.00","description":"Down Payment for Loan # 14565"},{"id":15697,"accountId":13344,"type":"Debit","date":"2016-09-22T00:00:00-07:00","amount":"22.00","description":"Down Payment for Loan # 14676"},{"id":16141,"accountId":13344,"type":"Debit","date":"2016-09-22T00:00:00-07:00","amount":"22.00","description":"Down Payment for Loan # 15120"}]}
+
+GET /parabank/services/bank/login/john/demo HTTP/1.1
+cache-control: no-cache
+connection: keep-alive
+host: localhost:9080
+accept: application/json
+parasoftproxyhops: 1
+user-agent: Java/1.8.0_45
+parasoftproxypath: REST Service-Proxy /parabank/services/bank
+pragma: no-cache
+
+
+
+HTTP/1.1 200 OK
+Date: Thu, 22 Sep 2016 22:33:29 GMT
+Content-Length: 200
+Content-Type: application/json
+Server: Apache-Coyote/1.1
+
+{"customer":{"id":12212,"firstName":"John","lastName":"Smith","address":{"street":"1431 Main St","city":"Beverly Hills","state":"CA","zipCode":90210},"phoneNumber":"310-447-4121","ssn":"622-11-9999"}}
+
+GET /parabank/services/bank/customers/12212/accounts HTTP/1.1
+cache-control: no-cache
+connection: keep-alive
+host: localhost:9080
+accept: application/json
+parasoftproxyhops: 1
+user-agent: Java/1.8.0_45
+parasoftproxypath: REST Service-Proxy /parabank/services/bank
+pragma: no-cache
+
+
+
+HTTP/1.1 200 OK
+Date: Thu, 22 Sep 2016 22:33:29 GMT
+Content-Length: 1136
+Content-Type: application/json
+Server: Apache-Coyote/1.1
+
+{"account":[{"id":13566,"customerId":12212,"type":"LOAN","balance":"9977.00"},{"id":13899,"customerId":12212,"type":"LOAN","balance":"9999.00"},{"id":13455,"customerId":12212,"type":"LOAN","balance":"9955.00"},{"id":14010,"customerId":12212,"type":"LOAN","balance":"9999.00"},{"id":14121,"customerId":12212,"type":"LOAN","balance":"9999.00"},{"id":14232,"customerId":12212,"type":"LOAN","balance":"9999.00"},{"id":14343,"customerId":12212,"type":"LOAN","balance":"9999.00"},{"id":14454,"customerId":12212,"type":"LOAN","balance":"9999.00"},{"id":14565,"customerId":12212,"type":"LOAN","balance":"9999.00"},{"id":14676,"customerId":12212,"type":"LOAN","balance":"9999.00"},{"id":14787,"customerId":12212,"type":"LOAN","balance":"666.00"},{"id":13677,"customerId":12212,"type":"LOAN","balance":"9932.00"},{"id":14898,"customerId":12212,"type":"LOAN","balance":"1000.00"},{"id":15009,"customerId":12212,"type":"LOAN","balance":"1000.00"},{"id":13788,"customerId":12212,"type":"LOAN","balance":"9979.00"},{"id":15120,"customerId":12212,"type":"LOAN","balance":"9999.00"},{"id":13344,"customerId":12212,"type":"CHECKING","balance":4802.93}]}
+
+POST /parabank/services/bank/requestLoan?amount=9999&customerId=12212&downPayment=22&fromAccountId=13344 HTTP/1.1
+cache-control: no-cache
+connection: keep-alive
+host: localhost:9080
+accept: application/json
+parasoftproxyhops: 1
+user-agent: Java/1.8.0_45
+parasoftproxypath: REST Service-Proxy /parabank/services/bank
+pragma: no-cache
+
+
+
+HTTP/1.1 200 OK
+Date: Thu, 22 Sep 2016 22:33:33 GMT
+Content-Length: 163
+Content-Type: application/json
+Server: Apache-Coyote/1.1
+
+{"ns2.loanResponse":{"responseDate":"2016-09-22T15:33:33.605-07:00","loanProviderName":"Wealth Securities Dynamic Loans (WSDL)","approved":true,"accountId":15231}}
+
+GET /parabank/services/bank/accounts/15231 HTTP/1.1
+cache-control: no-cache
+connection: keep-alive
+host: localhost:9080
+accept: application/json
+parasoftproxyhops: 1
+user-agent: Java/1.8.0_45
+parasoftproxypath: REST Service-Proxy /parabank/services/bank
+pragma: no-cache
+
+
+
+HTTP/1.1 200 OK
+Date: Thu, 22 Sep 2016 22:33:34 GMT
+Content-Length: 77
+Content-Type: application/json
+Server: Apache-Coyote/1.1
+
+{"account":{"id":15231,"customerId":12212,"type":"LOAN","balance":"9999.00"}}
+
+GET /parabank/services/bank/accounts/15231/transactions HTTP/1.1
+cache-control: no-cache
+connection: keep-alive
+host: localhost:9080
+accept: application/json
+parasoftproxyhops: 1
+user-agent: Java/1.8.0_45
+parasoftproxypath: REST Service-Proxy /parabank/services/bank
+pragma: no-cache
+
+
+
+HTTP/1.1 200 OK
+Date: Thu, 22 Sep 2016 22:33:35 GMT
+Content-Length: 18
+Content-Type: application/json
+Server: Apache-Coyote/1.1
+
+{"transaction":[]}
+
+GET /parabank/services/bank/customers/12212/accounts HTTP/1.1
+cache-control: no-cache
+connection: keep-alive
+host: localhost:9080
+accept: application/json
+parasoftproxyhops: 1
+user-agent: Java/1.8.0_45
+parasoftproxypath: REST Service-Proxy /parabank/services/bank
+pragma: no-cache
+
+
+
+HTTP/1.1 200 OK
+Date: Thu, 22 Sep 2016 22:33:35 GMT
+Content-Length: 1202
+Content-Type: application/json
+Server: Apache-Coyote/1.1
+
+{"account":[{"id":13566,"customerId":12212,"type":"LOAN","balance":"9977.00"},{"id":13899,"customerId":12212,"type":"LOAN","balance":"9999.00"},{"id":13455,"customerId":12212,"type":"LOAN","balance":"9955.00"},{"id":14010,"customerId":12212,"type":"LOAN","balance":"9999.00"},{"id":14121,"customerId":12212,"type":"LOAN","balance":"9999.00"},{"id":14232,"customerId":12212,"type":"LOAN","balance":"9999.00"},{"id":14343,"customerId":12212,"type":"LOAN","balance":"9999.00"},{"id":14454,"customerId":12212,"type":"LOAN","balance":"9999.00"},{"id":14565,"customerId":12212,"type":"LOAN","balance":"9999.00"},{"id":14676,"customerId":12212,"type":"LOAN","balance":"9999.00"},{"id":14787,"customerId":12212,"type":"LOAN","balance":"666.00"},{"id":13677,"customerId":12212,"type":"LOAN","balance":"9932.00"},{"id":14898,"customerId":12212,"type":"LOAN","balance":"1000.00"},{"id":15009,"customerId":12212,"type":"LOAN","balance":"1000.00"},{"id":13788,"customerId":12212,"type":"LOAN","balance":"9979.00"},{"id":15120,"customerId":12212,"type":"LOAN","balance":"9999.00"},{"id":15231,"customerId":12212,"type":"LOAN","balance":"9999.00"},{"id":13344,"customerId":12212,"type":"CHECKING","balance":4780.93}]}
+
+GET /parabank/services/bank/accounts/13344 HTTP/1.1
+cache-control: no-cache
+connection: keep-alive
+host: localhost:9080
+accept: application/json
+parasoftproxyhops: 1
+user-agent: Java/1.8.0_45
+parasoftproxypath: REST Service-Proxy /parabank/services/bank
+pragma: no-cache
+
+
+
+HTTP/1.1 200 OK
+Date: Thu, 22 Sep 2016 22:33:36 GMT
+Content-Length: 79
+Content-Type: application/json
+Server: Apache-Coyote/1.1
+
+{"account":{"id":13344,"customerId":12212,"type":"CHECKING","balance":4780.93}}
+
+GET /parabank/services/bank/accounts/13344/transactions HTTP/1.1
+cache-control: no-cache
+connection: keep-alive
+host: localhost:9080
+accept: application/json
+parasoftproxyhops: 1
+user-agent: Java/1.8.0_45
+parasoftproxypath: REST Service-Proxy /parabank/services/bank
+pragma: no-cache
+
+
+
+HTTP/1.1 200 OK
+Date: Thu, 22 Sep 2016 22:33:37 GMT
+Content-Length: 1601
+Content-Type: application/json
+Server: Apache-Coyote/1.1
+
+{"transaction":[{"id":14476,"accountId":13344,"type":"Debit","date":"2016-09-22T00:00:00-07:00","amount":"22.00","description":"Down Payment for Loan # 13455"},{"id":14698,"accountId":13344,"type":"Debit","date":"2016-09-22T00:00:00-07:00","amount":"22.00","description":"Down Payment for Loan # 13677"},{"id":15031,"accountId":13344,"type":"Debit","date":"2016-09-22T00:00:00-07:00","amount":"22.00","description":"Down Payment for Loan # 14010"},{"id":15142,"accountId":13344,"type":"Debit","date":"2016-09-22T00:00:00-07:00","amount":"22.00","description":"Down Payment for Loan # 14121"},{"id":15253,"accountId":13344,"type":"Debit","date":"2016-09-22T00:00:00-07:00","amount":"22.00","description":"Down Payment for Loan # 14232"},{"id":15364,"accountId":13344,"type":"Debit","date":"2016-09-22T00:00:00-07:00","amount":"22.00","description":"Down Payment for Loan # 14343"},{"id":15475,"accountId":13344,"type":"Debit","date":"2016-09-22T00:00:00-07:00","amount":"22.00","description":"Down Payment for Loan # 14454"},{"id":15586,"accountId":13344,"type":"Debit","date":"2016-09-22T00:00:00-07:00","amount":"22.00","description":"Down Payment for Loan # 14565"},{"id":15697,"accountId":13344,"type":"Debit","date":"2016-09-22T00:00:00-07:00","amount":"22.00","description":"Down Payment for Loan # 14676"},{"id":16141,"accountId":13344,"type":"Debit","date":"2016-09-22T00:00:00-07:00","amount":"22.00","description":"Down Payment for Loan # 15120"},{"id":16252,"accountId":13344,"type":"Debit","date":"2016-09-22T00:00:00-07:00","amount":"22.00","description":"Down Payment for Loan # 15231"}]}
+
+GET /parabank/services/bank/login/john/demo HTTP/1.1
+cache-control: no-cache
+connection: keep-alive
+host: localhost:9080
+accept: application/json
+parasoftproxyhops: 1
+user-agent: Java/1.8.0_45
+parasoftproxypath: REST Service-Proxy /parabank/services/bank
+pragma: no-cache
+
+
+
+HTTP/1.1 200 OK
+Date: Thu, 22 Sep 2016 22:35:45 GMT
+Content-Length: 200
+Content-Type: application/json
+Server: Apache-Coyote/1.1
+
+{"customer":{"id":12212,"firstName":"John","lastName":"Smith","address":{"street":"1431 Main St","city":"Beverly Hills","state":"CA","zipCode":90210},"phoneNumber":"310-447-4121","ssn":"622-11-9999"}}
+
+GET /parabank/services/bank/customers/12212/accounts HTTP/1.1
+cache-control: no-cache
+connection: keep-alive
+host: localhost:9080
+accept: application/json
+parasoftproxyhops: 1
+user-agent: Java/1.8.0_45
+parasoftproxypath: REST Service-Proxy /parabank/services/bank
+pragma: no-cache
+
+
+
+HTTP/1.1 200 OK
+Date: Thu, 22 Sep 2016 22:35:45 GMT
+Content-Length: 151
+Content-Type: application/json
+Server: Apache-Coyote/1.1
+
+{"account":[{"id":13344,"customerId":12212,"type":"CHECKING","balance":-45550.07},{"id":13455,"customerId":12212,"type":"SAVINGS","balance":"350.00"}]}
+
+GET /parabank/services/bank/login/john/demo HTTP/1.1
+cache-control: no-cache
+connection: keep-alive
+host: localhost:9080
+accept: application/json
+parasoftproxyhops: 1
+user-agent: Java/1.8.0_45
+parasoftproxypath: REST Service-Proxy /parabank/services/bank
+pragma: no-cache
+
+
+
+HTTP/1.1 200 OK
+Date: Thu, 22 Sep 2016 22:35:52 GMT
+Content-Length: 200
+Content-Type: application/json
+Server: Apache-Coyote/1.1
+
+{"customer":{"id":12212,"firstName":"John","lastName":"Smith","address":{"street":"1431 Main St","city":"Beverly Hills","state":"CA","zipCode":90210},"phoneNumber":"310-447-4121","ssn":"622-11-9999"}}
+
+GET /parabank/services/bank/customers/12212/accounts HTTP/1.1
+cache-control: no-cache
+connection: keep-alive
+host: localhost:9080
+accept: application/json
+parasoftproxyhops: 1
+user-agent: Java/1.8.0_45
+parasoftproxypath: REST Service-Proxy /parabank/services/bank
+pragma: no-cache
+
+
+
+HTTP/1.1 200 OK
+Date: Thu, 22 Sep 2016 22:35:52 GMT
+Content-Length: 81
+Content-Type: application/json
+Server: Apache-Coyote/1.1
+
+{"account":[{"id":13344,"customerId":12212,"type":"CHECKING","balance":5022.93}]}
+
+GET /parabank/services/bank/accounts/13344 HTTP/1.1
+cache-control: no-cache
+connection: keep-alive
+host: localhost:9080
+accept: application/json
+parasoftproxyhops: 1
+user-agent: Java/1.8.0_45
+parasoftproxypath: REST Service-Proxy /parabank/services/bank
+pragma: no-cache
+
+
+
+HTTP/1.1 200 OK
+Date: Thu, 22 Sep 2016 22:35:54 GMT
+Content-Length: 79
+Content-Type: application/json
+Server: Apache-Coyote/1.1
+
+{"account":{"id":13344,"customerId":12212,"type":"CHECKING","balance":5022.93}}
+
+GET /parabank/services/bank/accounts/13344/transactions HTTP/1.1
+cache-control: no-cache
+connection: keep-alive
+host: localhost:9080
+accept: application/json
+parasoftproxyhops: 1
+user-agent: Java/1.8.0_45
+parasoftproxypath: REST Service-Proxy /parabank/services/bank
+pragma: no-cache
+
+
+
+HTTP/1.1 200 OK
+Date: Thu, 22 Sep 2016 22:35:54 GMT
+Content-Length: 18
+Content-Type: application/json
+Server: Apache-Coyote/1.1
+
+{"transaction":[]}
+
+POST /parabank/services/bank/requestLoan?amount=1000&customerId=12212&downPayment=10&fromAccountId=13344 HTTP/1.1
+cache-control: no-cache
+connection: keep-alive
+host: localhost:9080
+accept: application/json
+parasoftproxyhops: 1
+user-agent: Java/1.8.0_45
+parasoftproxypath: REST Service-Proxy /parabank/services/bank
+pragma: no-cache
+
+
+
+HTTP/1.1 200 OK
+Date: Thu, 22 Sep 2016 22:35:57 GMT
+Content-Length: 163
+Content-Type: application/json
+Server: Apache-Coyote/1.1
+
+{"ns2.loanResponse":{"responseDate":"2016-09-22T15:35:57.873-07:00","loanProviderName":"Wealth Securities Dynamic Loans (WSDL)","approved":true,"accountId":13455}}
+
+POST /parabank/services/bank/requestLoan?amount=1000000&customerId=12212&downPayment=10&fromAccountId=13455 HTTP/1.1
+cache-control: no-cache
+connection: keep-alive
+host: localhost:9080
+accept: application/json
+parasoftproxyhops: 1
+user-agent: Java/1.8.0_45
+parasoftproxypath: REST Service-Proxy /parabank/services/bank
+pragma: no-cache
+
+
+
+HTTP/1.1 200 OK
+Date: Thu, 22 Sep 2016 22:36:01 GMT
+Content-Length: 183
+Content-Type: application/json
+Server: Apache-Coyote/1.1
+
+{"ns2.loanResponse":{"responseDate":"2016-09-22T15:36:01.221-07:00","loanProviderName":"Wealth Securities Dynamic Loans (WSDL)","approved":false,"message":"error.insufficient.funds"}}
+
+GET /parabank/services/bank/customers/12212/accounts HTTP/1.1
+cache-control: no-cache
+connection: keep-alive
+host: localhost:9080
+accept: application/json
+parasoftproxyhops: 1
+user-agent: Java/1.8.0_45
+parasoftproxypath: REST Service-Proxy /parabank/services/bank
+pragma: no-cache
+
+
+
+HTTP/1.1 200 OK
+Date: Thu, 22 Sep 2016 22:36:02 GMT
+Content-Length: 147
+Content-Type: application/json
+Server: Apache-Coyote/1.1
+
+{"account":[{"id":13455,"customerId":12212,"type":"LOAN","balance":"1000.00"},{"id":13344,"customerId":12212,"type":"CHECKING","balance":5012.93}]}
+
+GET /parabank/services/bank/customers/12212/accounts HTTP/1.1
+cache-control: no-cache
+connection: keep-alive
+host: localhost:9080
+accept: application/json
+parasoftproxyhops: 1
+user-agent: Java/1.8.0_45
+parasoftproxypath: REST Service-Proxy /parabank/services/bank
+pragma: no-cache
+
+
+
+HTTP/1.1 200 OK
+Date: Thu, 22 Sep 2016 22:36:21 GMT
+Content-Length: 147
+Content-Type: application/json
+Server: Apache-Coyote/1.1
+
+{"account":[{"id":13455,"customerId":12212,"type":"LOAN","balance":"1000.00"},{"id":13344,"customerId":12212,"type":"CHECKING","balance":5012.93}]}
+
+GET /parabank/services/bank/accounts/13455 HTTP/1.1
+cache-control: no-cache
+connection: keep-alive
+host: localhost:9080
+accept: application/json
+parasoftproxyhops: 1
+user-agent: Java/1.8.0_45
+parasoftproxypath: REST Service-Proxy /parabank/services/bank
+pragma: no-cache
+
+
+
+HTTP/1.1 200 OK
+Date: Thu, 22 Sep 2016 22:36:24 GMT
+Content-Length: 77
+Content-Type: application/json
+Server: Apache-Coyote/1.1
+
+{"account":{"id":13455,"customerId":12212,"type":"LOAN","balance":"1000.00"}}
+
+GET /parabank/services/bank/accounts/13455/transactions HTTP/1.1
+cache-control: no-cache
+connection: keep-alive
+host: localhost:9080
+accept: application/json
+parasoftproxyhops: 1
+user-agent: Java/1.8.0_45
+parasoftproxypath: REST Service-Proxy /parabank/services/bank
+pragma: no-cache
+
+
+
+HTTP/1.1 200 OK
+Date: Thu, 22 Sep 2016 22:36:24 GMT
+Content-Length: 18
+Content-Type: application/json
+Server: Apache-Coyote/1.1
+
+{"transaction":[]}
+
+GET /parabank/services/bank/accounts/13344/transactions/onDate/09-22-2016 HTTP/1.1
+cache-control: no-cache
+connection: keep-alive
+host: localhost:9080
+accept: application/json
+parasoftproxyhops: 1
+user-agent: Java/1.8.0_45
+parasoftproxypath: REST Service-Proxy /parabank/services/bank
+pragma: no-cache
+
+
+
+HTTP/1.1 200 OK
+Date: Thu, 22 Sep 2016 22:36:42 GMT
+Content-Length: 161
+Content-Type: application/json
+Server: Apache-Coyote/1.1
+
+{"transaction":[{"id":14476,"accountId":13344,"type":"Debit","date":"2016-09-22T00:00:00-07:00","amount":"10.00","description":"Down Payment for Loan # 13455"}]}
+
+GET /parabank/services/bank/transactions/14476 HTTP/1.1
+cache-control: no-cache
+connection: keep-alive
+host: localhost:9080
+accept: application/json
+parasoftproxyhops: 1
+user-agent: Java/1.8.0_45
+parasoftproxypath: REST Service-Proxy /parabank/services/bank
+pragma: no-cache
+
+
+
+HTTP/1.1 200 OK
+Date: Thu, 22 Sep 2016 22:36:45 GMT
+Content-Length: 159
+Content-Type: application/json
+Server: Apache-Coyote/1.1
+
+{"transaction":{"id":14476,"accountId":13344,"type":"Debit","date":"2016-09-22T00:00:00-07:00","amount":"10.00","description":"Down Payment for Loan # 13455"}}
+
+POST /parabank/services/bank/transfer?amount=44&toAccountId=13455&fromAccountId=13455 HTTP/1.1
+cache-control: no-cache
+connection: keep-alive
+host: localhost:9080
+accept: application/json
+parasoftproxyhops: 1
+user-agent: Java/1.8.0_45
+parasoftproxypath: REST Service-Proxy /parabank/services/bank
+pragma: no-cache
+
+
+
+HTTP/1.1 200 OK
+Date: Thu, 22 Sep 2016 22:36:53 GMT
+Content-Length: 66
+Content-Type: application/json
+Server: Apache-Coyote/1.1
+
+Successfully transferred $44 from account #13455 to account #13455
+

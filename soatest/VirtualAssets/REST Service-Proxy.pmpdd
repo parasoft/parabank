@@ -1,0 +1,19 @@
+<proxyConfiguration xmlVersion="5" productVersion="0">
+ <ProxyConfiguration className="com.parasoft.stub.proxy.ProxyConfiguration" version="1.1.2">
+  <id>f203f033-22c0-421f-8b44-e20409267398-1474581366121</id>
+  <proxyCount>1</proxyCount>
+  <HttpProxyConnection className="com.parasoft.stub.proxy.HttpProxyConnection" version="1.9.4">
+   <file>recorded_traffic/REST_Service_%d_%t.txt</file>
+   <port>9080</port>
+   <recordSecondaryTarget>false</recordSecondaryTarget>
+   <listenPath>/parabank/services/bank</listenPath>
+   <HttpProxyTargetConnection className="com.parasoft.stub.proxy.HttpProxyTargetConnection" version="1.1">
+    <forwardPath>/parabank/services/bank</forwardPath>
+    <host>localhost</host>
+    <port>8090</port>
+   </HttpProxyTargetConnection>
+   <HttpProxyTargetConnection className="com.parasoft.stub.proxy.HttpProxyTargetConnection" version="1.1">
+   </HttpProxyTargetConnection>
+  </HttpProxyConnection>
+ </ProxyConfiguration>
+</proxyConfiguration>

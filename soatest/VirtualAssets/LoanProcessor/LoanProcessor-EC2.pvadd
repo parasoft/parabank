@@ -1,0 +1,22 @@
+<stub version="1" id="7a79edb4-24d4-4a80-b95a-e07dc2292d38-1474581696738" enabled="true" description="" location="LoanProcessor-EC2.pva" path="/LoanProcessor-EC2"><jms providerURL="" initialContext="" useReplyTo="true" type="" messageSelector="" queueConnectionFactory="" destinationQueue="" replyToQueue="" topicConnectionFactory="" publishTopic="" subscribeTopic="" username="" password="" workerCount="1">
+<jmsProperties>
+</jmsProperties>
+<jmsSharedSettings xmlVersion="5" productVersion="0">
+ <JMSSharedSettings className="com.parasoft.net.jms.JMSSharedSettings" version="1.1">
+  <putConnectionId>null</putConnectionId>
+  <getConnectionId>null</getConnectionId>
+ </JMSSharedSettings>
+</jmsSharedSettings></jms><mq queueManager="" channel="" putQueue="" getQueue="" mq_host="" applicationIdData="" mq_port="1414" useReplyTo="false" username="" password="AA==" ccdtFile="" settingsMode="default" workerCount="1"><mqSharedSettings xmlVersion="5" productVersion="0">
+ <MQSharedSettings className="com.parasoft.net.mq.MQSharedSettings" version="1.1">
+  <putManagerId>null</putManagerId>
+  <getManagerId>null</getManagerId>
+ </MQSharedSettings>
+</mqSharedSettings></mq><custom selected="-1"></custom><performanceConfiguration xmlVersion="5" productVersion="0">
+ <StubPerformanceConfiguration className="com.parasoft.stub.deployment.StubPerformanceConfiguration" version="1.1">
+  <profileGroupMaps size="0">
+  </profileGroupMaps>
+ </StubPerformanceConfiguration>
+</performanceConfiguration><dataGroupsConfigurations xmlVersion="5" productVersion="0">
+ <StubDataGroupsConfiguration className="com.parasoft.stub.deployment.StubDataGroupsConfiguration" version="1.1">
+ </StubDataGroupsConfiguration>
+</dataGroupsConfigurations></stub>
