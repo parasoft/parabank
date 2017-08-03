@@ -1,0 +1,19 @@
+<proxyConfiguration xmlVersion="5" productVersion="0">
+ <ProxyConfiguration className="com.parasoft.stub.proxy.ProxyConfiguration" version="1.1.2">
+  <id>f494ff05-4314-4007-9549-52fa534ce547-1474579920176</id>
+  <proxyCount>1</proxyCount>
+  <HttpProxyConnection className="com.parasoft.stub.proxy.HttpProxyConnection" version="1.9.4">
+   <file>recorded_traffic/admin_%d_%t.txt</file>
+   <port>9080</port>
+   <recordSecondaryTarget>false</recordSecondaryTarget>
+   <listenPath>/proxy/admin</listenPath>
+   <HttpProxyTargetConnection className="com.parasoft.stub.proxy.HttpProxyTargetConnection" version="1.1">
+    <forwardPath>/admin</forwardPath>
+    <host>localhost</host>
+    <port>9080</port>
+   </HttpProxyTargetConnection>
+   <HttpProxyTargetConnection className="com.parasoft.stub.proxy.HttpProxyTargetConnection" version="1.1">
+   </HttpProxyTargetConnection>
+  </HttpProxyConnection>
+ </ProxyConfiguration>
+</proxyConfiguration>
