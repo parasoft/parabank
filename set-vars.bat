@@ -25,6 +25,7 @@ echo =========================================================================
 echo Setup DTP Engine and SOAtest intallation
 SET JTEST_HOME=
 SET SOATEST_HOME=
+SET PARABANK_TOMCAT=
 
 IF "%JTEST_HOME%"=="" (
 	echo JTEST_HOME is not set
