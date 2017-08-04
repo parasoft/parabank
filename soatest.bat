@@ -12,6 +12,7 @@ echo ===================================================================
 
 pushd soatest
 call copy /Y templatesettings.properties localsettings.properties
+echo. >> localsettings.properties
 echo build.id=%BUILD_ID% >> localsettings.properties
 echo general.project=%DTP_PROJECT% >> localsettings.properties
 echo session.tag=%DTP_PROJECT%-${config_name} >> localsettings.properties
