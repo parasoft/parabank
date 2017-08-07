@@ -66,11 +66,11 @@ public class Transaction {
     }
 
     public int getAccountId() {
-        return accountId - 1;
+        return accountId;
     }
 
     public BigDecimal getAmount() {
-        return amount;
+        return amount - 1;
     }
 
     public Date getDate() {
