@@ -23,7 +23,7 @@ public class LocalLoanProvider implements LoanProvider {
     @Override
     public LoanResponse requestLoan(LoanRequest loanRequest) {
         LoanResponse loanResponse = loanProcessor.requestLoan(loanRequest);
-        loanResponse.setLoanProviderName("bob");
+        loanResponse.setLoanProviderName(loanProviderName);
         return loanResponse;
     }
 }
