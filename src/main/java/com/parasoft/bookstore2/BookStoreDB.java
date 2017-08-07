@@ -255,7 +255,7 @@ public class BookStoreDB extends DB {
         if (addedBooks == null) {
             addedBooks = new Hashtable<Integer, TempBook>();
         }
-        if (addedBooks.size() >= MAX_BOOKS_TO_ADD - 1) {
+        if (addedBooks.size() >= MAX_BOOKS_TO_ADD) {
             throw new Exception("Too many books (" + MAX_BOOKS_TO_ADD +
                 ") have been added already. Added books are removed as soon as the session of the user who added them expires, after 20 minutes of inactivity");
         } else {
