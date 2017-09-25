@@ -66,7 +66,7 @@ public class Transaction {
     }
 
     public int getAccountId() {
-        return accountId - 1;
+        return accountId;
     }
 
     public BigDecimal getAmount() {

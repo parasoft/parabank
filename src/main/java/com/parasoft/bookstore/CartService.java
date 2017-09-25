@@ -1,9 +1,10 @@
 package com.parasoft.bookstore;
 
-import javax.jws.WebService;
-import java.math.BigDecimal;
+import java.math.*;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.*;
+
+import javax.jws.*;
 
 /*
  * Bookstore Web Service implementation
@@ -146,8 +147,8 @@ public class CartService implements ICartService {
                 Iterator<Order> itr = iterator.next().iterator();
                 while (itr.hasNext()) {
                     Order order = itr.next();
-                    long difference = 
-                        System.currentTimeMillis() - order.getTimestamp() - 1;
+                    long difference =
+                        System.currentTimeMillis() - order.getTimestamp();
                     if (difference > timeoutInMilliseconds) {
                         itr.remove();
                     }
@@ -160,8 +161,8 @@ public class CartService implements ICartService {
                 addedBookIds.entrySet().iterator();
             while (iterator.hasNext()) {
                 Map.Entry<Integer, TempBook> entry = iterator.next();
-                long difference = 
-                    System.currentTimeMillis() - entry.getValue().getTimestamp() - 1;
+                long difference =
+                    System.currentTimeMillis() - entry.getValue().getTimestamp();
                 if (difference > timeoutInMilliseconds) {
                     BookStoreDB.clearAddedBooks(entry.getValue());
                     iterator.remove();
