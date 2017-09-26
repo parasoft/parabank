@@ -4,9 +4,7 @@ import java.text.*;
 import java.util.*;
 
 import javax.xml.bind.annotation.*;
-
-import org.joda.time.*;
-import org.joda.time.format.*;
+import javax.xml.bind.annotation.adapters.*;
 
 import com.google.gson.*;
 import com.parasoft.parabank.util.*;
@@ -24,6 +22,7 @@ public class LoanResponse {
     private String message;
     private Integer accountId;
 
+    @XmlJavaTypeAdapter(DateTimeAdapter.class)
     public Date getResponseDate() {
         return responseDate;
     }
@@ -67,25 +66,22 @@ public class LoanResponse {
 
     public static LoanResponse readFrom(JsonObject json) throws ParseException {
 
-    	LoanResponse response = new LoanResponse();
-    	boolean approved = json.get("approved").getAsBoolean();
-    	response.setApproved(approved);
+        LoanResponse response = new LoanResponse();
+        boolean approved = json.get("approved").getAsBoolean();
+        response.setApproved(approved);
 
-    	if (approved) {
-    		response.setAccountId(json.get("accountId").getAsInt());
-    	}
-    	else {
-    		response.setMessage(json.get("message").getAsString());
-    	}
+        if (approved) {
+            response.setAccountId(json.get("accountId").getAsInt());
+        } else {
+            response.setMessage(json.get("message").getAsString());
+        }
 
-    	response.setLoanProviderName(json.get("loanProviderName").getAsString());
-    	String dt = json.get("responseDate").getAsString();
-    	DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
-    	DateTime dateTime = dtf.parseDateTime(dt);
-    	Date date = dateTime.toDate();
-    	response.setResponseDate(date);
+        response.setLoanProviderName(json.get("loanProviderName").getAsString());
+        final String dt = json.get("responseDate").getAsString();
+        final Date date = DateTimeAdapter.dateFromString(dt);
+        response.setResponseDate(date);
 
-    	return response;
+        return response;
     }
 
     @Override

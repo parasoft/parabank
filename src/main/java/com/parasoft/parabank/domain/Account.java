@@ -83,7 +83,7 @@ public class Account {
         return id;
     }
 
-    @JsonGetter(value = "type")
+    @JsonIgnore
     public int getIntType() {
         if (type == null) {
             return AccountType.LOAN.ordinal();
@@ -91,7 +91,7 @@ public class Account {
         return type.ordinal();
     }
 
-    @JsonIgnore
+    @JsonGetter(value = "type")
     public AccountType getType() {
         return type;
     }
@@ -119,12 +119,12 @@ public class Account {
         this.id = id;
     }
 
-    @JsonSetter(value = "type")
+    @JsonIgnore
     public void setType(final AccountType type) {
         this.type = type;
     }
 
-    @JsonIgnore
+    @JsonSetter(value = "type")
     public void setType(final int type) {
         this.type = AccountType.values()[type];
     }

@@ -4,6 +4,7 @@ import java.math.*;
 import java.util.*;
 
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.*;
 
 import com.parasoft.parabank.util.*;
 
@@ -19,6 +20,7 @@ public class LoanRequest {
     private BigDecimal downPayment;
     private BigDecimal loanAmount;
 
+    @XmlJavaTypeAdapter(DateTimeAdapter.class)
     public Date getRequestDate() {
         return requestDate;
     }

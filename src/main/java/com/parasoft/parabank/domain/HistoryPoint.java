@@ -4,6 +4,7 @@ import java.math.*;
 import java.util.*;
 
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.*;
 
 import com.parasoft.parabank.util.*;
 
@@ -25,6 +26,7 @@ public class HistoryPoint {
         this.symbol = symbol;
     }
 
+    @XmlJavaTypeAdapter(DateTimeAdapter.class)
     public Date getDate() {
         return date;
     }

@@ -156,7 +156,13 @@
 		<jaxrs:providers>
 <!--			<ref bean="jsonProviderJackson" /> -->
 			<ref bean="wadlGenerator" />
-			<bean id="jsonProvider" class="org.apache.cxf.jaxrs.provider.json.JSONProvider" />
+            <bean id="jsonProvider" class="org.apache.cxf.jaxrs.provider.json.JSONProvider">
+                <property name="dropRootElement" value="true" />
+                <property name="dropCollectionWrapperElement" value="true" />
+                <property name="serializeAsArray" value="true" />
+                <property name="supportUnwrapped" value="true" />
+                <property name="namespaceMap" ref="jsonNamespaceMap"/>
+            </bean>
 			<ref bean="cors-filter" />
 		</jaxrs:providers>
 
@@ -165,6 +171,10 @@
 		</jaxrs:features>
 
 	</jaxrs:server>
+
+    <util:map id="jsonNamespaceMap" map-class="java.util.Hashtable">
+        <entry key="http://service.parabank.parasoft.com/" value="parabank"/>
+    </util:map>
 
 	<!-- ========================= SERVICE IMPLEMENTATIONS ========================= -->
 

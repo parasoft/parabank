@@ -181,8 +181,8 @@ public class ParaBankServiceImpl implements ParaBankService, AdminManagerAware, 
     public List<HistoryPoint> getPositionHistory(final int positionId, final String startDate, final String endDate)
             throws ParaBankServiceException {
         try {
-            return bankManager.getPositionHistory(positionId, Util.DATE_TIME_FORMATTER.get().parse(startDate),
-                Util.DATE_TIME_FORMATTER.get().parse(endDate));
+            return bankManager.getPositionHistory(positionId, DateTimeAdapter.dateFromString(startDate),
+                    DateTimeAdapter.dateFromString(endDate));
         } catch (final Exception e) {
             log.error("DataAccessException caught :", e);
             throw new ParaBankServiceException("Could not find position #" + positionId, e);
