@@ -149,8 +149,7 @@ public class AccessModeController {
             final BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             final String message = reader.readLine();
             final JsonElement rootElement = parser.parse(message);
-            final JsonObject obj = rootElement.getAsJsonObject();
-            final JsonObject actObject = obj.get("account").getAsJsonObject();
+            final JsonObject actObject = rootElement.getAsJsonObject();
             createdAccount = Account.readFrom(actObject);
 
             conn.disconnect();
@@ -343,8 +342,7 @@ public class AccessModeController {
             final String message = reader.readLine();
             final JsonElement rootElement = parser.parse(message);
             final JsonObject obj = rootElement.getAsJsonObject();
-            final JsonObject arr = obj.get("account").getAsJsonObject();
-            account = Account.readFrom(arr);
+            account = Account.readFrom(obj);
             conn.disconnect();
             LOG.info("Using REST json Web Service");
         }
@@ -417,8 +415,7 @@ public class AccessModeController {
             final BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             final String message = reader.readLine();
             final JsonElement rootElement = parser.parse(message);
-            final JsonObject obj = rootElement.getAsJsonObject();
-            final JsonArray arr = obj.get("account").getAsJsonArray();
+            final JsonArray arr = rootElement.getAsJsonArray();
 
             for (int i = 0; i < arr.size(); i++) {
                 final Account acct = Account.readFrom(arr.get(i).getAsJsonObject());
@@ -491,7 +488,7 @@ public class AccessModeController {
             String output;
 
             while ((output = br.readLine()) != null) {
-                customer = new Gson().fromJson(output.substring(12, output.length() - 1), Customer.class);
+                customer = new Gson().fromJson(output, Customer.class);
             }
 
             conn.disconnect();
@@ -563,10 +560,9 @@ public class AccessModeController {
 
             LOG.info("class=" + rootElement.getClass());
             final JsonObject obj = rootElement.getAsJsonObject();
-            final JsonObject arr = obj.get(Constants.TRANSACTION).getAsJsonObject();
 
             LOG.info("obj:" + obj);
-            transaction = Transaction.readFrom(arr);
+            transaction = Transaction.readFrom(obj);
             conn.disconnect();
 
             LOG.info("Using REST JSON Web Service");
@@ -636,8 +632,7 @@ public class AccessModeController {
             final BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             final String message = reader.readLine();
             final JsonElement rootElement = parser.parse(message);
-            final JsonObject obj = rootElement.getAsJsonObject();
-            final JsonArray arr = obj.get(Constants.TRANSACTION).getAsJsonArray();
+            final JsonArray arr = rootElement.getAsJsonArray();
 
             for (int i = 0; i < arr.size(); i++) {
                 final Transaction trans = Transaction.readFrom(arr.get(i).getAsJsonObject());
@@ -722,9 +717,8 @@ public class AccessModeController {
 
             LOG.info("class=" + rootElement.getClass());
             final JsonObject obj = rootElement.getAsJsonObject();
-            final JsonObject arr = obj.get("ns2.loanResponse").getAsJsonObject();
 
-            loanResponse = LoanResponse.readFrom(arr);
+            loanResponse = LoanResponse.readFrom(obj);
             conn.disconnect();
             LOG.info("Using REST JSON Web Service");
         }
@@ -861,8 +855,7 @@ public class AccessModeController {
             final BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             final String message = reader.readLine();
             final JsonElement rootElement = parser.parse(message);
-            final JsonObject obj = rootElement.getAsJsonObject();
-            final JsonArray arr = obj.get(Constants.TRANSACTION).getAsJsonArray();
+            final JsonArray arr = rootElement.getAsJsonArray();
 
             for (int i = 0; i < arr.size(); i++) {
                 final Transaction trans = Transaction.readFrom(arr.get(i).getAsJsonObject());
@@ -981,7 +974,7 @@ public class AccessModeController {
 
             if (br != null) {
                 while ((output = br.readLine()) != null) {
-                    customer = new Gson().fromJson(output.substring(12, output.length() - 1), Customer.class);
+                    customer = new Gson().fromJson(output, Customer.class);
                 }
             }
 

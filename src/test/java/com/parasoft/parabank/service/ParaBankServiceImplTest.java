@@ -210,9 +210,9 @@ public class ParaBankServiceImplTest extends AbstractParaBankDataSourceTest {
     public void testGetPositionHistory() throws Exception {
         final Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_MONTH, -1);
-        final String endDate = Util.DATE_TIME_FORMATTER.get().format(calendar.getTime());
+        final String endDate = DateTimeAdapter.OUTPUT_FORMAT.format(calendar.toInstant());
         calendar.add(Calendar.DAY_OF_MONTH, -10);
-        final String startDate = Util.DATE_TIME_FORMATTER.get().format(calendar.getTime());
+        final String startDate = DateTimeAdapter.OUTPUT_FORMAT.format(calendar.toInstant());
         final List<HistoryPoint> history = paraBankService.getPositionHistory(POSITION_ID, startDate, endDate);
         int expected = 11;
         if (history.size() == 22) { // TODO figure out why when this test class

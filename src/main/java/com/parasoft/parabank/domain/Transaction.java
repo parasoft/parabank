@@ -5,9 +5,7 @@ import java.text.*;
 import java.util.*;
 
 import javax.xml.bind.annotation.*;
-
-import org.joda.time.*;
-import org.joda.time.format.*;
+import javax.xml.bind.annotation.adapters.*;
 
 import com.fasterxml.jackson.annotation.*;
 import com.google.gson.*;
@@ -31,9 +29,7 @@ public class Transaction {
         ret.setDescription(json.get("description").getAsString());
         ret.setId(json.get("id").getAsInt());
         final String dt = json.get("date").getAsString();
-        final DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZ");
-        final DateTime dateTime = dtf.parseDateTime(dt);
-        final Date date = dateTime.toDate();
+        final Date date = DateTimeAdapter.dateFromString(dt);
         ret.setDate(date);
         ret.setType(TransactionType.valueOf(json.get("type").getAsString()));
         return ret;
@@ -73,6 +69,7 @@ public class Transaction {
         return amount;
     }
 
+    @XmlJavaTypeAdapter(DateTimeAdapter.class)
     public Date getDate() {
         return date;
     }
@@ -85,12 +82,12 @@ public class Transaction {
         return id;
     }
 
-    @JsonGetter(value = "type")
+    @JsonIgnore
     public int getIntType() {
         return type.ordinal();
     }
 
-    @JsonIgnore
+    @JsonGetter(value = "type")
     public TransactionType getType() {
         return type;
     }
@@ -128,12 +125,12 @@ public class Transaction {
         this.id = id;
     }
 
-    @JsonSetter(value = "type")
+    @JsonIgnore
     public void setType(final int type) {
         this.type = TransactionType.values()[type];
     }
 
-    @JsonIgnore
+    @JsonSetter(value = "type")
     public void setType(final TransactionType type) {
         this.type = type;
     }

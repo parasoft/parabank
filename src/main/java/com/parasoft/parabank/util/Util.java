@@ -3,7 +3,6 @@ package com.parasoft.parabank.util;
 import java.io.*;
 import java.lang.reflect.*;
 import java.net.*;
-import java.text.*;
 import java.util.*;
 
 import javax.management.*;
@@ -19,13 +18,6 @@ public final class Util {
     public static final int DEFAULT_CATALINA_PORT = 8080;
 
     private static final Logger log = LoggerFactory.getLogger(Util.class);
-
-    public static final ThreadLocal<DateFormat> DATE_TIME_FORMATTER = new ThreadLocal<DateFormat>() {
-        @Override
-        protected DateFormat initialValue() {
-            return new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
-        }
-    };
 
     /**
      * Convenience method for comparing two, possibly null, objects
