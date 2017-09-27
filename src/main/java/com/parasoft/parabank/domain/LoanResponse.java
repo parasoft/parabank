@@ -23,6 +23,7 @@ public class LoanResponse {
     private Integer accountId;
 
     @XmlJavaTypeAdapter(DateTimeAdapter.class)
+    @XmlSchemaType(name = "dateTime")
     public Date getResponseDate() {
         return responseDate;
     }

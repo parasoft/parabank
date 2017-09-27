@@ -21,6 +21,7 @@ public class LoanRequest {
     private BigDecimal loanAmount;
 
     @XmlJavaTypeAdapter(DateTimeAdapter.class)
+    @XmlSchemaType(name = "dateTime")
     public Date getRequestDate() {
         return requestDate;
     }
