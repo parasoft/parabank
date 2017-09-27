@@ -27,6 +27,7 @@ public class HistoryPoint {
     }
 
     @XmlJavaTypeAdapter(DateTimeAdapter.class)
+    @XmlSchemaType(name = "dateTime")
     public Date getDate() {
         return date;
     }
