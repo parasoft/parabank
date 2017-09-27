@@ -1,4 +1,3 @@
-// parasoft-begin-suppress PB.RE.RCODE "Reviewed and found appropriate for this class only"
 package com.parasoft.parabank.util;
 
 import java.io.*;

@@ -19,10 +19,10 @@ public class Item implements Serializable {
 
     public Item(int id, String name, BigDecimal price, int quantity)
         throws ItemNotFoundException {
-        this.id = id;
+        setId(id);
         title = name;
-        this.price = price;
-        quantity_in_stock = quantity;
+        setPrice(price);
+        setStockQuantity(quantity);
     }
 
     public String getName() {
@@ -60,4 +60,20 @@ public class Item implements Serializable {
     public void inflatePrice(BigDecimal amount) {
         setPrice(price.add(amount));
     }
+
+    public void setTitle(String title) {
+        this.title =  title;
+    }
+    
+    public static void abcd() {
+        Item item = new Item();
+        item.getTitle();  // drive NPE
+    }
+    
+    public String getTitle() {
+        if (title.length() > 0) {
+            return title;
+        }
+        return null;
+    }   
 }

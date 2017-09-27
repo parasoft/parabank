@@ -82,15 +82,15 @@ public class CartService implements ICartService {
     @Override
     public Book[] getItemByTitle(String title) throws Exception {
         ++invocationCounter;
-        Book[] books = BookStoreDB.getByTitleLike(title != null? title : "");
+        Book[] books = BookStoreDB.getByTitleLike(title != null? title : "No Title");
         for (Book b : books) {
             b.inflatePrice(new BigDecimal(invocationCounter/5));
         }
         return books;
     }
 
-    /*
-     * (non-Javadoc)
+    /**
+     *
      * @see com.parasoft.parabank.store.ICart#getItemById(int)
      */
     @Override
@@ -98,8 +98,8 @@ public class CartService implements ICartService {
         return BookStoreDB.getById(id);
     }
 
-    /*
-     * (non-Javadoc)
+    /**
+     *
      * @see com.parasoft.parabank.store.ICart#addNewItemToInventory(com.parasoft.parabank.store.Book)
      */
     @Override
@@ -120,8 +120,8 @@ public class CartService implements ICartService {
         return book;
     }
 
-    /*
-     * (non-Javadoc)
+    /**
+     * 
      * @see com.parasoft.parabank.store.ICart#submitOrder(int)
      */
     @Override
@@ -130,8 +130,8 @@ public class CartService implements ICartService {
                                   System.currentTimeMillis());
     }
 
-    /*
-     * (non-Javadoc)
+    /**
+     *
      * @see com.parasoft.parabank.store.ICart#getItemsInCart(int)
      */
     @Override

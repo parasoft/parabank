@@ -23,7 +23,9 @@ public class LocalLoanProvider implements LoanProvider {
     @Override
     public LoanResponse requestLoan(LoanRequest loanRequest) {
         LoanResponse loanResponse = loanProcessor.requestLoan(loanRequest);
-        loanResponse.setLoanProviderName(loanProviderName);
+        if (loanResponse != null) { // fixing NPE above may return NULL for the response
+            loanResponse.setLoanProviderName(loanProviderName);
+        }
         return loanResponse;
     }
 }

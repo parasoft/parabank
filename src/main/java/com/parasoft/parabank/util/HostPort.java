@@ -90,7 +90,7 @@ public class HostPort {
      *         </DL>
      */
     public boolean isHostSet() {
-        return host != null && host != "";
+        return host != null  && !host.isEmpty(); // fixing PB.CUB.UEIC
     }
 
     /**
