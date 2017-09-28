@@ -9,8 +9,8 @@ public class DisplayOrder {
     }
 
     public DisplayOrder(Order order, int cartId) {
-        item = order;
-        this.cartId = cartId;
+        setItem(order);
+        setCartId(cartId);
     }
 
     public Order getItem() {

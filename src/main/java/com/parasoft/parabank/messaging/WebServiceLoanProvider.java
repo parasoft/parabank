@@ -32,22 +32,22 @@ public class WebServiceLoanProvider implements LoanProvider {
             final ArrayList<?> mBeanServers = MBeanServerFactory.findMBeanServer(null);
             if (mBeanServers != null && mBeanServers.size() > 0 && mBeanServers.get(0) instanceof MBeanServer) {
                 final MBeanServer mBeanServer = (MBeanServer) mBeanServers.get(0);
-                final ObjectName name = new ObjectName("Catalina", "type", "Server"); // parasoft-suppress CUSTOM.SLR  "Class name"
-                final Object server = mBeanServer.getAttribute(name, "managedResource"); // parasoft-suppress CUSTOM.SLR "Class name"
+                final ObjectName name = new ObjectName("Catalina", "type", "Server"); 
+                final Object server = mBeanServer.getAttribute(name, "managedResource"); 
                 if (server != null) {
-                    final Method findServices = server.getClass().getMethod("findServices"); // parasoft-suppress CUSTOM.SLR "Method name"
+                    final Method findServices = server.getClass().getMethod("findServices"); 
                     final Object[] services = (Object[]) findServices.invoke(server);
                     for (final Object service : services) {
-                        final Method findConnectors = service.getClass().getMethod("findConnectors"); // parasoft-suppress CUSTOM.SLR "Method name"
+                        final Method findConnectors = service.getClass().getMethod("findConnectors"); 
                         final Object[] connectors = (Object[]) findConnectors.invoke(service);
                         for (final Object connector : connectors) {
-                            final Method getProtocolHandler = connector.getClass().getMethod("getProtocolHandler"); // parasoft-suppress CUSTOM.SLR "Method name"
+                            final Method getProtocolHandler = connector.getClass().getMethod("getProtocolHandler"); 
                             final Object protocolHandler = getProtocolHandler.invoke(connector);
                             final String handlerType = protocolHandler.getClass().getName();
-                            if (handlerType.endsWith("Http11Protocol") // parasoft-suppress CUSTOM.SLR "Class name"
-                                || handlerType.endsWith("Http11AprProtocol") // parasoft-suppress CUSTOM.SLR "Class name"
-                                || handlerType.endsWith("Http11NioProtocol")) { // parasoft-suppress CUSTOM.SLR "Class name"
-                                final Method getPort = connector.getClass().getMethod("getPort"); // parasoft-suppress CUSTOM.SLR "Method name"
+                            if (handlerType.endsWith("Http11Protocol") 
+                                || handlerType.endsWith("Http11AprProtocol") 
+                                || handlerType.endsWith("Http11NioProtocol")) {
+                                final Method getPort = connector.getClass().getMethod("getPort"); 
                                 final Object port = getPort.invoke(connector);
                                 if (port instanceof Integer) {
                                     return (Integer) port;
@@ -83,7 +83,7 @@ public class WebServiceLoanProvider implements LoanProvider {
                 }
             }
             final URL wsdlURL = new URL(wsdlUrl);
-            final QName serviceName = new QName(LoanProcessorService.TNS, "LoanProcessorServiceImplService"); // parasoft-suppress CUSTOM.SLR "Class name"
+            final QName serviceName = new QName(LoanProcessorService.TNS, "LoanProcessorServiceImplService"); 
             final Service service = Service.create(wsdlURL, serviceName);
             final LoanProcessorService client = service.getPort(LoanProcessorService.class);
 

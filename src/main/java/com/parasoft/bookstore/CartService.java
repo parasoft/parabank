@@ -170,4 +170,24 @@ public class CartService implements ICartService {
             }
         }
     }
+    
+    public void indexOutofRange() {
+        String[] strArray = {"1", "2", "3", "4"};
+        String foo = "";
+        for (int i = 0; i <= strArray.length + 1; i++) {
+            foo.concat(strArray[i] + " XXX "); // create array out of index
+        }
+        
+    }
+    public void createSev1Violation() {
+        String foo = testString();
+        
+        if (foo.length() > 0) {
+            foo = "hello";
+        }
+    }
+    
+    public String testString() {
+        return null;
+    }
 }

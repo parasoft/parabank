@@ -11,8 +11,8 @@ public class SubmittedOrder {
     }
 
     public SubmittedOrder(boolean successIndicator, long time) {
-        this.successIndicator = successIndicator;
-        date = new Date(time);
+        setSuccess(successIndicator);
+        setOrderTime(new Date(time));
     }
 
     public void setOrderTime(Date date) {

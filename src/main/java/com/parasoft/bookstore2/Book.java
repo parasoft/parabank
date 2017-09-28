@@ -26,14 +26,13 @@ public class Book implements Serializable{
                    String publisher, String description, ProductInfo product)
 	    throws ItemNotFoundException
 	{
-		this.product = product;
-        this.isbn = isbn;
-        this.genre = genre;
-        publication_date = year;
-        this.authors = authors;
-        this.publisher = publisher;
-        this.description = description;
-
+        setProductInfo(product);
+        setISBN(isbn);
+        setGenre(genre);
+        setPublicationDate(year);
+        setAuthors(authors);
+        setPublisher(publisher);
+        setDescription(description);
 	}
 
     public String getISBN() {
@@ -104,4 +103,13 @@ public class Book implements Serializable{
 		product.inflateAmount(bigDecimal);
 
 	}
+    
+    private void testNPEViolation() {
+        String foo = null;
+        if (product == null) {
+            product.getAmount();
+        }
+        product.setName(foo);
+        boolean boo = foo.equals(product.getName()); 
+    }
 }
