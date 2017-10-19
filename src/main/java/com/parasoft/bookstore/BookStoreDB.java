@@ -7,20 +7,21 @@ import java.util.*;
 
 public class BookStoreDB extends DB {
     private static final int MAX_BOOKS_TO_ADD = 1000;
-    private static final String NL_TABLE_BOOK      = "book";
-    private static final String NL_TABLE_AUTHOR    = "author";
-    private static final String NL_TABLE_PUBLISHER = "publisher";
+
+    static final String NL_TABLE_BOOK      = "book";
+    static final String NL_TABLE_AUTHOR    = "author";
+    static final String NL_TABLE_PUBLISHER = "publisher";
     // column names
-    private static final String NL_ID          = "id";
-    private static final String NL_ISBN        = "isbn";
-    private static final String NL_TITLE       = "title";
-    private static final String NL_YEAR        = "year";
-    private static final String NL_NAME        = "name";
-    private static final String NL_DESCRIPTION = "description";
-    private static final String NL_PRICE       = "price";
-    private static final String NL_STOCK       = "stock";
+    static final String NL_ID          = "id";
+    static final String NL_ISBN        = "isbn";
+    static final String NL_TITLE       = "title";
+    static final String NL_YEAR        = "year";
+    static final String NL_NAME        = "name";
+    static final String NL_DESCRIPTION = "description";
+    static final String NL_PRICE       = "price";
+    static final String NL_STOCK       = "stock";
     // aliases
-    private static final String NL_PUBLISHER_NAME = "PN";
+    static final String NL_PUBLISHER_NAME = "PN";
     private static final String NL_AUTHOR_NAME = "AN";
 
     private static BookStoreDB db = null;
@@ -50,43 +51,37 @@ public class BookStoreDB extends DB {
         return db;
     }
 
-    /**
-     * @param titlePart a keyword in the title of the book
-     * @return Vector <Book>
-     */
-    public static Book[] getByTitleLike(String titlePart)
-        throws SQLException,
-            InstantiationException,
-            IllegalAccessException,
-            ClassNotFoundException,
-            ItemNotFoundException
-    {
+    public static Book[] getByTitleLike(String titlePart) throws SQLException, InstantiationException,
+            IllegalAccessException, ClassNotFoundException, ItemNotFoundException {
         String query = "SELECT DISTINCT " +
-            NL_TABLE_BOOK + "." + NL_ID + "," +
-            NL_TABLE_BOOK + "." + NL_ISBN + "," +
-            NL_TABLE_BOOK + "." + NL_TITLE + "," +
-            NL_TABLE_BOOK + "." + NL_YEAR + "," +
-            NL_TABLE_PUBLISHER + "." + NL_NAME + " as " + NL_PUBLISHER_NAME + "," +
-            NL_TABLE_BOOK + "." + NL_DESCRIPTION + "," +
-            NL_TABLE_BOOK + "." + NL_PRICE + "," +
-            NL_TABLE_BOOK + "." + NL_STOCK +
-            " FROM " +
-            NL_TABLE_BOOK + "," +
-            NL_TABLE_AUTHOR + "," +
-            NL_TABLE_PUBLISHER +
-            " WHERE " +
-            "LCASE(" + NL_TABLE_BOOK + "." + NL_TITLE + ")" + " LIKE ? AND " +
-            NL_TABLE_BOOK + "." + NL_ISBN + " = " +
-            NL_TABLE_AUTHOR + "." + NL_ISBN + " AND " +
-            NL_TABLE_BOOK + ".publisher_id = " +
-            NL_TABLE_PUBLISHER + "." + NL_ID;
-
+                NL_TABLE_BOOK + "." + NL_ID + "," +
+                NL_TABLE_BOOK + "." + NL_ISBN + "," +
+                NL_TABLE_BOOK + "." + NL_TITLE + "," +
+                NL_TABLE_BOOK + "." + NL_YEAR + "," +
+                NL_TABLE_PUBLISHER + "." + NL_NAME + " as " + NL_PUBLISHER_NAME + "," +
+                NL_TABLE_BOOK + "." + NL_DESCRIPTION + "," +
+                NL_TABLE_BOOK + "." + NL_PRICE + "," +
+                NL_TABLE_BOOK + "." + NL_STOCK +
+                " FROM " +
+                NL_TABLE_BOOK + "," +
+                NL_TABLE_AUTHOR + "," +
+                NL_TABLE_PUBLISHER +
+                " WHERE " +
+                "LCASE(" + NL_TABLE_BOOK + "." + NL_TITLE + ")" + " LIKE '%"+ titlePart.toLowerCase() +"%' AND " +
+                NL_TABLE_BOOK + "." + NL_ISBN + " = " +
+                NL_TABLE_AUTHOR + "." + NL_ISBN + " AND " +
+                NL_TABLE_BOOK + ".publisher_id = " +
+                NL_TABLE_PUBLISHER + "." + NL_ID;
         BookStoreDB db = getDBInstance();
-        PreparedStatement stmt = db.prepareStatement(query,
-                                                     ResultSet.TYPE_SCROLL_INSENSITIVE,
-                                                     ResultSet.CONCUR_UPDATABLE);
-        stmt.setString(1, "%" + titlePart.toLowerCase() + "%");
-        ResultSet rs = stmt.executeQuery();
+        Statement stmt = db.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        Book[] books= getByTitleLike(stmt.executeQuery(query), titlePart);
+        stmt.close();
+        return books;
+    }
+
+    static Book[] getByTitleLike(ResultSet rs, String titlePart) throws SQLException, InstantiationException,
+            IllegalAccessException, ClassNotFoundException, ItemNotFoundException {
+
         boolean hasNext = rs.first();
         Vector<Book> books = new Vector<Book>();
 
@@ -155,8 +150,6 @@ public class BookStoreDB extends DB {
         for (int i = 0; i < arrayOfBooks.length; ++i) {
             arrayOfBooks[i] = books.elementAt(i);
         }
-
-        stmt.close();
 
         if (arrayOfBooks.length == 0) {
             throw new ItemNotFoundException("no books with titles containing '" +

@@ -33,6 +33,29 @@
 		<constructor-arg ref="newsDao" />
 	</bean>
 
+	<!-- ========================= ENABLE SECURITY VULNERABILITIES ========================= -->
+
+	<!-- To disable security vulnerabilities comment out beans without Secure* classes
+		and uncomment beans with Secure* classes -->
+
+	<!-- bean id="customerDao" class="com.parasoft.parabank.dao.jdbc.SecureJdbcCustomerDao">
+		<property name="dataSource" ref="dataSource" />
+		<property name="sequenceDao" ref="sequenceDao" />
+	</bean -->
+	<bean id="customerDao" class="com.parasoft.parabank.dao.jdbc.JdbcCustomerDao">
+		<property name="dataSource" ref="dataSource" />
+		<property name="sequenceDao" ref="sequenceDao" />
+	</bean>
+	
+	<!-- bean id="transactionDao" class="com.parasoft.parabank.dao.jdbc.SecureJdbcTransactionDao">
+		<property name="dataSource" ref="dataSource" />
+		<property name="sequenceDao" ref="sequenceDao" />
+	</bean -->
+	<bean id="transactionDao" class="com.parasoft.parabank.dao.jdbc.JdbcTransactionDao">
+		<property name="dataSource" ref="dataSource" />
+		<property name="sequenceDao" ref="sequenceDao" />
+	</bean>
+
 	<!-- ========================= DAOS ========================= -->
 
 	<bean id="sequenceDao" class="com.parasoft.parabank.dao.jdbc.JdbcSequenceDao">
@@ -57,22 +80,11 @@
 		<property name="dataSource" ref="BookstoreDS" />
 	</bean>
 
-	<bean id="customerDao" class="com.parasoft.parabank.dao.jdbc.JdbcCustomerDao">
-
-		<property name="dataSource" ref="dataSource" />
-		<property name="sequenceDao" ref="sequenceDao" />
-	</bean>
-
 	<bean id="newsDao" class="com.parasoft.parabank.dao.jdbc.JdbcNewsDao">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
 	<bean id="positionDao" class="com.parasoft.parabank.dao.jdbc.JdbcPositionDao">
-		<property name="dataSource" ref="dataSource" />
-		<property name="sequenceDao" ref="sequenceDao" />
-	</bean>
-
-	<bean id="transactionDao" class="com.parasoft.parabank.dao.jdbc.JdbcTransactionDao">
 		<property name="dataSource" ref="dataSource" />
 		<property name="sequenceDao" ref="sequenceDao" />
 	</bean>

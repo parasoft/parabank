@@ -30,7 +30,7 @@ public class JdbcTransactionDao extends NamedParameterJdbcDaoSupport implements 
         }
     }
 
-    private static final Logger log = LoggerFactory.getLogger(JdbcTransactionDao.class);
+    protected static final Logger log = LoggerFactory.getLogger(JdbcTransactionDao.class);
 
     private JdbcSequenceDao sequenceDao;
 
@@ -103,7 +103,7 @@ public class JdbcTransactionDao extends NamedParameterJdbcDaoSupport implements 
         final List<Object> params = new ArrayList<Object>();
         params.add(accountId);
 
-        SQL += new JdbcTransactionQueryRestrictor().getRestrictions(criteria, params);
+        SQL += getRestrictions(criteria, params);
 
         // Return in chronological order.
         SQL += " ORDER BY date, id";
@@ -113,6 +113,10 @@ public class JdbcTransactionDao extends NamedParameterJdbcDaoSupport implements 
             + " with search type = " + criteria.getSearchType());
 
         return transactions;
+    }
+
+    protected String getRestrictions(final TransactionCriteria criteria, final List<Object> params) {
+        return new JdbcTransactionQueryRestrictor().getRestrictions(criteria, params);
     }
 
     public void setSequenceDao(final JdbcSequenceDao sequenceDao) {

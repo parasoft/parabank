@@ -176,6 +176,14 @@
         <entry key="http://service.parabank.parasoft.com/" value="parabank"/>
     </util:map>
 
+	<!-- ========================= ENABLE SECURITY VULNERABILITIES ========================= -->
+
+	<!-- To disable security vulnerabilities comment out beans without Secure* classes
+		 and uncomment beans with Secure* classes -->
+
+	<!-- bean id="bookstoreService" class="com.parasoft.bookstore.SecureCartService" / -->
+	<bean id="bookstoreService" class="com.parasoft.bookstore.CartService" />
+
 	<!-- ========================= SERVICE IMPLEMENTATIONS ========================= -->
 
 	<bean id="wadlGenerator" class="com.parasoft.parabank.util.CustomWadlGenerator" />
@@ -218,7 +226,6 @@
 		<property name="loanProviderName" value="Wealth Securities Dynamic Loans (WSDL)" />
 	</bean>
 
-	<bean id="bookstoreService" class="com.parasoft.bookstore.CartService" />
 	<bean id="bookstoreServiceV2" class="com.parasoft.bookstore2.CartService" />
 
 	<bean id="store-02-Request" class="org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor">

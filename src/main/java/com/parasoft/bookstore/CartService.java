@@ -30,7 +30,7 @@ public class CartService implements ICartService {
     private static final Map<Integer, TempBook> addedBookIds = 
         Collections.synchronizedMap(new ConcurrentHashMap<Integer, TempBook>());
     private final CartManager cart = new CartManager();
-    private int invocationCounter = 0;
+    protected int invocationCounter = 0;
 
     /*
      * (non-Javadoc)
