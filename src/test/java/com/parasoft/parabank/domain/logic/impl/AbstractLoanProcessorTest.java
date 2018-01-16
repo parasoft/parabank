@@ -3,7 +3,6 @@ package com.parasoft.parabank.domain.logic.impl;
 import static org.junit.Assert.*;
 
 import java.lang.reflect.*;
-import java.math.*;
 
 import javax.annotation.*;
 
@@ -11,6 +10,7 @@ import org.junit.*;
 
 import com.parasoft.parabank.domain.*;
 import com.parasoft.parabank.domain.logic.*;
+import com.parasoft.parabank.domain.util.LoanRequestFactory;
 import com.parasoft.parabank.test.util.*;
 
 public abstract class AbstractLoanProcessorTest<T extends AbstractLoanProcessor>
@@ -21,8 +21,6 @@ public abstract class AbstractLoanProcessorTest<T extends AbstractLoanProcessor>
 
     @Resource(name = "adminManager")
     private AdminManager adminManager;
-
-    protected LoanRequest loanRequest;
 
     @SuppressWarnings("unchecked")
     protected AbstractLoanProcessorTest() {
@@ -37,9 +35,6 @@ public abstract class AbstractLoanProcessorTest<T extends AbstractLoanProcessor>
 
         processor = processorClass.newInstance();
         processor.setAdminManager(adminManager);
-
-        loanRequest = new LoanRequest();
-        loanRequest.setAvailableFunds(new BigDecimal("1000.00"));
     }
 
     public final void setAdminManager(final AdminManager adminManager) {
@@ -48,8 +43,7 @@ public abstract class AbstractLoanProcessorTest<T extends AbstractLoanProcessor>
 
     @Test
     public final void testProcessLoan() {
-        loanRequest.setLoanAmount(new BigDecimal("10000.00"));
-        loanRequest.setDownPayment(new BigDecimal("2000.00"));
+        LoanRequest loanRequest = LoanRequestFactory.create(1000, 2000, 10000);
         final LoanResponse response = processor.requestLoan(loanRequest);
         assertFalse(response.isApproved());
         assertNotNull(response.getResponseDate());

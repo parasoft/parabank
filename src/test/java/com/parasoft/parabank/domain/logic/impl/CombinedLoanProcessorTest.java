@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.math.*;
 
 import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.util.LoanRequestFactory;
 /**
  * @req PAR-34
  *
@@ -13,8 +14,7 @@ public class CombinedLoanProcessorTest
 extends AbstractLoanProcessorTest<CombinedLoanProcessor> {
     @Override
     public void assertProcessor() {
-        loanRequest.setDownPayment(BigDecimal.ZERO);
-        loanRequest.setLoanAmount(new BigDecimal("4900.00"));
+        LoanRequest loanRequest = LoanRequestFactory.create(1000, 0, 4900);
         LoanResponse response = processor.requestLoan(loanRequest);
         assertTrue(response.isApproved());
         assertNotNull(response.getResponseDate());
