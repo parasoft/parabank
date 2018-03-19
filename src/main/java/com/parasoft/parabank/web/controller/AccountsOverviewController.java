@@ -18,16 +18,13 @@ import com.parasoft.parabank.web.*;
 /**
  * Controller for displaying all user accounts
  */
-@Controller("secure_overview")
-@RequestMapping("/overview.htm")
-public class AccountsOverviewController extends AbstractBankController {
+@Controller("secure_overview") @RequestMapping("/overview.htm") public class AccountsOverviewController
+        extends AbstractBankController {
     private static final Logger log = LoggerFactory.getLogger(AccountsOverviewController.class);
 
-    @Resource(name = "accessModeController")
-    private AccessModeController accessModeController;
+    @Resource(name = "accessModeController") private AccessModeController accessModeController;
 
-    @Resource(name = "adminManager")
-    private AdminManager adminManager;
+    @Resource(name = "adminManager") private AdminManager adminManager;
 
     //    @RequestMapping(method = RequestMethod.GET)
     //    public ModelAndView handleRequest(final HttpServletRequest request) throws Exception {
@@ -65,10 +62,7 @@ public class AccountsOverviewController extends AbstractBankController {
         }
 
         final Map<String, Object> model = new HashMap<String, Object>();
-        model.put("accounts", accounts);
-        model.put("totalBalance", totalBalance);
-        model.put("totalAvailableBalance", totalAvailableBalance);
-
+        model.put("customerId", customer.getId());
         return new ModelAndView("overview", "model", model);
     }
 
