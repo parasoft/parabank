@@ -14,16 +14,9 @@ import com.parasoft.parabank.domain.*;
  * @req PAR-11
  * @req PAR-9
  * @req PAR-10
- *
  */
-@SuppressWarnings("unchecked")
-public class AccountsOverviewControllerTest extends AbstractBankControllerTest<AccountsOverviewController> {
-    private void assertUserAccounts(final int id, final int expectedSize) throws Exception {
-        request = registerSession(new MockHttpServletRequest(), id);
-        final ModelAndView mav = processGetRequest(request, new MockHttpServletResponse());
-        final List<Account> accounts = (List<Account>) getModelValue(mav, "accounts");
-        assertEquals(expectedSize, accounts.size());
-    }
+@SuppressWarnings("unchecked") public class AccountsOverviewControllerTest
+        extends AbstractBankControllerTest<AccountsOverviewController> {
 
     @Override
     public void onSetUp() throws Exception {
@@ -33,11 +26,18 @@ public class AccountsOverviewControllerTest extends AbstractBankControllerTest<A
         registerSession(request);
 
     }
-
+    /**
+     * Accounts details are loaded on the frontend side by calling directly parabank rest api.
+     * Controllers returns only customerId.
+     */
     @Test
-    public void testHandleRequest() throws Exception {
-        assertUserAccounts(12212, 11);
-        assertUserAccounts(12323, 1);
-        assertUserAccounts(3, 0);
+    public void overviewAccountsControllerShouldReturnOnlyCustomerId() throws Exception {
+        Integer customerId = 12212;
+        request = registerSession(new MockHttpServletRequest(), customerId);
+
+        final ModelAndView mav = processGetRequest(request, new MockHttpServletResponse());
+        Integer actualCustomerId = (Integer) getModelValue(mav, "customerId");
+
+        assertEquals(customerId, actualCustomerId);
     }
 }
