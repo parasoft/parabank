@@ -41,8 +41,8 @@ import com.parasoft.parabank.util.*;
         request.setParameter("id", id);
 
         final ModelAndView mav = processGetRequest(request, new MockHttpServletResponse());
-        Integer acccountId = (Integer) getModelValue(mav, "accountId");
+        Integer accountId = (Integer) getModelValue(mav, "accountId");
 
-        assertEquals(Integer.valueOf(id), acccountId);
+        assertEquals(Integer.valueOf(id), accountId);
     }
 }
