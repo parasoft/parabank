@@ -1,23 +1,27 @@
 package com.parasoft.parabank.web.controller;
 
-import java.math.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.annotation.*;
+import javax.annotation.Resource;
 
-import org.slf4j.*;
-import org.springframework.stereotype.*;
-import org.springframework.ui.*;
-import org.springframework.validation.*;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.domain.Account.*;
-import com.parasoft.parabank.domain.logic.*;
-import com.parasoft.parabank.util.*;
-import com.parasoft.parabank.web.*;
-import com.parasoft.parabank.web.form.*;
+import com.parasoft.parabank.domain.Account.AccountType;
+import com.parasoft.parabank.domain.logic.AdminManager;
+import com.parasoft.parabank.domain.logic.AdminParameters;
+import com.parasoft.parabank.util.AccessModeController;
+import com.parasoft.parabank.util.Constants;
+import com.parasoft.parabank.util.SessionParam;
+import com.parasoft.parabank.web.UserSession;
 
 /**
  * Controller for creating a new bank account
@@ -40,20 +44,6 @@ public class OpenAccountController extends AbstractBankController {
         return mav;
     }
 
-    @ModelAttribute("accounts")
-    public List<Integer> getAccountIds(@SessionParam(Constants.USERSESSION) final UserSession userSession) {
-        //final UserSession userSession = (UserSession) WebUtils.getRequiredSessionAttribute(request, Constants.USERSESSION);
-
-        final Customer customer = userSession.getCustomer();
-        final List<Account> accounts = bankManager.getAccountsForCustomer(customer);
-
-        final List<Integer> accountIds = new ArrayList<Integer>();
-        for (final Account account : accounts) {
-            accountIds.add(account.getId());
-        }
-        return accountIds;
-    }
-
     @ModelAttribute("types")
     public List<AccountType> getAccountTypes() {
         final List<AccountType> types = new ArrayList<AccountType>();
@@ -69,49 +59,55 @@ public class OpenAccountController extends AbstractBankController {
     public String getMinimumBalance() {
         return adminManager.getParameter(AdminParameters.MINIMUM_BALANCE);
     }
-
-    @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView onSubmit(@ModelAttribute(Constants.OPENACCOUNTFORM) final OpenAccountForm openAccountForm,
-        final BindingResult errors, @SessionParam(Constants.USERSESSION) final UserSession userSession)
-                throws Exception {
-        if (errors != null && errors.hasErrors()) {
-            return new ModelAndView(getFormView(), errors.getModel());
-        }
-
-        //        final UserSession userSession = (UserSession) WebUtils.getRequiredSessionAttribute(request, Constants.USERSESSION);
-        //final UserSession userSession = (UserSession) session.getAttribute(Constants.USERSESSION);
-        //        if (Util.isEmpty(userSession)) {
-        //            final String message = "No 'userSession' found on the current Http session";
-        //            log.error(message);
-        //            throw new IllegalStateException(message);
-        //        }
-
-        Account newAccount;
-
-        String accessMode = null;
-
-        if (adminManager != null) {
-            accessMode = adminManager.getParameter("accessmode");
-        }
-
-        if (!Util.isEmpty(accessMode) && !accessMode.equalsIgnoreCase("jdbc")) {
-            newAccount = accessModeController.createAccount(userSession.getCustomer().getId(),
-                openAccountForm.getType().ordinal(), openAccountForm.getFromAccountId());
-        } else {
-            newAccount = new Account();
-            newAccount.setCustomerId(userSession.getCustomer().getId());
-            newAccount.setType(openAccountForm.getType());
-            newAccount.setBalance(BigDecimal.ZERO);
-            bankManager.createAccount(newAccount, openAccountForm.getFromAccountId());
-            if (Util.isEmpty(accessMode)) {
-                log.warn("Using regular JDBC connection by default. accessMode not set.");
-            } else {
-                log.info("Using regular JDBC connection");
-            }
-        }
-
-        return new ModelAndView("openaccountConfirm", "account", newAccount);
+    
+    @ModelAttribute("customerId")
+    public int getCustomerId(@SessionParam(Constants.USERSESSION) final UserSession userSession) {
+        return userSession.getCustomer().getId();
     }
+
+
+    //    @RequestMapping(method = RequestMethod.POST)
+    //    public ModelAndView onSubmit(@ModelAttribute(Constants.OPENACCOUNTFORM) final OpenAccountForm openAccountForm,
+    //        final BindingResult errors, @SessionParam(Constants.USERSESSION) final UserSession userSession)
+    //                throws Exception {
+    //        if (errors != null && errors.hasErrors()) {
+    //            return new ModelAndView(getFormView(), errors.getModel());
+    //        }
+    //
+    //        //        final UserSession userSession = (UserSession) WebUtils.getRequiredSessionAttribute(request, Constants.USERSESSION);
+    //        //final UserSession userSession = (UserSession) session.getAttribute(Constants.USERSESSION);
+    //        //        if (Util.isEmpty(userSession)) {
+    //        //            final String message = "No 'userSession' found on the current Http session";
+    //        //            log.error(message);
+    //        //            throw new IllegalStateException(message);
+    //        //        }
+    //
+    //        Account newAccount;
+    //
+    //        String accessMode = null;
+    //
+    //        if (adminManager != null) {
+    //            accessMode = adminManager.getParameter("accessmode");
+    //        }
+    //
+    //        if (!Util.isEmpty(accessMode) && !accessMode.equalsIgnoreCase("jdbc")) {
+    //            newAccount = accessModeController.createAccount(userSession.getCustomer().getId(),
+    //                openAccountForm.getType().ordinal(), openAccountForm.getFromAccountId());
+    //        } else {
+    //            newAccount = new Account();
+    //            newAccount.setCustomerId(userSession.getCustomer().getId());
+    //            newAccount.setType(openAccountForm.getType());
+    //            newAccount.setBalance(BigDecimal.ZERO);
+    //            bankManager.createAccount(newAccount, openAccountForm.getFromAccountId());
+    //            if (Util.isEmpty(accessMode)) {
+    //                log.warn("Using regular JDBC connection by default. accessMode not set.");
+    //            } else {
+    //                log.info("Using regular JDBC connection");
+    //            }
+    //        }
+    //
+    //        return new ModelAndView("openaccountConfirm", "account", newAccount);
+    //    }
 
     @Override
     public void setAccessModeController(final AccessModeController accessModeController) {
