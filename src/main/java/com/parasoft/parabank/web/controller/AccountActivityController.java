@@ -93,9 +93,7 @@ public class AccountActivityController extends AbstractBankController {
             }
             log.info("got {} transactions for account id: {}", transactions == null ? 0 : transactions.size(), account);
 
-            model.put("account", account);
-            model.put("transactions", transactions);
-
+            model.put("accountId", account.getId());
             modelAndView.addObject("model", model);
         } catch (final NumberFormatException e) {
             log.error("Invalid account id = " + id, e);

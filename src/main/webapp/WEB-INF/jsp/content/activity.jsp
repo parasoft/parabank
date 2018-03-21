@@ -3,54 +3,119 @@
 
 <h1 class="title"><fmt:message key="account.details"/></h1>
 
-<table>
+<div ng-app="AccountDetailsApp">
+
+<table ng-controller="AccountDetailsCtrl">
   <tr>
     <td align="right"><fmt:message key="account.number"/>:</td>
-    <td id="accountId">${model.account.id}</td>
+    <td id="accountId">{{account.id}}</td>
   </tr>
   <tr>
     <td align="right"><fmt:message key="account.type"/>:</td>
-    <td id="accountType">${model.account.type}</td>
+    <td id="accountType">{{account.type}}</td>
   </tr>
   <tr>
     <td align="right"><fmt:message key="account.balance"/>:</td>
-    <td id="balance"><fmt:formatNumber type="currency" pattern="$0.00;-$0.00" value="${model.account.balance}"/></td>
+    <td id="balance">{{account.balance | currency: "$" : 2}}</td>
   </tr>
   <tr>
     <td align="right"><fmt:message key="account.available.balance"/>:</td>
-    <td id="availableBalance"><fmt:formatNumber type="currency" pattern="$0.00;-$0.00" value="${model.account.availableBalance}"/></td>
+    <td id="availableBalance">{{account.availableBalance | currency: "$" : 2}}</td>
   </tr>
 </table>
 
 <br/>
 
-<h1 class="title"><fmt:message key="account.activity"/></h1>
+  <h1 class="title"><fmt:message key="account.activity"/></h1>
+  <div ng-controller="AccountActivityCtrl">
+    <form ng-submit="submit()">
+      <table class="form_activity">
+        <tr>
+          <td align="right"><b><fmt:message key="activity.period"/>:</b></td>
+          <td>
+              <select id="month" name="month" class="input" ng-init="activityPeriod = '${months[0]}'" ng-model="activityPeriod">
+                <c:forEach items="${months}" var="month">
+                  <option value="${month}">${month}</option>
+                </c:forEach>
+              </select>
+          </td>
+        </tr>
+        <tr>
+          <td align="right"><b><fmt:message key="transaction.type"/>:</b></td>
+          <td>
+            <select id="transactionType" name="transactionType" class="input" ng-init="type = '${types[0]}'" ng-model="type">
+              <c:forEach items="${types}" var="type">
+                <option value="${type}">${type}</option>
+              </c:forEach>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td><input type="submit" class="button" value="Go"></td>
+        </tr>
+      </table>
+    </form>
 
-<form:form method="post" commandName="transactionCriteria">
-<table class="form_activity">
-  <tr>
-    <td align="right"><b><fmt:message key="activity.period"/>:</b></td>
-    <td>
-      <form:select cssClass="input" path="month">
-        <form:options items="${months}"/>
-      </form:select>
-    </td>
-  </tr>
-  <tr>
-    <td align="right"><b><fmt:message key="transaction.type"/>:</b></td>
-    <td>
-      <form:select cssClass="input" path="transactionType">
-        <form:options items="${types}"/>
-      </form:select>
-    </td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td><input type="submit" class="button" value="Go"></td>
-  </tr>
-</table>
-</form:form>
+    <br/>
 
-<br/>
+      <p ng-if="transactions.length <= 0">
+        <b><fmt:message key="no.transactions.found"/></b>
+      </p>
 
-<jsp:include page="transactions.jsp"/>
+      <table ng-if="transactions.length > 0" id="transactionTable" class="gradient-style" >
+            <thead>
+              <tr>
+                <th><fmt:message key="date"/></th>
+                <th><fmt:message key="transaction"/></th>
+                <th><fmt:message key="debit"/></th>
+                <th><fmt:message key="credit"/></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="transaction in transactions">
+                <td>{{transaction.date | date:'MM-dd-yyyy'}}</td>
+                <td><a href="/parabank/transaction.htm?id={{transaction.id}}">{{transaction.description}}</a></td>
+
+                <td ng-if="transaction.type == 'Debit'">{{transaction.amount | currency: "$" : 2}}</td>
+                <td ng-if="transaction.type != 'Debit'"></td>
+
+                <td ng-if="transaction.type == 'Credit'">{{transaction.amount | currency: "$" : 2}}</td>
+                <td ng-if="transaction.type != 'Credit'"></td>
+              </tr>
+            </tbody>
+      </table>
+  </div>
+
+</div>
+
+<script>
+    var app = angular.module('AccountDetailsApp', []);
+
+    app.controller('AccountDetailsCtrl', function ($scope, $http) {
+        $http.get("/parabank/services/bank/accounts/${model.accountId}")
+            .then(function (response) {
+                $scope.account = response.data;
+                $scope.account.availableBalance = getAvailableBalance($scope.account);
+            });
+
+        function getAvailableBalance(account) {
+            return account.balance < 0 ? 0 : account.balance;
+        }
+    });
+
+    app.controller('AccountActivityCtrl', function ($scope, $http) {
+        $http.get("/parabank/services/bank/accounts/${model.accountId}/transactions")
+            .then(function (response) {
+                $scope.transactions = [];
+                $scope.transactions = response.data;
+            });
+
+        $scope.submit = function() {
+            $http.get("/parabank/services/bank/accounts/${model.accountId}/transactions/month/" + $scope.activityPeriod + "/type/" + $scope.type)
+                .then(function (response) {
+                    $scope.transactions = response.data;
+                });
+        };
+    });
+</script>

@@ -28,7 +28,7 @@ import com.parasoft.parabank.domain.*;
     }
     /**
      * Accounts details are loaded on the frontend side by calling directly parabank rest api.
-     * Controllers returns only customerId.
+     * Controller returns only customerId.
      */
     @Test
     public void overviewAccountsControllerShouldReturnOnlyCustomerId() throws Exception {
