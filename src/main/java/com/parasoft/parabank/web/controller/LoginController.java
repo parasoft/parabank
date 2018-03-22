@@ -46,18 +46,20 @@ public class LoginController extends AbstractBankController {
             log.warn("Empty username and/or password used for login");
             return ViewUtil.createErrorView("error.empty.username.or.password");
         }
-
-        // login function is handled by the appropriate access mode handler
-        customer = accessModeController.login(username, password);
-
-        if (customer == null) {
-            log.warn("Invalid login attempt with username = " + username + " and password = " + password);
-            return ViewUtil.createErrorView("error.invalid.username.or.password");
+        
+        if (!Util.isLoggedIn(session, username, password)) {
+	        // login function is handled by the appropriate access mode handler
+	        customer = accessModeController.login(username, password);
+	
+	        if (customer == null) {
+	            log.warn("Invalid login attempt with username = " + username + " and password = " + password);
+	            return ViewUtil.createErrorView("error.invalid.username.or.password");
+	        }
+	
+	        final UserSession userSession = new UserSession(customer);
+	        session.setAttribute(Constants.USERSESSION, userSession);
+	        //final String forwardAction = request.getParameter("forwardAction");
         }
-
-        final UserSession userSession = new UserSession(customer);
-        session.setAttribute(Constants.USERSESSION, userSession);
-        //final String forwardAction = request.getParameter("forwardAction");
 
         if (forwardAction != null) {
             log.info("Forwarding response to original request url: " + forwardAction);
