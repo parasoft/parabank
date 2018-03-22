@@ -84,3 +84,5 @@
 .headline {
     color: #3979AA;	
 }
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
