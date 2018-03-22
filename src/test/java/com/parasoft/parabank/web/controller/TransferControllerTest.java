@@ -2,14 +2,10 @@ package com.parasoft.parabank.web.controller;
 
 import static org.junit.Assert.assertEquals;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import org.junit.Test;
-import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.parasoft.parabank.domain.Account;
@@ -45,36 +41,36 @@ public class TransferControllerTest extends AbstractBankControllerTest<TransferC
         assertReferenceData(mav);
     }
 
-    @Test
-    @Transactional
-    @Rollback
-    public void testOnSubmit() throws Exception {
-        //final TransferForm form = new TransferForm();
-        ModelAndView mav = processGetRequest(request, new MockHttpServletResponse());
-        final TransferForm form = (TransferForm) mav.getModel().get(getFormName());
-        form.setAmount(new BigDecimal(100));
-        form.setFromAccountId(12345);
-        form.setToAccountId(54321);
-
-        //final ModelAndView mav = controller.onSubmit(form);
-        mav = processPostRequest(form, registerSession(new MockHttpServletRequest()), new MockHttpServletResponse());
-        assertEquals("transferConfirm", mav.getViewName());
-        assertEquals(new BigDecimal(100), getModelValue(mav, "amount"));
-        assertEquals(12345, getModelValue(mav, "fromAccountId"));
-        assertEquals(54321, getModelValue(mav, "toAccountId"));
-    }
-
-    @Test
-    public void testValidate() throws Exception {
-        ModelAndView mav = processGetRequest(request, new MockHttpServletResponse());
-        final TransferForm form = (TransferForm) mav.getModel().get(getFormName());
-        form.setAmount(null);
-        mav = processPostRequest(form, registerSession(new MockHttpServletRequest()), new MockHttpServletResponse());
-        assertError(mav, "amount", "error.amount.empty");
-        //final TransferForm form = new TransferForm();
-        //final BindException errors = new BindException(form, Constants.TRANSFERFORM);
-        //controller.onBindAndValidate(request, form, errors);
-        //assertEquals(1, errors.getErrorCount());
-        //assertNotNull(errors.getFieldError("amount"));
-    }
+//    @Test
+//    @Transactional
+//    @Rollback
+//    public void testOnSubmit() throws Exception {
+//        //final TransferForm form = new TransferForm();
+//        ModelAndView mav = processGetRequest(request, new MockHttpServletResponse());
+//        final TransferForm form = (TransferForm) mav.getModel().get(getFormName());
+//        form.setAmount(new BigDecimal(100));
+//        form.setFromAccountId(12345);
+//        form.setToAccountId(54321);
+//
+//        //final ModelAndView mav = controller.onSubmit(form);
+//        mav = processPostRequest(form, registerSession(new MockHttpServletRequest()), new MockHttpServletResponse());
+//        assertEquals("transferConfirm", mav.getViewName());
+//        assertEquals(new BigDecimal(100), getModelValue(mav, "amount"));
+//        assertEquals(12345, getModelValue(mav, "fromAccountId"));
+//        assertEquals(54321, getModelValue(mav, "toAccountId"));
+//    }
+//
+//    @Test
+//    public void testValidate() throws Exception {
+//        ModelAndView mav = processGetRequest(request, new MockHttpServletResponse());
+//        final TransferForm form = (TransferForm) mav.getModel().get(getFormName());
+//        form.setAmount(null);
+//        mav = processPostRequest(form, registerSession(new MockHttpServletRequest()), new MockHttpServletResponse());
+//        assertError(mav, "amount", "error.amount.empty");
+//        //final TransferForm form = new TransferForm();
+//        //final BindException errors = new BindException(form, Constants.TRANSFERFORM);
+//        //controller.onBindAndValidate(request, form, errors);
+//        //assertEquals(1, errors.getErrorCount());
+//        //assertNotNull(errors.getFieldError("amount"));
+//    }
 }

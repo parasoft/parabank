@@ -1,21 +1,26 @@
 package com.parasoft.parabank.web.controller;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.annotation.*;
+import javax.annotation.Resource;
 
-import org.springframework.stereotype.*;
-import org.springframework.ui.*;
-import org.springframework.validation.*;
-import org.springframework.validation.annotation.*;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.Validator;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.domain.logic.*;
-import com.parasoft.parabank.util.*;
-import com.parasoft.parabank.web.*;
-import com.parasoft.parabank.web.form.*;
+import com.parasoft.parabank.domain.Account;
+import com.parasoft.parabank.domain.Customer;
+import com.parasoft.parabank.domain.logic.AdminManager;
+import com.parasoft.parabank.util.AccessModeController;
+import com.parasoft.parabank.util.Constants;
+import com.parasoft.parabank.util.SessionParam;
+import com.parasoft.parabank.web.UserSession;
 
 /**
  * Controller for transferring funds between accounts
@@ -45,42 +50,15 @@ public class TransferController extends AbstractValidatingBankController {
         return accountIds;
     }
 
+    @ModelAttribute("customerId")
+    public int getCustomerId(@SessionParam(Constants.USERSESSION) final UserSession userSession) {
+        return userSession.getCustomer().getId();
+    }
+
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView getTransferForm(final Model model) throws Exception {
         final ModelAndView mav = super.prepForm(model);
         return mav;
-    }
-
-    @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView onSubmit(@Validated @ModelAttribute(Constants.TRANSFERFORM) final TransferForm transferForm,
-        final BindingResult errors) throws Exception {
-        //final TransferForm transferForm = (TransferForm) command;
-        if (errors.hasErrors()) {
-            return new ModelAndView(getFormView(), errors.getModel());
-        }
-
-        String accessMode = null;
-
-        if (adminManager != null) {
-            accessMode = adminManager.getParameter("accessmode");
-        }
-
-        if (accessMode != null && !accessMode.equalsIgnoreCase("jdbc")) {
-            accessModeController.doTransfer(transferForm.getFromAccountId(), transferForm.getToAccountId(),
-                transferForm.getAmount());
-        }
-
-        else {
-            bankManager.transfer(transferForm.getFromAccountId(), transferForm.getToAccountId(),
-                transferForm.getAmount());
-        }
-
-        final Map<String, Object> model = new HashMap<String, Object>();
-        model.put("amount", transferForm.getAmount());
-        model.put("fromAccountId", transferForm.getFromAccountId());
-        model.put("toAccountId", transferForm.getToAccountId());
-
-        return new ModelAndView("transferConfirm", "model", model);
     }
 
     @Override
