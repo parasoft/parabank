@@ -98,7 +98,7 @@
     var app = angular.module('AccountDetailsApp', []);
 
     app.controller('AccountDetailsCtrl', function ($scope, $rootScope, $http) {
-        $http.get("/parabank/services/bank/accounts/${model.accountId}", {timeout:30000})
+        $http.get("/parabank/services_proxy/bank/accounts/${model.accountId}", {timeout:30000})
             .then(function (response) {
                 $scope.account = response.data;
                 $scope.account.availableBalance = getAvailableBalance($scope.account);
@@ -113,7 +113,7 @@
     });
 
     app.controller('AccountActivityCtrl', function ($scope, $rootScope, $http) {
-        $http.get("/parabank/services/bank/accounts/${model.accountId}/transactions", {timeout:30000})
+        $http.get("/parabank/services_proxy/bank/accounts/${model.accountId}/transactions", {timeout:30000})
             .then(function (response) {
                 $scope.transactions = [];
                 $scope.transactions = response.data;
@@ -123,7 +123,7 @@
             });
 
         $scope.submit = function() {
-            $http.get("/parabank/services/bank/accounts/${model.accountId}/transactions/month/" + $scope.activityPeriod + "/type/" + $scope.type, {timeout:30000})
+            $http.get("/parabank/services_proxy/bank/accounts/${model.accountId}/transactions/month/" + $scope.activityPeriod + "/type/" + $scope.type, {timeout:30000})
                 .then(function (response) {
                     $scope.transactions = response.data;
                 })

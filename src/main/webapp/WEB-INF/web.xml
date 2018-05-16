@@ -71,20 +71,19 @@
 	</filter-mapping>
 -->
 	<servlet-mapping>
+		<servlet-name>parabank</servlet-name>
+		<url-pattern>/services_proxy/*</url-pattern>
+		<url-pattern>*.htm</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
 		<servlet-name>cxf</servlet-name>
 		<url-pattern>/services/*</url-pattern>
 	</servlet-mapping>
 
-	<servlet-mapping>
-		<servlet-name>parabank</servlet-name>
-		<url-pattern>*.htm</url-pattern>
-	</servlet-mapping>
-
-
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
-
 
 	<error-page>
 		<error-code>500</error-code>

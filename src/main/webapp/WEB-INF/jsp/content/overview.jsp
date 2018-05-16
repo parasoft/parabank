@@ -46,7 +46,7 @@
         $scope.showOverview = true;
         $scope.showError = false;
         
-        $http.get("/parabank/services/bank/customers/" + ${model.customerId} + "/accounts", {timeout:30000})
+        $http.get("/parabank/services_proxy/bank/customers/" + ${model.customerId} + "/accounts", {timeout:30000})
             .then(function (response) {
                 $scope.accounts = [];
                 $scope.accounts = response.data;

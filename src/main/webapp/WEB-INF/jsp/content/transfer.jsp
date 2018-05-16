@@ -53,7 +53,7 @@
 
         $scope.getAccounts = function() {
         	
-            $http.get("/parabank/services/bank/customers/${customerId}/accounts", {timeout:30000})
+            $http.get("/parabank/services_proxy/bank/customers/${customerId}/accounts", {timeout:30000})
                 .then(function(response) {
                     $scope.accounts = response.data;
                     $scope.accounts.fromAccountId = $scope.accounts[0];
@@ -70,7 +70,7 @@
             $scope.fromAccountId = $scope.accounts.fromAccountId.id;
             $scope.toAccountId =  $scope.accounts.toAccountId.id;
 
-            var url = "services/bank/transfer?fromAccountId=" + $scope.fromAccountId + "&toAccountId=" + $scope.toAccountId +"&amount=" + $scope.amount;
+            var url = "services_proxy/bank/transfer?fromAccountId=" + $scope.fromAccountId + "&toAccountId=" + $scope.toAccountId +"&amount=" + $scope.amount;
 
         	$http.defaults.transformResponse = [];
             $http.post(url, "", {timeout:30000})
