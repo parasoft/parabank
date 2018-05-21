@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:amq="http://activemq.apache.org/schema/core"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+       	http://www.springframework.org/schema/mvc
+       	http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+       	http://www.springframework.org/schema/context
+       	http://www.springframework.org/schema/context/spring-context-4.2.xsd
+       	http://www.springframework.org/schema/util
+       	http://www.springframework.org/schema/util/spring-util-4.2.xsd
+       	http://activemq.apache.org/schema/core 
+       	http://activemq.apache.org/schema/core/activemq-core.xsd        
+        http://www.springframework.org/schema/jdbc 
+        http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd">
+
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+		lazy-init="false">
+		<property name="locations">
+			<list>
+				<value>classpath:jms.properties</value>
+				<value>classpath:jdbc.properties</value>
+				<value>classpath:jdbcBookstore.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<import resource="classpath*:/**/parabank-servlet.xml" />
+	<import resource="classpath*:/**/applicationContext-base.xml" />
+	<!-- The other two configuration files (jms & hsqldb) are represented by 
+		the beans below -->
+
+	<!-- the test application context definition for the jdbc based tests -->
+
+	<!-- <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource"> 
+		<property name="basename" value="messages" /> </bean> <bean id="viewResolver" 
+		class="com.parasoft.parabank.web.TemplateViewResolver"> <property name="viewClass" 
+		value="org.springframework.web.servlet.view.JstlView"></property> <property 
+		name="prefix" value="/WEB-INF/jsp/"></property> <property name="suffix" value=".jsp"></property> 
+		</bean> -->
+	<bean id="paraBankService" class="com.parasoft.parabank.service.ParaBankServiceImpl">
+		<property name="adminManager" ref="adminManager" />
+		<property name="bankManager" ref="bankManager" />
+	</bean>
+
+	<bean id="loanProcessorService" class="com.parasoft.parabank.service.LoanProcessorServiceImpl">
+		<property name="loanProcessor" ref="loanProvider" />
+		<property name="loanProviderName" value="Test Provider" />
+	</bean>
+	<!-- <bean id="adminManager" class="com.parasoft.parabank.domain.logic.impl.AdminManagerImpl"> 
+		<property name="adminDao" ref="adminDao" /> <property name="jmsListener" 
+		ref="jmsListener" /> </bean> <bean id="bankManager" class="com.parasoft.parabank.domain.logic.impl.BankManagerImpl"> 
+		<property name="accountDao" ref="accountDao" /> <property name="customerDao" 
+		ref="customerDao" /> <property name="positionDao" ref="positionDao" /> <property 
+		name="transactionDao" ref="transactionDao" /> <property name="adminDao" ref="adminDao" 
+		/> <property name="loanProvider" ref="loanProvider" /> </bean> <bean id="databaseController" 
+		class="com.parasoft.parabank.web.controller.DatabaseController"> <property 
+		name="adminManager" ref="adminManager" /> </bean> <bean id="loginController" 
+		class="com.parasoft.parabank.web.controller.LoginController"> <property name="accessModeController" 
+		ref="accessModeController" /> </bean> <bean id="accessModeController" class="com.parasoft.parabank.util.AccessModeController"> 
+		<property name="bankManager" ref="bankManager" /> <property name="adminManager" 
+		ref="adminManager" /> </bean> <bean id="newsManager" class="com.parasoft.parabank.domain.logic.impl.NewsManagerImpl"> 
+		<property name="newsDao" ref="newsDao" /> </bean> <bean id="stockDataInserter" 
+		class="com.parasoft.parabank.dao.jdbc.internal.StockDataInserter"> <property 
+		name="dataSource" ref="dataSource" /> <property name="sequenceDao" ref="sequenceDao" 
+		/> </bean> -->
+	<bean id="loanProvider"
+		class="com.parasoft.parabank.domain.logic.impl.ConfigurableLoanProvider">
+		<property name="adminManager" ref="adminManager" />
+		<property name="loanProviders">
+			<map>
+				<entry key="funds">
+					<bean
+						class="com.parasoft.parabank.domain.logic.impl.AvailableFundsLoanProcessor">
+						<property name="adminManager" ref="adminManager" />
+					</bean>
+				</entry>
+				<entry key="ws" value-ref="wsLoanProvider" />
+			</map>
+		</property>
+		<property name="parameter" value="loanProcessor" />
+	</bean>
+
+	<bean id="wsLoanProvider" class="com.parasoft.parabank.messaging.WebServiceLoanProvider">
+		<property name="adminManager" ref="adminManager" />
+		<property name="wsdlUrl"
+			value="http://localhost:19089/wsdl/parabank/services/LoanProcessor?wsdl" />
+	</bean>
+<!-- 	<util:list id="resources" value-type="com.parasoft.parabank.test.util.LoanRequestTestConfig">
+		<bean id="wsdl" class="com.parasoft.parabank.test.util.LoanRequestTestConfig">
+			<property name="amount" value="wsdl"/>
+			<property name="response" value="url-ref/LoanService.wsdl"/>
+		</bean>
+		<bean id="10" class="com.parasoft.parabank.test.util.LoanRequestTestConfig">
+			<property name="amount" value="10"/>
+			<property name="response" value="url-ref/Success.xml"/>
+		</bean>
+		<bean id="100" class="com.parasoft.parabank.test.util.LoanRequestTestConfig">
+			<property name="amount" value="100"/>
+			<property name="response" value="url-ref/Success.xml"/>
+		</bean>
+		<bean id="1000" class="com.parasoft.parabank.test.util.LoanRequestTestConfig">
+			<property name="amount" value="1000"/>
+			<property name="response" value="url-ref/Success.xml"/>
+		</bean>
+		<bean id="10000" class="com.parasoft.parabank.test.util.LoanRequestTestConfig">
+			<property name="amount" value="10000"/>
+			<property name="response" value="url-ref/InsufficientFunds.xml"/>
+			<property name="success" value="false" />
+			<property name="message" value="error.insufficient.funds" />
+		</bean>
+	</util:list> -->
+	
+
+	<!-- <bean id="accountDao" class="com.parasoft.parabank.dao.jdbc.JdbcAccountDao"> 
+		<property name="dataSource" ref="dataSource" /> <property name="sequenceDao" 
+		ref="sequenceDao" /> </bean> <bean id="adminDao" class="com.parasoft.parabank.dao.jdbc.JdbcAdminDao"> 
+		<property name="dataSource" ref="dataSource" /> <property name="inserters"> 
+		<list> <ref bean="stockDataInserter" /> </list> </property> </bean> <bean 
+		id="customerDao" class="com.parasoft.parabank.dao.jdbc.JdbcCustomerDao"> 
+		<property name="dataSource" ref="dataSource" /> <property name="sequenceDao" 
+		ref="sequenceDao" /> </bean> <bean id="newsDao" class="com.parasoft.parabank.dao.jdbc.JdbcNewsDao"> 
+		<property name="dataSource" ref="dataSource" /> </bean> <bean id="positionDao" 
+		class="com.parasoft.parabank.dao.jdbc.JdbcPositionDao"> <property name="dataSource" 
+		ref="dataSource" /> <property name="sequenceDao" ref="sequenceDao" /> </bean> 
+		<bean id="sequenceDao" class="com.parasoft.parabank.dao.jdbc.JdbcSequenceDao"> 
+		<property name="dataSource" ref="dataSource" /> </bean> <bean id="transactionDao" 
+		class="com.parasoft.parabank.dao.jdbc.JdbcTransactionDao"> <property name="dataSource" 
+		ref="dataSource" /> <property name="sequenceDao" ref="sequenceDao" /> </bean> -->
+	<bean id="mockJmsListener"
+		class="com.parasoft.parabank.messaging.MockJmsListeningContainer">
+		<property name="connectionFactory">
+			<bean class="com.parasoft.parabank.messaging.MockConnectionFactory" />
+		</property>
+	</bean>
+	<!-- ========================= PROPERTIES ========================= -->
+
+
+	<!-- ========================= XML MARSHALLER ========================= -->
+
+	<bean id="jaxb2Marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+		<property name="classesToBeBound">
+			<list>
+				<value>com.parasoft.parabank.domain.LoanRequest</value>
+				<value>com.parasoft.parabank.domain.LoanResponse</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- ========================= JMS ========================= -->
+
+	<bean id="jmsLoanProcessor" class="com.parasoft.parabank.messaging.JmsLoanProcessor">
+		<property name="jmsTemplate" ref="jmsTemplate" />
+		<property name="marshaller" ref="jaxb2Marshaller" />
+		<property name="unmarshaller" ref="jaxb2Marshaller" />
+		<property name="loanProcessor" ref="loanProcessor" />
+		<property name="destinationName" value="queue.test.response" />
+		<property name="loanProviderName" value="Jiffy Mortgage Solutions (JMS)" />
+	</bean>
+
+	<bean id="jmsListener"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="concurrentConsumers" value="5" />
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="destinationName" value="queue.test.request" />
+		<property name="messageListener" ref="jmsLoanProcessor" />
+	</bean>
+
+	<bean id="jndiTemplate" class="org.springframework.jndi.JndiTemplate">
+		<property name="environment">
+			<props>
+				<prop key="java.naming.factory.initial">${jndi.factory.initial}</prop>
+				<prop key="java.naming.provider.url">${jndi.url}</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="receiveTimeout" value="30000" />
+	</bean>
+
+	<bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL" value="tcp://localhost:62616" />
+	</bean>
+
+
+	<bean id="jmsLoanProvider" class="com.parasoft.parabank.messaging.JmsLoanProvider">
+		<property name="jmsTemplate" ref="jmsTemplate" />
+		<property name="marshaller" ref="jaxb2Marshaller" />
+		<property name="unmarshaller" ref="jaxb2Marshaller" />
+		<property name="requestDestinationName" value="queue.test.request" />
+		<property name="responseDestinationName" value="queue.test.response" />
+	</bean>
+	<!-- <bean id="jmsLoanProcessor" class="com.parasoft.parabank.messaging.JmsLoanProcessor"> 
+		<property name="marshaller" ref="jaxb2Marshaller" /> <property name="unmarshaller" 
+		ref="jaxb2Marshaller" /> <property name="loanProcessor" ref="loanProvider" 
+		/> <property name="destinationName" value="queue.test.response" /> </bean> -->
+	<!-- <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate"> 
+		<property name="connectionFactory" ref="connectionFactory" /> </bean> -->
+
+	<!-- <bean id="jaxb2Marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller"> 
+		<property name="classesToBeBound"> <list> <value>com.parasoft.parabank.domain.LoanRequest</value> 
+		<value>com.parasoft.parabank.domain.LoanResponse</value> </list> </property> 
+		</bean> -->
+	<bean id="hsqldb" class="com.parasoft.parabank.util.ServerBean"
+		lazy-init="false">
+		<property name="databasePath" value="target/test-db/db"></property>
+		<property name="databasePath2" value="target/test-db/db2"></property>
+		<property name="dataSource" ref="dataSource" />
+		<property name="serverProperties">
+			<props>
+				<prop key="server.database.0">file:parabank</prop>
+				<prop key="server.dbname.0">parabank</prop>
+				<prop key="server.database.1">bookstore</prop>
+				<prop key="server.dbname.1">bookstore</prop>
+				<prop key="server.silent">true</prop>
+				<prop key="server.port">9012</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+
+	<bean id="BookstoreDS" class="org.apache.commons.dbcp2.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.bookstoreDriverClassName}" />
+		<property name="url" value="${jdbc.bookstoreURL}" />
+		<property name="username" value="${jdbc.bookstoreUsername}" />
+		<property name="password" value="${jdbc.bookstorePassword}" />
+	</bean>
+
+	<bean id="txManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- <amq:broker useJmx="false" persistent="false">
+		<amq:destinationInterceptors>
+			<amq:mirroredQueue copyMessage="true" postfix=".mirror"
+				prefix="" />
+		</amq:destinationInterceptors>
+		<amq:transportConnectors>
+			<amq:transportConnector uri="tcp://localhost:62616" />
+		</amq:transportConnectors>
+	</amq:broker> -->
+
+	<!-- initialize parabank data source -->
+	<jdbc:initialize-database data-source="dataSource">
+		<jdbc:script location="classpath*:/**/parabank/dao/jdbc/sql/create.sql" />
+		<jdbc:script location="classpath*:/**/parabank/dao/jdbc/sql/insert.sql" />
+	</jdbc:initialize-database>
+
+	<!-- initialize bookstore data source -->
+	<jdbc:initialize-database data-source="BookstoreDS">
+		<jdbc:script location="classpath*:/**/bookstore/jdbc/sql/bookstoreCreate.sql" />
+		<jdbc:script location="classpath*:/**/bookstore/jdbc/sql/bookstoreInsert.sql" />
+	</jdbc:initialize-database>
+
+	<!-- <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> 
+		<property name="dataSource" ref="dataSource" /> </bean> ========================= 
+		CUSTOM ANNOTATION RESOLVERS ========================= <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"> 
+		<property name="customArgumentResolvers"> <list> <ref bean="sessionArgResolver" 
+		/> </list> </property> <property name="synchronizeOnSession" value="true" 
+		/> </bean> <bean id="sessionArgResolver" class="com.parasoft.parabank.util.SessionParamArgumentResolver" 
+		/> -->
+</beans>
