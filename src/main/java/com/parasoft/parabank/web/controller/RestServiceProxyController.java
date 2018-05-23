@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.parasoft.parabank.domain.Account;
 import com.parasoft.parabank.domain.Account.AccountType;
 import com.parasoft.parabank.domain.Customer;
+import com.parasoft.parabank.domain.LoanResponse;
 import com.parasoft.parabank.domain.Transaction;
 import com.parasoft.parabank.domain.TransactionCriteria;
 import com.parasoft.parabank.domain.TransactionCriteria.SearchType;
@@ -164,6 +165,25 @@ public class RestServiceProxyController extends AbstractBankController{
 		}
 		return "Successfully transferred $" + amount + " from account #" + fromAccountId + " to account #"
         		+ toAccountId;
+	}
+	
+	@RequestMapping(value ="bank/requestLoan", method = RequestMethod.POST, produces = "application/json")
+	public LoanResponse requestLoan(
+			@RequestParam("customerId") Integer customerId,
+			@RequestParam("amount") BigDecimal amount,
+			@RequestParam("downPayment") BigDecimal downPayment,
+			@RequestParam("fromAccountId") Integer fromAccountId) throws Exception
+	{
+		String accessMode = null;
+		if (adminManager != null) {
+            accessMode = adminManager.getParameter("accessmode");
+        }
+		if (accessMode != null && !accessMode.equalsIgnoreCase("jdbc")) {
+			return accessModeController.doRequestLoan(customerId, amount, downPayment, fromAccountId);
+		} else {
+			// default JDBC
+			return bankManager.requestLoan(customerId, amount, downPayment, fromAccountId);
+		}
 	}
 
 }

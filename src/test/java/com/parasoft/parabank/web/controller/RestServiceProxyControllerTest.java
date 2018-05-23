@@ -22,6 +22,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
@@ -144,5 +145,19 @@ public class RestServiceProxyControllerTest {
 		.andExpect(jsonPath("$.availableBalance", is(0)))
 		.andExpect(jsonPath("$.customerId", is(customerId)))
 		.andExpect(jsonPath("$.type", is("CHECKING")));
+	}
+	
+	@Test
+	public void testRequestLoan() throws Exception {
+		mockMvc.perform(
+				post("/bank/requestLoan")
+				.contentType(MediaType.APPLICATION_JSON)
+				.param("customerId", "" + customerId)
+				.param("amount", "1000")
+				.param("downPayment", "200")
+				.param("fromAccountId", "13122")
+				.accept(MediaType.APPLICATION_JSON))
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("$.approved", is(true)));
 	}
 }
