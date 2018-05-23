@@ -1,6 +1,8 @@
 package com.parasoft.parabank.web.controller;
 
 import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -64,6 +66,7 @@ public class RestServiceProxyController extends AbstractBankController{
             accounts = bankManager.getAccountsForCustomer(customer);
             log.warn("Using regular JDBC connection");
         }
+		Collections.sort(accounts, Comparator.comparingInt(Account::getId));
 		return accounts;
 	}
 	
