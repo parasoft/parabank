@@ -6,10 +6,14 @@ import java.net.*;
 import java.util.*;
 
 import javax.management.*;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.*;
 import org.slf4j.*;
 import org.springframework.context.*;
+
+import com.parasoft.parabank.domain.Customer;
+import com.parasoft.parabank.web.UserSession;
 
 /**
  * Utility methods for ParaBank
@@ -26,6 +30,19 @@ public final class Util {
      */
     public static final boolean equals(final Object o1, final Object o2) {
         return o1 == o2 || o1 != null && o1.equals(o2);
+    }
+    
+    public static boolean isLoggedIn(HttpSession session, String username, String password)
+    {
+        UserSession userSession = (UserSession) session.getAttribute(Constants.USERSESSION);
+    	if (userSession == null) {
+    		return false;
+    	}
+    	Customer customer = userSession.getCustomer();
+    	if (customer == null || customer.getId() < 1) {
+    		return false;
+    	}
+    	return customer.getUsername().equals(username) && customer.getPassword().equals(password);
     }
 
     public static String getCurrentPath(final ApplicationContext context) {
