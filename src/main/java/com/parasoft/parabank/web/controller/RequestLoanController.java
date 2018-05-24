@@ -44,6 +44,11 @@ public class RequestLoanController extends AbstractValidatingBankController {
         }
         return accountIds;
     }
+    
+    @ModelAttribute("customerId")
+    public int getCustomerId(@SessionParam(Constants.USERSESSION) final UserSession userSession) {
+        return userSession.getCustomer().getId();
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView getRequestLoanForm(final Model model) throws Exception {

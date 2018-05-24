@@ -1,43 +1,127 @@
 <%@ include file="../include/include.jsp" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<h1 class="title"><fmt:message key="apply.for.a.loan"/></h1>
+<div ng-app="RequestLoanApp" ng-controller="RequestLoanAppCtrl" ng-cloak>
 
-<form:form method="post" commandName="requestLoanForm">
-  <table class="form2" >
-    <tr>
-      <td align="right" width="40%"><b><fmt:message key="loan.amount"/>:</b> $</td>
-      <td width="20%">
-        <form:input cssClass="input" path="amount"/>
-      </td>
-      <td width="40%">
-        <form:errors path="amount" cssClass="error"/>
-      </td>
-    </tr>
-    <tr>
-      <td align="right" width="40%"><b><fmt:message key="down.payment"/>:</b> $</td>
-      <td width="20%">
-        <form:input cssClass="input" path="downPayment"/>
-      </td>
-      <td width="40%">
-        <form:errors path="downPayment" cssClass="error"/>
-      </td>
-    </tr>
-    <tr>
-      <td align="right" width="40%"><b><fmt:message key="from.account.number"/>:</b></td>
-      <td width="20%">
-        <form:select cssClass="input" path="fromAccountId">
-          <form:options items="${accounts}"/>
-        </form:select>
-      </td>
-      <td width="40%">
-        <form:errors path="fromAccountId" cssClass="error"/>
-      </td>
-    </tr>    
-    <tr>
-      <td>&nbsp;</td>
-      <td colspan="2"><input type="submit" class="button" value="<fmt:message key="apply.now"/>"></td>
-    </tr>
-  </table>
-  <br>
-</form:form>
+    <div ng-if="showForm">
+	   <h1 class="title">
+		  <fmt:message key="apply.for.a.loan" />
+	   </h1>
+
+	   <form ng-submit="submit()">
+		<table class="form2">
+			<tr>
+				<td align="right" width="40%"><b><fmt:message key="loan.amount" />:</b> $</td>
+				<td width="20%"><input class="input" ng-model="loanRequest.amount" /></td>
+				<td width="40%"></td>
+			</tr>
+			<tr>
+				<td align="right" width="40%"><b><fmt:message key="down.payment" />:</b> $</td>
+				<td width="20%"><input class="input" ng-model="loanRequest.downPayment" /></td>
+				<td width="40%"></td>
+			</tr>
+			<tr>
+				<td align="right" width="40%"><b><fmt:message key="from.account.number" />:</b></td>
+				<td width="20%">
+				    <select class="input" ng-init="loanRequest.fromAccountId = '${accounts[0]}'" ng-model="loanRequest.fromAccountId">
+                        <c:forEach items="${accounts}" var="account">
+                            <option value="${account}">${account}</option>
+                        </c:forEach>
+				    </select>
+                </td>
+                <td width="40%"></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td colspan="2"><input type="submit" class="button" value="<fmt:message key="apply.now"/>"></td>
+			</tr>
+		</table>
+		<br>
+	</form>
+    </div>
+    
+    <div ng-if="showResult">
+        <h1 class="title"><fmt:message key="loan.request.processed"/></h1>
+        <table class="form" style="width: 500px;">
+            <tr>
+                <td align="right" width="25%"><b><fmt:message key="loan.provider.name"/>:</b></td>
+                <td id="loanProviderName" width="75%">{{loanResponse.loanProviderName}}</td>
+            </tr>
+            <tr>
+                <td align="right"><b><fmt:message key="loan.response.date"/>:</b></td>
+                <td id="responseDate">{{loanResponse.formattedDate}}</td>
+            </tr>
+            <tr>
+                <td align="right"><b><fmt:message key="loan.status"/>:</b></td>
+                <td ng-if="loanResponse.approved" id="loanStatus"><fmt:message key="loan.approved"/></td>
+                <td ng-if="!loanResponse.approved" id="loanStatus"><fmt:message key="loan.denied"/></td>
+            </tr>
+        </table>
+        <br/>
+        <div ng-if="!loanResponse.approved">
+            <p ng-if="loanResponse.message === 'error.insufficient.funds.for.down.payment'" class="error"><fmt:message key="error.insufficient.funds.for.down.payment"/></p>
+            <p ng-if="loanResponse.message === 'error.insufficient.funds'" class="error"><fmt:message key="error.insufficient.funds"/></p>
+            <p ng-if="loanResponse.message === 'error.insufficient.funds.and.down.payment'" class="error"><fmt:message key="error.insufficient.funds.and.down.payment"/></p>
+            <p ng-if="loanResponse.message === 'error.insufficient.down.payment'" class="error"><fmt:message key="error.insufficient.down.payment"/></p>
+        </div>
+        <div ng-if="loanResponse.approved">
+            <p><fmt:message key="loan.approved.message"/></p>    
+            <p><b><fmt:message key="new.account.number"/>:</b> <a id="newAccountId" href="/activity.htm">{{loanResponse.accountId}}</a></p>
+        </div>
+    </div>
+
+	<div ng-if="showError">
+		<h1 class="title">
+			<fmt:message key="error.heading" />
+		</h1>
+		<p class="error">
+			<fmt:message key="error.internal" />
+		</p>
+	</div>
+
+</div>
+
+<script>
+var app = angular.module('RequestLoanApp', []);
+
+app.controller('RequestLoanAppCtrl', function ($scope, $rootScope, $http) {
+	
+	$scope.loanRequest = { };
+	$scope.showForm = true;
+    $scope.showResult = false;
+    $scope.showError = false;
+    
+	$scope.submit = function() {
+		var url = 'services_proxy/bank/requestLoan?customerId=${customerId}&amount=' + $scope.loanRequest.amount + '&downPayment=' + $scope.loanRequest.downPayment + '&fromAccountId=' + $scope.loanRequest.fromAccountId;
+		$http.post(url, "", {timeout:30000})
+		  .then(function(response) {
+			  $scope.showForm = false;
+              $scope.showResult = true;
+			  $scope.loanResponse = response.data;
+			  $scope.loanResponse.formattedDate = format(
+					  new Date(response.data.responseDate));
+		  })
+		  .catch(function(response) {
+			  showError(response);
+		  })
+	}
+	
+    function showError(error) {
+        $scope.showForm = false;
+        $scope.showResult = false;
+        $scope.showError = true;
+        var status = error.status > 0 ? error.status : "timeout";
+        var data = error.data ? error.data : "Server timeout"
+            console.error("Server returned " + status + ": " + data);
+    }
+    
+    function format(date) {
+        var month = date.getMonth() + 1 + "";
+        if (month.length === 1) {
+        	   month = "0" + month;
+        }
+        return month + '-' + date.getDate() + '-' +  date.getFullYear();
+    }
+});
+
+</script>
