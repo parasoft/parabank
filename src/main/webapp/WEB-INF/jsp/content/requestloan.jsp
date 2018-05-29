@@ -66,7 +66,7 @@
         </div>
         <div ng-if="loanResponse.approved">
             <p><fmt:message key="loan.approved.message"/></p>    
-            <p><b><fmt:message key="new.account.number"/>:</b> <a id="newAccountId" href="/activity.htm">{{loanResponse.accountId}}</a></p>
+            <p><b><fmt:message key="new.account.number"/>:</b> <a id="newAccountId" href="${pageContext.request.contextPath}/activity.htm?id={{loanResponse.accountId}}">{{loanResponse.accountId}}</a></p>
         </div>
     </div>
 
