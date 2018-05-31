@@ -189,7 +189,10 @@ public class RestServiceProxyController extends AbstractBankController{
 		}
 	}
 	
-	@RequestMapping(value ="bank/accounts/{accountId}/transactions/onDate/{onDate}")
+	@RequestMapping(
+			value ="bank/accounts/{accountId}/transactions/onDate/{onDate}", 
+			method = RequestMethod.GET, 
+			produces = "application/json")
 	public List<Transaction> getTransactionsOnDate(
 			@PathVariable(value = "accountId") Integer accountId, 
 			@PathVariable(value = "onDate") String onDate
