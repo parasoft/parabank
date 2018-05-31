@@ -126,7 +126,7 @@ public class BankManagerImpl implements BankManager {
      * @see com.parasoft.parabank.domain.logic.BankManager#deposit(int, java.math.BigDecimal, java.lang.String)
      */
     @Override
-    public void deposit(final int accountId, final BigDecimal amount, final String description) {
+    public Transaction deposit(final int accountId, final BigDecimal amount, final String description) {
         final Account account = accountDao.getAccount(accountId);
 
         account.credit(amount);
@@ -137,6 +137,7 @@ public class BankManagerImpl implements BankManager {
             createTransaction(account, TransactionType.Credit, new Date(), amount, description);
         transactionDao.createTransaction(transaction);
         log.info("Created credit transaction with id = " + transaction.getId() + " with description: " + description);
+        return transaction;
     }
 
     /*

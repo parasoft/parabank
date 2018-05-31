@@ -204,7 +204,7 @@ public interface BankManager {
      * @param amount the amount of money to withdraw
      * @param description a description of the transaction
      */
-    void deposit(int accountId, BigDecimal amount, String description);
+    Transaction deposit(int accountId, BigDecimal amount, String description);
 
     /**
      * Deposit funds to an account

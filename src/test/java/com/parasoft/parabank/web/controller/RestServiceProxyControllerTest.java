@@ -1,7 +1,7 @@
 package com.parasoft.parabank.web.controller;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -9,6 +9,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -22,7 +24,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
@@ -30,6 +31,7 @@ import org.springframework.web.context.WebApplicationContext;
 import com.parasoft.parabank.domain.Account;
 import com.parasoft.parabank.domain.Customer;
 import com.parasoft.parabank.domain.Transaction;
+import com.parasoft.parabank.domain.TransactionCriteria;
 import com.parasoft.parabank.domain.logic.BankManager;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -159,5 +161,45 @@ public class RestServiceProxyControllerTest {
 				.accept(MediaType.APPLICATION_JSON))
 		.andExpect(status().isOk())
 		.andExpect(jsonPath("$.approved", is(true)));
+	}
+	
+	@Test
+	public void testGetTransaction() throws Exception {
+		int accountId = 12567;
+		Transaction deposit = bankManager.deposit(accountId, BigDecimal.valueOf(1000.00), "Funds Transfer Received");
+		mockMvc.perform(
+				get("/bank/transactions/" + deposit.getId())
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON))
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("$.id", is(deposit.getId())));
+	}
+	
+	@Test
+	public void testGetTransactionsByAmount() throws Exception {
+		int accountId = 12567;
+		BigDecimal amount = new BigDecimal(2000);
+		Transaction deposit = bankManager.deposit(accountId, amount, "Funds Transfer Received");
+		mockMvc.perform(
+				get("/bank/accounts/" + accountId + "/transactions/amount/" + amount)
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON))
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("$.[?(@.id == '" + deposit.getId() + "')]", hasSize(1)));
+	}
+	
+	@Test
+	public void testGetTransactionsOnDate() throws Exception {
+		int accountId = 12567;
+		BigDecimal amount = new BigDecimal(2000);
+		String date = TransactionCriteria.DATE_FORMATTER.get().format(new Date());
+		Transaction deposit = bankManager.deposit(accountId, amount, "Funds Transfer Received");
+		mockMvc.perform(
+				get("/bank/accounts/" + accountId + "/transactions/onDate/" + date)
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON))
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("$", hasSize(greaterThan(0))))
+		.andExpect(jsonPath("$.[?(@.id == '" + deposit.getId() + "')]", hasSize(1)));
 	}
 }

@@ -188,5 +188,92 @@ public class RestServiceProxyController extends AbstractBankController{
 			return bankManager.requestLoan(customerId, amount, downPayment, fromAccountId);
 		}
 	}
-
+	
+	@RequestMapping(value ="bank/accounts/{accountId}/transactions/onDate/{onDate}")
+	public List<Transaction> getTransactionsOnDate(
+			@PathVariable(value = "accountId") Integer accountId, 
+			@PathVariable(value = "onDate") String onDate
+	) throws Exception {
+		String accessMode = null;
+		if (adminManager != null) {
+			accessMode = adminManager.getParameter("accessmode");
+		}
+		TransactionCriteria criteria = new TransactionCriteria();
+		criteria.setOnDate(TransactionCriteria.DATE_FORMATTER.get().parse(onDate));
+		criteria.setSearchType(SearchType.DATE);
+		if (accessMode != null && !accessMode.equalsIgnoreCase("jdbc")) {
+			Account account = bankManager.getAccount(accountId);
+			return accessModeController.getTransactionsForAccount(account, criteria);
+		} else {
+			// default JDBC
+			return bankManager.getTransactionsForAccount(accountId, criteria);
+		}
+	}
+	
+	@RequestMapping(
+			value ="bank/accounts/{accountId}/transactions/fromDate/{fromDate}/toDate/{toDate}",
+			method = RequestMethod.GET, 
+			produces = "application/json"
+	)
+	public List<Transaction> getTransactionsByToFromDate(
+			@PathVariable(value = "accountId") Integer accountId, 
+			@PathVariable(value = "fromDate") String fromDate,
+			@PathVariable(value = "toDate") String toDate
+	) throws Exception {
+		String accessMode = null;
+		if (adminManager != null) {
+			accessMode = adminManager.getParameter("accessmode");
+		}
+		TransactionCriteria criteria = new TransactionCriteria();
+		criteria.setToDate(TransactionCriteria.DATE_FORMATTER.get().parse(toDate));
+		criteria.setFromDate(TransactionCriteria.DATE_FORMATTER.get().parse(fromDate));
+		criteria.setSearchType(SearchType.DATE_RANGE);
+		if (accessMode != null && !accessMode.equalsIgnoreCase("jdbc")) {
+			Account account = bankManager.getAccount(accountId);
+			return accessModeController.getTransactionsForAccount(account, criteria);
+		} else {
+			// default JDBC
+			return bankManager.getTransactionsForAccount(accountId, criteria);
+		}
+	}
+	
+	@RequestMapping(
+			value = "bank/accounts/{accountId}/transactions/amount/{amount}", 
+			method = RequestMethod.GET, 
+			produces = "application/json"
+	)
+	public List<Transaction> getTransactionsByAmount(
+			@PathVariable(value = "accountId") Integer accountId,
+			@PathVariable(value = "amount") BigDecimal amount
+	) throws Exception {
+		String accessMode = null;
+		if (adminManager != null) {
+			accessMode = adminManager.getParameter("accessmode");
+		}
+		TransactionCriteria criteria = new TransactionCriteria();
+		criteria.setAmount(amount);
+		criteria.setSearchType(SearchType.AMOUNT);
+		if (accessMode != null && !accessMode.equalsIgnoreCase("jdbc")) {
+			Account account = bankManager.getAccount(accountId);
+			return accessModeController.getTransactionsForAccount(account, criteria);
+		} else {
+			// default JDBC
+			return bankManager.getTransactionsForAccount(accountId, criteria);
+		}
+	}
+	
+	@RequestMapping(value = "bank/transactions/{transactionId}", method = RequestMethod.GET, produces = "application/json")
+	public Transaction getTransaction(@PathVariable(value = "transactionId") Integer transactionId) throws Exception {
+		String accessMode = null;
+		if (adminManager != null) {
+			accessMode = adminManager.getParameter("accessmode");
+		}
+		if (accessMode != null && !accessMode.equalsIgnoreCase("jdbc")) {
+			return accessModeController.doGetTransaction(transactionId);
+		} else {
+			// default JDBC
+			return bankManager.getTransaction(transactionId);
+		}
+	}
+	
 }
