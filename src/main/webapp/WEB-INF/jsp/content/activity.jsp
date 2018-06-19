@@ -16,11 +16,11 @@
       </tr>
       <tr>
         <td align="right"><fmt:message key="account.balance" />:</td>
-        <td id="balance">{{account.balance | currency: "$" : 2}}</td>
+        <td id="balance">{{account.balance | currency: "$" : 2 | commaLess}}</td>
       </tr>
       <tr>
         <td align="right"><fmt:message key="account.available.balance" />:</td>
-        <td id="availableBalance">{{account.availableBalance | currency: "$" : 2}}</td>
+        <td id="availableBalance">{{account.availableBalance | currency: "$" : 2 | commaLess}}</td>
       </tr>
     </table>
 
@@ -77,10 +77,10 @@
           <td>{{transaction.date | date:'MM-dd-yyyy'}}</td>
           <td><a href="/parabank/transaction.htm?id={{transaction.id}}">{{transaction.description}}</a></td>
 
-          <td ng-if="transaction.type == 'Debit'">{{transaction.amount | currency: "$" : 2}}</td>
+          <td ng-if="transaction.type == 'Debit'">{{transaction.amount | currency: "$" : 2 | commaLess}}</td>
           <td ng-if="transaction.type != 'Debit'"></td>
 
-          <td ng-if="transaction.type == 'Credit'">{{transaction.amount | currency: "$" : 2}}</td>
+          <td ng-if="transaction.type == 'Credit'">{{transaction.amount | currency: "$" : 2 | commaLess}}</td>
           <td ng-if="transaction.type != 'Credit'"></td>
         </tr>
       </tbody>
@@ -147,4 +147,10 @@
         var data = error.data ? error.data : "Server timeout"
         console.error("Server returned " + status + ": " + data);
     }
+
+	app.filter('commaLess', function() {
+		return function(input) {
+			return (input) ? input.toString().trim().replace(",","") : null;
+		};
+	});
 </script>

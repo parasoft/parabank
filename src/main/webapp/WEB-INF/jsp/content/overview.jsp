@@ -15,13 +15,13 @@
 
         <tr ng-repeat="account in accounts">
           <td><a href="/parabank/activity.htm?id={{account.id}}">{{account.id}}</a></td>
-          <td>{{account.balance | currency: "$" : 2}}</td>
-          <td>{{account.availableBalance | currency: "$" : 2}}</td>
+          <td>{{account.balance | currency: "$" : 2 | commaLess}}</td>
+          <td>{{account.availableBalance | currency: "$" : 2 | commaLess}}</td>
         </tr>
 
         <tr>
           <td align="right"><b><fmt:message key="total" /></b></td>
-          <td><b>{{totalBalance | currency: "$" : 2}}</b></td>
+          <td><b>{{totalBalance | currency: "$" : 2 | commaLess}}</b></td>
           <td>&nbsp;</td>
         </tr>
       </tbody>
@@ -81,4 +81,10 @@
         }
 
     });
+
+	app.filter('commaLess', function() {
+		return function(input) {
+			return (input) ? input.toString().trim().replace(",","") : null;
+		};
+	});
 </script>

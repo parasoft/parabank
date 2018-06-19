@@ -6,7 +6,7 @@
     <h1 class="title"><fmt:message key="open.new.account" /></h1>
     <form ng-submit="submit()">
       <p><b><fmt:message key="what.type.of.account" /></b></p>
-      <select class="input" ng-init="types.selectedOption = '0'" ng-model="types.selectedOption" >
+      <select id="type" class="input" ng-init="types.selectedOption = '0'" ng-model="types.selectedOption" >
         <c:forEach items="${types}" var="type" varStatus="loop">
           <option value="${loop.index}">${type}</option>
         </c:forEach>
@@ -14,7 +14,7 @@
       <br /><br />
       <fmt:formatNumber type="currency" value="${minimumBalance}" var="minValue" currencySymbol="$" maxFractionDigits="2" minFractionDigits="2" />
       <p><b><fmt:message key="minimum.deposit"><fmt:param value="${minValue}" /></fmt:message></b></p>
-      <select class="input" ng-init="getAccounts()" ng-model="accounts.selectedOption" ng-options="account.id for account in accounts track by account.id"></select>
+      <select id="fromAccountId" class="input" ng-init="getAccounts()" ng-model="accounts.selectedOption" ng-options="account.id for account in accounts track by account.id"></select>
       <br /><br />
       <div><input type="submit" class="button" value="<fmt:message key="open.new.account"/>"></div>
     </form>

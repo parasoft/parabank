@@ -6,16 +6,16 @@
    <div ng-if="showForm">
 
        <h1 class="title"><fmt:message key="transfer.funds"/></h1>
-       <p ng-if="showEmptyAmountError" class="error"><fmt:message key="error.amount.empty"/></p>
-       <p ng-if="showInvalidValueError" class="error"><fmt:message key="typeMismatch.java.math.BigDecimal"/></p>
+       <p id="amount.errors" ng-if="showEmptyAmountError" class="error"><fmt:message key="error.amount.empty"/></p>
+       <p id="amount.errors" ng-if="showInvalidValueError" class="error"><fmt:message key="typeMismatch.java.math.BigDecimal"/></p>
        <form ng-submit="submit()">
 
-         <p><b><fmt:message key="transfer.amount"/>:</b> $<input type="text" name="input" ng-model="accounts.amount" /></p>
+         <p><b><fmt:message key="transfer.amount"/>:</b> $<input id="amount" type="text" name="input" ng-model="accounts.amount" /></p>
          <div>
             <fmt:message key="from.account.number"/>
-            <select class="input" ng-init="getAccounts()" ng-model="accounts.fromAccountId" ng-options="account.id for account in accounts track by account.id"><select>
+            <select id="fromAccountId" class="input" ng-init="getAccounts()" ng-model="accounts.fromAccountId" ng-options="account.id for account in accounts track by account.id"><select>
             <fmt:message key="to.account.number"/>
-            <select class="input" ng-model="accounts.toAccountId" ng-options="account.id for account in accounts track by account.id"><select>
+            <select id="toAccountId" class="input" ng-model="accounts.toAccountId" ng-options="account.id for account in accounts track by account.id"><select>
          </div>
          <br/>
          <div><input type="submit" class="button" value="<fmt:message key="transfer"/>"></div>
@@ -28,7 +28,7 @@
 
       <p>
 	  <fmt:message key="transfer.confirmation">
-	     <fmt:param value="<span id='amount'>{{amount | currency: '$' : 2}}</span>"/>
+	     <fmt:param value="<span id='amount'>{{amount | currency: '$' : 2 | commaLess}}</span>"/>
 	     <fmt:param value="<span id='fromAccountId'>{{fromAccountId}}</span>"/>
 	     <fmt:param value="<span id='toAccountId'>{{toAccountId}}</span>"/>
 	  </fmt:message>
@@ -109,4 +109,10 @@
         }
 
     });
+
+	app.filter('commaLess', function() {
+		return function(input) {
+			return (input) ? input.toString().trim().replace(",","") : null;
+		};
+	});
 </script>

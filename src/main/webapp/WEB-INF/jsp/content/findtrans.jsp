@@ -8,7 +8,7 @@
     <form ng-submit="submit()">
         <div>
             <b><fmt:message key="select.an.account"/></b>:
-            <select class="input" ng-init="criteria.accountId = '${accounts[0]}'" ng-model="criteria.accountId">
+            <select id="accountId" class="input" ng-init="criteria.accountId = '${accounts[0]}'" ng-model="criteria.accountId">
                 <c:forEach items="${accounts}" var="account">
                     <option value="${account}">${account}</option>
                 </c:forEach>
@@ -19,7 +19,7 @@
         <hr/>
   
         <div>
-            <b><fmt:message key="find.by.transaction.id"/></b>: <input class="input" ng-model="criteria.transactionId" ng-required="criteria.searchType === 'ID'"/>
+            <b><fmt:message key="find.by.transaction.id"/></b>: <input id="criteria.transactionId" class="input" ng-model="criteria.transactionId" ng-required="criteria.searchType === 'ID'"/>
             <errors path="criteria.transactionId" class="error"/>
         </div>
         
@@ -34,7 +34,7 @@
         <hr/>
   
         <div>
-            <b><fmt:message key="find.by.date"/></b>: <input class="input" ng-model="criteria.onDate" ng-required="criteria.searchType === 'DATE'"/>
+            <b><fmt:message key="find.by.date"/></b>: <input id="criteria.onDate" class="input" ng-model="criteria.onDate" ng-required="criteria.searchType === 'DATE'"/>
             (<fmt:message key="date.format"/>)
             <br/>
             <errors path="criteria.onDate" class="error"/>
@@ -54,9 +54,9 @@
             <p><b><fmt:message key="find.by.date.range"/></b></p>
             <div>
                 <fmt:message key="between"/>
-                <input class="input" ng-model="criteria.fromDate" ng-required="criteria.searchType === 'DATE_RANGE'"/>
+                <input id="criteria.fromDate" class="input" ng-model="criteria.fromDate" ng-required="criteria.searchType === 'DATE_RANGE'"/>
                 <fmt:message key="and"/>
-                <input class="input" ng-model="criteria.toDate" ng-required="criteria.searchType === 'DATE_RANGE'"/>
+                <input id="criteria.toDate" class="input" ng-model="criteria.toDate" ng-required="criteria.searchType === 'DATE_RANGE'"/>
                 (<fmt:message key="date.format"/>)
             </div>
         </div>
@@ -72,7 +72,7 @@
         <hr/>
   
         <div>
-            <b><fmt:message key="find.by.amount"/></b>: <input class="input" ng-model="criteria.amount" ng-required="criteria.searchType === 'AMOUNT'"/>
+            <b><fmt:message key="find.by.amount"/></b>: <input id="criteria.amount" class="input" ng-model="criteria.amount" ng-required="criteria.searchType === 'AMOUNT'"/>
         </div>
         
         <br/>

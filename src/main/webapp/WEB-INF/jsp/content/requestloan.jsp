@@ -12,18 +12,18 @@
 		<table class="form2">
 			<tr>
 				<td align="right" width="40%"><b><fmt:message key="loan.amount" />:</b> $</td>
-				<td width="20%"><input class="input" ng-model="loanRequest.amount" /></td>
-				<td width="40%"></td>
+					<td width="20%"><input id="amount" class="input" ng-model="loanRequest.amount" /></td>
+					<td width="40%"></td>
 			</tr>
 			<tr>
 				<td align="right" width="40%"><b><fmt:message key="down.payment" />:</b> $</td>
-				<td width="20%"><input class="input" ng-model="loanRequest.downPayment" /></td>
+				<td width="20%"><input id="downPayment" class="input" ng-model="loanRequest.downPayment" /></td>
 				<td width="40%"></td>
 			</tr>
 			<tr>
 				<td align="right" width="40%"><b><fmt:message key="from.account.number" />:</b></td>
 				<td width="20%">
-				    <select class="input" ng-init="loanRequest.fromAccountId = '${accounts[0]}'" ng-model="loanRequest.fromAccountId">
+				    <select id="fromAccountId" class="input" ng-init="loanRequest.fromAccountId = '${accounts[0]}'" ng-model="loanRequest.fromAccountId">
                         <c:forEach items="${accounts}" var="account">
                             <option value="${account}">${account}</option>
                         </c:forEach>
