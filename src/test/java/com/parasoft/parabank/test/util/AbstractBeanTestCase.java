@@ -154,6 +154,8 @@ public abstract class AbstractBeanTestCase<T> extends AbstractParaBankTest {
             field.set(obj, on ? new Date() : new Date(0));
         } else if (field.getType().isEnum()) {
             field.set(obj, field.getType().getEnumConstants()[on ? 1 : 0]);
+        } else if (field.getType().isArray()) {
+            field.set(obj, Array.newInstance(field.getType().getComponentType(), 0));
         } else if (Object.class.isAssignableFrom(field.getType())) {
             field.set(obj, field.getType().newInstance());
         } else {
