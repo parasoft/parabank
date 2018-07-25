@@ -2,6 +2,7 @@ package com.parasoft.parabank.domain;
 
 import javax.xml.bind.annotation.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.parasoft.parabank.util.*;
 
 /**
@@ -45,6 +46,7 @@ public class Customer {
         this.lastName = lastName;
     }
 
+	@JsonIgnore
 	public String getFullName() {
 	    return firstName + " " + lastName;
 	}
@@ -74,6 +76,7 @@ public class Customer {
     }
 
 	@XmlTransient
+	@JsonIgnore
 	public String getUsername() {
         return username;
     }
@@ -83,6 +86,7 @@ public class Customer {
     }
 
 	@XmlTransient
+	@JsonIgnore
 	public String getPassword() {
         return password;
     }

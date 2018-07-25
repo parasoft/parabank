@@ -6,6 +6,8 @@ import java.util.*;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.*;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.google.gson.*;
 import com.parasoft.parabank.util.*;
 
@@ -49,6 +51,7 @@ public class LoanResponse {
         this.approved = approved;
     }
 
+    @JsonInclude(value = Include.NON_NULL)
     public String getMessage() {
         return message;
     }

@@ -67,6 +67,7 @@ public class Account {
             && Util.equals(balance, other.balance);
     }
 
+    @JsonIgnore
     public BigDecimal getAvailableBalance() {
         return balance.signum() < 0 ? new BigDecimal(0) : balance;
     }

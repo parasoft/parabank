@@ -154,15 +154,8 @@
 		</jaxrs:serviceBeans>
 
 		<jaxrs:providers>
-<!--			<ref bean="jsonProviderJackson" /> -->
+			<ref bean="jsonProviderJackson" />
 			<ref bean="wadlGenerator" />
-            <bean id="jsonProvider" class="org.apache.cxf.jaxrs.provider.json.JSONProvider">
-                <property name="dropRootElement" value="true" />
-                <property name="dropCollectionWrapperElement" value="true" />
-                <property name="serializeAsArray" value="true" />
-                <property name="supportUnwrapped" value="true" />
-                <property name="namespaceMap" ref="jsonNamespaceMap"/>
-            </bean>
 			<ref bean="cors-filter" />
 		</jaxrs:providers>
 
@@ -171,10 +164,6 @@
 		</jaxrs:features>
 
 	</jaxrs:server>
-
-    <util:map id="jsonNamespaceMap" map-class="java.util.Hashtable">
-        <entry key="http://service.parabank.parasoft.com/" value="parabank"/>
-    </util:map>
 
 	<!-- ========================= ENABLE SECURITY VULNERABILITIES ========================= -->
 
@@ -190,7 +179,7 @@
 	<bean id="cors-filter" class="org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter"/>
 
   <!-- JAXRS providers -->
-	<bean id="jsonProviderJackson" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider" />
+	<bean id="jsonProviderJackson" class="com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider" />
 
 	<!-- CXF Swagger2Feature -->
 	<bean id="swagger2Feature" class="com.parasoft.parabank.util.CustomSwagger2Feature">

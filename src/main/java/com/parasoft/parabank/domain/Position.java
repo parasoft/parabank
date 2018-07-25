@@ -4,6 +4,7 @@ import java.math.*;
 
 import javax.xml.bind.annotation.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.parasoft.parabank.util.*;
 
 /**
@@ -67,6 +68,7 @@ public class Position {
         purchasePrice = price;
     }
 
+    @JsonIgnore
     public BigDecimal getCostBasis() {
         return purchasePrice.multiply(new BigDecimal(shares));
     }
