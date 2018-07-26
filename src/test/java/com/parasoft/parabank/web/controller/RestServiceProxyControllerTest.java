@@ -80,7 +80,7 @@ public class RestServiceProxyControllerTest {
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON))
 		.andExpect(status().isOk())
-		.andExpect(jsonPath("$.availableBalance", is(10.45)))
+		.andExpect(jsonPath("$.balance", is(10.45)))
 		.andExpect(jsonPath("$.customerId", is(customerId)))
 		.andExpect(jsonPath("$.type", is("CHECKING")));
 	}
@@ -144,7 +144,7 @@ public class RestServiceProxyControllerTest {
 				.content("")
 				.accept(MediaType.APPLICATION_JSON))
 		.andExpect(status().isOk())
-		.andExpect(jsonPath("$.availableBalance", is(0)))
+		.andExpect(jsonPath("$.balance", is(0)))
 		.andExpect(jsonPath("$.customerId", is(customerId)))
 		.andExpect(jsonPath("$.type", is("CHECKING")));
 	}
