@@ -13,4 +13,5 @@ public interface AdminParameters {
     String LOAN_PROCESSOR = "loanProcessor";
     String LOAN_PROCESSOR_THRESHOLD = "loanProcessorThreshold";
     String ACCESSMODE = "accessmode";
+    String WEB_AUTHENTICATION_ENABLED = "webAuthenticationEnabled";
 }
