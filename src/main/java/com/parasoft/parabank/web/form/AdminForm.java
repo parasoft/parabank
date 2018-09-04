@@ -19,6 +19,7 @@ public class AdminForm {
     private String loanProcessor;
     private Integer loanProcessorThreshold;
     private String accessMode;
+    private boolean webAuthenticationEnabled;
 
     public String getAccessMode() {
         return accessMode;
@@ -114,6 +115,8 @@ public class AdminForm {
         loanProcessor = parameters.get(AdminParameters.LOAN_PROCESSOR);
         varString=parameters.get(AdminParameters.LOAN_PROCESSOR_THRESHOLD);
         loanProcessorThreshold = Integer.parseInt(varString == null || varString.isEmpty() ? "20" : varString);
+        varString = parameters.get(AdminParameters.WEB_AUTHENTICATION_ENABLED);
+        webAuthenticationEnabled = Boolean.parseBoolean(varString == null || varString.isEmpty() ? "false" : "true");
     }
 
     public void setRestEndpoint(final String rest_endpoint) {
@@ -123,4 +126,12 @@ public class AdminForm {
     public void setSoapEndpoint(final String soap_endpoint) {
         soapEndpoint = soap_endpoint;
     }
+
+	public boolean isWebAuthenticationEnabled() {
+		return webAuthenticationEnabled;
+	}
+
+	public void setWebAuthenticationEnabled(boolean webAuthenticationEnabled) {
+		this.webAuthenticationEnabled = webAuthenticationEnabled;
+	}
 }
