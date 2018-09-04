@@ -116,7 +116,7 @@ public class AdminForm {
         varString=parameters.get(AdminParameters.LOAN_PROCESSOR_THRESHOLD);
         loanProcessorThreshold = Integer.parseInt(varString == null || varString.isEmpty() ? "20" : varString);
         varString = parameters.get(AdminParameters.WEB_AUTHENTICATION_ENABLED);
-        webAuthenticationEnabled = Boolean.parseBoolean(varString == null || varString.isEmpty() ? "false" : "true");
+        webAuthenticationEnabled = Boolean.parseBoolean(varString == null || varString.isEmpty() ? "false" : varString);
     }
 
     public void setRestEndpoint(final String rest_endpoint) {
