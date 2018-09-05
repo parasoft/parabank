@@ -34,6 +34,7 @@ INSERT INTO Parameter (name, value) VALUES ('loanProcessorThreshold', '20');
 INSERT INTO Parameter (name, value) VALUES ('soap_endpoint', '');
 INSERT INTO Parameter (name, value) VALUES ('rest_endpoint', '');
 INSERT INTO Parameter (name, value) VALUES ('accessmode', 'jdbc');
+INSERT INTO Parameter (name, value) VALUES ('webAuthenticationEnabled', 'false');
 
 INSERT INTO Sequence (name, next_id) VALUES ('Customer', 12434);
 INSERT INTO Sequence (name, next_id) VALUES ('Account', 13566);

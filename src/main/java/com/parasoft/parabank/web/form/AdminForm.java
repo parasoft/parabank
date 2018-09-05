@@ -63,6 +63,7 @@ public class AdminForm {
             put(AdminParameters.LOAN_PROVIDER, loanProvider);
             put(AdminParameters.LOAN_PROCESSOR, loanProcessor);
             put(AdminParameters.LOAN_PROCESSOR_THRESHOLD, loanProcessorThreshold.toString());
+            put(AdminParameters.WEB_AUTHENTICATION_ENABLED, Boolean.toString(webAuthenticationEnabled));
         }};
     }
 
