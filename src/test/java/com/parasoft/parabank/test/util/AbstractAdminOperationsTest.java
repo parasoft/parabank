@@ -54,7 +54,7 @@ public abstract class AbstractAdminOperationsTest extends AbstractParaBankDataSo
         tests.addAll(Arrays.asList(new IntQuery[] { new IntQuery(2, "SELECT COUNT(id) FROM Customer"), //$NON-NLS-1$
             new IntQuery(12, "SELECT COUNT(id) FROM Account"), //$NON-NLS-1$
             new IntQuery(21, "SELECT COUNT(id) FROM Transaction"), //$NON-NLS-1$
-            new IntQuery(9, "SELECT COUNT(*) FROM Parameter") })); //$NON-NLS-1$
+            new IntQuery(10, "SELECT COUNT(*) FROM Parameter") })); //$NON-NLS-1$
         for (final IntQuery intQuery : tests) {
             intQuery.validate(getJdbcTemplate());
         }
