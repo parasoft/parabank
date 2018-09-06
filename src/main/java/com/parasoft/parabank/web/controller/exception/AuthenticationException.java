@@ -1,5 +1,7 @@
 package com.parasoft.parabank.web.controller.exception;
 
+import org.springframework.http.HttpStatus;
+
 public class AuthenticationException extends Exception {
 
     /**
@@ -27,6 +29,10 @@ public class AuthenticationException extends Exception {
         
         public String getMessage() {
             return message;
+        }
+        
+        public int getStatus() {
+            return HttpStatus.UNAUTHORIZED.value();
         }
     }
 }

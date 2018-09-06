@@ -14,9 +14,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -69,6 +66,7 @@ public class RestServiceProxyController extends AbstractBankController{
 
     @RequestMapping(value="bank/customers/{id}/accounts", method = RequestMethod.GET, produces = "application/json")
     public List<Account> getAccounts(@PathVariable(value = "id") Integer id) throws Exception {
+        authenticate();
         List<Account> accounts;// = new ArrayList<Account>();
 
         String accessMode = null;
@@ -89,6 +87,7 @@ public class RestServiceProxyController extends AbstractBankController{
 
     @RequestMapping(value="bank/accounts/{id}",method = RequestMethod.GET, produces = "application/json")
     public Account getAccount(@PathVariable(value = "id") Integer id) throws Exception {
+        authenticate();
         String accessMode = null;
         Account account;
         if (adminManager != null) {
@@ -105,6 +104,7 @@ public class RestServiceProxyController extends AbstractBankController{
 
     @RequestMapping(value="bank/accounts/{id}/transactions",method = RequestMethod.GET, produces = "application/json")
     public List<Transaction> getTransactions(@PathVariable(value = "id") Integer id) throws Exception {
+        authenticate();
         String accessMode = null;
         List<Transaction> transactions;
         Account account = bankManager.getAccount(id);
@@ -125,6 +125,7 @@ public class RestServiceProxyController extends AbstractBankController{
             @PathVariable(value = "id") Integer id, 
             @PathVariable(value = "month") String month,
             @PathVariable(value = "type") String type) throws Exception {
+        authenticate();
         String accessMode = null;
         List<Transaction> transactions;
         Account account = bankManager.getAccount(id);
@@ -145,7 +146,7 @@ public class RestServiceProxyController extends AbstractBankController{
     }
 
     @RequestMapping(value="bank/createAccount", method = RequestMethod.POST, produces = "application/json")
-    public ResponseEntity<Account> createAccount(
+    public Account createAccount(
             @RequestParam("customerId") Integer customerId,
             @RequestParam("newAccountType") Integer newAccountType,
             @RequestParam("fromAccountId") Integer fromAccountId) throws Exception {
@@ -165,11 +166,11 @@ public class RestServiceProxyController extends AbstractBankController{
             newAccount.setBalance(BigDecimal.ZERO);
             bankManager.createAccount(newAccount, fromAccountId);
         }
-        return createResponse(newAccount);
+        return newAccount;
     }
 
     @RequestMapping(value="bank/transfer", method = RequestMethod.POST, produces = "application/json")
-    public ResponseEntity<String> transfer(
+    public String transfer(
             @RequestParam("fromAccountId") Integer fromAccountId,
             @RequestParam("toAccountId") Integer toAccountId,
             @RequestParam("amount") BigDecimal amount) throws Exception {
@@ -184,13 +185,12 @@ public class RestServiceProxyController extends AbstractBankController{
             // default JDBC
             bankManager.transfer(fromAccountId, toAccountId, amount);
         }
-        String message = "Successfully transferred $" + amount + " from account #" + fromAccountId + " to account #"
+        return "Successfully transferred $" + amount + " from account #" + fromAccountId + " to account #"
                 + toAccountId;
-        return createResponse(message);
     }
 
     @RequestMapping(value ="bank/requestLoan", method = RequestMethod.POST, produces = "application/json")
-    public ResponseEntity<LoanResponse> requestLoan(
+    public LoanResponse requestLoan(
             @RequestParam("customerId") Integer customerId,
             @RequestParam("amount") BigDecimal amount,
             @RequestParam("downPayment") BigDecimal downPayment,
@@ -208,7 +208,7 @@ public class RestServiceProxyController extends AbstractBankController{
             // default JDBC
             loanResponse = bankManager.requestLoan(customerId, amount, downPayment, fromAccountId);
         }
-        return createResponse(loanResponse);
+        return loanResponse;
     }
 
     @RequestMapping(
@@ -219,6 +219,7 @@ public class RestServiceProxyController extends AbstractBankController{
             @PathVariable(value = "accountId") Integer accountId, 
             @PathVariable(value = "onDate") String onDate
             ) throws Exception {
+        authenticate();
         String accessMode = null;
         if (adminManager != null) {
             accessMode = adminManager.getParameter("accessmode");
@@ -245,6 +246,7 @@ public class RestServiceProxyController extends AbstractBankController{
             @PathVariable(value = "fromDate") String fromDate,
             @PathVariable(value = "toDate") String toDate
             ) throws Exception {
+        authenticate();
         String accessMode = null;
         if (adminManager != null) {
             accessMode = adminManager.getParameter("accessmode");
@@ -271,6 +273,7 @@ public class RestServiceProxyController extends AbstractBankController{
             @PathVariable(value = "accountId") Integer accountId,
             @PathVariable(value = "amount") BigDecimal amount
             ) throws Exception {
+        authenticate();
         String accessMode = null;
         if (adminManager != null) {
             accessMode = adminManager.getParameter("accessmode");
@@ -289,6 +292,7 @@ public class RestServiceProxyController extends AbstractBankController{
 
     @RequestMapping(value = "bank/transactions/{transactionId}", method = RequestMethod.GET, produces = "application/json")
     public Transaction getTransaction(@PathVariable(value = "transactionId") Integer transactionId) throws Exception {
+        authenticate();
         String accessMode = null;
         if (adminManager != null) {
             accessMode = adminManager.getParameter("accessmode");
@@ -301,15 +305,6 @@ public class RestServiceProxyController extends AbstractBankController{
         }
     }
 
-    private static <T> ResponseEntity<T> createResponse(T value) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Type", "application/json; charset=utf-8"); 
-        // Prevent IE from incorrectly caching AJAX/JSON results
-        // http://www.dashbay.com/2011/05/internet-explorer-caches-ajax/
-        headers.add("Expires", "-1");
-        return new ResponseEntity<T>(value, headers, HttpStatus.OK);
-    }
-
     private void authenticate() throws Exception {
         String parameter = adminManager.getParameter(AdminParameters.WEB_AUTHENTICATION_ENABLED);
         boolean webAuthenticationEnabled = Boolean.parseBoolean(parameter == null || parameter.isEmpty() ? "false" : parameter);
@@ -320,15 +315,15 @@ public class RestServiceProxyController extends AbstractBankController{
         HttpSession session = attr.getRequest().getSession(false);
         Locale locale = LocaleContextHolder.getLocale();
         if (session == null) {
-            throw new AuthenticationException(messageSource.getMessage("no.http.session", null, locale));
+            throw new AuthenticationException(messageSource.getMessage("user.login.required", null, locale));
         }
         Object result = session.getAttribute("userSession");
         if (result == null || !(result instanceof UserSession)) {
-            throw new AuthenticationException(messageSource.getMessage("invalid.user.session", null, locale));
+            throw new AuthenticationException(messageSource.getMessage("user.login.required", null, locale));
         }
         UserSession userSession = (UserSession) result;
         if (userSession.getCustomer() == null) {
-            throw new AuthenticationException(messageSource.getMessage("customer.not.found", null, locale));
+            throw new AuthenticationException(messageSource.getMessage("user.login.required", null, locale));
         }
     }
 }
