@@ -5,10 +5,14 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
+import java.util.StringTokenizer;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.codec.binary.StringUtils;
+import org.apache.xml.security.utils.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +38,7 @@ import com.parasoft.parabank.domain.logic.AdminParameters;
 import com.parasoft.parabank.domain.logic.BankManager;
 import com.parasoft.parabank.util.AccessModeController;
 import com.parasoft.parabank.web.UserSession;
+import com.parasoft.parabank.web.ViewUtil;
 import com.parasoft.parabank.web.controller.exception.AuthenticationException;
 
 /**
@@ -312,18 +317,58 @@ public class RestServiceProxyController extends AbstractBankController{
             return;
         }
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-        HttpSession session = attr.getRequest().getSession(false);
+        HttpServletRequest request = attr.getRequest();
+        String authHeader = request.getHeader("Authorization");
         Locale locale = LocaleContextHolder.getLocale();
-        if (session == null) {
-            throw new AuthenticationException(messageSource.getMessage("user.login.required", null, locale));
+        if(authHeader == null) {
+        	HttpSession session = request.getSession(false);
+            if (session == null) {
+                throw new AuthenticationException(messageSource.getMessage("user.login.required", null, locale));
+            }
+            Object result = session.getAttribute("userSession");
+            if (result == null || !(result instanceof UserSession)) {
+                throw new AuthenticationException(messageSource.getMessage("user.login.required", null, locale));
+            }
+            UserSession userSession = (UserSession) result;
+            if (userSession.getCustomer() == null) {
+                throw new AuthenticationException(messageSource.getMessage("user.login.required", null, locale));
+            }
+        } else {
+        	StringTokenizer st = new StringTokenizer(authHeader);
+			if (st.hasMoreTokens()) {
+				String basic = st.nextToken();
+				if (basic.equalsIgnoreCase("Basic")) {
+					try {
+						String credentials = new String(Base64.decode(st.nextToken()), "UTF-8");
+						int p = credentials.indexOf(":");
+						if (p != -1) {
+							String username = credentials.substring(0, p).trim();
+							String password = credentials.substring(p + 1).trim();
+
+							if (username == null || username.length() <= 0 || password == null
+									|| password.length() <= 0) {
+								throw new AuthenticationException(
+										messageSource.getMessage("error.empty.username.or.password", null, locale));
+							}
+
+							Customer customer = accessModeController.login(username, password);
+
+							if (customer == null) {
+								throw new AuthenticationException(
+										messageSource.getMessage("error.invalid.username.or.password", null, locale));
+							}
+
+						} else {
+							throw new AuthenticationException(
+									messageSource.getMessage("error.invalid.username.or.password", null, locale));
+						}
+					} catch (Exception e) {
+						throw new AuthenticationException(
+								messageSource.getMessage("error.invalid.username.or.password", null, locale));
+					}
+				}
+			}
         }
-        Object result = session.getAttribute("userSession");
-        if (result == null || !(result instanceof UserSession)) {
-            throw new AuthenticationException(messageSource.getMessage("user.login.required", null, locale));
-        }
-        UserSession userSession = (UserSession) result;
-        if (userSession.getCustomer() == null) {
-            throw new AuthenticationException(messageSource.getMessage("user.login.required", null, locale));
-        }
+        
     }
 }
