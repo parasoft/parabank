@@ -345,7 +345,7 @@ public class RestServiceProxyController extends AbstractBankController{
 							String username = credentials.substring(0, p).trim();
 							String password = credentials.substring(p + 1).trim();
 
-							if (username.length() <= 0 || password.length() <= 0) {
+							if (username.isEmpty()|| password.isEmpty()) {
 								throw new AuthenticationException(
 										messageSource.getMessage("error.empty.username.or.password", null, locale));
 							}
