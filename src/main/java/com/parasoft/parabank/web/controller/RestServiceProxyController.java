@@ -5,10 +5,14 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
+import java.util.StringTokenizer;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.xml.security.exceptions.Base64DecodingException;
+import org.apache.xml.security.utils.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,22 +41,22 @@ import com.parasoft.parabank.web.UserSession;
 import com.parasoft.parabank.web.controller.exception.AuthenticationException;
 
 /**
- * Controller that behaves like a proxy. Restful calls made to /services_proxy/* are
- * routed here where they are then processed by the {@link AccessModeController} or the
- * {@link BankManager}
+ * Controller that behaves like a proxy. Restful calls made to /services_proxy/*
+ * are routed here where they are then processed by the
+ * {@link AccessModeController} or the {@link BankManager}
  */
 @RestController
-public class RestServiceProxyController extends AbstractBankController{
+public class RestServiceProxyController extends AbstractBankController {
 
     private static final Logger log = LoggerFactory.getLogger(RestServiceProxyController.class);
 
     @Autowired
     private MessageSource messageSource;
 
-    @Resource(name = "accessModeController") 
+    @Resource(name = "accessModeController")
     private AccessModeController accessModeController;
 
-    @Resource(name = "adminManager") 
+    @Resource(name = "adminManager")
     private AdminManager adminManager;
 
     @Override
@@ -64,7 +68,7 @@ public class RestServiceProxyController extends AbstractBankController{
         this.adminManager = adminManager;
     }
 
-    @RequestMapping(value="bank/customers/{id}/accounts", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "bank/customers/{id}/accounts", method = RequestMethod.GET, produces = "application/json")
     public List<Account> getAccounts(@PathVariable(value = "id") Integer id) throws Exception {
         authenticate();
         List<Account> accounts;// = new ArrayList<Account>();
@@ -85,7 +89,7 @@ public class RestServiceProxyController extends AbstractBankController{
         return accounts;
     }
 
-    @RequestMapping(value="bank/accounts/{id}",method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "bank/accounts/{id}", method = RequestMethod.GET, produces = "application/json")
     public Account getAccount(@PathVariable(value = "id") Integer id) throws Exception {
         authenticate();
         String accessMode = null;
@@ -102,7 +106,7 @@ public class RestServiceProxyController extends AbstractBankController{
         return account;
     }
 
-    @RequestMapping(value="bank/accounts/{id}/transactions",method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "bank/accounts/{id}/transactions", method = RequestMethod.GET, produces = "application/json")
     public List<Transaction> getTransactions(@PathVariable(value = "id") Integer id) throws Exception {
         authenticate();
         String accessMode = null;
@@ -120,11 +124,9 @@ public class RestServiceProxyController extends AbstractBankController{
         return transactions;
     }
 
-    @RequestMapping(value="bank/accounts/{id}/transactions/month/{month}/type/{type}", method = RequestMethod.GET, produces = "application/json")
-    public List<Transaction> getTransactionsByMonthAndType(
-            @PathVariable(value = "id") Integer id, 
-            @PathVariable(value = "month") String month,
-            @PathVariable(value = "type") String type) throws Exception {
+    @RequestMapping(value = "bank/accounts/{id}/transactions/month/{month}/type/{type}", method = RequestMethod.GET, produces = "application/json")
+    public List<Transaction> getTransactionsByMonthAndType(@PathVariable(value = "id") Integer id,
+            @PathVariable(value = "month") String month, @PathVariable(value = "type") String type) throws Exception {
         authenticate();
         String accessMode = null;
         List<Transaction> transactions;
@@ -136,7 +138,7 @@ public class RestServiceProxyController extends AbstractBankController{
         criteria.setSearchType(SearchType.ACTIVITY);
         criteria.setTransactionType(type);
         criteria.setMonth(month);
-        if (accessMode != null && !accessMode.equalsIgnoreCase("jdbc")) { 
+        if (accessMode != null && !accessMode.equalsIgnoreCase("jdbc")) {
             transactions = accessModeController.getTransactionsForAccount(account, criteria);
         } else {
             // default JDBC
@@ -145,9 +147,8 @@ public class RestServiceProxyController extends AbstractBankController{
         return transactions;
     }
 
-    @RequestMapping(value="bank/createAccount", method = RequestMethod.POST, produces = "application/json")
-    public Account createAccount(
-            @RequestParam("customerId") Integer customerId,
+    @RequestMapping(value = "bank/createAccount", method = RequestMethod.POST, produces = "application/json")
+    public Account createAccount(@RequestParam("customerId") Integer customerId,
             @RequestParam("newAccountType") Integer newAccountType,
             @RequestParam("fromAccountId") Integer fromAccountId) throws Exception {
         authenticate();
@@ -156,7 +157,7 @@ public class RestServiceProxyController extends AbstractBankController{
         if (adminManager != null) {
             accessMode = adminManager.getParameter("accessmode");
         }
-        if (accessMode != null && !accessMode.equalsIgnoreCase("jdbc")) { 
+        if (accessMode != null && !accessMode.equalsIgnoreCase("jdbc")) {
             newAccount = accessModeController.createAccount(customerId, newAccountType, fromAccountId);
         } else {
             // default JDBC
@@ -169,11 +170,10 @@ public class RestServiceProxyController extends AbstractBankController{
         return newAccount;
     }
 
-    @RequestMapping(value="bank/transfer", method = RequestMethod.POST, produces = "application/json")
-    public String transfer(
-            @RequestParam("fromAccountId") Integer fromAccountId,
-            @RequestParam("toAccountId") Integer toAccountId,
-            @RequestParam("amount") BigDecimal amount) throws Exception {
+    @RequestMapping(value = "bank/transfer", method = RequestMethod.POST, produces = "application/json")
+    public String transfer(@RequestParam("fromAccountId") Integer fromAccountId,
+            @RequestParam("toAccountId") Integer toAccountId, @RequestParam("amount") BigDecimal amount)
+            throws Exception {
         authenticate();
         String accessMode = null;
         if (adminManager != null) {
@@ -189,13 +189,10 @@ public class RestServiceProxyController extends AbstractBankController{
                 + toAccountId;
     }
 
-    @RequestMapping(value ="bank/requestLoan", method = RequestMethod.POST, produces = "application/json")
-    public LoanResponse requestLoan(
-            @RequestParam("customerId") Integer customerId,
-            @RequestParam("amount") BigDecimal amount,
-            @RequestParam("downPayment") BigDecimal downPayment,
-            @RequestParam("fromAccountId") Integer fromAccountId) throws Exception
-    {
+    @RequestMapping(value = "bank/requestLoan", method = RequestMethod.POST, produces = "application/json")
+    public LoanResponse requestLoan(@RequestParam("customerId") Integer customerId,
+            @RequestParam("amount") BigDecimal amount, @RequestParam("downPayment") BigDecimal downPayment,
+            @RequestParam("fromAccountId") Integer fromAccountId) throws Exception {
         authenticate();
         String accessMode = null;
         if (adminManager != null) {
@@ -211,14 +208,9 @@ public class RestServiceProxyController extends AbstractBankController{
         return loanResponse;
     }
 
-    @RequestMapping(
-            value ="bank/accounts/{accountId}/transactions/onDate/{onDate}", 
-            method = RequestMethod.GET, 
-            produces = "application/json")
-    public List<Transaction> getTransactionsOnDate(
-            @PathVariable(value = "accountId") Integer accountId, 
-            @PathVariable(value = "onDate") String onDate
-            ) throws Exception {
+    @RequestMapping(value = "bank/accounts/{accountId}/transactions/onDate/{onDate}", method = RequestMethod.GET, produces = "application/json")
+    public List<Transaction> getTransactionsOnDate(@PathVariable(value = "accountId") Integer accountId,
+            @PathVariable(value = "onDate") String onDate) throws Exception {
         authenticate();
         String accessMode = null;
         if (adminManager != null) {
@@ -236,16 +228,10 @@ public class RestServiceProxyController extends AbstractBankController{
         }
     }
 
-    @RequestMapping(
-            value ="bank/accounts/{accountId}/transactions/fromDate/{fromDate}/toDate/{toDate}",
-            method = RequestMethod.GET, 
-            produces = "application/json"
-            )
-    public List<Transaction> getTransactionsByToFromDate(
-            @PathVariable(value = "accountId") Integer accountId, 
-            @PathVariable(value = "fromDate") String fromDate,
-            @PathVariable(value = "toDate") String toDate
-            ) throws Exception {
+    @RequestMapping(value = "bank/accounts/{accountId}/transactions/fromDate/{fromDate}/toDate/{toDate}", method = RequestMethod.GET, produces = "application/json")
+    public List<Transaction> getTransactionsByToFromDate(@PathVariable(value = "accountId") Integer accountId,
+            @PathVariable(value = "fromDate") String fromDate, @PathVariable(value = "toDate") String toDate)
+            throws Exception {
         authenticate();
         String accessMode = null;
         if (adminManager != null) {
@@ -264,15 +250,9 @@ public class RestServiceProxyController extends AbstractBankController{
         }
     }
 
-    @RequestMapping(
-            value = "bank/accounts/{accountId}/transactions/amount/{amount}", 
-            method = RequestMethod.GET, 
-            produces = "application/json"
-            )
-    public List<Transaction> getTransactionsByAmount(
-            @PathVariable(value = "accountId") Integer accountId,
-            @PathVariable(value = "amount") BigDecimal amount
-            ) throws Exception {
+    @RequestMapping(value = "bank/accounts/{accountId}/transactions/amount/{amount}", method = RequestMethod.GET, produces = "application/json")
+    public List<Transaction> getTransactionsByAmount(@PathVariable(value = "accountId") Integer accountId,
+            @PathVariable(value = "amount") BigDecimal amount) throws Exception {
         authenticate();
         String accessMode = null;
         if (adminManager != null) {
@@ -307,23 +287,55 @@ public class RestServiceProxyController extends AbstractBankController{
 
     private void authenticate() throws Exception {
         String parameter = adminManager.getParameter(AdminParameters.WEB_AUTHENTICATION_ENABLED);
-        boolean webAuthenticationEnabled = Boolean.parseBoolean(parameter == null || parameter.isEmpty() ? "false" : parameter);
+        boolean webAuthenticationEnabled = Boolean
+                .parseBoolean(parameter == null || parameter.isEmpty() ? "false" : parameter);
         if (!webAuthenticationEnabled) {
             return;
         }
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-        HttpSession session = attr.getRequest().getSession(false);
+        HttpServletRequest request = attr.getRequest();
+        String authHeader = request.getHeader("Authorization");
         Locale locale = LocaleContextHolder.getLocale();
-        if (session == null) {
-            throw new AuthenticationException(messageSource.getMessage("user.login.required", null, locale));
+        if (authHeader == null) {
+            HttpSession session = request.getSession(false);
+            if (session == null) {
+                throw new AuthenticationException(messageSource.getMessage("user.login.required", null, locale));
+            }
+            Object result = session.getAttribute("userSession");
+            if (result == null || !(result instanceof UserSession)) {
+                throw new AuthenticationException(messageSource.getMessage("user.login.required", null, locale));
+            }
+            UserSession userSession = (UserSession) result;
+            if (userSession.getCustomer() == null) {
+                throw new AuthenticationException(messageSource.getMessage("user.login.required", null, locale));
+            }
+        } else {
+            StringTokenizer st = new StringTokenizer(authHeader);
+            if (st.hasMoreTokens()) {
+                String basic = st.nextToken();
+                if (basic.equalsIgnoreCase("Basic")) {
+                    try {
+                        String credentials = new String(Base64.decode(st.nextToken()), "UTF-8");
+                        int p = credentials.indexOf(":");
+                        if (p != -1) {
+                            String username = credentials.substring(0, p).trim();
+                            String password = credentials.substring(p + 1).trim();
+                            Customer customer = accessModeController.login(username, password);
+                            if (customer == null) {
+                                throw new AuthenticationException(
+                                        messageSource.getMessage("error.invalid.username.or.password", null, locale));
+                            }
+                        } else {
+                            throw new AuthenticationException(
+                                    messageSource.getMessage("error.invalid.username.or.password", null, locale));
+                        }
+                    } catch (Base64DecodingException e) {
+                        throw new AuthenticationException(
+                                messageSource.getMessage("error.invalid.username.or.password", null, locale));
+                    }
+                }
+            }
         }
-        Object result = session.getAttribute("userSession");
-        if (result == null || !(result instanceof UserSession)) {
-            throw new AuthenticationException(messageSource.getMessage("user.login.required", null, locale));
-        }
-        UserSession userSession = (UserSession) result;
-        if (userSession.getCustomer() == null) {
-            throw new AuthenticationException(messageSource.getMessage("user.login.required", null, locale));
-        }
+
     }
 }
