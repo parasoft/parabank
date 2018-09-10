@@ -98,20 +98,6 @@
 		</tr>
 	</table>
 	<br />
-	
-	<h3>
-	   <fmt:message key="web.authentication" />
-	</h3>
-	
-	<table class="form2" style="width : 100%">
-	   <tbody>
-	   <tr>
-           <td width="10%" align="right"><form:checkbox path="webAuthenticationEnabled"/></td>
-	       <td align="left"><fmt:message key="web.authentication.description" /></td>
-	   </tr>
-	   </tbody>
-	</table>
-	<br />
 
 	<h3>
 		<fmt:message key="web.service" />

@@ -34,7 +34,6 @@ import com.parasoft.parabank.domain.Transaction;
 import com.parasoft.parabank.domain.TransactionCriteria;
 import com.parasoft.parabank.domain.TransactionCriteria.SearchType;
 import com.parasoft.parabank.domain.logic.AdminManager;
-import com.parasoft.parabank.domain.logic.AdminParameters;
 import com.parasoft.parabank.domain.logic.BankManager;
 import com.parasoft.parabank.util.AccessModeController;
 import com.parasoft.parabank.web.UserSession;
@@ -286,12 +285,6 @@ public class RestServiceProxyController extends AbstractBankController {
     }
 
     private void authenticate() throws Exception {
-        String parameter = adminManager.getParameter(AdminParameters.WEB_AUTHENTICATION_ENABLED);
-        boolean webAuthenticationEnabled = Boolean
-                .parseBoolean(parameter == null || parameter.isEmpty() ? "false" : parameter);
-        if (!webAuthenticationEnabled) {
-            return;
-        }
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         HttpServletRequest request = attr.getRequest();
         String authHeader = request.getHeader("Authorization");
