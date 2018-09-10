@@ -48,7 +48,6 @@ public class AdminFormTest extends AbstractParaBankTest {
         parameters.put(AdminParameters.LOAN_PROVIDER, LOAN_PROVIDER);
         parameters.put(AdminParameters.LOAN_PROCESSOR, LOAN_PROCESSOR);
         parameters.put(AdminParameters.LOAN_PROCESSOR_THRESHOLD, LOAN_PROCESSOR_THRESHOLD.toString());
-        parameters.put(AdminParameters.WEB_AUTHENTICATION_ENABLED, Boolean.FALSE.toString());
         parameters.put(AdminParameters.ACCESSMODE, ACCESS_MODE);
         parameters.put(AdminParameters.REST_ENDPOINT, REST_ENDPOINT);
         parameters.put(AdminParameters.SOAP_ENDPOINT, SOAP_ENDPOINT);
