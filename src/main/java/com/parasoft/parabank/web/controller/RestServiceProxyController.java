@@ -1,13 +1,18 @@
 package com.parasoft.parabank.web.controller;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.StringTokenizer;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -18,6 +23,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -52,12 +60,15 @@ public class RestServiceProxyController extends AbstractBankController {
     @Autowired
     private MessageSource messageSource;
 
+    @Autowired
+    private ServletContext context;
+    
     @Resource(name = "accessModeController")
     private AccessModeController accessModeController;
 
     @Resource(name = "adminManager")
     private AdminManager adminManager;
-
+    
     @Override
     public void setAccessModeController(final AccessModeController accessModeController) {
         this.accessModeController = accessModeController;
@@ -266,6 +277,17 @@ public class RestServiceProxyController extends AbstractBankController {
         } else {
             // default JDBC
             return bankManager.getTransactionsForAccount(accountId, criteria);
+        }
+    }
+    
+    @RequestMapping(value = "bank/swagger.yaml")
+    public ResponseEntity<String> getSwagger(HttpServletRequest request) throws IOException {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(context.getResourceAsStream("/WEB-INF/swagger.yaml")))) {
+            String host = request.getServerName() + ':' + request.getServerPort();
+            String content = br.lines().collect(Collectors.joining(System.lineSeparator())).replaceFirst("replace-host-name", host);
+            HttpHeaders headers = new HttpHeaders();
+            headers.add("Content-Type", "application/yaml");
+            return new ResponseEntity<String>(content, headers, HttpStatus.OK);
         }
     }
 
