@@ -24,7 +24,6 @@ tags:
 schemes:
 - "http"
 produces:
-- "application/xml"
 - "application/json"
 paths:
   /transfer:
@@ -35,7 +34,6 @@ paths:
       description: ""
       operationId: "transfer_1"
       produces:
-      - "application/xml"
       - "application/json"
       parameters:
       - name: "fromAccountId"
@@ -69,7 +67,6 @@ paths:
       description: ""
       operationId: "getAccounts_1"
       produces:
-      - "application/xml"
       - "application/json"
       parameters:
       - name: "customerId"
@@ -94,7 +91,6 @@ paths:
       description: ""
       operationId: "getTransactionsByAmount_1"
       produces:
-      - "application/xml"
       - "application/json"
       parameters:
       - name: "accountId"
@@ -124,7 +120,6 @@ paths:
       description: ""
       operationId: "getTransactionsByMonthAndType_1"
       produces:
-      - "application/xml"
       - "application/json"
       parameters:
       - name: "accountId"
@@ -159,7 +154,6 @@ paths:
       description: ""
       operationId: "getTransactionsByToFromDate_1"
       produces:
-      - "application/xml"
       - "application/json"
       parameters:
       - name: "accountId"
@@ -194,7 +188,6 @@ paths:
       description: ""
       operationId: "getTransactionsOnDate_1"
       produces:
-      - "application/xml"
       - "application/json"
       parameters:
       - name: "accountId"
@@ -224,7 +217,6 @@ paths:
       description: ""
       operationId: "getTransactions_1"
       produces:
-      - "application/xml"
       - "application/json"
       parameters:
       - name: "accountId"
@@ -248,7 +240,6 @@ paths:
       description: ""
       operationId: "getTransaction_1"
       produces:
-      - "application/xml"
       - "application/json"
       parameters:
       - name: "transactionId"
@@ -271,7 +262,6 @@ paths:
       description: ""
       operationId: "createAccount_1"
       produces:
-      - "application/xml"
       - "application/json"
       parameters:
       - name: "customerId"
@@ -305,7 +295,6 @@ paths:
       description: ""
       operationId: "getAccount_1"
       produces:
-      - "application/xml"
       - "application/json"
       parameters:
       - name: "accountId"
@@ -327,7 +316,6 @@ paths:
       description: ""
       operationId: "requestLoan_1"
       produces:
-      - "application/xml"
       - "application/json"
       parameters:
       - name: "customerId"
