@@ -1,0 +1,410 @@
+---
+swagger: "2.0"
+info:
+  description: "This API provides access to the internal PROXY for internal REST services"
+  version: "3.0.0"
+  title: "The ParaBank services proxy REST API"
+  termsOfService: "/parabank/about.htm"
+  contact:
+    name: "ParaBank Web Administrator"
+    url: "http://www.parasoft.com"
+    email: "webadmin@parabank.parasoft.com"
+  license:
+    name: "Apache 2.0 License"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "replace-host-name"
+basePath: "/parabank/services_proxy/bank"
+tags:
+- name: "Accounts"
+  description: "account centric operations"
+- name: "Loans"
+  description: "request loan operations"
+- name: "Transactions"
+  description: "banking transactions centric operations"
+schemes:
+- "http"
+produces:
+- "application/json"
+paths:
+  /transfer:
+    post:
+      tags:
+      - "Accounts"
+      summary: "Transfer funds"
+      description: ""
+      operationId: "transfer_1"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "fromAccountId"
+        in: "query"
+        description: "Customer funds source account"
+        required: true
+        type: "integer"
+        format: "int32"
+      - name: "toAccountId"
+        in: "query"
+        description: "Customer funds target account"
+        required: true
+        type: "integer"
+        format: "int32"
+      - name: "amount"
+        in: "query"
+        description: "Amount"
+        required: true
+        type: "number"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "string"
+  /customers/{customerId}/accounts:
+    get:
+      tags:
+      - "Customers"
+      - "Accounts"
+      summary: "Get Customer Accounts"
+      description: ""
+      operationId: "getAccounts_1"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "customerId"
+        in: "path"
+        description: "Customer's id"
+        required: true
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Account"
+  /accounts/{accountId}/transactions/amount/{amount}:
+    get:
+      tags:
+      - "Accounts"
+      - "Transactions"
+      summary: "Create transactions by amount for account"
+      description: ""
+      operationId: "getTransactionsByAmount_1"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "accountId"
+        in: "path"
+        description: "Account id"
+        required: true
+        type: "integer"
+        format: "int32"
+      - name: "amount"
+        in: "path"
+        description: "Amount"
+        required: true
+        type: "number"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Transaction"
+  /accounts/{accountId}/transactions/month/{month}/type/{type}:
+    get:
+      tags:
+      - "Accounts"
+      - "Transactions"
+      summary: "Fetch transactions by month and type for account"
+      description: ""
+      operationId: "getTransactionsByMonthAndType_1"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "accountId"
+        in: "path"
+        description: "Account id"
+        required: true
+        type: "integer"
+        format: "int32"
+      - name: "month"
+        in: "path"
+        description: "Month to use for the search range"
+        required: true
+        type: "string"
+      - name: "type"
+        in: "path"
+        description: "Transaction type (CREDIT, DEBIT)"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Transaction"
+  /accounts/{accountId}/transactions/fromDate/{fromDate}/toDate/{toDate}:
+    get:
+      tags:
+      - "Accounts"
+      - "Transactions"
+      summary: "Fetch transactions for date range for account"
+      description: ""
+      operationId: "getTransactionsByToFromDate_1"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "accountId"
+        in: "path"
+        description: "Account id"
+        required: true
+        type: "integer"
+        format: "int32"
+      - name: "fromDate"
+        in: "path"
+        description: "Search starting date"
+        required: true
+        type: "string"
+      - name: "toDate"
+        in: "path"
+        description: "Search ending date"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Transaction"
+  /accounts/{accountId}/transactions/onDate/{onDate}:
+    get:
+      tags:
+      - "Accounts"
+      - "Transactions"
+      summary: "Fetch transactions for a specific date for account"
+      description: ""
+      operationId: "getTransactionsOnDate_1"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "accountId"
+        in: "path"
+        description: "Account id"
+        required: true
+        type: "integer"
+        format: "int32"
+      - name: "onDate"
+        in: "path"
+        description: "Search specific date"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Transaction"
+  /accounts/{accountId}/transactions:
+    get:
+      tags:
+      - "Accounts"
+      - "Transactions"
+      summary: "Get the list of Transactions for the account"
+      description: ""
+      operationId: "getTransactions_1"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "accountId"
+        in: "path"
+        description: "Account id"
+        required: true
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Transaction"
+  /transactions/{transactionId}:
+    get:
+      tags:
+      - "Transactions"
+      summary: "Get the transaction for the id"
+      description: ""
+      operationId: "getTransaction_1"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "transactionId"
+        in: "path"
+        description: "Unique identifier for the transaction"
+        required: true
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Transaction"
+  /createAccount:
+    post:
+      tags:
+      - "Customers"
+      - "Accounts"
+      summary: "Create a new account"
+      description: ""
+      operationId: "createAccount_1"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "customerId"
+        in: "query"
+        description: "Customer's id"
+        required: true
+        type: "integer"
+        format: "int32"
+      - name: "newAccountType"
+        in: "query"
+        description: "Account type (CHECKING, SAVINGS, LOAN)"
+        required: true
+        type: "integer"
+        format: "int32"
+      - name: "fromAccountId"
+        in: "query"
+        description: "Customer funds source account"
+        required: true
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Account"
+  /accounts/{accountId}:
+    get:
+      tags:
+      - "Accounts"
+      summary: "Get Account by Id"
+      description: ""
+      operationId: "getAccount_1"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "accountId"
+        in: "path"
+        description: "Account id"
+        required: true
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Account"
+  /requestLoan:
+    post:
+      tags:
+      - "Loans"
+      summary: "Request a loan"
+      description: ""
+      operationId: "requestLoan_1"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "customerId"
+        in: "query"
+        description: "Customer's id"
+        required: true
+        type: "integer"
+        format: "int32"
+      - name: "amount"
+        in: "query"
+        description: "Amount"
+        required: true
+        type: "number"
+      - name: "downPayment"
+        in: "query"
+        description: "Downpayment for the loan"
+        required: true
+        type: "number"
+      - name: "fromAccountId"
+        in: "query"
+        description: "Customer funds source account"
+        required: true
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/LoanResponse"
+definitions:
+  Transaction:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int32"
+      accountId:
+        type: "integer"
+        format: "int32"
+      date:
+        type: "string"
+        format: "date-time"
+      amount:
+        type: "number"
+      description:
+        type: "string"
+      type:
+        type: "string"
+        enum:
+        - "Credit"
+        - "Debit"
+    xml:
+      name: "transaction"
+  Account:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int32"
+      customerId:
+        type: "integer"
+        format: "int32"
+      balance:
+        type: "number"
+      type:
+        type: "string"
+        enum:
+        - "CHECKING"
+        - "SAVINGS"
+        - "LOAN"
+    xml:
+      name: "account"
+  LoanResponse:
+    type: "object"
+    required:
+    - "loanProviderName"
+    properties:
+      responseDate:
+        type: "string"
+        format: "date-time"
+      loanProviderName:
+        type: "string"
+      approved:
+        type: "boolean"
+      message:
+        type: "string"
+      accountId:
+        type: "integer"
+        format: "int32"
+    xml:
+      name: "loanResponse"
+      namespace: "http://service.parabank.parasoft.com/"
