@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -53,14 +54,13 @@ import com.parasoft.parabank.web.controller.exception.AuthenticationException;
  * {@link AccessModeController} or the {@link BankManager}
  */
 @RestController
-public class RestServiceProxyController extends AbstractBankController {
+public class RestServiceProxyController extends AbstractBankController implements ServletContextAware{
 
     private static final Logger log = LoggerFactory.getLogger(RestServiceProxyController.class);
 
     @Autowired
     private MessageSource messageSource;
 
-    @Autowired
     private ServletContext context;
     
     @Resource(name = "accessModeController")
@@ -76,6 +76,11 @@ public class RestServiceProxyController extends AbstractBankController {
 
     public void setAdminManager(final AdminManager adminManager) {
         this.adminManager = adminManager;
+    }
+    
+    @Override
+    public void setServletContext(ServletContext servletContext) {
+        this.context = servletContext;
     }
 
     @RequestMapping(value = "bank/customers/{id}/accounts", method = RequestMethod.GET, produces = "application/json")
