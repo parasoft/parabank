@@ -36,13 +36,49 @@
 		<commons-codec.version>1.10</commons-codec.version>
 		<groovy-all.version>2.4.11</groovy-all.version>
 		<wiremock.version>1.58</wiremock.version>
-		<mockito.version>1.10.19</mockito.version>
-		<powermock.version>1.7.0</powermock.version>
-		<junitparams.version>1.1.0</junitparams.version>
+		<mockito.version>2.23.0</mockito.version>
+		<bytebuddy.version>1.9.0</bytebuddy.version>
+		<javassist.version>3.22.0-GA</javassist.version>
+		<powermock.version>2.0.0-beta.11</powermock.version>
+		<junitparams.version>1.1.1</junitparams.version>
 		<hamcrest.version>1.3</hamcrest.version>
 		<wss4j.version>2.1.9</wss4j.version>
 	</properties>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-core</artifactId>
+				<version>${mockito.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>net.bytebuddy</groupId>
+				<artifactId>byte-buddy</artifactId>
+				<version>${bytebuddy.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>net.bytebuddy</groupId>
+				<artifactId>byte-buddy-agent</artifactId>
+				<version>${bytebuddy.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.javassist</groupId>
+				<artifactId>javassist</artifactId>
+				<version>${javassist.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<repositories>
+		<repository>
+			<id>mockito</id>
+			<name>mockito</name>
+			<url>https://dl.bintray.com/mockito/maven/</url>
+		</repository>
+		<repository>
+			<id>powermock</id>
+			<name>powermock</name>
+			<url>https://dl.bintray.com/powermock/maven/</url>
+		</repository>
 		<repository>
 			<id>mulesoft.org-snapshot</id>
 			<name>MuleSoft Snapshot Repository</name>
@@ -380,7 +416,6 @@
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
-			<version>${mockito.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -415,7 +450,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.powermock</groupId>
-			<artifactId>powermock-api-mockito</artifactId>
+			<artifactId>powermock-api-mockito2</artifactId>
 			<version>${powermock.version}</version>
 			<scope>test</scope>
 		</dependency>
