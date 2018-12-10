@@ -37,7 +37,7 @@ import com.parasoft.parabank.web.form.*;
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DirtiesContextTestExecutionListener.class,
     TransactionalTestExecutionListener.class })
 @Transactional
-public class BillPayControllerTest {
+public class BillPayControllerSpringTest {
 
     private static final String BILLPAY_CONFIRM = "billpayConfirm";
 
@@ -54,12 +54,12 @@ public class BillPayControllerTest {
     private BillPayForm getBillPayForm() {
         final BillPayForm form = new BillPayForm();
         final Payee payee = new Payee();
-        payee.setName("payee name");
         final Address address = new Address();
         address.setStreet("payee street");
         address.setCity("payee city");
         address.setState("payee state");
         address.setZipCode("payee zipcode");
+        payee.setName("payee name");
         payee.setAddress(address);
         payee.setPhoneNumber("payee phone number");
         payee.setAccountNumber(100);
