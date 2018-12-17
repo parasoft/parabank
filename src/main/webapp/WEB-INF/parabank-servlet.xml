@@ -19,6 +19,9 @@
 	</mvc:annotation-driven>
 	<context:component-scan base-package="com.parasoft.parabank,com.parasoft.bookstore,com.parasoft.bookstore2" />
 
+	<!-- ========================= WEB FRONT-END LIBRARY PROVIDER ========================= -->
+	<mvc:resources mapping="/webjars/**" location="/webjars/"/>
+
 	<!-- ========================= VIEW CONTROLLERS ========================= -->
 
 	<mvc:view-controller path="/about.htm" view-name="about" />

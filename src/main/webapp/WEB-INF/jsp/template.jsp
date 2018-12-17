@@ -14,7 +14,7 @@
 			type="text/css" />
 		<link href="<c:url value="/style.css"/>" rel="stylesheet"
 			type="text/css" />
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+		<script src="<c:url value="/webjars/angularjs/1.6.9/angular.min.js"/>"></script>
 	</head>
 
 	<body
