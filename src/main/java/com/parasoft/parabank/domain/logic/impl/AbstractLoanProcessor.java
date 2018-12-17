@@ -1,9 +1,8 @@
 package com.parasoft.parabank.domain.logic.impl;
 
-import java.util.*;
-
 import com.parasoft.parabank.domain.*;
 import com.parasoft.parabank.domain.logic.*;
+import com.parasoft.parabank.domain.util.LoanResponseBuilder;
 
 /**
  * Provides skeleton algorithm for determining loan approval
@@ -17,22 +16,22 @@ public abstract class AbstractLoanProcessor implements LoanProvider {
 
     @Override
     public final LoanResponse requestLoan(LoanRequest loanRequest) {
-        LoanResponse response = new LoanResponse();
-        response.setResponseDate(new Date());
-        response.setApproved(true);
+        LoanResponseBuilder builder = new LoanResponseBuilder()
+                .accountId(0)
+                .approved(true);
 
         if (loanRequest.getDownPayment().compareTo(loanRequest.getAvailableFunds()) > 0) {
-            response.setApproved(false);
-            response.setMessage("error.insufficient.funds.for.down.payment");
-            return response;
+            builder.approved(false);
+            builder.message("error.insufficient.funds.for.down.payment");
+            return builder.build();
         }
 
         if (getQualifier(loanRequest) < getThreshold()) {
-            response.setApproved(false);
-            response.setMessage(getErrorMessage());
+            builder.approved(false);
+            builder.message(getErrorMessage());
         }
 
-        return response;
+        return builder.build();
     }
 
     protected abstract double getQualifier(LoanRequest loanRequest);
