@@ -24,6 +24,7 @@ import org.springframework.test.context.*;
 import org.springframework.test.context.junit4.*;
 import org.springframework.test.context.support.*;
 import org.springframework.test.context.transaction.*;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.*;
 import org.springframework.ui.*;
 import org.springframework.validation.*;
@@ -37,6 +38,7 @@ import com.parasoft.parabank.util.*;
 import com.parasoft.parabank.web.*;
 
 // @SuppressWarnings("deprecation")
+@WebAppConfiguration("file:src/test/resources")
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:/**/test-context.xml" })
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DirtiesContextTestExecutionListener.class,
