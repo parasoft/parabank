@@ -16,6 +16,7 @@ import org.springframework.test.context.*;
 import org.springframework.test.context.junit4.*;
 import org.springframework.test.context.support.*;
 import org.springframework.test.context.transaction.*;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.*;
 import org.springframework.test.web.servlet.setup.*;
 import org.springframework.transaction.annotation.*;
@@ -32,6 +33,7 @@ import com.parasoft.parabank.web.form.*;
  *
  */
 @SuppressWarnings({ "unchecked" })
+@WebAppConfiguration("file:src/test/resources")
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:/**/test-context.xml" })
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DirtiesContextTestExecutionListener.class,
