@@ -44,6 +44,8 @@
 		<hamcrest.version>1.3</hamcrest.version>
 		<wss4j.version>2.1.9</wss4j.version>
 		<angularjs.version>1.6.9</angularjs.version>
+		<selenium-java.version>3.141.59</selenium-java.version>
+		<guava.version>25.0-jre</guava.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -165,6 +167,13 @@
 	</pluginRepositories>
 
 	<dependencies>
+		<!-- Need to override for Selenium library -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${guava.version}</version>
+		</dependency>
+
 		<!-- Spring dependencies -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -475,6 +484,13 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- Selenium dependencies -->
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>${selenium-java.version}</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -544,6 +560,41 @@
 					<version>${maven-surefire-plugin.version}</version>
 					<configuration>
 						<runOrder>alphabetical</runOrder>
+						<excludes>
+							<exclude>com.parasoft.webdriver.test.*</exclude>
+						</excludes>
+					</configuration>
+				</plugin>
+				<!--This plugin's configuration is used to store Eclipse m2e settings
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.raml.plugins
+										</groupId>
+										<artifactId>
+											jaxrs-raml-maven-plugin
+										</artifactId>
+										<versionRange>
+											[1.3.4,)
+										</versionRange>
+										<goals>
+											<goal>generate-raml</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
 					</configuration>
 				</plugin>
 			</plugins>
@@ -576,12 +627,14 @@
 						<phase>install</phase>
 						<configuration>
 							<target>
-								<echo message="making a copy for deployment: ${project.build.directory}/${project.artifactId}.${project.packaging} " />
+								<echo
+									message="making a copy for deployment: ${project.build.directory}/${project.artifactId}.${project.packaging} " />
 								<copy overwrite="true" verbose="true" toDir="${project.build.directory}">
 									<fileset dir="${project.build.directory}">
 										<include name="${project.build.finalName}.${project.packaging}" />
 									</fileset>
-									<globmapper from="${project.build.finalName}.${project.packaging}" to="${project.artifactId}.${project.packaging}" />
+									<globmapper from="${project.build.finalName}.${project.packaging}"
+										to="${project.artifactId}.${project.packaging}" />
 								</copy>
 							</target>
 						</configuration>
