@@ -1,12 +1,11 @@
-package com.parasoft.webdriver.test;
+package com.parasoft.parabank.webdriver.test;
 
-import org.junit.Test;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class FirefoxSimpleSmartAPIDemoTest extends SimpleSmartAPIDemoTest {
-    @Test
-    public void testSmartAPIDemo() throws Throwable {
+    public WebDriver getWebDriver() {
         // MUST set "webdriver.gecko.driver" via a system property
-        doSmartAPIDemo(new FirefoxDriver());
+        return new FirefoxDriver();
     }
 }

@@ -1,12 +1,11 @@
-package com.parasoft.webdriver.test;
+package com.parasoft.parabank.webdriver.test;
 
-import org.junit.Test;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class ChromeSimpleSmartAPIDemoTest extends SimpleSmartAPIDemoTest {
-    @Test
-    public void testSmartAPIDemo() throws Throwable {
+    public WebDriver getWebDriver() {
         // MUST set "webdriver.chrome.driver" via a system property
-        doSmartAPIDemo(new ChromeDriver());
+        return new ChromeDriver();
     }
 }

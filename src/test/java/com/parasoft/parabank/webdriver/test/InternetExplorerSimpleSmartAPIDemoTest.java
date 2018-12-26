@@ -1,12 +1,11 @@
-package com.parasoft.webdriver.test;
+package com.parasoft.parabank.webdriver.test;
 
-import org.junit.Test;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
 public class InternetExplorerSimpleSmartAPIDemoTest extends SimpleSmartAPIDemoTest {
-    @Test
-    public void testSmartAPIDemo() throws Throwable {
+    public WebDriver getWebDriver() {
         // MUST set "webdriver.ie.driver" via a system property
-        doSmartAPIDemo(new InternetExplorerDriver());
+        return new InternetExplorerDriver();
     }
 }

@@ -1,4 +1,4 @@
-package com.parasoft.webdriver.page;
+package com.parasoft.parabank.webdriver.page;
 
 import java.util.List;
 
