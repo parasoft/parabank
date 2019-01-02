@@ -16,6 +16,8 @@ import com.parasoft.parabank.webdriver.page.LoginComponent;
 import com.parasoft.parabank.webdriver.page.TransferFundsPage;
 
 public abstract class SimpleSmartAPIDemoTest {
+    private static final String ENDPOINT = SimpleSmartAPIDemoTest.class.getName() + ".ENDPOINT";
+
     private WebDriver _driver;
 
     public abstract WebDriver getWebDriver();
@@ -27,7 +29,7 @@ public abstract class SimpleSmartAPIDemoTest {
 
     @Test
     public void testSmartAPIDemo() throws Throwable {
-        _driver.get("http://localhost:8080/parabank/");
+        _driver.get(System.getProperty(ENDPOINT, "http://localhost:8080/parabank/"));
         LandingPage landingPage = PageFactory.initElements(_driver, LandingPage.class);
 
         LoginComponent loginComponent = landingPage.getLogin();
