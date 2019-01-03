@@ -561,7 +561,7 @@
 					<configuration>
 						<runOrder>alphabetical</runOrder>
 						<excludes>
-							<exclude>com.parasoft.webdriver.test.*</exclude>
+							<exclude>com.parasoft.parabank.webdriver.test.*</exclude>
 						</excludes>
 					</configuration>
 				</plugin>

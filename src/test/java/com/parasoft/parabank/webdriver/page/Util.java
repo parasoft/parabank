@@ -42,7 +42,13 @@ public class Util {
 
     public static void waitAndSelect(WebElement element, WebDriver driver, String option) {
         waitUntilClickable(element, driver);
+        waitUntilSelectOptionsPopulated(element, driver);
         Select dropdown = new Select(element);
         dropdown.selectByVisibleText(option);
+    }
+
+    private static void waitUntilSelectOptionsPopulated(WebElement element, WebDriver driver) {
+        WebDriverWait wait = new WebDriverWait(driver, DEFAULT_WAIT_FOR_ELEMENT_TIMEOUT);
+        wait.until(webdriver -> new Select(element).getFirstSelectedOption().getText().trim().length() > 0);
     }
 }

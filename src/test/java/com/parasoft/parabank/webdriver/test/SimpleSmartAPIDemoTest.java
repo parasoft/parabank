@@ -47,9 +47,9 @@ public abstract class SimpleSmartAPIDemoTest {
         accountServicesComponent.clickTransferFunds();
 
         TransferFundsPage transferFundsPage = PageFactory.initElements(_driver, TransferFundsPage.class);
-        transferFundsPage.setAmount("1");
         transferFundsPage.selectFromAccount(accounts.get(0));
         transferFundsPage.selectToAccount(accounts.get(1));
+        transferFundsPage.setAmount("1");
         transferFundsPage.clickTransfer();
 
         accountServicesComponent = transferFundsPage.getAccountServices();
