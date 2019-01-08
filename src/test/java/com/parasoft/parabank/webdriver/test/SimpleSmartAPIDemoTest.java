@@ -64,6 +64,8 @@ public abstract class SimpleSmartAPIDemoTest {
 
     @After
     public void afterTest() {
-        _driver.quit();
+        if (_driver != null) {
+            _driver.quit();
+        }
     }
 }
