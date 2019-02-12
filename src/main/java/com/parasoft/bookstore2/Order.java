@@ -1,5 +1,7 @@
 package com.parasoft.bookstore2;
 
+import java.util.Date;
+
 public class Order {
     private Book book;
     private int quantity;
@@ -41,5 +43,9 @@ public class Order {
 
     public void refreshTimestamp() {
         timestamp = System.currentTimeMillis();
+    }
+
+    public String getDescription() {
+        return "Order: " + book.getProductInfo() + " x" + quantity + " on " + new Date(timestamp).toString();
     }
 }

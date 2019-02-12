@@ -22,11 +22,11 @@ public class Book implements Serializable{
         // for serialization only
     }
 
-	public Book(String isbn, String genre, Date year, String[] authors,
+    public Book(String isbn, String genre, Date year, String[] authors,
                    String publisher, String description, ProductInfo product)
-	    throws ItemNotFoundException
-	{
-		this.product = product;
+        throws ItemNotFoundException
+    {
+        this.product = product;
         this.isbn = isbn;
         this.genre = genre;
         publication_date = year;
@@ -34,7 +34,7 @@ public class Book implements Serializable{
         this.publisher = publisher;
         this.description = description;
 
-	}
+    }
 
     public String getISBN() {
         return isbn;
@@ -45,11 +45,11 @@ public class Book implements Serializable{
     }
 
     public String getGenre() {
-    	return genre;
+        return genre;
     }
 
     public void setGenre(String genre){
-    	this.genre = genre;
+        this.genre = genre;
     }
 
     public Date getPublicationDate() {
@@ -93,15 +93,14 @@ public class Book implements Serializable{
     }
 
     public ProductInfo getProductInfo(){
-    	return product;
+        return product;
     }
 
     public void setProductInfo(ProductInfo product){
-    	this.product = product;
+        this.product = product;
     }
 
-	public void inflatePrice(BigDecimal bigDecimal) {
-		product.inflateAmount(bigDecimal);
-
-	}
+    public void inflatePrice(BigDecimal bigDecimal) {
+        product.inflateAmount(bigDecimal);
+    }
 }

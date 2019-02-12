@@ -61,4 +61,8 @@ public class ProductInfo implements Serializable
     public void inflateAmount(BigDecimal inflate) {
         setAmount(amount.add(inflate));
     }
+
+    public String toString() {
+        return title;
+    }
 }
