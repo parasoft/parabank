@@ -170,6 +170,8 @@
 
 	<bean id="contactFormValidator" class="com.parasoft.parabank.domain.validator.ContactFormValidator" />
 
+    <bean id="contactInformationValidator" class="com.parasoft.parabank.domain.validator.ContactInformationValidator" />
+
 	<bean id="customerFormValidator" class="com.parasoft.parabank.domain.validator.CustomerFormValidator">
 		<property name="customerValidator" ref="customerValidator" />
 	</bean>
@@ -188,6 +190,7 @@
 
 	<bean id="payeeValidator" class="com.parasoft.parabank.domain.validator.PayeeValidator">
 		<property name="addressValidator" ref="addressValidator" />
+        <property name="contactInformationValidator" ref="contactInformationValidator" />
 	</bean>
 
 	<bean id="transactionCriteriaValidator" class="com.parasoft.parabank.domain.validator.TransactionCriteriaValidator" />
