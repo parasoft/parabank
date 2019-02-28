@@ -11,7 +11,7 @@ import com.parasoft.parabank.util.Util;
 public class Payee {
     private String name;
     private Address address;
-    private String phoneNumber;
+    private ContactInformation contactInformation;
     private Integer accountNumber;
 
     public String getName() {
@@ -30,12 +30,12 @@ public class Payee {
         this.address = address;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public ContactInformation getContactInformation() {
+        return contactInformation;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setContactInformation(ContactInformation contactInformation) {
+        this.contactInformation = contactInformation;
     }
 
     public Integer getAccountNumber() {
@@ -52,7 +52,7 @@ public class Payee {
         int result = 1;
         result = prime * result + (name == null ? 0 : name.hashCode());
         result = prime * result + (address == null ? 0 : address.hashCode());
-        result = prime * result + (phoneNumber == null ? 0 : phoneNumber.hashCode());
+        result = prime * result + (contactInformation == null ? 0 : contactInformation.hashCode());
         result = prime * result + (accountNumber == null ? 0 : accountNumber.hashCode());
         return result;
     }
@@ -68,14 +68,14 @@ public class Payee {
         Payee other = (Payee) obj;
         return Util.equals(name, other.name) &&
             Util.equals(address, other.address) &&
-            Util.equals(phoneNumber, other.phoneNumber) &&
+            Util.equals(contactInformation, other.contactInformation) &&
             Util.equals(accountNumber, other.accountNumber);
     }
 
     @Override
     public String toString() {
         return "Payee [name=" + name + ", address=" + address
-                + ", phoneNumber=" + phoneNumber + ", accountNumber="
+                + ", contactInformation=" + contactInformation + ", accountNumber="
                 + accountNumber + "]";
     }
 }
