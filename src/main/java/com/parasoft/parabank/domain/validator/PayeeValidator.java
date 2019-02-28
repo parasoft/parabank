@@ -13,15 +13,8 @@ public class PayeeValidator implements Validator {
     @Resource(name = "addressValidator")
     private Validator addressValidator;
 
-    @Resource(name = "contactInformationValidator")
-    private Validator contactInformationValidator;
-
     public void setAddressValidator(final Validator addressValidator) {
         this.addressValidator = addressValidator;
-    }
-
-    public void setContactInformationValidator(final Validator contactInformationValidator) {
-        this.contactInformationValidator = contactInformationValidator;
     }
 
     @Override
@@ -32,18 +25,13 @@ public class PayeeValidator implements Validator {
     @Override
     public void validate(final Object obj, final Errors errors) {
         ValidationUtils.rejectIfEmpty(errors, "name", "error.payee.name.required");
+        ValidationUtils.rejectIfEmpty(errors, "phoneNumber", "error.phone.number.required");
         ValidationUtils.rejectIfEmpty(errors, "accountNumber", "error.account.number.required");
 
         final Payee payee = (Payee) obj;
         try {
             errors.pushNestedPath("address");
             ValidationUtils.invokeValidator(addressValidator, payee.getAddress(), errors);
-        } finally {
-            errors.popNestedPath();
-        }
-        try {
-            errors.pushNestedPath("contactInformation");
-            ValidationUtils.invokeValidator(contactInformationValidator, payee.getContactInformation(), errors);
         } finally {
             errors.popNestedPath();
         }

@@ -35,13 +35,8 @@
   </tr>
   <tr>
     <td align="right" width="30%"><b><fmt:message key="phone.number"/>:</b></td>
-    <td width="20%"><form:input cssClass="input" path="payee.contactInformation.phoneNumber"/></td>
-    <td width="50%"><form:errors path="payee.contactInformation.phoneNumber" cssClass="error"/></td>
-  </tr>
-  <tr>
-    <td align="right" width="30%"><b><fmt:message key="email"/>:</b></td>
-    <td width="20%"><form:input cssClass="input" path="payee.contactInformation.email"/></td>
-    <td width="50%"><form:errors path="payee.contactInformation.email" cssClass="error"/></td>
+    <td width="20%"><form:input cssClass="input" path="payee.phoneNumber"/></td>
+    <td width="50%"><form:errors path="payee.phoneNumber" cssClass="error"/></td>
   </tr>
   <tr><td>&nbsp;</td></tr>
   <tr>

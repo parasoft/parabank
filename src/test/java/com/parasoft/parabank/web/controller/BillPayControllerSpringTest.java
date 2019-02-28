@@ -57,16 +57,13 @@ public class BillPayControllerSpringTest {
         final BillPayForm form = new BillPayForm();
         final Payee payee = new Payee();
         final Address address = new Address();
-        final ContactInformation contactInformation = new ContactInformation();
         address.setStreet("payee street");
         address.setCity("payee city");
         address.setState("payee state");
         address.setZipCode("payee zipcode");
         payee.setName("payee name");
         payee.setAddress(address);
-        contactInformation.setPhoneNumber("payee phone number");
-        contactInformation.setEmail("payee@email.com");
-        payee.setContactInformation(contactInformation);
+        payee.setPhoneNumber("payee phone number");
         payee.setAccountNumber(100);
         form.setPayee(payee);
         form.setVerifyAccount(100);
@@ -142,13 +139,13 @@ public class BillPayControllerSpringTest {
     public void testValidate() throws Exception 
     {
         BillPayForm form = getBillPayForm();
-        form.getPayee().getContactInformation().setPhoneNumber(null);
+        form.getPayee().setPhoneNumber(null);
         mockMvc.perform(post(PATH)
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
             .sessionAttr(Constants.BILLPAYFORM, form)
             .sessionAttr(Constants.USERSESSION, new UserSession(new Customer())))
                 .andExpect(model().hasErrors())
-                .andExpect(model().attributeHasFieldErrorCode(Constants.BILLPAYFORM, "payee.contactInformation.phoneNumber", "error.phone.number.required"));
+                .andExpect(model().attributeHasFieldErrorCode(Constants.BILLPAYFORM, "payee.phoneNumber", "error.phone.number.required"));
 
         form = getBillPayForm();
         form.setAmount(null);
