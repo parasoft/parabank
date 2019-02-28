@@ -35,7 +35,7 @@ public class ContactInformation {
     }
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof Address)) {
+        if (!(obj instanceof ContactInformation)) {
             return false;
         }
         ContactInformation other = (ContactInformation)obj;
