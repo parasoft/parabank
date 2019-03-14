@@ -34,8 +34,14 @@
     <td width="50%"><form:errors path="payee.address.zipCode" cssClass="error"/></td>
   </tr>
   <tr>
+    <%-- Random id and cssClass attributes in "payee.phoneNamber" are for demonstrating
+         better locator recommendations in Selenium test scenarios. --%>
+    <% 
+      String phoneNumberRandomId = java.util.UUID.randomUUID().toString();
+      String phoneNumberCssClass = String.format("input phone-number-%s", phoneNumberRandomId);
+    %>
     <td align="right" width="30%"><b><fmt:message key="phone.number"/>:</b></td>
-    <td width="20%"><form:input cssClass="input" path="payee.phoneNumber"/></td>
+    <td width="20%"><form:input id="<%=phoneNumberRandomId%>" cssClass="<%=phoneNumberCssClass%>" path="payee.phoneNumber"/></td>
     <td width="50%"><form:errors path="payee.phoneNumber" cssClass="error"/></td>
   </tr>
   <tr><td>&nbsp;</td></tr>
