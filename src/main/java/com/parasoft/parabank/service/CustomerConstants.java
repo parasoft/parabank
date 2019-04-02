@@ -4,6 +4,8 @@ public interface CustomerConstants {
 
     String ACCOUNT_ID = "accountId";
 
+    String BILL_PAY_ACCOUNT_ID_DESC = "Bill payment source account";
+
     String CITY = "city";
 
     String CITY_DESC = "City";

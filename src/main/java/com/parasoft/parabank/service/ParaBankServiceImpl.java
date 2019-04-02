@@ -19,6 +19,7 @@ import com.parasoft.parabank.domain.Address;
 import com.parasoft.parabank.domain.Customer;
 import com.parasoft.parabank.domain.HistoryPoint;
 import com.parasoft.parabank.domain.LoanResponse;
+import com.parasoft.parabank.domain.Payee;
 import com.parasoft.parabank.domain.Position;
 import com.parasoft.parabank.domain.Transaction;
 import com.parasoft.parabank.domain.TransactionCriteria;
@@ -498,5 +499,11 @@ public class ParaBankServiceImpl implements ParaBankService, AdminManagerAware, 
             log.error("DataAccessException caught :", e);
             throw new ParaBankServiceException("Could not find account number " + accountId, e);
         }
+    }
+
+    @Override
+    public String billPay(int accountId, BigDecimal amount, Payee Payee) throws ParaBankServiceException {
+        // TODO: SOA-11503
+        return null;
     }
 }
