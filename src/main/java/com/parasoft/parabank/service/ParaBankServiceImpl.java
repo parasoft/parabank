@@ -16,6 +16,7 @@ import org.springframework.dao.DataAccessException;
 
 import com.parasoft.parabank.domain.Account;
 import com.parasoft.parabank.domain.Address;
+import com.parasoft.parabank.domain.BillPayResult;
 import com.parasoft.parabank.domain.Customer;
 import com.parasoft.parabank.domain.HistoryPoint;
 import com.parasoft.parabank.domain.LoanResponse;
@@ -501,9 +502,13 @@ public class ParaBankServiceImpl implements ParaBankService, AdminManagerAware, 
         }
     }
 
+    /*
+     * (non-Javadoc)
+     * @see com.parasoft.parabank.service.ParaBankService#billPay(int, java.math.BigDecimal, com.parasoft.parabank.domain.Payee)
+     */
     @Override
-    public String billPay(int accountId, BigDecimal amount, Payee Payee) throws ParaBankServiceException {
-        // TODO: SOA-11503
-        return null;
+    public BillPayResult billPay(int accountId, BigDecimal amount, Payee payee) throws ParaBankServiceException {
+        bankManager.withdraw(accountId, amount, String.format("Bill Payment to %s", payee.getName()));
+        return new BillPayResult(accountId, amount, payee.getName());
     }
 }
