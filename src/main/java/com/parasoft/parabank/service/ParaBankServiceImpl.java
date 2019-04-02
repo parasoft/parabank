@@ -508,7 +508,7 @@ public class ParaBankServiceImpl implements ParaBankService, AdminManagerAware, 
      */
     @Override
     public BillPayResult billPay(int accountId, BigDecimal amount, Payee payee) throws ParaBankServiceException {
-        bankManager.withdraw(accountId, amount,String.format("Bill Payment to %s", payee.getName()));
+        bankManager.withdraw(accountId, amount, String.format("Bill Payment to %s", payee.getName()));
         return new BillPayResult(accountId, amount, payee.getName());
     }
 }
