@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
+import java.net.URLDecoder;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -37,6 +38,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.parasoft.parabank.domain.Account;
 import com.parasoft.parabank.domain.Account.AccountType;
+import com.parasoft.parabank.domain.Address;
 import com.parasoft.parabank.domain.Customer;
 import com.parasoft.parabank.domain.LoanResponse;
 import com.parasoft.parabank.domain.Transaction;
@@ -160,6 +162,69 @@ public class RestServiceProxyController extends AbstractBankController implement
             transactions = bankManager.getTransactionsForAccount(id, criteria);
         }
         return transactions;
+    }
+
+    @RequestMapping(value = "bank/customers/{customerId}", method = RequestMethod.GET, produces = "application/json")
+    public Customer getCustomer(@PathVariable(value = "customerId") Integer customerId) throws Exception {
+        authenticate();
+        String accessMode = null;
+        Customer customer;
+        if (adminManager != null) {
+            accessMode = adminManager.getParameter("accessmode");
+        }
+        if (accessMode != null && !accessMode.equalsIgnoreCase("jdbc")) {
+            customer = accessModeController.doGetCustomer(customerId);
+        } else {
+            // default JDBC
+            customer = bankManager.getCustomer(customerId);
+        }
+        return customer;
+    }
+    
+    @RequestMapping(value = "bank/customers/update/{customerId}", method = RequestMethod.POST, produces = "application/json")
+    public String updateCustomer(@PathVariable(value = "customerId") Integer customerId,
+            @RequestParam("firstName") String firstName,
+            @RequestParam("lastName") String lastName,
+            @RequestParam("street") String street,
+            @RequestParam("city") String city,
+            @RequestParam("state") String state,
+            @RequestParam("zipCode") String zipCode,
+            @RequestParam("phoneNumber") String phoneNumber,
+            @RequestParam("ssn") String ssn,
+            @RequestParam("username") String username,
+            @RequestParam("password") String password) throws Exception {
+        authenticate();
+        Customer updatedCustomer;
+        String accessMode = null;
+        
+        if (adminManager != null) {
+            accessMode = adminManager.getParameter("accessmode");
+        }
+        boolean notDefault = accessMode != null && !accessMode.equalsIgnoreCase("jdbc");
+        if (notDefault) {
+            updatedCustomer = accessModeController.doGetCustomer(customerId);
+        } else {
+            updatedCustomer = bankManager.getCustomer(customerId);
+        }
+        Address customerAddress = updatedCustomer.getAddress();
+        customerAddress.setStreet(URLDecoder.decode(street, "UTF-8"));
+        customerAddress.setCity(URLDecoder.decode(city, "UTF-8"));
+        customerAddress.setState(URLDecoder.decode(state, "UTF-8"));
+        customerAddress.setZipCode(URLDecoder.decode(zipCode, "UTF-8"));
+        updatedCustomer.setAddress(customerAddress);
+        updatedCustomer.setFirstName(URLDecoder.decode(firstName, "UTF-8"));
+        updatedCustomer.setLastName(URLDecoder.decode(lastName, "UTF-8"));
+        updatedCustomer.setId(customerId);
+        updatedCustomer.setPhoneNumber(URLDecoder.decode(phoneNumber, "UTF-8"));
+        updatedCustomer.setSsn(ssn);
+        updatedCustomer.setUsername(username);
+        updatedCustomer.setPassword(password);
+        if (notDefault) {
+            accessModeController.updateCustomer(updatedCustomer);
+        } else {
+            bankManager.updateCustomer(updatedCustomer);
+        }
+        return "Successfully updated customer profile";
     }
 
     @RequestMapping(value = "bank/createAccount", method = RequestMethod.POST, produces = "application/json")

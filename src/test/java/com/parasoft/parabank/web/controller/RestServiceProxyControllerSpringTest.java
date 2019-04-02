@@ -4,6 +4,7 @@ package com.parasoft.parabank.web.controller;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.hasSize;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -35,6 +36,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.parasoft.parabank.domain.Account;
+import com.parasoft.parabank.domain.Address;
 import com.parasoft.parabank.domain.Customer;
 import com.parasoft.parabank.domain.Transaction;
 import com.parasoft.parabank.domain.TransactionCriteria;
@@ -121,6 +123,51 @@ public class RestServiceProxyControllerSpringTest
         // transfer is a 'Debit' transaction
         mockMvc.perform(get("/bank/accounts/12567/transactions/month/All/type/Credit").with(createUserToken()).contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk()).andExpect(jsonPath("$", hasSize(0)));
+    }
+    
+    @Test
+    public void testUpdateCustomer()
+        throws Exception
+    {
+        Customer customer = bankManager.getCustomer(customerId);
+        Address addr = customer.getAddress();
+        mockMvc
+            .perform(post("/bank/customers/update/" + customerId).with(createUserToken()).contentType(MediaType.APPLICATION_JSON)
+            .param("customerId", "" + customerId)
+            .param("firstName", customer.getFirstName())
+            .param("lastName", customer.getLastName())
+            .param("street", addr.getStreet())
+            .param("city", addr.getCity())
+            .param("state", addr.getState())
+            .param("zipCode", addr.getZipCode())
+            .param("phoneNumber", customer.getPhoneNumber())
+            .param("ssn", "888888888")
+            .param("username", customer.getUsername())
+            .param("password", customer.getPassword())
+            .accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk());
+        Customer updatedCustomer = bankManager.getCustomer(customerId);
+        assertEquals("888888888", updatedCustomer.getSsn());
+    }
+    
+    @Test
+    public void testGetCustomer()
+        throws Exception
+    {
+        Customer customer = bankManager.getCustomer(customerId);
+        Address addr = customer.getAddress();
+        mockMvc
+            .perform(get("/bank/customers/" + customerId).with(createUserToken()).contentType(MediaType.APPLICATION_JSON)
+            .accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.firstName", is(customer.getFirstName())))
+            .andExpect(jsonPath("$.lastName", is(customer.getLastName())))
+            .andExpect(jsonPath("$.address.street", is(addr.getStreet())))
+            .andExpect(jsonPath("$.address.city", is(addr.getCity())))
+            .andExpect(jsonPath("$.address.state", is(addr.getState())))
+            .andExpect(jsonPath("$.address.zipCode", is(addr.getZipCode())))
+            .andExpect(jsonPath("$.phoneNumber", is(customer.getPhoneNumber())))
+            .andExpect(jsonPath("$.ssn", is(customer.getSsn())));
     }
 
     @Test
