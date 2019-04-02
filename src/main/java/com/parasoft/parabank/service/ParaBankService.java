@@ -53,6 +53,28 @@ tags = { //
 public interface ParaBankService extends ParaBankServiceConstants {
 
     /**
+     * Pay bill using funds from the given account
+     *
+     * @param accountId
+     *            the account to which to pay the bill
+     * @param amount
+     *            bill amount
+     * @return status message of result
+     * @throws ParaBankServiceException
+     */
+    @POST
+    @Path("/billpay")
+    @ApiOperation(value = "Pay bill", tags = { ParaBankServiceConstants.ACCOUNTS })
+    @WebResult(name = "billpayReturn", targetNamespace = ParaBankServiceConstants.TNS)
+    @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+    @Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+    String billPay(
+        @ApiParam(value = BILL_PAY_ACCOUNT_ID_DESC, required = true) @QueryParam(ACCOUNT_ID) @WebParam(name = ACCOUNT_ID, targetNamespace = ParaBankServiceConstants.TNS) int accountId,
+        @ApiParam(value = AMOUNT_DESC, required = true) @QueryParam("amount") @WebParam(name = "amount", targetNamespace = ParaBankServiceConstants.TNS) BigDecimal amount,
+        @ApiParam(value = "Payee", required = true) Payee Payee)
+                throws ParaBankServiceException;
+
+    /**
      * Buy a position
      *
      * @param customerId
@@ -123,27 +145,6 @@ public interface ParaBankService extends ParaBankServiceConstants {
     String deposit(
         @ApiParam(value = CUSTOMER_ACCOUNT_DEP_DESC, required = true) @QueryParam(ACCOUNT_ID) @WebParam(name = ACCOUNT_ID, targetNamespace = ParaBankServiceConstants.TNS) int accountId,
         @ApiParam(value = AMOUNT_DESC, required = true) @QueryParam("amount") @WebParam(name = "amount", targetNamespace = ParaBankServiceConstants.TNS) BigDecimal amount)
-                throws ParaBankServiceException;
-
-    /**
-     * Pay bill using funds from the given account
-     *
-     * @param accountId
-     *            the account to which to pay the bill
-     * @param amount
-     *            bill amount
-     * @return status message of result
-     * @throws ParaBankServiceException
-     */
-    @POST
-    @Path("/billpay")
-    @ApiOperation(value = "Pay bill", tags = { ParaBankServiceConstants.ACCOUNTS })
-    @WebResult(name = "billpayReturn", targetNamespace = ParaBankServiceConstants.TNS)
-    @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-    String billPay(
-        @ApiParam(value = BILL_PAY_ACCOUNT_ID_DESC, required = true) @QueryParam(ACCOUNT_ID) @WebParam(name = ACCOUNT_ID, targetNamespace = ParaBankServiceConstants.TNS) int accountId,
-        @ApiParam(value = AMOUNT_DESC, required = true) @QueryParam("amount") @WebParam(name = "amount", targetNamespace = ParaBankServiceConstants.TNS) BigDecimal amount,
-        @ApiParam(value = "Payee", required = true) Payee Payee)
                 throws ParaBankServiceException;
 
     /**
