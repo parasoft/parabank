@@ -69,7 +69,6 @@ paths:
       operationId: "billpay_1"
       consumes:
       - "application/json"
-      - "application/xml"
       produces:
       - "application/json"
       parameters:
