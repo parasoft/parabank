@@ -21,6 +21,7 @@ import javax.annotation.Resource;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.xml.security.utils.Base64;
+import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -124,7 +125,39 @@ public class RestServiceProxyControllerSpringTest
         mockMvc.perform(get("/bank/accounts/12567/transactions/month/All/type/Credit").with(createUserToken()).contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk()).andExpect(jsonPath("$", hasSize(0)));
     }
-    
+
+    @Test
+    public void testBillPay()
+        throws Exception
+    {
+        mockMvc
+            .perform(get("/bank/accounts/12345").with(createUserToken()).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk()).andExpect(jsonPath("$.balance", is(-2300.0)));
+
+        JSONObject address = new JSONObject();
+        address.put("street", "Myrtle Ave");
+        address.put("city", "Monrovia");
+        address.put("state", "CA");
+        address.put("zipCode", "91016");
+        JSONObject json = new JSONObject();
+        json.put("name", "Jim");
+        json.put("address", address);
+        json.put("phoneNumber", "6262626262");
+        json.put("accountNumber", 12345);
+        String responseStr = mockMvc
+            .perform(post("/bank/billpay").with(createUserToken()).contentType(MediaType.APPLICATION_JSON)
+            .param("accountId", "12345")
+            .param("amount", "10")
+            .content(json.toString())
+            .accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+        assertEquals("{\"payeeName\":\"Jim\",\"amount\":10,\"accountId\":12345}", responseStr);
+
+        mockMvc
+            .perform(get("/bank/accounts/12345").with(createUserToken()).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk()).andExpect(jsonPath("$.balance", is(-2310.0)));
+    }
+
     @Test
     public void testUpdateCustomer()
         throws Exception

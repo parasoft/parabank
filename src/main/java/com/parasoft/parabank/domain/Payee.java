@@ -1,10 +1,13 @@
 package com.parasoft.parabank.domain;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import com.parasoft.parabank.util.*;
 
 /**
  * Domain object representing the recipient of a bill payment
  */
+@XmlRootElement
 public class Payee {
     private String name;
     private Address address;

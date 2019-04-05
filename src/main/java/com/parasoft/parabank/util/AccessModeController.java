@@ -17,6 +17,9 @@ import javax.xml.ws.Service;
 import org.slf4j.*;
 import org.springframework.stereotype.*;
 
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.*;
 import com.parasoft.parabank.domain.*;
 import com.parasoft.parabank.domain.logic.*;
@@ -781,6 +784,60 @@ public class AccessModeController {
                 + amount + "&" + "fromAccountId=" + fromAccountId);
 
             final HttpURLConnection conn = getConnection(url, MediaType.APPLICATION_JSON, POST);
+            conn.getResponseMessage();
+            conn.disconnect();
+            LOG.info("Using REST json Web Service");
+        }
+    }
+
+    /**
+     * @param accountId
+     * @param amount
+     * @param payee
+     * @throws MalformedURLException
+     * @throws com.parasoft.parabank.service.ParaBankServiceException
+     * @throws java.io.IOException
+     * @throws javax.xml.bind.JAXBException
+     *
+     */
+    public void doBillPay(final int accountId, final BigDecimal amount, final Payee payee)
+            throws IOException, JAXBException {
+        final String accessMode = adminManager.getParameter("accessmode");
+        String restEndpoint = adminManager.getParameter("rest_endpoint");
+
+        if (Util.isEmpty(restEndpoint)) {
+            restEndpoint = getDefaultRestEndpoint();
+        }
+        if (accessMode.equalsIgnoreCase("RESTXML")) {
+            final URL url = new URL(restEndpoint + "/billpay?" + "accountId=" + accountId + "&" + "amount="
+                    + amount);
+
+            LOG.info(url.toExternalForm());
+            final HttpURLConnection conn = getConnection(url, MediaType.APPLICATION_XML, POST);
+            conn.setDoOutput(true);
+            conn.setRequestProperty("Content-Type", "application/xml; charset=UTF-8");
+            JAXBContext jContext = JAXBContext.newInstance(Payee.class);
+            Marshaller marshaller = jContext.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            marshaller.marshal(payee, conn.getOutputStream());
+
+            // this is mandatory for the function to work though we do not use
+            // response anywhere
+            conn.getResponseMessage();
+            conn.disconnect();
+            LOG.info("Using REST xml Web Service");
+        } else if (accessMode.equalsIgnoreCase("RESTJSON")) {
+            final URL url = new URL(restEndpoint + "/billpay?" + "accountId=" + accountId + "&" + "amount="
+                    + amount);
+            final HttpURLConnection conn = getConnection(url, MediaType.APPLICATION_JSON, POST);
+            conn.setDoOutput(true);
+            conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream(), "UTF-8");
+            JsonFactory factory = new JsonFactory();
+            JsonGenerator generator = factory.createGenerator(writer);
+            generator.setCodec(new ObjectMapper());
+            generator.writeObject(payee);
+            generator.close();
             conn.getResponseMessage();
             conn.disconnect();
             LOG.info("Using REST json Web Service");
