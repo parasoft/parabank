@@ -60,6 +60,40 @@ paths:
           description: "successful operation"
           schema:
             type: "string"
+  /billpay:
+    post:
+      tags:
+      - "Accounts"
+      summary: "Pay bill"
+      description: ""
+      operationId: "billpay_1"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "accountId"
+        in: "query"
+        description: "Bill payment source account"
+        required: true
+        type: "integer"
+        format: "int32"
+      - name: "amount"
+        in: "query"
+        description: "Amount"
+        required: true
+        type: "number"
+      - in: body
+        name: "Payee"
+        description: "Payee"
+        required: true
+        schema:
+          $ref: "#/definitions/Payee"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/BillPayResponse"
   /customers/{customerId}/accounts:
     get:
       tags:
@@ -493,6 +527,19 @@ definitions:
         type: "string"
       zipCode:
         type: "string"
+  BillPayResponse:
+    type: "object"
+    properties:
+      payeeName:
+        type: "string"
+      amount:
+        type: "number"
+      accountId:
+        type: "integer"
+        format: "int32"
+    xml:
+      name: "billPayResponse"
+      namespace: "http://service.parabank.parasoft.com/"
   Customer:
     type: "object"
     properties:
@@ -531,3 +578,17 @@ definitions:
     xml:
       name: "loanResponse"
       namespace: "http://service.parabank.parasoft.com/"
+  Payee:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      address:
+        $ref: "#/definitions/Address"
+      phoneNumber:
+        type: "string"
+      accountNumber:
+        type: "integer"
+        format: "int32"
+    xml:
+      name: "payee"

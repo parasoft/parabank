@@ -28,6 +28,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,8 +40,10 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import com.parasoft.parabank.domain.Account;
 import com.parasoft.parabank.domain.Account.AccountType;
 import com.parasoft.parabank.domain.Address;
+import com.parasoft.parabank.domain.BillPayResult;
 import com.parasoft.parabank.domain.Customer;
 import com.parasoft.parabank.domain.LoanResponse;
+import com.parasoft.parabank.domain.Payee;
 import com.parasoft.parabank.domain.Transaction;
 import com.parasoft.parabank.domain.TransactionCriteria;
 import com.parasoft.parabank.domain.TransactionCriteria.SearchType;
@@ -267,6 +270,24 @@ public class RestServiceProxyController extends AbstractBankController implement
         }
         return "Successfully transferred $" + amount + " from account #" + fromAccountId + " to account #"
                 + toAccountId;
+    }
+
+    @RequestMapping(value = "bank/billpay", method = RequestMethod.POST, produces = "application/json")
+    public BillPayResult billPay(@RequestParam("accountId") Integer accountId,
+            @RequestParam("amount") BigDecimal amount, @RequestBody Payee payee)
+            throws Exception {
+        authenticate();
+        String accessMode = null;
+        if (adminManager != null) {
+            accessMode = adminManager.getParameter("accessmode");
+        }
+        if (accessMode != null && !accessMode.equalsIgnoreCase("jdbc")) {
+            accessModeController.doBillPay(accountId, amount, payee);
+        } else {
+            // default JDBC
+            bankManager.withdraw(accountId, amount, String.format("Bill Payment to %s", payee.getName()));
+        }
+        return new BillPayResult(accountId, amount, payee.getName());
     }
 
     @RequestMapping(value = "bank/requestLoan", method = RequestMethod.POST, produces = "application/json")
