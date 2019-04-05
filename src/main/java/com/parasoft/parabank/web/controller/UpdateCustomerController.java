@@ -1,26 +1,32 @@
 package com.parasoft.parabank.web.controller;
 
-import java.io.*;
+import java.io.IOException;
 
-import javax.annotation.*;
-import javax.servlet.http.*;
-import javax.xml.bind.*;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
+import javax.xml.bind.JAXBException;
 
-import org.slf4j.*;
-import org.springframework.stereotype.*;
-import org.springframework.ui.*;
-import org.springframework.validation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
-import org.springframework.validation.annotation.*;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.*;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.domain.logic.*;
-import com.parasoft.parabank.service.*;
-import com.parasoft.parabank.util.*;
-import com.parasoft.parabank.web.*;
-import com.parasoft.parabank.web.form.*;
+import com.parasoft.parabank.domain.Customer;
+import com.parasoft.parabank.domain.logic.AdminManager;
+import com.parasoft.parabank.service.ParaBankServiceException;
+import com.parasoft.parabank.util.AccessModeController;
+import com.parasoft.parabank.util.Constants;
+import com.parasoft.parabank.util.SessionParam;
+import com.parasoft.parabank.web.UserSession;
+import com.parasoft.parabank.web.form.CustomerForm;
 
 /**
  * Controller for updating customer information
@@ -58,6 +64,9 @@ public class UpdateCustomerController extends AbstractValidatingBankController {
         final CustomerForm form = new CustomerForm(bankManager.getCustomer(userSession.getCustomer().getId()));
         form.setRepeatedPassword(form.getCustomer().getPassword());
         final ModelAndView mv = super.prepForm(model, form);
+        mv.addObject("customerId", userSession.getCustomer().getId());
+        mv.addObject("username", userSession.getCustomer().getUsername());
+        mv.addObject("password", userSession.getCustomer().getPassword());
         return mv;
     }
 

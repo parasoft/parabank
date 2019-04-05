@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
-import java.net.URLDecoder;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -197,32 +196,25 @@ public class RestServiceProxyController extends AbstractBankController implement
             @RequestParam("username") String username,
             @RequestParam("password") String password) throws Exception {
         authenticate();
-        Customer updatedCustomer;
         String accessMode = null;
-        
         if (adminManager != null) {
             accessMode = adminManager.getParameter("accessmode");
         }
-        boolean notDefault = accessMode != null && !accessMode.equalsIgnoreCase("jdbc");
-        if (notDefault) {
-            updatedCustomer = accessModeController.doGetCustomer(customerId);
-        } else {
-            updatedCustomer = bankManager.getCustomer(customerId);
-        }
-        Address customerAddress = updatedCustomer.getAddress();
-        customerAddress.setStreet(URLDecoder.decode(street, "UTF-8"));
-        customerAddress.setCity(URLDecoder.decode(city, "UTF-8"));
-        customerAddress.setState(URLDecoder.decode(state, "UTF-8"));
-        customerAddress.setZipCode(URLDecoder.decode(zipCode, "UTF-8"));
+        Customer updatedCustomer = new Customer();
+        Address customerAddress = new Address();
+        customerAddress.setStreet(street);
+        customerAddress.setCity(city);
+        customerAddress.setState(state);
+        customerAddress.setZipCode(zipCode);
         updatedCustomer.setAddress(customerAddress);
-        updatedCustomer.setFirstName(URLDecoder.decode(firstName, "UTF-8"));
-        updatedCustomer.setLastName(URLDecoder.decode(lastName, "UTF-8"));
+        updatedCustomer.setFirstName(firstName);
+        updatedCustomer.setLastName(lastName);
         updatedCustomer.setId(customerId);
-        updatedCustomer.setPhoneNumber(URLDecoder.decode(phoneNumber, "UTF-8"));
+        updatedCustomer.setPhoneNumber(phoneNumber);
         updatedCustomer.setSsn(ssn);
         updatedCustomer.setUsername(username);
         updatedCustomer.setPassword(password);
-        if (notDefault) {
+        if (accessMode != null && !accessMode.equalsIgnoreCase("jdbc")) {
             accessModeController.updateCustomer(updatedCustomer);
         } else {
             bankManager.updateCustomer(updatedCustomer);
