@@ -50,29 +50,7 @@ tags = { //
 @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 @CrossOriginResourceSharing(allowAllOrigins = true)
 @WebService(targetNamespace = ParaBankServiceConstants.TNS)
-public interface ParaBankService extends ParaBankServiceConstants {
-
-    /**
-     * Pay bill using funds from the given account
-     *
-     * @param accountId
-     *            the account to which to pay the bill
-     * @param amount
-     *            bill amount
-     * @return status message of result
-     * @throws ParaBankServiceException
-     */
-    @POST
-    @Path("/billpay")
-    @ApiOperation(value = "Pay bill", tags = { ParaBankServiceConstants.ACCOUNTS })
-    @WebResult(name = "billpayReturn", targetNamespace = ParaBankServiceConstants.TNS)
-    @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    @Consumes({ MediaType.APPLICATION_JSON , MediaType.APPLICATION_XML})
-    BillPayResult billPay(
-        @ApiParam(value = BILL_PAY_ACCOUNT_ID_DESC, required = true) @QueryParam(ACCOUNT_ID) @WebParam(name = ACCOUNT_ID, targetNamespace = ParaBankServiceConstants.TNS) int accountId,
-        @ApiParam(value = AMOUNT_DESC, required = true) @QueryParam("amount") @WebParam(name = "amount", targetNamespace = ParaBankServiceConstants.TNS) BigDecimal amount,
-        @ApiParam(value = "Payee", required = true) Payee Payee)
-                throws ParaBankServiceException;
+public interface ParaBankService extends IBillPayService {
 
     /**
      * Buy a position
