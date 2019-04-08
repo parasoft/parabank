@@ -185,11 +185,15 @@
         	$scope.validationModel.amount = validateNumber($scope.amount)
         	//look thru validation model for a false || string value which
         	//indicates an error
-        	var error = Object.values($scope.validationModel)
-        	   .find(function(value) {
-        		   return value === false || typeof value === 'string';
-        	   })
-        	return error === undefined;
+        	var valid = true;
+        	for (prop in $scope.validationModel) {
+        		var value = $scope.validationModel[prop];
+        		if (value === false || typeof value === 'string') {
+        			valid = false;
+        			break
+        		}
+        	}
+        	return valid;
         }
         
         $scope.validationModel = createValidationModel();
