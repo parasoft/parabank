@@ -103,6 +103,11 @@
     <p><fmt:message key="see.account.activity"/></p>
 </div>
 
+<div ng-show="showError">
+     <h1 class="title"><fmt:message key="error.heading" /></h1>
+     <p class="error"><fmt:message key="error.internal" /></p>
+</div>
+
 </div>
 
 <script type="text/javascript">
@@ -138,6 +143,30 @@
         	return null;
         }
         
+        var createValidationModel = function() {
+        	return { 
+                name : true,
+                address : true,
+                city : true,
+                state : true,
+                zipCode : true,
+                phoneNumber : true,
+                account : null,
+                verifyAccount : null,
+                amount : null
+            };
+        }
+        
+        var showError= function(error) {
+            $scope.validationModel = createValidationModel();
+            $scope.showForm = false;
+            $scope.showResult = false;
+            $scope.showError = true;
+            var status = error.status > 0 ? error.status : "timeout";
+            var data = error.data ? error.data : "Server timeout"
+            console.error("Server returned " + status + ": " + data);
+        }
+        
         var validate = function() {
             $scope.validationModel.name = isNonEmpty($scope.payee.name);
         	var address = $scope.payee.address;
@@ -163,23 +192,13 @@
         	return error === undefined;
         }
         
-        $scope.validationModel = { 
-        	name : true,
-        	address : true,
-        	city : true,
-        	state : true,
-        	zipCode : true,
-        	phoneNumber : true,
-        	account : null,
-        	verifyAccount : null,
-        	amount : null
-        };
+        $scope.validationModel = createValidationModel();
         $scope.submit = function() {
             if (!validate()) {
             	return;
             } 
             $http.post(
-            	    'services/bank/billpay?accountId='+ this.accountId + '&amount=' + this.amount,
+            	    'services_proxy/bank/billpay?accountId='+ this.accountId + '&amount=' + this.amount,
             		this.payee, 
             		{timeout: 30000}
             ).then(function(response) {
@@ -191,7 +210,7 @@
                 $scope.showResult = true;
                 })
             .catch(function(response) {
-            
+            	showError(response);
             });
         }
        
