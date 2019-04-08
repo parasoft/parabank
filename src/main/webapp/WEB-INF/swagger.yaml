@@ -578,6 +578,13 @@ definitions:
     xml:
       name: "loanResponse"
       namespace: "http://service.parabank.parasoft.com/"
+  ContactInformation:
+    type: "object"
+    properties:
+      phoneNumber:
+        type: "string"
+      email:
+        type: "string"
   Payee:
     type: "object"
     properties:
@@ -585,8 +592,8 @@ definitions:
         type: "string"
       address:
         $ref: "#/definitions/Address"
-      phoneNumber:
-        type: "string"
+      contactInformation:
+        $ref: "#/definitions/ContactInformation"
       accountNumber:
         type: "integer"
         format: "int32"
