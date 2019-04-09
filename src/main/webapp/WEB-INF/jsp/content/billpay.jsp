@@ -44,8 +44,17 @@
                         String phoneNumberclass = String.format("input phone-number-%s", phoneNumberRandomId);
                 %>
                 <td align="right" width="30%"><b><fmt:message key="phone.number" />:</b></td>
-                <td width="20%"><input id="<%=phoneNumberRandomId%>" class="<%=phoneNumberclass%>" ng-model="payee.phoneNumber" name="payee.phoneNumber" /></td>
+                <td width="20%"><input id="<%=phoneNumberRandomId%>" class="<%=phoneNumberclass%>" ng-model="payee.contactInformation.phoneNumber" name="payee.contactInformation.phoneNumber" /></td>
                 <td width="50%"><span ng-show="!validationModel.phoneNumber" class="error"><fmt:message key="error.phone.number.required" /></span></td>
+            </tr>
+            <tr>
+                <%
+                String emailRandomId = java.util.UUID.randomUUID().toString();
+                String emailCssClass = String.format("input email-%s", emailRandomId);
+                %>
+                <td align="right" width="30%"><b><fmt:message key="email"/>:</b></td>
+                <td width="20%"><input id="<%=emailRandomId%>" class="<%=emailCssClass%>" ng-model="payee.contactInformation.email" name="payee.contactInformation.email"/></td>
+                <td width="50%"><span ng-show="!validationModel.email" class="error"><fmt:message key="error.email.empty"/></span></td>
             </tr>
             <tr><td>&nbsp;</td></tr>
             <tr>
@@ -123,7 +132,8 @@
         $scope.showForm = true;
         $scope.showResult = false;
         $scope.payee = {
-        		address : { }
+        		address : { },
+        		contactInformation : { }
         };
         $scope.result = {};
         var currencyFormat = function(amount) {
@@ -155,6 +165,7 @@
                 state : true,
                 zipCode : true,
                 phoneNumber : true,
+                email : true,
                 account : null,
                 verifyAccount : null,
                 amount : null
@@ -178,7 +189,8 @@
         	$scope.validationModel.city = isNonEmpty(address.city);
         	$scope.validationModel.state = isNonEmpty(address.state);
         	$scope.validationModel.zipCode = isNonEmpty(address.zipCode);
-        	$scope.validationModel.phoneNumber = isNonEmpty($scope.payee.phoneNumber);
+        	$scope.validationModel.phoneNumber = isNonEmpty($scope.payee.contactInformation.phoneNumber);
+        	$scope.validationModel.email = isNonEmpty($scope.payee.contactInformation.email)
         	var account = $scope.payee.accountNumber;
         	$scope.validationModel.account = validateNumber($scope.payee.accountNumber);
         	var verifyAccount = $scope.verifyAccount;
