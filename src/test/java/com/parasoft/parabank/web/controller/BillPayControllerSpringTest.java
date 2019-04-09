@@ -28,6 +28,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.parasoft.parabank.domain.Address;
+import com.parasoft.parabank.domain.ContactInformation;
 import com.parasoft.parabank.domain.Customer;
 import com.parasoft.parabank.domain.Payee;
 import com.parasoft.parabank.util.Constants;
