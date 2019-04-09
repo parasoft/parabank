@@ -41,11 +41,20 @@
              better locator recommendations in Selenium test scenarios. --%>
                 <%
                     String phoneNumberRandomId = java.util.UUID.randomUUID().toString();
-                        String phoneNumberclass = String.format("input phone-number-%s", phoneNumberRandomId);
+                    String phoneNumberclass = String.format("input phone-number-%s", phoneNumberRandomId);
                 %>
                 <td align="right" width="30%"><b><fmt:message key="phone.number" />:</b></td>
-                <td width="20%"><input id="<%=phoneNumberRandomId%>" class="<%=phoneNumberclass%>" name="payee.phoneNumber" /></td>
+                <td width="20%"><input id="<%=phoneNumberRandomId%>" class="<%=phoneNumberclass%>" name="payee.contactInformation.phoneNumber" /></td>
                 <td width="50%"><span style="display:none" id="validationModel-phoneNumber" class="error"><fmt:message key="error.phone.number.required" /></span></td>
+            </tr>
+            <tr>
+                <%
+                String emailRandomId = java.util.UUID.randomUUID().toString();
+                String emailCssClass = String.format("input email-%s", emailRandomId);
+                %>
+                <td align="right" width="30%"><b><fmt:message key="email"/>:</b></td>
+                <td width="20%"><input id="<%=emailRandomId%>" class="<%=emailCssClass%>" name="payee.contactInformation.email"/></td>
+                <td width="50%"><span style="display:none" id="validationModel-email" class="error"><fmt:message key="error.email.empty"/></span></td>
             </tr>
             <tr><td>&nbsp;</td></tr>
             <tr>
@@ -143,7 +152,8 @@
 			}
         }
         var payee = {
-			address : { }
+			address : { },
+        	contactInformation : { }
         };
         
         var currencyFormat = function(amount) {
@@ -174,6 +184,7 @@
                 state : true,
                 zipCode : true,
                 phoneNumber : true,
+                email : true,
                 account : null,
                 verifyAccount : null,
                 amount : null
@@ -187,7 +198,8 @@
 	        payee.address.city = $("[name='payee.address.city']").val();
 	        payee.address.state = $("[name='payee.address.state']").val();
 	        payee.address.zipCode = $("[name='payee.address.zipCode']").val();
-	        payee.phoneNumber = $("[name='payee.phoneNumber']").val();
+	        payee.contactInformation.phoneNumber = $("[name='payee.contactInformation.phoneNumber']").val();
+	        payee.contactInformation.email = $("[name='payee.contactInformation.email']").val();
 	        payee.accountNumber = $("[name='payee.accountNumber']").val();
 	        
 	        //account
@@ -213,7 +225,8 @@
         	isNonEmpty(address.city) ? $("#validationModel-city").hide() : $("#validationModel-city").show();
         	isNonEmpty(address.state) ? $("#validationModel-state").hide() : $("#validationModel-state").show();
         	isNonEmpty(address.zipCode) ? $("#validationModel-zipCode").hide() : $("#validationModel-zipCode").show();
-        	isNonEmpty(payee.phoneNumber) ? $("#validationModel-phoneNumber").hide() : $("#validationModel-phoneNumber").show();
+        	isNonEmpty(payee.contactInformation.phoneNumber) ? $("#validationModel-phoneNumber").hide() : $("#validationModel-phoneNumber").show();
+			isNonEmpty(payee.contactInformation.email) ? $("#validationModel-email").hide() : $("#validationModel-email").show();
         	var account = payee.accountNumber;
         	validationModel.account = validateNumber(payee.accountNumber);
         	validationModel.account == "empty" ? $("#validationModel-account-empty").show() : $("#validationModel-account-empty").hide();
