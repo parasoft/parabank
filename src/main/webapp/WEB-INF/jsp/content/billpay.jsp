@@ -82,7 +82,7 @@
             <tr>
                 <td align="right"><b><fmt:message key="from.account.number" />:</b></td>
                 <td>
-                    <select class="input" ng-init="accountId='${accounts[0]}'"  ng-model="accountId">
+                    <select name="fromAccountId" class="input" ng-init="accountId='${accounts[0]}'"  ng-model="accountId">
                         <c:forEach items="${accounts}" var="account">
                             <option value="${account}">${account}</option>
                         </c:forEach>
@@ -99,7 +99,13 @@
 
 <div ng-show="showResult">
     <h1 class="title"><fmt:message key="bill.payment.complete"/></h1>
-    <p>{{confirmationMessage}}</p>
+    <p>
+        <fmt:message key="billpay.confirmation">
+            <fmt:param value="<span id='payeeName'>{{result.payeeName}}</span>"/>
+            <fmt:param value="<span id='amount'>{{result.amount}}</span>"/>
+            <fmt:param value="<span id='fromAccountId'>{{result.fromAccountId}}</span>"/>
+        </fmt:message>
+    </p>
     <p><fmt:message key="see.account.activity"/></p>
 </div>
 
@@ -119,9 +125,7 @@
         $scope.payee = {
         		address : { }
         };
-
-        var confirmationMessage = '<fmt:message key="billpay.confirmation" />';
-        
+        $scope.result = {};
         var currencyFormat = function(amount) {
             return '$' + amount.toFixed(2);
         }
@@ -206,12 +210,12 @@
             		this.payee, 
             		{timeout: 30000}
             ).then(function(response) {
-                $scope.confirmationMessage = confirmationMessage
-                .replace('{0}', response.data.payeeName)
-                .replace('{1}', currencyFormat(response.data.amount))
-                .replace('{2}', response.data.accountId);
+                $scope.result.payeeName = response.data.payeeName;
+                $scope.result.amount = currencyFormat(response.data.amount);
+                $scope.result.fromAccountId = response.data.accountId;
                 $scope.showForm = false;
                 $scope.showResult = true;
+                document.title = 'ParaBank | ' + '<fmt:message key="billpayConfirm.title" />'
                 })
             .catch(function(response) {
             	showError(response);
