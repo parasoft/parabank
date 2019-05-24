@@ -190,7 +190,6 @@
         	$scope.validationModel.state = isNonEmpty(address.state);
         	$scope.validationModel.zipCode = isNonEmpty(address.zipCode);
         	$scope.validationModel.phoneNumber = isNonEmpty($scope.payee.contactInformation.phoneNumber);
-        	$scope.validationModel.email = isNonEmpty($scope.payee.contactInformation.email)
         	var account = $scope.payee.accountNumber;
         	$scope.validationModel.account = validateNumber($scope.payee.accountNumber);
         	var verifyAccount = $scope.verifyAccount;
