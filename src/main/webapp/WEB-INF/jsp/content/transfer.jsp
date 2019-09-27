@@ -52,7 +52,7 @@
         $scope.errorCode = -1;
 
         $scope.getAccounts = function() {
-        	
+        setTimeout(function() {
             $http.get("services_proxy/bank/customers/${customerId}/accounts", {timeout:30000})
                 .then(function(response) {
                     $scope.accounts = response.data;
@@ -62,6 +62,7 @@
                 .catch(function(response) {
                     showError(response);
                 });
+        }, 5000);
         }
 
         $scope.submit = function() {
