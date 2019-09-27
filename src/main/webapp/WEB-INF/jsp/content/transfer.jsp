@@ -56,6 +56,7 @@
 <script>
     $(document).ready(function() {
         function getAccounts() {
+        	setTimeout(function() {
             $.ajax({
                 url: "services_proxy/bank/customers/" + ${customerId} + "/accounts",
                 type: "GET",
@@ -87,13 +88,13 @@
                 error: function(xhr, status, error) {
                     showError(xhr);
                 }
-            });
+            });	        	
+        	}, 5000)
         }
 
         $('#transferForm').submit(function(event) {
             event.preventDefault();
             resetErrors();
-
             var amount = $('#amount').val();
             var fromAccountId = $('#fromAccountId').val();
             var toAccountId = $('#toAccountId').val();
