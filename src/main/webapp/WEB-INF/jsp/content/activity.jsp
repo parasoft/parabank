@@ -113,6 +113,7 @@
     });
 
     app.controller('AccountActivityCtrl', function ($scope, $rootScope, $http) {
+        setTimeout(function () {
         $http.get("services_proxy/bank/accounts/${model.accountId}/transactions", {timeout:30000})
             .then(function (response) {
                 $scope.transactions = [];
@@ -121,7 +122,7 @@
             .catch(function(response) {
                 reportError($rootScope, response);
             });
-
+        }, 5000);
         $scope.submit = function() {
             $http.get("services_proxy/bank/accounts/${model.accountId}/transactions/month/" + $scope.activityPeriod + "/type/" + $scope.type, {timeout:30000})
                 .then(function (response) {
