@@ -12,18 +12,18 @@
 		<table class="form2">
 			<tr>
 				<td align="right" width="40%"><b><fmt:message key="loan.amount" />:</b> $</td>
-					<td width="20%"><input id="amount" class="input" ng-model="loanRequest.amount" /></td>
+					<td width="20%"><input disabled id="amount" class="input" ng-model="loanRequest.amount" /></td>
 					<td width="40%"></td>
 			</tr>
 			<tr>
 				<td align="right" width="40%"><b><fmt:message key="down.payment" />:</b> $</td>
-				<td width="20%"><input id="downPayment" class="input" ng-model="loanRequest.downPayment" /></td>
+				<td width="20%"><input disabled id="downPayment" class="input" ng-model="loanRequest.downPayment" /></td>
 				<td width="40%"></td>
 			</tr>
 			<tr>
 				<td align="right" width="40%"><b><fmt:message key="from.account.number" />:</b></td>
 				<td width="20%">
-				    <select id="fromAccountId" class="input" ng-init="loanRequest.fromAccountId = '${accounts[0]}'" ng-model="loanRequest.fromAccountId">
+				    <select style="visibility:hidden" id="fromAccountId" class="input" ng-init="loanRequest.fromAccountId = '${accounts[0]}'" ng-model="loanRequest.fromAccountId">
                         <c:forEach items="${accounts}" var="account">
                             <option value="${account}">${account}</option>
                         </c:forEach>
@@ -33,7 +33,14 @@
 			</tr>
 			<tr>
 				<td>&nbsp;</td>
-				<td colspan="2"><input type="submit" class="button" value="<fmt:message key="apply.now"/>"></td>
+				<td colspan="2">
+					<div>
+						<input id="submit" type="submit" class="button" value="<fmt:message key="apply.now"/>">
+					</div>
+					<div style="position:relative; background-color:rgb(220, 220, 220)" id="curtain">
+						<fmt:message key="loading"/>
+					</div>
+				</td>
 			</tr>
 		</table>
 		<br>
@@ -82,6 +89,31 @@
 </div>
 
 <script>
+
+setTimeout(setCurtain);
+setTimeout(function() {
+	document.getElementById("amount").disabled = false;
+	document.getElementById("downPayment").disabled = false;
+}, 3000);
+setTimeout(function() { document.getElementById("fromAccountId").style.visibility = "visible"; }, 6000);
+setTimeout(function() { document.getElementById("curtain").style.visibility = "hidden"; }, 9000);
+
+function setCurtain() {
+    var button = document.getElementById("submit");
+    var width = button.getBoundingClientRect().width;
+    var height = button.getBoundingClientRect().height;
+    if (width > 0 && height > 0) {
+        var curtain = document.getElementById("curtain");
+        curtain.style.visibility = "visible";
+        curtain.style.position = "relative";
+        curtain.style.width = width + "px";
+        curtain.style.height = height + "px";
+        curtain.style.top = -height + "px";
+    } else {
+        setTimeout(setCurtain, 100);
+    }
+}
+
 var app = angular.module('RequestLoanApp', []);
 
 app.controller('RequestLoanAppCtrl', function ($scope, $rootScope, $http) {
