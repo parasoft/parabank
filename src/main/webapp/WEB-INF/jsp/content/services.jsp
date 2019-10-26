@@ -2,7 +2,7 @@
 <html>
 <head>
   <link type="text/css" rel="stylesheet"
- href="/parabank/services/?stylesheet=1">
+ href="services/?stylesheet=1">
   <meta http-equiv="content-type"
  content="text/html; charset=UTF-8">
   <title>CXF - Service list</title>
@@ -11,6 +11,7 @@
 <%
    String hostname = request.getServerName();
    int port = request.getServerPort();
+   String contextPath = request.getServletContext().getContextPath();
 %>
 <span class="heading">Available Bookstore SOAP services:</span><br>
 <table style="text-align: left; width: 925px;" border="1"
@@ -26,9 +27,9 @@
 Bookstore Web service with a database backend. Includes a total of 9
 book items.<br>
       <br>
-Endpoint address:</span> <span class="value">http://<%= hostname%>:<%= port %>/parabank/services/store-01</span><br>
+Endpoint address:</span> <span class="value">http://<%= hostname%>:<%= port %><%= contextPath%>/services/store-01</span><br>
       <span class="field">WSDL :</span> <a
- href="http://<%= request.getServerName() %>:<%= port%>/parabank/services/store-01?wsdl">{http://store.parabank.parasoft.com/}Bookstore</a><br>
+ href="http://<%= request.getServerName() %>:<%= port%><%= contextPath%>/services/store-01?wsdl">{http://store.parabank.parasoft.com/}Bookstore</a><br>
       <span class="field">Target namespace:</span> <span
  class="value">http://store.parabank.parasoft.com/</span></td>
     </tr>
@@ -42,9 +43,9 @@ Endpoint address:</span> <span class="value">http://<%= hostname%>:<%= port %>/p
 Bookstore Web service with a database backend. Includes a total of 9
 book items.<br>
       <br>
-Endpoint address:</span> <span class="value">http://<%= hostname%>:<%= port %>/parabank/services/store-01V2</span><br>
+Endpoint address:</span> <span class="value">http://<%= hostname%>:<%= port %><%= contextPath%>/services/store-01V2</span><br>
       <span class="field">WSDL :</span> <a
- href="http://<%= request.getServerName() %>:<%= port%>/parabank/services/store-01V2?wsdl">{http://store.parabank.parasoft.com/}Bookstore</a><br>
+ href="http://<%= request.getServerName() %>:<%= port%><%= contextPath%>/services/store-01V2?wsdl">{http://store.parabank.parasoft.com/}Bookstore</a><br>
       <span class="field">Target namespace:</span> <span
  class="value">http://store.parabank.parasoft.com/</span></td>
     </tr>
@@ -63,9 +64,9 @@ need to authenticate themselves using Username Token.<br>
 username:soatest<br>
 password:soatest<br>
       <br>
-Endpoint address:</span> <span class="value">http://<%= hostname%>:<%= port%>/parabank/services/store-wss-01</span><br>
+Endpoint address:</span> <span class="value">http://<%= hostname%>:<%= port%><%= contextPath%>/services/store-wss-01</span><br>
       <span class="field">WSDL :</span> <a
- href="http://<%= hostname%>:<%= port%>/parabank/services/store-wss-01?wsdl">{http://store.parabank.parasoft.com/}Bookstore</a><br>
+ href="http://<%= hostname%>:<%= port%><%= contextPath%>/services/store-wss-01?wsdl">{http://store.parabank.parasoft.com/}Bookstore</a><br>
       <span class="field">Target namespace:</span> <span
  class="value">http://store.parabank.parasoft.com/</span></td>
     </tr>
@@ -88,9 +89,9 @@ algorithm: RSA<br>
       <br>
 Responses have the SOAP Body signed using the same certificate.<br>
       <br>
-Endpoint address:</span> <span class="value">http://<%= hostname%>:<%= port%>/parabank/services/store-wss-02</span><br>
+Endpoint address:</span> <span class="value">http://<%= hostname%>:<%= port%><%= contextPath%>/services/store-wss-02</span><br>
       <span class="field">WSDL :</span> <a
- href="http://<%= hostname%>:<%= port%>/parabank/services/store-wss-02?wsdl">{http://store.parabank.parasoft.com/}Bookstore</a><br>
+ href="http://<%= hostname%>:<%= port%><%= contextPath%>/services/store-wss-02?wsdl">{http://store.parabank.parasoft.com/}Bookstore</a><br>
       <span class="field">Target namespace:</span> <span
  class="value">http://store.parabank.parasoft.com/</span></td>
     </tr>
@@ -111,9 +112,9 @@ public key alias: soatest<br>
       <br>
 Responses have the SOAP Body encrypted using the same key.<br>
       <br>
-Endpoint address:</span> <span class="value">http://<%= hostname%>:<%= port%>/parabank/services/store-wss-03</span><br>
+Endpoint address:</span> <span class="value">http://<%= hostname%>:<%= port%><%= contextPath%>/services/store-wss-03</span><br>
       <span class="field">WSDL :</span> <a
- href="http://<%= hostname%>:<%= port%>/parabank/services/store-wss-03?wsdl">{http://store.parabank.parasoft.com/}Bookstore</a><br>
+ href="http://<%= hostname%>:<%= port%><%= contextPath%>/services/store-wss-03?wsdl">{http://store.parabank.parasoft.com/}Bookstore</a><br>
       <span class="field">Target namespace:</span> <span
  class="value">http://store.parabank.parasoft.com/</span></td>
     </tr>
@@ -136,9 +137,9 @@ key alias: soatest<br>
       <br>
 Responses have the SOAP Body signed, then encrypted using the same key<br>
       <br>
-Endpoint address:</span> <span class="value">http://<%= hostname%>:<%= port%>/parabank/services/store-wss-04</span><br>
+Endpoint address:</span> <span class="value">http://<%= hostname%>:<%= port%><%= contextPath%>/services/store-wss-04</span><br>
       <span class="field">WSDL :</span> <a
- href="http://<%= hostname%>:<%= port%>/parabank/services/store-wss-04?wsdl">{http://store.parabank.parasoft.com/}Bookstore</a><br>
+ href="http://<%= hostname%>:<%= port%><%= contextPath%>/services/store-wss-04?wsdl">{http://store.parabank.parasoft.com/}Bookstore</a><br>
       <span class="field">Target namespace:</span> <span
  class="value">http://store.parabank.parasoft.com/</span></td>
     </tr>
@@ -264,9 +265,9 @@ accessed within 20 minutes will be removed from the database.</td>
       </ul>
       </td>
       <td style="width: 1183px;"><span class="field">Endpoint
-address:</span> <span class="value">http://<%= hostname%>:<%= port%>/parabank/services/LoanProcessor</span><br>
+address:</span> <span class="value">http://<%= hostname%>:<%= port%><%= contextPath%>/services/LoanProcessor</span><br>
       <span class="field">WSDL :</span> <a
- href="http://<%= hostname%>:<%= port%>/parabank/services/LoanProcessor?wsdl">{http://service.parabank.parasoft.com/}LoanProcessorServiceImplService</a><br>
+ href="http://<%= hostname%>:<%= port%><%= contextPath%>/services/LoanProcessor?wsdl">{http://service.parabank.parasoft.com/}LoanProcessorServiceImplService</a><br>
       <span class="field">Target namespace:</span> <span
  class="value">http://service.parabank.parasoft.com/</span></td>
     </tr>
@@ -277,9 +278,9 @@ address:</span> <span class="value">http://<%= hostname%>:<%= port%>/parabank/se
       </ul>
       </td>
       <td style="width: 1183px;"><span class="field">Endpoint
-address:</span> <span class="value">http://<%= hostname%>:<%= port%>/parabank/services/ParaBank</span><br>
+address:</span> <span class="value">http://<%= hostname%>:<%= port%><%= contextPath%>/services/ParaBank</span><br>
       <span class="field">WSDL :</span> <a
- href="http://<%= hostname%>:<%= port%>/parabank/services/ParaBank?wsdl">{http://service.parabank.parasoft.com/}ParaBank</a><br>
+ href="http://<%= hostname%>:<%= port%><%= contextPath%>/services/ParaBank?wsdl">{http://service.parabank.parasoft.com/}ParaBank</a><br>
       <span class="field">Target namespace:</span> <span
  class="value">http://service.parabank.parasoft.com/</span></td>
     </tr>
@@ -579,9 +580,9 @@ string, string, string<br>
   <tbody>
     <tr>
       <td><span class="field">Endpoint address:</span>
-      <span class="value">http://<%= hostname%>:<%= port%>/parabank/services/bank</span><br>
+      <span class="value">http://<%= hostname%>:<%= port%><%= contextPath%>/services/bank</span><br>
       <span class="field">WADL :</span> <a
- href="http://<%= hostname%>:<%= port%>/parabank/services/bank?_wadl&amp;_type=xml">http://<%= hostname%>:<%= port%>/parabank/services/bank?_wadl&amp;type=xml</a></td>
+ href="http://<%= hostname%>:<%= port%><%= contextPath%>/services/bank?_wadl&amp;_type=xml">http://<%= hostname%>:<%= port%><%= contextPath%>/services/bank?_wadl&amp;type=xml</a></td>
     </tr>
   </tbody>
 </table>

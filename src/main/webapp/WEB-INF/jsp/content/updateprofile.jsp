@@ -96,7 +96,7 @@
         $scope.showError = false;
 
         $scope.getCustomer = function() {
-            $http.get("/parabank/services_proxy/bank/customers/${customerId}", {timeout:30000})
+            $http.get("services_proxy/bank/customers/${customerId}", {timeout:30000})
                 .then(function(response) {
                     $scope.customer = response.data;
                 })

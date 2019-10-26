@@ -75,7 +75,7 @@
       <tbody>
         <tr ng-repeat="transaction in transactions">
           <td>{{transaction.date | date:'MM-dd-yyyy'}}</td>
-          <td><a href="/parabank/transaction.htm?id={{transaction.id}}">{{transaction.description}}</a></td>
+          <td><a href="transaction.htm?id={{transaction.id}}">{{transaction.description}}</a></td>
 
           <td ng-if="transaction.type == 'Debit'">{{transaction.amount | currency: "$" : 2 | commaLess}}</td>
           <td ng-if="transaction.type != 'Debit'"></td>
@@ -98,7 +98,7 @@
     var app = angular.module('AccountDetailsApp', []);
 
     app.controller('AccountDetailsCtrl', function ($scope, $rootScope, $http) {
-        $http.get("/parabank/services_proxy/bank/accounts/${model.accountId}", {timeout:30000})
+        $http.get("services_proxy/bank/accounts/${model.accountId}", {timeout:30000})
             .then(function (response) {
                 $scope.account = response.data;
                 $scope.account.availableBalance = getAvailableBalance($scope.account);
@@ -113,7 +113,7 @@
     });
 
     app.controller('AccountActivityCtrl', function ($scope, $rootScope, $http) {
-        $http.get("/parabank/services_proxy/bank/accounts/${model.accountId}/transactions", {timeout:30000})
+        $http.get("services_proxy/bank/accounts/${model.accountId}/transactions", {timeout:30000})
             .then(function (response) {
                 $scope.transactions = [];
                 $scope.transactions = response.data;
@@ -123,7 +123,7 @@
             });
 
         $scope.submit = function() {
-            $http.get("/parabank/services_proxy/bank/accounts/${model.accountId}/transactions/month/" + $scope.activityPeriod + "/type/" + $scope.type, {timeout:30000})
+            $http.get("services_proxy/bank/accounts/${model.accountId}/transactions/month/" + $scope.activityPeriod + "/type/" + $scope.type, {timeout:30000})
                 .then(function (response) {
                     $scope.transactions = response.data;
                 })

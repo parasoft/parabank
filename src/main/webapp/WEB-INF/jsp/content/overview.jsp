@@ -14,7 +14,7 @@
       <tbody>
 
         <tr ng-repeat="account in accounts">
-          <td><a href="/parabank/activity.htm?id={{account.id}}">{{account.id}}</a></td>
+          <td><a href="activity.htm?id={{account.id}}">{{account.id}}</a></td>
           <td>{{account.balance | currency: "$" : 2 | commaLess}}</td>
           <td>{{account.availableBalance | currency: "$" : 2 | commaLess}}</td>
         </tr>
@@ -46,7 +46,7 @@
         $scope.showOverview = true;
         $scope.showError = false;
         
-        $http.get("/parabank/services_proxy/bank/customers/" + ${model.customerId} + "/accounts", {timeout:30000})
+        $http.get("services_proxy/bank/customers/" + ${model.customerId} + "/accounts", {timeout:30000})
             .then(function (response) {
                 $scope.accounts = [];
                 $scope.accounts = response.data;

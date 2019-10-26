@@ -33,7 +33,13 @@
       if (url && url.length > 1) {
         url = decodeURIComponent(url[1]);
       } else {
-        url = "/parabank/services/bank/swagger.yaml";
+        url = "";
+        var pathArray = document.location.href.split('/');
+        for (i = 0; i < pathArray.length - 2; i++) {
+          url += pathArray[i];
+          url += "/";
+        }
+        url += "services/bank/swagger.yaml";
       }
 
       // Pre load translate...

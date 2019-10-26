@@ -53,7 +53,7 @@
 
         $scope.getAccounts = function() {
         	
-            $http.get("/parabank/services_proxy/bank/customers/${customerId}/accounts", {timeout:30000})
+            $http.get("services_proxy/bank/customers/${customerId}/accounts", {timeout:30000})
                 .then(function(response) {
                     $scope.accounts = response.data;
                     $scope.accounts.fromAccountId = $scope.accounts[0];

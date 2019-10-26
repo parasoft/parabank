@@ -43,7 +43,7 @@
         $scope.types.selectedOption;
 
         $scope.getAccounts = function() {
-            $http.get("/parabank/services_proxy/bank/customers/${customerId}/accounts", {timeout:30000})
+            $http.get("services_proxy/bank/customers/${customerId}/accounts", {timeout:30000})
                 .then(function(response) {
                     $scope.accounts = response.data;
                     $scope.accounts.selectedOption = $scope.accounts[0];
@@ -60,7 +60,7 @@
                     $scope.showForm = false;
                     $scope.showResult = true;
                     $scope.newAccountId = response.data.id;
-                    $scope.newAccountUrl = "/parabank/activity.htm" + "?id=" + $scope.newAccountId;
+                    $scope.newAccountUrl = "activity.htm" + "?id=" + $scope.newAccountId;
                 })
                 .catch(function(response) {
                     showError(response);
