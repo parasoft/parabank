@@ -14,13 +14,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.ws.rs.core.MediaType;
 
-import org.apache.xml.security.utils.Base64;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -268,7 +268,7 @@ public class RestServiceProxyControllerSpringTest
             try {
                 String username = "john";
                 String password = "demo";
-                String credentials = Base64.encode((username + ":" + password).getBytes("UTF-8"));
+                String credentials = new String(Base64.getEncoder().encode((username + ":" + password).getBytes("UTF-8")), "UTF-8");
                 request.addHeader("Authorization", "Basic " + credentials);
                 return request;
             } catch (UnsupportedEncodingException e) {

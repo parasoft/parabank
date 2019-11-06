@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
+import java.util.Base64;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -16,8 +17,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.xml.security.exceptions.Base64DecodingException;
-import org.apache.xml.security.utils.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -413,7 +412,7 @@ public class RestServiceProxyController extends AbstractBankController implement
                 String basic = st.nextToken();
                 if (basic.equalsIgnoreCase("Basic")) {
                     try {
-                        String credentials = new String(Base64.decode(st.nextToken()), "UTF-8");
+                        String credentials = new String(Base64.getDecoder().decode(st.nextToken()), "UTF-8");
                         int p = credentials.indexOf(":");
                         if (p != -1) {
                             String username = credentials.substring(0, p).trim();
@@ -427,7 +426,7 @@ public class RestServiceProxyController extends AbstractBankController implement
                             throw new AuthenticationException(
                                     messageSource.getMessage("error.invalid.username.or.password", null, locale));
                         }
-                    } catch (Base64DecodingException e) {
+                    } catch (IllegalArgumentException e) {
                         throw new AuthenticationException(
                                 messageSource.getMessage("error.invalid.username.or.password", null, locale));
                     }

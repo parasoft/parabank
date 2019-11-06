@@ -35,7 +35,6 @@ public class OpenAccountControllerTest extends AbstractBankControllerTest<OpenAc
 //        assertEquals(11, accounts.size());
         @SuppressWarnings("unchecked")
         final List<AccountType> types = (List<AccountType>) mav.getModel().get("types");
-        @SuppressWarnings("unchecked")
         final int customerId = (int) mav.getModel().get("customerId");
         assertEquals(2, types.size());
         assertEquals(adminManager.getParameter(AdminParameters.MINIMUM_BALANCE), mav.getModel().get("minimumBalance"));

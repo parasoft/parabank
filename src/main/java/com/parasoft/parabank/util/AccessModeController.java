@@ -174,10 +174,9 @@ public class AccessModeController {
             final HttpURLConnection conn = getConnection(url, MediaType.APPLICATION_JSON, POST);
             final InputStream inputStream = conn.getInputStream();
 
-            final JsonParser parser = new JsonParser();
             final BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             final String message = reader.readLine();
-            final JsonElement rootElement = parser.parse(message);
+            final JsonElement rootElement = JsonParser.parseString(message);
             final JsonObject actObject = rootElement.getAsJsonObject();
             createdAccount = Account.readFrom(actObject);
 
@@ -366,10 +365,9 @@ public class AccessModeController {
             final HttpURLConnection conn = getConnection(url, MediaType.APPLICATION_JSON, GET);
             final InputStream inputStream = conn.getInputStream();
 
-            final JsonParser parser = new JsonParser();
             final BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             final String message = reader.readLine();
-            final JsonElement rootElement = parser.parse(message);
+            final JsonElement rootElement = JsonParser.parseString(message);
             final JsonObject obj = rootElement.getAsJsonObject();
             account = Account.readFrom(obj);
             conn.disconnect();
@@ -440,10 +438,9 @@ public class AccessModeController {
             final HttpURLConnection conn = getConnection(url, MediaType.APPLICATION_JSON, GET);
             final InputStream inputStream = conn.getInputStream();
 
-            final JsonParser parser = new JsonParser();
             final BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             final String message = reader.readLine();
-            final JsonElement rootElement = parser.parse(message);
+            final JsonElement rootElement = JsonParser.parseString(message);
             final JsonArray arr = rootElement.getAsJsonArray();
 
             for (int i = 0; i < arr.size(); i++) {
@@ -582,10 +579,9 @@ public class AccessModeController {
 
             final InputStream inputStream = conn.getInputStream();
 
-            final JsonParser parser = new JsonParser();
             final BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             final String message = reader.readLine();
-            final JsonElement rootElement = parser.parse(message);
+            final JsonElement rootElement = JsonParser.parseString(message);
 
             LOG.info("class=" + rootElement.getClass());
             final JsonObject obj = rootElement.getAsJsonObject();
@@ -657,10 +653,9 @@ public class AccessModeController {
 
             final InputStream inputStream = conn.getInputStream();
 
-            final JsonParser parser = new JsonParser();
             final BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             final String message = reader.readLine();
-            final JsonElement rootElement = parser.parse(message);
+            final JsonElement rootElement = JsonParser.parseString(message);
             final JsonArray arr = rootElement.getAsJsonArray();
 
             for (int i = 0; i < arr.size(); i++) {
@@ -739,10 +734,9 @@ public class AccessModeController {
 
             final InputStream inputStream = conn.getInputStream();
 
-            final JsonParser parser = new JsonParser();
             final BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             final String message = reader.readLine();
-            final JsonElement rootElement = parser.parse(message);
+            final JsonElement rootElement = JsonParser.parseString(message);
 
             LOG.info("class=" + rootElement.getClass());
             final JsonObject obj = rootElement.getAsJsonObject();
@@ -934,10 +928,9 @@ public class AccessModeController {
                 createGetTransactionsRestUrl(account.getId(), criteria, restEndpoint), MediaType.APPLICATION_JSON, GET);
             final InputStream inputStream = connection.getInputStream();
 
-            final JsonParser parser = new JsonParser();
             final BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             final String message = reader.readLine();
-            final JsonElement rootElement = parser.parse(message);
+            final JsonElement rootElement = JsonParser.parseString(message);
             final JsonArray arr = rootElement.getAsJsonArray();
 
             for (int i = 0; i < arr.size(); i++) {

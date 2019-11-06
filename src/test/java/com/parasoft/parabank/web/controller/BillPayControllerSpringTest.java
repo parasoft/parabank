@@ -41,7 +41,6 @@ import com.parasoft.parabank.web.form.BillPayForm;
  * @req PAR-15
  *
  */
-@SuppressWarnings({ "unchecked" })
 @WebAppConfiguration("file:src/test/resources")
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:/**/test-context.xml" })

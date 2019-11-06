@@ -12,8 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @req PAR-9
  * @req PAR-10
  */
-@SuppressWarnings("unchecked") public class AccountsOverviewControllerTest
-        extends AbstractBankControllerTest<AccountsOverviewController> {
+public class AccountsOverviewControllerTest extends AbstractBankControllerTest<AccountsOverviewController> {
 
     @Override
     public void onSetUp() throws Exception {

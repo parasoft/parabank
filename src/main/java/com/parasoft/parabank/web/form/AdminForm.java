@@ -51,7 +51,6 @@ public class AdminForm {
         return minimumBalance;
     }
 
-    @SuppressWarnings("serial")
     public Map<String, String> getParameters() {
         return new HashMap<String, String>() {{
             put(AdminParameters.ENDPOINT, endpoint);

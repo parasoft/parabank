@@ -11,8 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @req PAR-9
  * @req PAR-10
  */
-@SuppressWarnings({ "unchecked" }) public class AccountActivityControllerTest
-        extends AbstractBankControllerTest<AccountActivityController> {
+public class AccountActivityControllerTest extends AbstractBankControllerTest<AccountActivityController> {
 
     @Override
     public void onSetUp() throws Exception {
