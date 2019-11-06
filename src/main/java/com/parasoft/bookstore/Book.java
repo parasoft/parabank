@@ -1,8 +1,8 @@
 package com.parasoft.bookstore;
 
-import java.io.*;
-import java.math.*;
-import java.util.*;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
 
 public class Book extends Item implements Serializable{
     /**
@@ -20,17 +20,17 @@ public class Book extends Item implements Serializable{
         // for serialization only
     }
 
-	protected Book(int id, String isbn, String title, Date year, String[] authors,
+    protected Book(int id, String isbn, String title, Date year, String[] authors,
                    String publisher, String description, BigDecimal price, int stock)
-	    throws ItemNotFoundException
-	{
-		super(id, title, price, stock);
+        throws ItemNotFoundException
+    {
+        super(id, title, price, stock);
         this.isbn = isbn;
         publication_date = year;
         this.authors = authors;
         this.publisher = publisher;
         this.description = description;
-	}
+    }
 
     public String getISBN() {
         return isbn;

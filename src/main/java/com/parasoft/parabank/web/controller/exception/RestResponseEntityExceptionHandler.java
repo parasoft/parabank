@@ -14,7 +14,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     @ExceptionHandler(value = AuthenticationException.class)
     protected ResponseEntity<Object> handleAuthenticationError(AuthenticationException ex, WebRequest request) {
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Type", "application/json; charset=utf-8"); 
+        headers.add("Content-Type", "application/json; charset=utf-8");
         // Prevent IE from incorrectly caching AJAX/JSON results
         // http://www.dashbay.com/2011/05/internet-explorer-caches-ajax/
         headers.add("Expires", "-1");

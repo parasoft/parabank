@@ -1,7 +1,7 @@
 package com.parasoft.parabank.service;
 
-import org.apache.cxf.service.model.*;
-import org.apache.cxf.wsdl.service.factory.*;
+import org.apache.cxf.service.model.MessagePartInfo;
+import org.apache.cxf.wsdl.service.factory.DefaultServiceConfiguration;
 
 /**
  * Defines parameters for XML Schema generation by CXF

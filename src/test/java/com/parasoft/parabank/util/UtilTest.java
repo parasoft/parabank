@@ -1,10 +1,11 @@
 package com.parasoft.parabank.util;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.*;
+import org.junit.Test;
 
-import com.parasoft.parabank.test.util.*;
+import com.parasoft.parabank.test.util.AbstractParaBankTest;
 
 /**
  * @req PAR-44

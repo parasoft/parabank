@@ -1,6 +1,6 @@
 package com.parasoft.bookstore;
 
-import java.sql.*;
+import java.sql.SQLException;
 
 /**
  * BookStoreMemoryDB

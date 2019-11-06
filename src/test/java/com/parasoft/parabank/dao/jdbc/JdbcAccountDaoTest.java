@@ -1,20 +1,22 @@
 package com.parasoft.parabank.dao.jdbc;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.fail;
 
-import java.math.*;
-import java.util.*;
+import java.math.BigDecimal;
+import java.util.List;
 
-import javax.annotation.*;
+import javax.annotation.Resource;
 
-import org.junit.*;
-import org.springframework.dao.*;
-import org.springframework.test.annotation.*;
+import org.junit.Test;
+import org.springframework.dao.DataAccessException;
+import org.springframework.test.annotation.Rollback;
 
-import com.parasoft.parabank.dao.*;
-import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.domain.Account.*;
-import com.parasoft.parabank.test.util.*;
+import com.parasoft.parabank.dao.AccountDao;
+import com.parasoft.parabank.domain.Account;
+import com.parasoft.parabank.domain.Account.AccountType;
+import com.parasoft.parabank.test.util.AbstractParaBankDataSourceTest;
 
 /**
  * @req PAR-11

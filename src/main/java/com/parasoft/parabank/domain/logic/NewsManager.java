@@ -1,8 +1,10 @@
 package com.parasoft.parabank.domain.logic;
 
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
-import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.News;
 
 /**
  * Interface for bank news management

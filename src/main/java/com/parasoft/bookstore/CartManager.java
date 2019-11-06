@@ -1,8 +1,12 @@
 package com.parasoft.bookstore;
 
-import java.util.*;
-import java.util.concurrent.*;
-import java.util.concurrent.atomic.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class CartManager {
     private static Map<Integer, List<Order>> cartIdToOrderMap =
@@ -25,7 +29,7 @@ public class CartManager {
     }
 
     public void addNewItemToCart(Order order) {
-        List<Order> list = new ArrayList<Order>();
+        List<Order> list = new ArrayList<>();
         list.add(order);
         cartIdToOrderMap.put(generatedNewCartId.incrementAndGet(), list);
     }
@@ -75,7 +79,7 @@ public class CartManager {
                     return order;
                 }
             }
-            if(!found) {
+            if (!found) {
                 throw new Exception("Did not update order with cartId " +
                         cartId + ", order does not exist.");
             }

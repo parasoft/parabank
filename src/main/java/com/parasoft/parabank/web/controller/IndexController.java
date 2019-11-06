@@ -1,21 +1,27 @@
 package com.parasoft.parabank.web.controller;
 
-import java.util.*;
-import java.util.Map.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
-import javax.annotation.*;
-import javax.servlet.http.*;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
-import org.slf4j.*;
-import org.springframework.dao.*;
-import org.springframework.stereotype.*;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.*;
-import org.springframework.web.servlet.view.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
-import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.domain.logic.*;
-import com.parasoft.parabank.util.*;
+import com.parasoft.parabank.domain.News;
+import com.parasoft.parabank.domain.logic.NewsManager;
+import com.parasoft.parabank.util.AccessModeController;
+import com.parasoft.parabank.util.Constants;
+import com.parasoft.parabank.util.CustomRamlGenerator;
 
 /**
  * Controller for home page
@@ -47,7 +53,7 @@ public class IndexController extends AbstractBankController {
 
     @RequestMapping
     public ModelAndView handleRequest(final HttpSession session) throws Exception {
-        final Map<String, Object> model = new HashMap<String, Object>();
+        final Map<String, Object> model = new HashMap<>();
         ModelAndView mav;
         try {
 

@@ -1,13 +1,14 @@
 package com.parasoft.parabank.domain.validator;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.*;
-import org.springframework.validation.*;
+import org.junit.Test;
+import org.springframework.validation.Validator;
 
-import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.domain.TransactionCriteria.*;
-import com.parasoft.parabank.test.util.*;
+import com.parasoft.parabank.domain.TransactionCriteria;
+import com.parasoft.parabank.domain.TransactionCriteria.SearchType;
+import com.parasoft.parabank.test.util.AbstractParaBankTest;
 
 /**
  * @req PAR-37

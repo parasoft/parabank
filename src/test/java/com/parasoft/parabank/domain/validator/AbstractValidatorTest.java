@@ -1,20 +1,29 @@
 package com.parasoft.parabank.domain.validator;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import java.lang.reflect.*;
-import java.util.*;
+import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
-import org.junit.*;
-import org.springframework.beans.*;
-import org.springframework.validation.*;
+import org.junit.Test;
+import org.springframework.beans.BeanWrapper;
+import org.springframework.beans.BeanWrapperImpl;
+import org.springframework.validation.BindException;
+import org.springframework.validation.Validator;
 
-import com.parasoft.parabank.test.util.*;
+import com.parasoft.parabank.test.util.AbstractBeanTestCase;
+import com.parasoft.parabank.test.util.AbstractParaBankTest;
 
 public abstract class AbstractValidatorTest extends AbstractParaBankTest {
-    private Class<?> beanClass;
+    private final Class<?> beanClass;
 
-    private String[] requiredFields;
+    private final String[] requiredFields;
 
     public AbstractValidatorTest(Class<?> beanClass, String[] requiredFields) {
         this.beanClass = beanClass;
@@ -36,7 +45,7 @@ public abstract class AbstractValidatorTest extends AbstractParaBankTest {
     }
 
     static final void assertValidate(Validator validator, Object target, String[] requiredFields) throws Exception {
-        Set<String> requiredFieldSet = new HashSet<String>(Arrays.asList(requiredFields));
+        Set<String> requiredFieldSet = new HashSet<>(Arrays.asList(requiredFields));
         Field[] fields = target.getClass().getDeclaredFields();
         int expectedErrorCount = fields.length;
 

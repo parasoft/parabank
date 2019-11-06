@@ -1,7 +1,7 @@
 package com.parasoft.bookstore;
 
-import java.io.*;
-import java.math.*;
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 public class Item implements Serializable {
     /**

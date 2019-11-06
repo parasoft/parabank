@@ -1,30 +1,39 @@
 package com.parasoft.parabank.web.controller;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.hamcrest.collection.IsIterableWithSize.iterableWithSize;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-import java.math.*;
+import java.math.BigDecimal;
 
-import org.junit.*;
-import org.junit.runner.*;
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.context.*;
-import org.springframework.http.*;
-import org.springframework.test.annotation.*;
-import org.springframework.test.context.*;
-import org.springframework.test.context.junit4.*;
-import org.springframework.test.context.support.*;
-import org.springframework.test.context.transaction.*;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.http.MediaType;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.test.web.servlet.*;
-import org.springframework.test.web.servlet.setup.*;
-import org.springframework.transaction.annotation.*;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.util.*;
-import com.parasoft.parabank.web.*;
-import com.parasoft.parabank.web.form.*;
+import com.parasoft.parabank.domain.Address;
+import com.parasoft.parabank.domain.Customer;
+import com.parasoft.parabank.domain.Payee;
+import com.parasoft.parabank.util.Constants;
+import com.parasoft.parabank.util.SessionParamArgumentResolver;
+import com.parasoft.parabank.web.UserSession;
+import com.parasoft.parabank.web.form.BillPayForm;
 
 /**
  * @req PAR-11
@@ -97,7 +106,7 @@ public class BillPayControllerSpringTest {
      * This test should verify that a customer who has an ID
      */
     @Test
-    public void testHandleGetRequest() throws Exception 
+    public void testHandleGetRequest() throws Exception
     {
         Customer customer = new Customer();
         customer.setId(12212);
@@ -136,7 +145,7 @@ public class BillPayControllerSpringTest {
     @Test
     @Transactional
     @Rollback
-    public void testValidate() throws Exception 
+    public void testValidate() throws Exception
     {
         BillPayForm form = getBillPayForm();
         form.getPayee().setPhoneNumber(null);

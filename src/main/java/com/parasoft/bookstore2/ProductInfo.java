@@ -1,7 +1,7 @@
 package com.parasoft.bookstore2;
 
-import java.io.*;
-import java.math.*;
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 public class ProductInfo implements Serializable
 {
@@ -62,6 +62,7 @@ public class ProductInfo implements Serializable
         setAmount(amount.add(inflate));
     }
 
+    @Override
     public String toString() {
         return title;
     }

@@ -1,14 +1,11 @@
 package com.parasoft.parabank.web.controller;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import java.util.*;
-
-import org.junit.*;
-import org.springframework.mock.web.*;
-import org.springframework.web.servlet.*;
-
-import com.parasoft.parabank.domain.*;
+import org.junit.Test;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @req PAR-11

@@ -1,11 +1,12 @@
 package com.parasoft.parabank.domain;
 
-import java.math.*;
+import java.math.BigDecimal;
 
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.parasoft.parabank.util.*;
+import com.parasoft.parabank.util.Util;
 
 /**
  * Domain object representing a stock position

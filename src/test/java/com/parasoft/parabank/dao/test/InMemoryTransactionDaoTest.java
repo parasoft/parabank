@@ -1,14 +1,19 @@
 package com.parasoft.parabank.dao.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.junit.*;
+import org.junit.Test;
 
-import com.parasoft.parabank.dao.*;
-import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.test.util.*;
+import com.parasoft.parabank.dao.InMemoryTransactionDao;
+import com.parasoft.parabank.dao.TransactionDao;
+import com.parasoft.parabank.domain.Transaction;
+import com.parasoft.parabank.domain.TransactionCriteria;
+import com.parasoft.parabank.test.util.AbstractParaBankTest;
 
 /**
  * @req PAR-26
@@ -26,7 +31,7 @@ public class InMemoryTransactionDaoTest extends AbstractParaBankTest {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        final List<Transaction> transactions = new ArrayList<Transaction>();
+        final List<Transaction> transactions = new ArrayList<>();
 
         Transaction transaction = new Transaction();
         transaction.setId(TRANSACTION1_ID);

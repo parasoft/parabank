@@ -1,41 +1,64 @@
 package com.parasoft.parabank.test.util;
 
-import static com.github.tomakehurst.wiremock.client.WireMock.*;
-import static org.junit.Assert.*;
+import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
+import static com.github.tomakehurst.wiremock.client.WireMock.containing;
+import static com.github.tomakehurst.wiremock.client.WireMock.get;
+import static com.github.tomakehurst.wiremock.client.WireMock.matching;
+import static com.github.tomakehurst.wiremock.client.WireMock.post;
+import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
+import static com.github.tomakehurst.wiremock.client.WireMock.urlPathEqualTo;
+import static com.github.tomakehurst.wiremock.client.WireMock.urlPathMatching;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
-import java.lang.reflect.*;
-import java.text.*;
-import java.util.*;
+import java.lang.reflect.InvocationTargetException;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import javax.annotation.*;
-import javax.sql.*;
+import javax.annotation.Resource;
+import javax.sql.DataSource;
 
-import org.junit.*;
-import org.junit.runner.*;
-import org.slf4j.*;
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.context.*;
-import org.springframework.core.io.support.*;
-import org.springframework.dao.*;
-import org.springframework.jdbc.core.support.*;
-import org.springframework.jdbc.datasource.init.*;
-import org.springframework.mock.web.*;
-import org.springframework.test.context.*;
-import org.springframework.test.context.junit4.*;
-import org.springframework.test.context.support.*;
-import org.springframework.test.context.transaction.*;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.support.EncodedResource;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.jdbc.datasource.init.ScriptUtils;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.mock.web.MockHttpSession;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
+import org.springframework.test.context.transaction.BeforeTransaction;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.transaction.annotation.*;
-import org.springframework.ui.*;
-import org.springframework.validation.*;
-import org.springframework.web.servlet.*;
-import org.springframework.web.servlet.mvc.method.annotation.*;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.servlet.HandlerExecutionChain;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
-import com.github.tomakehurst.wiremock.junit.*;
-import com.parasoft.parabank.dao.*;
-import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.util.*;
-import com.parasoft.parabank.web.*;
+import com.github.tomakehurst.wiremock.junit.WireMockRule;
+import com.parasoft.parabank.dao.AdminDao;
+import com.parasoft.parabank.domain.Customer;
+import com.parasoft.parabank.util.Constants;
+import com.parasoft.parabank.web.UserSession;
 
 // @SuppressWarnings("deprecation")
 @WebAppConfiguration("file:src/test/resources")
@@ -132,7 +155,7 @@ public abstract class AbstractParaBankDataSourceTest extends JdbcDaoSupport {
     @Resource(name = "adminDao")
     private AdminDao adminDao;
 
-    private Map<String, String> testResponses = new HashMap<>();;
+    private Map<String, String> testResponses = new HashMap<>();
 
     /**
      * <DL>
@@ -157,7 +180,7 @@ public abstract class AbstractParaBankDataSourceTest extends JdbcDaoSupport {
             assertEquals(fieldErrors.get(fieldName), fe.getCode());
         }
         // return errorName;
-    };
+    }
 
     /**
      * <DL>
@@ -241,7 +264,7 @@ public abstract class AbstractParaBankDataSourceTest extends JdbcDaoSupport {
      */
     public ApplicationContext getApplicationContext() {
         return applicationContext;
-    };
+    }
 
     /**
      * <DL>

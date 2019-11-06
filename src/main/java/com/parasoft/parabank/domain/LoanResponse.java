@@ -1,15 +1,19 @@
 package com.parasoft.parabank.domain;
 
-import java.text.*;
-import java.util.*;
+import java.text.ParseException;
+import java.util.Date;
 
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.*;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.google.gson.*;
-import com.parasoft.parabank.util.*;
+import com.google.gson.JsonObject;
+import com.parasoft.parabank.util.DateTimeAdapter;
+import com.parasoft.parabank.util.Util;
 
 
 /**

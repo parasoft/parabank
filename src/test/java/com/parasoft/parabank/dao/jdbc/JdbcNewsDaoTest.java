@@ -1,17 +1,18 @@
 package com.parasoft.parabank.dao.jdbc;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.sql.Date;
-import java.util.*;
+import java.util.List;
 
-import javax.annotation.*;
+import javax.annotation.Resource;
 
-import org.junit.*;
+import org.junit.Test;
 
-import com.parasoft.parabank.dao.*;
-import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.test.util.*;
+import com.parasoft.parabank.dao.NewsDao;
+import com.parasoft.parabank.domain.News;
+import com.parasoft.parabank.test.util.AbstractParaBankDataSourceTest;
 
 /**
  * @req PAR-14

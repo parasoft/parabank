@@ -1,8 +1,8 @@
 package com.parasoft.parabank.domain;
 
-import java.util.*;
+import java.util.Date;
 
-import com.parasoft.parabank.util.*;
+import com.parasoft.parabank.util.Util;
 
 /**
  * Domain object representing a bank news item

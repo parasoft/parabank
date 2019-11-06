@@ -1,6 +1,6 @@
 package com.parasoft.parabank.web.controller;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
 import java.sql.Date;

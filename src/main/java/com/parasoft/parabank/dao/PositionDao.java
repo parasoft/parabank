@@ -1,8 +1,10 @@
 package com.parasoft.parabank.dao;
 
-import java.util.*;
+import java.util.Date;
+import java.util.List;
 
-import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.HistoryPoint;
+import com.parasoft.parabank.domain.Position;
 
 /**
  * Interface for accessing Position information from a data source

@@ -1,6 +1,6 @@
 package com.parasoft.bookstore2;
 
-import java.util.*;
+import java.util.TimerTask;
 
 public class CartTimer extends TimerTask {
     @Override

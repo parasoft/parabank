@@ -1,11 +1,13 @@
 package com.parasoft.parabank.domain.validator;
 
-import javax.annotation.*;
+import javax.annotation.Resource;
 
-import org.springframework.validation.*;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
+import org.springframework.validation.Validator;
 
-import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.web.form.*;
+import com.parasoft.parabank.domain.Payee;
+import com.parasoft.parabank.web.form.BillPayForm;
 
 /**
  * Provides basic empty field validation for <code>BillPayForm</code> object

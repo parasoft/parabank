@@ -1,15 +1,17 @@
 package com.parasoft.parabank.dao.jdbc;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
 
-import org.slf4j.*;
-import org.springframework.jdbc.core.*;
-import org.springframework.jdbc.core.support.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
-import com.parasoft.parabank.dao.*;
-import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.dao.NewsDao;
+import com.parasoft.parabank.domain.News;
 
 /*
  * JDBC implementation of NewsDao

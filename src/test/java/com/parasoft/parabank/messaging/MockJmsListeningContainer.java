@@ -1,9 +1,9 @@
 package com.parasoft.parabank.messaging;
 
-import javax.jms.*;
+import javax.jms.JMSException;
 
-import org.springframework.jms.*;
-import org.springframework.jms.listener.*;
+import org.springframework.jms.JmsException;
+import org.springframework.jms.listener.AbstractJmsListeningContainer;
 
 public class MockJmsListeningContainer extends AbstractJmsListeningContainer {
     private boolean running;

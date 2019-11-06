@@ -1,12 +1,15 @@
 package com.parasoft.parabank.domain;
 
-import java.math.*;
-import java.util.*;
+import java.math.BigDecimal;
+import java.util.Date;
 
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import com.parasoft.parabank.util.*;
+import com.parasoft.parabank.util.DateTimeAdapter;
+import com.parasoft.parabank.util.Util;
 
 /**
  * Domain object representing a history point

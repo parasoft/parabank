@@ -1,12 +1,15 @@
 package com.parasoft.parabank.test.util;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-import javax.annotation.*;
+import javax.annotation.Resource;
 
-import com.parasoft.parabank.messaging.*;
+import com.parasoft.parabank.messaging.MockJmsListeningContainer;
 
 public abstract class AbstractAdminOperationsTest extends AbstractParaBankDataSourceTest {
     protected interface DBCleaner {
@@ -30,7 +33,7 @@ public abstract class AbstractAdminOperationsTest extends AbstractParaBankDataSo
 
     protected void assertDBClean(final DBCleaner dbCleaner) throws Exception {
         dbCleaner.cleanDB();
-        final List<IntQuery> tests = new ArrayList<IntQuery>();
+        final List<IntQuery> tests = new ArrayList<>();
         // TODO move this mess to Spring configuration
         tests.addAll(Arrays.asList(new IntQuery[] { new IntQuery(1, "SELECT COUNT(id) FROM Customer"), //$NON-NLS-1$
             new IntQuery(1, "SELECT COUNT(id) FROM Account"), //$NON-NLS-1$
@@ -49,7 +52,7 @@ public abstract class AbstractAdminOperationsTest extends AbstractParaBankDataSo
 
     protected void assertDBInitialized(final DBInitializer dbInitializer) throws Exception {
         dbInitializer.initializeDB();
-        final List<IntQuery> tests = new ArrayList<IntQuery>();
+        final List<IntQuery> tests = new ArrayList<>();
 
         tests.addAll(Arrays.asList(new IntQuery[] { new IntQuery(2, "SELECT COUNT(id) FROM Customer"), //$NON-NLS-1$
             new IntQuery(12, "SELECT COUNT(id) FROM Account"), //$NON-NLS-1$

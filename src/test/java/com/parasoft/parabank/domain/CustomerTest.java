@@ -1,10 +1,10 @@
 package com.parasoft.parabank.domain;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import org.junit.*;
+import org.junit.Test;
 
-import com.parasoft.parabank.test.util.*;
+import com.parasoft.parabank.test.util.AbstractBeanTestCase;
 
 /**
  * @req PAR-26

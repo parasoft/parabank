@@ -1,8 +1,9 @@
 package com.parasoft.parabank.dao;
 
-import java.util.*;
+import java.util.Date;
+import java.util.List;
 
-import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.News;
 
 /**
  * Interface for accessing bank news items from a data source

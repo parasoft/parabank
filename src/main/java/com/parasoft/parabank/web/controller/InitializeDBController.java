@@ -1,17 +1,18 @@
 package com.parasoft.parabank.web.controller;
 
-import javax.annotation.*;
+import javax.annotation.Resource;
 
-import org.slf4j.*;
-import org.springframework.stereotype.*;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.*;
-import org.springframework.web.servlet.view.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
-import com.parasoft.parabank.dao.*;
-import com.parasoft.parabank.domain.logic.*;
-import com.parasoft.parabank.util.*;
-import com.parasoft.parabank.web.*;
+import com.parasoft.parabank.dao.AdminDao;
+import com.parasoft.parabank.domain.logic.AdminManager;
+import com.parasoft.parabank.util.AccessModeController;
+import com.parasoft.parabank.web.ViewUtil;
 
 /**
  * Controller for creating database tables and populating with sample data

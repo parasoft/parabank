@@ -1,5 +1,5 @@
 package com.parasoft.parabank.domain;
 
-import com.parasoft.parabank.test.util.*;
+import com.parasoft.parabank.test.util.AbstractBeanTestCase;
 
 public class NewsTest extends AbstractBeanTestCase<News> { }

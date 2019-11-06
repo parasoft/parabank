@@ -1,10 +1,12 @@
 package com.parasoft.parabank.domain.logic.impl;
 
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
-import com.parasoft.parabank.dao.*;
-import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.domain.logic.*;
+import com.parasoft.parabank.dao.NewsDao;
+import com.parasoft.parabank.domain.News;
+import com.parasoft.parabank.domain.logic.NewsManager;
 import com.parasoft.parabank.domain.util.NewsUtil;
 
 /*
@@ -12,7 +14,7 @@ import com.parasoft.parabank.domain.util.NewsUtil;
  */
 public class NewsManagerImpl implements NewsManager {
 
-    private NewsDao newsDao;
+    private final NewsDao newsDao;
 
     public NewsManagerImpl(final NewsDao newsDao) {
         this.newsDao = newsDao;

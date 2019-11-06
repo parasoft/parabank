@@ -1,15 +1,20 @@
 package com.parasoft.parabank.dao.jdbc;
 
-import java.math.*;
-import java.sql.*;
-import java.util.*;
+import java.math.BigDecimal;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.slf4j.*;
-import org.springframework.jdbc.core.*;
-import org.springframework.jdbc.core.namedparam.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
 
-import com.parasoft.parabank.dao.*;
-import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.dao.TransactionDao;
+import com.parasoft.parabank.domain.Transaction;
+import com.parasoft.parabank.domain.TransactionCriteria;
 
 /*
  * JDBC implementation of TransactionDao
@@ -100,7 +105,7 @@ public class JdbcTransactionDao extends NamedParameterJdbcDaoSupport implements 
         String SQL =
             "SELECT id, account_id, type, date, amount, description, MONTH(date) as month FROM Transaction WHERE account_id = ?";
 
-        final List<Object> params = new ArrayList<Object>();
+        final List<Object> params = new ArrayList<>();
         params.add(accountId);
 
         SQL += getRestrictions(criteria, params);

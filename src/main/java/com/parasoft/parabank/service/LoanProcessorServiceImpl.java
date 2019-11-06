@@ -1,7 +1,8 @@
 package com.parasoft.parabank.service;
 
-import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.domain.logic.*;
+import com.parasoft.parabank.domain.LoanRequest;
+import com.parasoft.parabank.domain.LoanResponse;
+import com.parasoft.parabank.domain.logic.LoanProvider;
 
 public class LoanProcessorServiceImpl implements LoanProcessorService, LoanProcessorAware, LoanProviderNameAware {
     private LoanProvider loanProcessor;

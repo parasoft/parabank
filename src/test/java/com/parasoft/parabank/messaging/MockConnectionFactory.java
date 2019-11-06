@@ -1,6 +1,8 @@
 package com.parasoft.parabank.messaging;
 
-import javax.jms.*;
+import javax.jms.Connection;
+import javax.jms.ConnectionFactory;
+import javax.jms.JMSException;
 
 public class MockConnectionFactory implements ConnectionFactory {
     public MockConnectionFactory() throws Exception {

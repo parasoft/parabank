@@ -1,6 +1,6 @@
 package com.parasoft.parabank.web.form;
 
-import com.parasoft.parabank.domain.Account.*;
+import com.parasoft.parabank.domain.Account.AccountType;
 
 /**
  * Backing class for account creation form

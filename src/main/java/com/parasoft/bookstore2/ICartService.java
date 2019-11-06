@@ -1,6 +1,8 @@
 package com.parasoft.bookstore2;
 
-import javax.jws.*;
+import javax.jws.WebParam;
+import javax.jws.WebResult;
+import javax.jws.WebService;
 
 /**
  * Java interface for the Book store web service

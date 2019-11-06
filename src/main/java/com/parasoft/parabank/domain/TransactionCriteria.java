@@ -1,8 +1,9 @@
 package com.parasoft.parabank.domain;
 
-import java.math.*;
-import java.text.*;
-import java.util.*;
+import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 /**
@@ -34,11 +35,12 @@ public class TransactionCriteria {
 
     private SearchType searchType;
 
-    public static final ThreadLocal<DateFormat> DATE_FORMATTER =
-    		new ThreadLocal<DateFormat>() { @Override
-            protected DateFormat initialValue() {
-    											return new SimpleDateFormat("MM-dd-yyyy");
-    									   }};
+    public static final ThreadLocal<DateFormat> DATE_FORMATTER = new ThreadLocal<DateFormat>() {
+        @Override
+        protected DateFormat initialValue() {
+            return new SimpleDateFormat("MM-dd-yyyy");
+        }
+    };
 
 
     public String getMonth() {

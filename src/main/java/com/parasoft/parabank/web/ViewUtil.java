@@ -1,8 +1,9 @@
 package com.parasoft.parabank.web;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.springframework.web.servlet.*;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Utility methods for Spring MVC
@@ -16,7 +17,7 @@ public final class ViewUtil {
      * @param errorMessage the error message resource bundle key to display
      * @return Spring MVC view result
      */
-    public static final ModelAndView createErrorView(String errorMessage) {
+    public static ModelAndView createErrorView(String errorMessage) {
         return createErrorView(errorMessage, null);
     }
 
@@ -27,8 +28,8 @@ public final class ViewUtil {
      * @param parameters parameters associated with the resource bundle message
      * @return Spring MVC view result
      */
-    public static final ModelAndView createErrorView(String errorMessage, Object[] parameters) {
-        Map<String, Object> model = new HashMap<String, Object>();
+    public static ModelAndView createErrorView(String errorMessage, Object[] parameters) {
+        Map<String, Object> model = new HashMap<>();
         model.put("message", errorMessage);
         if (parameters != null && parameters.length > 0) {
             model.put("parameters", parameters);

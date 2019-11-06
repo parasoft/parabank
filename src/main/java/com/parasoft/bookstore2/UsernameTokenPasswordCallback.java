@@ -1,10 +1,12 @@
 package com.parasoft.bookstore2;
 
-import java.io.*;
+import java.io.IOException;
 
-import javax.security.auth.callback.*;
+import javax.security.auth.callback.Callback;
+import javax.security.auth.callback.CallbackHandler;
+import javax.security.auth.callback.UnsupportedCallbackException;
 
-import org.apache.wss4j.common.ext.*;
+import org.apache.wss4j.common.ext.WSPasswordCallback;
 
 public class UsernameTokenPasswordCallback implements CallbackHandler {
     private final String NL_USERNAME = "soatest";

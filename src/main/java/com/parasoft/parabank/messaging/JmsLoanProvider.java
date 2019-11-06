@@ -1,15 +1,21 @@
 package com.parasoft.parabank.messaging;
 
-import java.util.*;
+import java.util.Date;
 
-import javax.jms.*;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.TextMessage;
 
-import org.slf4j.*;
-import org.springframework.jms.core.*;
-import org.springframework.oxm.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
+import org.springframework.oxm.Marshaller;
+import org.springframework.oxm.Unmarshaller;
 
-import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.domain.logic.*;
+import com.parasoft.parabank.domain.LoanRequest;
+import com.parasoft.parabank.domain.LoanResponse;
+import com.parasoft.parabank.domain.logic.LoanProvider;
 
 /**
  * Message client for generating and sending loan requests over JMS
@@ -120,12 +126,9 @@ public class JmsLoanProvider implements LoanProvider {
 
     @Override
     public LoanResponse requestLoan(final LoanRequest loanRequest) {
-        jmsTemplate.send(requestDesinationName, new MessageCreator() {
-            @Override
-            public Message createMessage(final Session session) throws JMSException {
-                final String xml = MarshalUtil.marshal(marshaller, loanRequest);
-                return session.createTextMessage(xml);
-            }
+        jmsTemplate.send(requestDesinationName, (MessageCreator) session -> {
+            final String xml = MarshalUtil.marshal(marshaller, loanRequest);
+            return session.createTextMessage(xml);
         });
         final Message message = jmsTemplate.receive(responseDestinationName);
         return processResponse(message);

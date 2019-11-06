@@ -1,13 +1,15 @@
 package com.parasoft.parabank.dao;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.Transaction;
+import com.parasoft.parabank.domain.TransactionCriteria;
 
 public class InMemoryTransactionDao implements TransactionDao {
     private static int ID = 0;
 
-    private List<Transaction> transactions;
+    private final List<Transaction> transactions;
 
     public InMemoryTransactionDao() {
         this(new ArrayList<Transaction>());
@@ -31,7 +33,7 @@ public class InMemoryTransactionDao implements TransactionDao {
 
     @Override
     public List<Transaction> getTransactionsForAccount(int accountId) {
-        List<Transaction> accountTransactions = new ArrayList<Transaction>();
+        List<Transaction> accountTransactions = new ArrayList<>();
 
         for (Transaction transaction : transactions) {
             if (transaction.getAccountId() == accountId) {
@@ -45,7 +47,7 @@ public class InMemoryTransactionDao implements TransactionDao {
     @Override
     public List<Transaction> getTransactionsForAccount(int accountId,
             TransactionCriteria criteria) {
-        List<Transaction> accountTransactions = new ArrayList<Transaction>();
+        List<Transaction> accountTransactions = new ArrayList<>();
 
         for (Transaction transaction : transactions) {
             if (transaction.getAccountId() == accountId) {

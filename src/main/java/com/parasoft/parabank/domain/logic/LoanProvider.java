@@ -1,6 +1,7 @@
 package com.parasoft.parabank.domain.logic;
 
-import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.LoanRequest;
+import com.parasoft.parabank.domain.LoanResponse;
 
 /**
  * Interface for objects that can provide/process a loan

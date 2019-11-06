@@ -1,17 +1,23 @@
 package com.parasoft.parabank.web.controller;
 
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.http.*;
-import org.springframework.stereotype.*;
-import org.springframework.ui.*;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.domain.logic.impl.*;
-import com.parasoft.parabank.util.*;
+import com.parasoft.parabank.domain.News;
+import com.parasoft.parabank.domain.logic.impl.NewsManagerImpl;
+import com.parasoft.parabank.util.Constants;
 
 /**
  * Controller for displaying news page
@@ -42,16 +48,11 @@ public class NewsController {
         }
         if (ret != null) {
             // Sort most recent first and truncate size to count
-            ret.sort(new Comparator<News>() {
-                @Override
-                public int compare(News o1, News o2) {
-                    return o2.getDate().compareTo(o1.getDate());
-                }
-            });
+            ret.sort((o1, o2) -> o2.getDate().compareTo(o1.getDate()));
             while (ret.size() > count) {
                 ret.remove(ret.size()-1);
             }
         }
-        return new ResponseEntity<List<News>>(ret, HttpStatus.OK);
+        return new ResponseEntity<>(ret, HttpStatus.OK);
     }
 }

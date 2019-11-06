@@ -1,12 +1,12 @@
 package com.parasoft.parabank.web.form;
 
-import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.Customer;
 
 /**
  * Backing class for customer registration form
  */
 public class CustomerForm {
-    private Customer customer;
+    private final Customer customer;
 
     private String repeatedPassword;
 

@@ -1,6 +1,6 @@
 package com.parasoft.parabank.web.form;
 
-import java.math.*;
+import java.math.BigDecimal;
 
 /**
  * Backing class for loan request form

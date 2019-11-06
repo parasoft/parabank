@@ -1,19 +1,27 @@
 package com.parasoft.parabank.service;
 
-import static com.github.tomakehurst.wiremock.client.WireMock.*;
-import static org.junit.Assert.*;
+import static com.github.tomakehurst.wiremock.client.WireMock.findAll;
+import static com.github.tomakehurst.wiremock.client.WireMock.postRequestedFor;
+import static com.github.tomakehurst.wiremock.client.WireMock.urlPathMatching;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
-import java.math.*;
-import java.util.*;
+import java.math.BigDecimal;
+import java.util.List;
 
-import org.junit.*;
-import org.slf4j.*;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import com.github.tomakehurst.wiremock.verification.*;
-import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.domain.logic.*;
-import com.parasoft.parabank.domain.logic.impl.*;
-import com.parasoft.parabank.test.util.*;
+import com.github.tomakehurst.wiremock.verification.LoggedRequest;
+import com.parasoft.parabank.domain.LoanRequest;
+import com.parasoft.parabank.domain.LoanResponse;
+import com.parasoft.parabank.domain.logic.LoanProvider;
+import com.parasoft.parabank.domain.logic.impl.LoanProviderMapAware;
+import com.parasoft.parabank.test.util.AbstractParaBankDataSourceTest;
+import com.parasoft.parabank.test.util.LoanRequestTestConfig;
 
 /**
  * @req PAR-41

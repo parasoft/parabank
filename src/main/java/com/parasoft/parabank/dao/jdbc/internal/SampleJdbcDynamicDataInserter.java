@@ -1,8 +1,8 @@
 package com.parasoft.parabank.dao.jdbc.internal;
 
-import org.springframework.jdbc.core.support.*;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
-import com.parasoft.parabank.dao.internal.*;
+import com.parasoft.parabank.dao.internal.DynamicDataInserter;
 
 public class SampleJdbcDynamicDataInserter extends JdbcDaoSupport implements DynamicDataInserter {
     /** {@inheritDoc} */

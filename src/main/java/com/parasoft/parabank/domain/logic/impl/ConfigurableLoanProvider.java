@@ -1,10 +1,13 @@
 package com.parasoft.parabank.domain.logic.impl;
 
-import java.util.*;
+import java.util.Map;
+import java.util.Set;
 
-import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.domain.logic.*;
-import com.parasoft.parabank.service.*;
+import com.parasoft.parabank.domain.LoanRequest;
+import com.parasoft.parabank.domain.LoanResponse;
+import com.parasoft.parabank.domain.logic.AdminManager;
+import com.parasoft.parabank.domain.logic.LoanProvider;
+import com.parasoft.parabank.service.AdminManagerAware;
 
 /**
  * <DL>

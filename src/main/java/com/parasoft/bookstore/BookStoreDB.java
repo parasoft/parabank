@@ -1,9 +1,14 @@
 package com.parasoft.bookstore;
 
-import java.math.*;
-import java.sql.*;
+import java.math.BigDecimal;
 import java.sql.Date;
-import java.util.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.Vector;
 
 public class BookStoreDB extends DB {
     private static final int MAX_BOOKS_TO_ADD = 1000;
@@ -83,7 +88,7 @@ public class BookStoreDB extends DB {
             IllegalAccessException, ClassNotFoundException, ItemNotFoundException {
 
         boolean hasNext = rs.first();
-        Vector<Book> books = new Vector<Book>();
+        Vector<Book> books = new Vector<>();
 
         String query2 = "SELECT " +
                 NL_TABLE_AUTHOR + "." + NL_NAME + " as " + NL_AUTHOR_NAME +
@@ -115,7 +120,7 @@ public class BookStoreDB extends DB {
             stmt2.setString(2, isbn);
             ResultSet rs2 = stmt2.executeQuery();
             boolean hasMore = rs2.first();
-            Vector<String> authors = new Vector<String>();
+            Vector<String> authors = new Vector<>();
 
             while (hasMore) {
                 String author = rs2.getString(NL_AUTHOR_NAME);
@@ -224,7 +229,7 @@ public class BookStoreDB extends DB {
         stmt2.setInt(1, id);
         ResultSet rs2 = stmt2.executeQuery();
         boolean more2 = rs2.first();
-        Vector<String> authors = new Vector<String>();
+        Vector<String> authors = new Vector<>();
         while (more2) {
             String author = rs2.getString(NL_AUTHOR_NAME);
             authors.add(author);
@@ -241,7 +246,7 @@ public class BookStoreDB extends DB {
 
     public static void addNewItem(TempBook tempbook) throws Exception {
         if (addedBooks == null) {
-            addedBooks = new Hashtable<Integer, TempBook>();
+            addedBooks = new Hashtable<>();
         }
         if (addedBooks.size() >= MAX_BOOKS_TO_ADD) {
             throw new Exception("Too many books (" + MAX_BOOKS_TO_ADD +

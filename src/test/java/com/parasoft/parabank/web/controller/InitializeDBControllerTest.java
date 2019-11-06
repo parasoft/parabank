@@ -1,6 +1,7 @@
 package com.parasoft.parabank.web.controller;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import javax.annotation.Resource;
 
@@ -51,15 +52,12 @@ public class InitializeDBControllerTest extends AbstractAdminOperationsTest {
     @Transactional
     @Commit
     public void testHandleRequest() throws Exception {
-        assertDBInitialized(new DBInitializer() {
-            @Override
-            public void initializeDB() throws Exception {
-                final ModelAndView mav =
-                    processGetRequest(registerSession(new MockHttpServletRequest()), new MockHttpServletResponse());
-                assertNotNull(mav);
-                assertEquals("/index.htm", ((RedirectView) mav.getView()).getUrl());
-                //controller.handleRequest(new MockHttpServletRequest(), new MockHttpServletResponse());
-            }
+        assertDBInitialized(() -> {
+            final ModelAndView mav =
+                processGetRequest(registerSession(new MockHttpServletRequest()), new MockHttpServletResponse());
+            assertNotNull(mav);
+            assertEquals("/index.htm", ((RedirectView) mav.getView()).getUrl());
+            //controller.handleRequest(new MockHttpServletRequest(), new MockHttpServletResponse());
         });
     }
 
@@ -75,15 +73,12 @@ public class InitializeDBControllerTest extends AbstractAdminOperationsTest {
         assertEquals("error", mav.getViewName());
         controller.setAdminManager(admin);
         // make sure everything back to normal ...
-        assertDBInitialized(new DBInitializer() {
-            @Override
-            public void initializeDB() throws Exception {
-                final ModelAndView mav =
-                    processGetRequest(registerSession(new MockHttpServletRequest()), new MockHttpServletResponse());
-                assertNotNull(mav);
-                assertEquals("/index.htm", ((RedirectView) mav.getView()).getUrl());
-                //controller.handleRequest(new MockHttpServletRequest(), new MockHttpServletResponse());
-            }
+        assertDBInitialized(() -> {
+            final ModelAndView mav1 =
+                processGetRequest(registerSession(new MockHttpServletRequest()), new MockHttpServletResponse());
+            assertNotNull(mav1);
+            assertEquals("/index.htm", ((RedirectView) mav1.getView()).getUrl());
+            //controller.handleRequest(new MockHttpServletRequest(), new MockHttpServletResponse());
         });
     }
 }

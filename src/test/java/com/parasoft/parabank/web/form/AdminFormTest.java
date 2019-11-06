@@ -1,14 +1,15 @@
 package com.parasoft.parabank.web.form;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import java.math.*;
-import java.util.*;
+import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.junit.*;
+import org.junit.Test;
 
-import com.parasoft.parabank.domain.logic.*;
-import com.parasoft.parabank.test.util.*;
+import com.parasoft.parabank.domain.logic.AdminParameters;
+import com.parasoft.parabank.test.util.AbstractParaBankTest;
 
 /**
  * @req PAR-3
@@ -41,7 +42,7 @@ public class AdminFormTest extends AbstractParaBankTest {
     public void setUp() throws Exception {
         adminForm = new AdminForm();
 
-        parameters = new HashMap<String, String>();
+        parameters = new HashMap<>();
         parameters.put(AdminParameters.ENDPOINT, ENDPOINT);
         parameters.put(AdminParameters.INITIAL_BALANCE, INITIAL_BALANCE.toString());
         parameters.put(AdminParameters.MINIMUM_BALANCE, MINIMUM_BALANCE.toString());

@@ -1,8 +1,8 @@
 package com.parasoft.bookstore2;
 
-import java.io.*;
-import java.math.*;
-import java.util.*;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
 
 public class Book implements Serializable{
     /**

@@ -25,7 +25,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -58,7 +57,7 @@ public class RestServiceProxyControllerSpringTest
     @Resource(name = "bankManager")
     protected BankManager bankManager;
 
-    private int customerId = 12212;
+    private final int customerId = 12212;
 
     @Before
     public void setUp()
@@ -182,7 +181,7 @@ public class RestServiceProxyControllerSpringTest
         Customer updatedCustomer = bankManager.getCustomer(customerId);
         assertEquals("888888888", updatedCustomer.getSsn());
     }
-    
+
     @Test
     public void testGetCustomer()
         throws Exception
@@ -265,21 +264,15 @@ public class RestServiceProxyControllerSpringTest
     private static RequestPostProcessor createUserToken()
     {
         org.apache.xml.security.Init.init();
-        return new RequestPostProcessor()
-        {
-
-            @Override
-            public MockHttpServletRequest postProcessRequest(MockHttpServletRequest request)
-            {
-                try {
-                    String username = "john";
-                    String password = "demo";
-                    String credentials = Base64.encode((username + ":" + password).getBytes("UTF-8"));
-                    request.addHeader("Authorization", "Basic " + credentials);
-                    return request;
-                } catch (UnsupportedEncodingException e) {
-                    throw new RuntimeException(e);
-                }
+        return request -> {
+            try {
+                String username = "john";
+                String password = "demo";
+                String credentials = Base64.encode((username + ":" + password).getBytes("UTF-8"));
+                request.addHeader("Authorization", "Basic " + credentials);
+                return request;
+            } catch (UnsupportedEncodingException e) {
+                throw new RuntimeException(e);
             }
         };
     }

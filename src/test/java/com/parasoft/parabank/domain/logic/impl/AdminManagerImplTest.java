@@ -1,19 +1,23 @@
 package com.parasoft.parabank.domain.logic.impl;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import java.util.*;
+import java.util.Map;
 
-import javax.annotation.*;
+import javax.annotation.Resource;
 
-import org.junit.*;
-import org.junit.runners.*;
-import org.springframework.jms.listener.*;
-import org.springframework.test.annotation.*;
-import org.springframework.transaction.annotation.*;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
+import org.junit.runners.MethodSorters;
+import org.springframework.jms.listener.AbstractJmsListeningContainer;
+import org.springframework.test.annotation.Commit;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.parasoft.parabank.domain.logic.*;
-import com.parasoft.parabank.test.util.*;
+import com.parasoft.parabank.domain.logic.AdminManager;
+import com.parasoft.parabank.test.util.AbstractAdminOperationsTest;
 
 /**
  * @req PAR-31

@@ -1,8 +1,11 @@
 package com.parasoft.bookstore2;
 
-import org.junit.*;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
 
-import com.parasoft.parabank.test.util.*;
+import com.parasoft.parabank.test.util.AbstractParaBankTest;
 
 public abstract class AbstractCartService extends AbstractParaBankTest {
 

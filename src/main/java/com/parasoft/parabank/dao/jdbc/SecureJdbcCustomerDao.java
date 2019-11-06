@@ -7,9 +7,9 @@
 
 package com.parasoft.parabank.dao.jdbc;
 
-import org.springframework.jdbc.core.namedparam.*;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 
-import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.Customer;
 
 public class SecureJdbcCustomerDao extends JdbcCustomerDao {
 

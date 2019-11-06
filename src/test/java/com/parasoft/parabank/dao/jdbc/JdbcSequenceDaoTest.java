@@ -1,13 +1,14 @@
 package com.parasoft.parabank.dao.jdbc;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
-import javax.annotation.*;
+import javax.annotation.Resource;
 
-import org.junit.*;
-import org.springframework.dao.*;
+import org.junit.Test;
+import org.springframework.dao.DataAccessException;
 
-import com.parasoft.parabank.test.util.*;
+import com.parasoft.parabank.test.util.AbstractParaBankDataSourceTest;
 
 /**
  * @req PAR-19

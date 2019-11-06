@@ -1,8 +1,8 @@
 package com.parasoft.parabank.test.util;
 
-import org.junit.*;
+import org.junit.Test;
 
-import com.parasoft.parabank.util.*;
+import com.parasoft.parabank.util.Util;
 
 /**
  * @req PAR-44

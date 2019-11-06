@@ -1,13 +1,17 @@
 package com.parasoft.parabank.dao.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.junit.*;
+import org.junit.Test;
 
-import com.parasoft.parabank.dao.*;
-import com.parasoft.parabank.test.util.*;
+import com.parasoft.parabank.dao.AdminDao;
+import com.parasoft.parabank.dao.InMemoryAdminDao;
+import com.parasoft.parabank.test.util.AbstractParaBankTest;
 
 /**
  * @req PAR-22
@@ -26,7 +30,7 @@ public class InMemoryAdminDaoTest extends AbstractParaBankTest {
 
     @Override
     public void setUp() throws Exception {
-        final Map<String, String> parameters = new HashMap<String, String>();
+        final Map<String, String> parameters = new HashMap<>();
 
         parameters.put(NAME1, VALUE1);
         parameters.put(NAME2, VALUE2);

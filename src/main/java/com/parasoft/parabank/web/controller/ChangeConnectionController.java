@@ -1,14 +1,15 @@
 package com.parasoft.parabank.web.controller;
 
-import javax.servlet.http.*;
+import javax.servlet.http.HttpSession;
 
-import org.slf4j.*;
-import org.springframework.stereotype.*;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.*;
-import org.springframework.web.servlet.view.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
-import com.parasoft.parabank.util.*;
+import com.parasoft.parabank.util.AccessModeController;
 
 /**
  * <DL>
@@ -63,7 +64,7 @@ public class ChangeConnectionController extends AbstractBankController {
     //        if (selected != null) {
     //            request.getSession().setAttribute("ConnType", selected);
     //        }
-    //        // System.out.println( request.getSession().getAttribute("ConnType"));
+    //        // System.out.println(request.getSession().getAttribute("ConnType"));
     //        response.sendRedirect("admin.htm");
     //        return ViewUtil.createErrorView("error.invalid.username.or.password");
     //    }

@@ -43,7 +43,7 @@ public class TransferController extends AbstractValidatingBankController {
         final Customer customer = userSession.getCustomer();
         final List<Account> accounts = bankManager.getAccountsForCustomer(customer);
 
-        final List<Integer> accountIds = new ArrayList<Integer>();
+        final List<Integer> accountIds = new ArrayList<>();
         for (final Account account : accounts) {
             accountIds.add(account.getId());
         }

@@ -1,8 +1,9 @@
 package com.parasoft.bookstore2;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
-import org.junit.*;
+import org.junit.Test;
 
 /**
  * <DL>

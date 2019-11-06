@@ -1,17 +1,20 @@
 package com.parasoft.parabank.domain.logic.impl;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 
-import java.lang.reflect.*;
+import java.lang.reflect.ParameterizedType;
 
-import javax.annotation.*;
+import javax.annotation.Resource;
 
-import org.junit.*;
+import org.junit.Test;
 
-import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.domain.logic.*;
+import com.parasoft.parabank.domain.LoanRequest;
+import com.parasoft.parabank.domain.LoanResponse;
+import com.parasoft.parabank.domain.logic.AdminManager;
 import com.parasoft.parabank.domain.util.LoanRequestFactory;
-import com.parasoft.parabank.test.util.*;
+import com.parasoft.parabank.test.util.AbstractParaBankDataSourceTest;
 
 public abstract class AbstractLoanProcessorTest<T extends AbstractLoanProcessor>
         extends AbstractParaBankDataSourceTest {

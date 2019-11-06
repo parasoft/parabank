@@ -1,18 +1,37 @@
 package com.parasoft.parabank.domain.logic.impl;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
-import java.math.*;
-import java.util.*;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
-import org.junit.*;
-import org.springframework.test.annotation.*;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.test.annotation.Rollback;
 
-import com.parasoft.parabank.dao.*;
-import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.domain.Transaction.*;
-import com.parasoft.parabank.domain.logic.*;
-import com.parasoft.parabank.test.util.*;
+import com.parasoft.parabank.dao.AccountDao;
+import com.parasoft.parabank.dao.AdminDao;
+import com.parasoft.parabank.dao.CustomerDao;
+import com.parasoft.parabank.dao.InMemoryAccountDao;
+import com.parasoft.parabank.dao.InMemoryAdminDao;
+import com.parasoft.parabank.dao.InMemoryCustomerDao;
+import com.parasoft.parabank.dao.InMemoryPositionDao;
+import com.parasoft.parabank.dao.InMemoryTransactionDao;
+import com.parasoft.parabank.dao.PositionDao;
+import com.parasoft.parabank.dao.TransactionDao;
+import com.parasoft.parabank.domain.Account;
+import com.parasoft.parabank.domain.Customer;
+import com.parasoft.parabank.domain.HistoryPoint;
+import com.parasoft.parabank.domain.Position;
+import com.parasoft.parabank.domain.Transaction;
+import com.parasoft.parabank.domain.Transaction.TransactionType;
+import com.parasoft.parabank.domain.logic.AdminParameters;
+import com.parasoft.parabank.domain.logic.BankManager;
+import com.parasoft.parabank.test.util.AbstractParaBankTest;
 
 /**
  * @req PAR-33
@@ -60,7 +79,7 @@ public class BankManagerImplTest extends AbstractParaBankTest {
     @Override
     @Before
     public void setUp() throws Exception {
-        final List<Account> accounts = new ArrayList<Account>();
+        final List<Account> accounts = new ArrayList<>();
 
         final Account account1 = new Account();
         account1.setId(ACCOUNT1_ID);
@@ -80,7 +99,7 @@ public class BankManagerImplTest extends AbstractParaBankTest {
 
         accountDao = new InMemoryAccountDao(accounts);
 
-        final List<Customer> customers = new ArrayList<Customer>();
+        final List<Customer> customers = new ArrayList<>();
 
         final Customer customer = new Customer();
         customer.setId(3);
@@ -88,7 +107,7 @@ public class BankManagerImplTest extends AbstractParaBankTest {
 
         customerDao = new InMemoryCustomerDao(customers);
 
-        final List<Position> positions = new ArrayList<Position>();
+        final List<Position> positions = new ArrayList<>();
 
         final Position position1 = new Position();
         position1.setPositionId(POSITION1_ID);
@@ -100,7 +119,7 @@ public class BankManagerImplTest extends AbstractParaBankTest {
         position2.setSymbol(SYMBOL);
         positions.add(position2);
 
-        final List<HistoryPoint> history = new ArrayList<HistoryPoint>();
+        final List<HistoryPoint> history = new ArrayList<>();
 
         HistoryPoint historyPoint = new HistoryPoint();
         final Calendar calendar = Calendar.getInstance();

@@ -1,6 +1,6 @@
 package com.parasoft.parabank.web.form;
 
-import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.Address;
 
 /**
  * Backing class for customer login lookup form

@@ -1,13 +1,14 @@
 package com.parasoft.parabank.domain;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
-import java.math.*;
+import java.math.BigDecimal;
 
-import org.junit.*;
+import org.junit.Test;
 
-import com.parasoft.parabank.domain.Account.*;
-import com.parasoft.parabank.test.util.*;
+import com.parasoft.parabank.domain.Account.AccountType;
+import com.parasoft.parabank.test.util.AbstractBeanTestCase;
 
 /**
  * @req PAR-27

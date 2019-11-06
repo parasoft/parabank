@@ -46,7 +46,7 @@ public class OpenAccountController extends AbstractBankController {
 
     @ModelAttribute("types")
     public List<AccountType> getAccountTypes() {
-        final List<AccountType> types = new ArrayList<AccountType>();
+        final List<AccountType> types = new ArrayList<>();
         for (final AccountType type : AccountType.values()) {
             if (!type.isInternal()) {
                 types.add(type);
@@ -59,7 +59,7 @@ public class OpenAccountController extends AbstractBankController {
     public String getMinimumBalance() {
         return adminManager.getParameter(AdminParameters.MINIMUM_BALANCE);
     }
-    
+
     @ModelAttribute("customerId")
     public int getCustomerId(@SessionParam(Constants.USERSESSION) final UserSession userSession) {
         return userSession.getCustomer().getId();

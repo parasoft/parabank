@@ -1,6 +1,6 @@
 package com.parasoft.bookstore2;
 
-import java.util.*;
+import java.util.Date;
 
 public class SubmittedOrder {
     private boolean successIndicator;

@@ -1,8 +1,9 @@
 package com.parasoft.parabank.dao;
 
-import java.util.*;
+import java.util.List;
 
-import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.Transaction;
+import com.parasoft.parabank.domain.TransactionCriteria;
 
 /**
  * Interface for accessing Transaction information from a data source

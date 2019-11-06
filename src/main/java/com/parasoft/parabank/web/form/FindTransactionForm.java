@@ -1,6 +1,6 @@
 package com.parasoft.parabank.web.form;
 
-import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.TransactionCriteria;
 
 /**
  * Backing class for transaction search form

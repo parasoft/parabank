@@ -1,9 +1,10 @@
 package com.parasoft.parabank.dao;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class InMemoryAdminDao implements AdminDao {
-    private Map<String, String> parameters;
+    private final Map<String, String> parameters;
 
     public InMemoryAdminDao() {
         this(new HashMap<String, String>());

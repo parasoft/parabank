@@ -1,9 +1,10 @@
 package com.parasoft.parabank.test.util;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import org.slf4j.*;
-import org.springframework.jdbc.core.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
  * <DL>

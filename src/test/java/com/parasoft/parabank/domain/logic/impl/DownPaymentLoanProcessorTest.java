@@ -1,10 +1,15 @@
 package com.parasoft.parabank.domain.logic.impl;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import java.math.*;
+import java.math.BigDecimal;
 
-import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.LoanRequest;
+import com.parasoft.parabank.domain.LoanResponse;
 import com.parasoft.parabank.domain.util.LoanRequestFactory;
 
 /**

@@ -1,16 +1,20 @@
 package com.parasoft.bookstore;
 
-import java.math.*;
-import java.util.*;
-import java.util.concurrent.*;
+import java.math.BigDecimal;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
-import javax.jws.*;
+import javax.jws.WebService;
 
 /*
  * Bookstore Web Service implementation
  */
 @WebService(
-        endpointInterface = "com.parasoft.bookstore.ICartService", 
+        endpointInterface = "com.parasoft.bookstore.ICartService",
         serviceName = "Bookstore")
 public class CartService implements ICartService {
     /**
@@ -27,7 +31,7 @@ public class CartService implements ICartService {
     }
 
     private static final long timeoutInMilliseconds = 1200000; // 20 minutes
-    private static final Map<Integer, TempBook> addedBookIds = 
+    private static final Map<Integer, TempBook> addedBookIds =
         Collections.synchronizedMap(new ConcurrentHashMap<Integer, TempBook>());
     private final CartManager cart = new CartManager();
     protected int invocationCounter = 0;
@@ -70,11 +74,11 @@ public class CartService implements ICartService {
             throw new Exception("Did not update order with cartId " + cartId +
                    ", no orders were submitted.");
         }
-        
+
         return new DisplayOrder(
                 cart.updateExistingItem(cartId, itemId, quantity), cartId);
     }
-    
+
     /**
      *
      * @see com.parasoft.parabank.store.ICart#getItemByTitle(java.lang.String)

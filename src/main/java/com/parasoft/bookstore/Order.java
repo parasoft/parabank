@@ -3,7 +3,7 @@ package com.parasoft.bookstore;
 public class Order {
     private Book book;
     private int quantity;
-	private long timestamp;
+    private long timestamp;
 
     public Order() {
         this(null, 0, System.currentTimeMillis());

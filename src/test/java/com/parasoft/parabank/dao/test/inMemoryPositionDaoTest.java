@@ -1,15 +1,22 @@
 package com.parasoft.parabank.dao.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
-import java.math.*;
-import java.util.*;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
-import org.junit.*;
+import org.junit.Test;
 
-import com.parasoft.parabank.dao.*;
-import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.test.util.*;
+import com.parasoft.parabank.dao.InMemoryPositionDao;
+import com.parasoft.parabank.dao.PositionDao;
+import com.parasoft.parabank.domain.HistoryPoint;
+import com.parasoft.parabank.domain.Position;
+import com.parasoft.parabank.test.util.AbstractParaBankTest;
 
 /**
  * @req PAR-25
@@ -33,7 +40,7 @@ public class inMemoryPositionDaoTest extends AbstractParaBankTest {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        final List<Position> positions = new ArrayList<Position>();
+        final List<Position> positions = new ArrayList<>();
 
         Position position = new Position();
         position.setPositionId(POSITION1_ID);
@@ -47,7 +54,7 @@ public class inMemoryPositionDaoTest extends AbstractParaBankTest {
         position.setSymbol(SYMBOL);
         positions.add(position);
 
-        final List<HistoryPoint> history = new ArrayList<HistoryPoint>();
+        final List<HistoryPoint> history = new ArrayList<>();
 
         HistoryPoint historyPoint = new HistoryPoint();
         historyPoint.setSymbol(SYMBOL);

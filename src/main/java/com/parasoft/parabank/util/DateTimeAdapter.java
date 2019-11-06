@@ -7,11 +7,14 @@
 
 package com.parasoft.parabank.util;
 
-import java.time.*;
-import java.time.format.*;
-import java.util.*;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
-import javax.xml.bind.annotation.adapters.*;
+import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 public class DateTimeAdapter extends XmlAdapter<String, Date> {
     public static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX")

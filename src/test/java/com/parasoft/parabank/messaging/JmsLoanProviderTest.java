@@ -1,18 +1,24 @@
 package com.parasoft.parabank.messaging;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import javax.annotation.*;
-import javax.jms.*;
-import javax.jms.Message;
+import javax.annotation.Resource;
+import javax.jms.JMSException;
+import javax.jms.TextMessage;
 
-import org.apache.activemq.command.*;
-import org.junit.*;
-import org.springframework.jms.core.*;
-import org.springframework.oxm.*;
+import org.apache.activemq.command.ActiveMQTextMessage;
+import org.junit.Test;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
+import org.springframework.oxm.Marshaller;
 
-import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.test.util.*;
+import com.parasoft.parabank.domain.LoanRequest;
+import com.parasoft.parabank.domain.LoanResponse;
+import com.parasoft.parabank.test.util.AbstractParaBankDataSourceTest;
 
 /**
  * @req PAR-38
@@ -49,15 +55,12 @@ public class JmsLoanProviderTest extends AbstractParaBankDataSourceTest {
 
     @Test
     public void testRequestLoan() {
-        jmsTemplate.send("queue.test.response", new MessageCreator() {
-            @Override
-            public Message createMessage(final Session session) throws JMSException {
-                final LoanResponse loanResponse = new LoanResponse();
-                loanResponse.setApproved(true);
-                final TextMessage message = session.createTextMessage();
-                message.setText(MarshalUtil.marshal(marshaller, loanResponse));
-                return message;
-            }
+        jmsTemplate.send("queue.test.response", (MessageCreator) session -> {
+            final LoanResponse loanResponse = new LoanResponse();
+            loanResponse.setApproved(true);
+            final TextMessage message = session.createTextMessage();
+            message.setText(MarshalUtil.marshal(marshaller, loanResponse));
+            return message;
         });
         final LoanResponse loanResponse = jmsLoanProvider.requestLoan(new LoanRequest());
         assertTrue(loanResponse.isApproved());

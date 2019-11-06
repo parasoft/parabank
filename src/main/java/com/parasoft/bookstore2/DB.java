@@ -1,7 +1,10 @@
 package com.parasoft.bookstore2;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 public abstract class DB {
     @SuppressWarnings({ "unused", })

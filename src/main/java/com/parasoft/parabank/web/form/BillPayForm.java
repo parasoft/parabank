@@ -1,8 +1,8 @@
 package com.parasoft.parabank.web.form;
 
-import java.math.*;
+import java.math.BigDecimal;
 
-import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.Payee;
 
 /**
  * Backing class for online bill pay form

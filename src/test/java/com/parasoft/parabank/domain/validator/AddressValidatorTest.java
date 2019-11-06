@@ -1,8 +1,8 @@
 package com.parasoft.parabank.domain.validator;
 
-import org.springframework.validation.*;
+import org.springframework.validation.Validator;
 
-import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.Address;
 
 /**
  * @req PAR-35

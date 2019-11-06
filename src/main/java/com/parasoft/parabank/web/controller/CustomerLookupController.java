@@ -1,20 +1,27 @@
 package com.parasoft.parabank.web.controller;
 
-import javax.annotation.*;
-import javax.servlet.http.*;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
-import org.slf4j.*;
-import org.springframework.stereotype.*;
-import org.springframework.ui.*;
-import org.springframework.validation.*;
-import org.springframework.validation.annotation.*;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.util.*;
-import com.parasoft.parabank.web.*;
-import com.parasoft.parabank.web.form.*;
+import com.parasoft.parabank.domain.Customer;
+import com.parasoft.parabank.util.AccessModeController;
+import com.parasoft.parabank.util.Constants;
+import com.parasoft.parabank.web.UserSession;
+import com.parasoft.parabank.web.ViewUtil;
+import com.parasoft.parabank.web.form.LookupForm;
 
 /**
  * Controller for retrieving lost customer signin info

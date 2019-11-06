@@ -1,14 +1,15 @@
 package com.parasoft.parabank.dao;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.util.*;
+import com.parasoft.parabank.domain.Customer;
+import com.parasoft.parabank.util.Util;
 
 public class InMemoryCustomerDao implements CustomerDao {
     private static int ID = 0;
 
-    private List<Customer> customers;
+    private final List<Customer> customers;
 
     public InMemoryCustomerDao() {
         this(new ArrayList<Customer>());

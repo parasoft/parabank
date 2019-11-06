@@ -1,16 +1,18 @@
 package com.parasoft.parabank.dao.jdbc.internal;
 
-import java.sql.*;
-import java.text.*;
-import java.util.*;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Random;
 
-import org.slf4j.*;
-import org.springframework.dao.*;
-import org.springframework.jdbc.core.*;
-import org.springframework.jdbc.core.support.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
-import com.parasoft.parabank.dao.internal.*;
-import com.parasoft.parabank.dao.jdbc.*;
+import com.parasoft.parabank.dao.internal.DynamicDataInserter;
+import com.parasoft.parabank.dao.jdbc.JdbcSequenceDao;
 
 public class StockDataInserter extends JdbcDaoSupport implements DynamicDataInserter {
     private static final Logger log = LoggerFactory.getLogger(StockDataInserter.class);
@@ -44,15 +46,12 @@ public class StockDataInserter extends JdbcDaoSupport implements DynamicDataInse
     public List<String> getSymbols() {
         final String SQL = "SELECT symbol FROM Company";
 
-        return getJdbcTemplate().query(SQL, new ResultSetExtractor<List<String>>() {
-            @Override
-            public List<String> extractData(final ResultSet rs) throws SQLException, DataAccessException {
-                final List<String> symbols = new ArrayList<String>();
-                while (rs.next()) {
-                    symbols.add(rs.getString("symbol"));
-                }
-                return symbols;
+        return getJdbcTemplate().query(SQL, (ResultSetExtractor<List<String>>) rs -> {
+            final List<String> symbols = new ArrayList<>();
+            while (rs.next()) {
+                symbols.add(rs.getString("symbol"));
             }
+            return symbols;
         });
     }
 

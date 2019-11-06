@@ -5,7 +5,7 @@ import java.util.Date;
 public class Order {
     private Book book;
     private int quantity;
-	private long timestamp;
+    private long timestamp;
 
     public Order() {
         this(null, 0, System.currentTimeMillis());

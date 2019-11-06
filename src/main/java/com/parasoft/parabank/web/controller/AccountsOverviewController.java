@@ -1,19 +1,25 @@
 package com.parasoft.parabank.web.controller;
 
-import java.math.*;
-import java.util.*;
+import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import javax.annotation.*;
+import javax.annotation.Resource;
 
-import org.slf4j.*;
-import org.springframework.stereotype.*;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.domain.logic.*;
-import com.parasoft.parabank.util.*;
-import com.parasoft.parabank.web.*;
+import com.parasoft.parabank.domain.Account;
+import com.parasoft.parabank.domain.Customer;
+import com.parasoft.parabank.domain.logic.AdminManager;
+import com.parasoft.parabank.util.AccessModeController;
+import com.parasoft.parabank.util.Constants;
+import com.parasoft.parabank.util.SessionParam;
+import com.parasoft.parabank.web.UserSession;
 
 /**
  * Controller for displaying all user accounts
@@ -61,7 +67,7 @@ import com.parasoft.parabank.web.*;
             totalAvailableBalance = totalAvailableBalance.add(account.getAvailableBalance());
         }
 
-        final Map<String, Object> model = new HashMap<String, Object>();
+        final Map<String, Object> model = new HashMap<>();
         model.put("customerId", customer.getId());
         return new ModelAndView("overview", "model", model);
     }

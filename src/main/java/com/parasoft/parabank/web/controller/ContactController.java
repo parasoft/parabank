@@ -1,18 +1,24 @@
 package com.parasoft.parabank.web.controller;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
-import javax.annotation.*;
+import javax.annotation.Resource;
 
-import org.springframework.stereotype.*;
-import org.springframework.ui.*;
-import org.springframework.validation.*;
-import org.springframework.validation.annotation.*;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.parasoft.parabank.util.*;
-import com.parasoft.parabank.web.form.*;
+import com.parasoft.parabank.util.AccessModeController;
+import com.parasoft.parabank.util.Constants;
+import com.parasoft.parabank.web.form.ContactForm;
 
 /**
  * Controller for collecting customer support messages (currently ignores the message)
@@ -37,7 +43,7 @@ public class ContactController extends AbstractValidatingBankController {
             return new ModelAndView(getFormView(), errors.getModel());
         }
 
-        final Map<String, Object> model = new HashMap<String, Object>();
+        final Map<String, Object> model = new HashMap<>();
         model.put("name", customerServiceForm.getName());
 
         return new ModelAndView("contactConfirm", "model", model);

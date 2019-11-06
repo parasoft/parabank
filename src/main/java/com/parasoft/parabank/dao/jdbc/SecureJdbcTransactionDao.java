@@ -7,11 +7,11 @@
 
 package com.parasoft.parabank.dao.jdbc;
 
-import java.util.*;
+import java.util.List;
 
-import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.domain.Transaction.*;
-import com.parasoft.parabank.domain.TransactionCriteria.*;
+import com.parasoft.parabank.domain.Transaction.TransactionType;
+import com.parasoft.parabank.domain.TransactionCriteria;
+import com.parasoft.parabank.domain.TransactionCriteria.SearchType;
 
 public class SecureJdbcTransactionDao extends JdbcTransactionDao {
 

@@ -1,25 +1,38 @@
 package com.parasoft.parabank.web.controller;
 
-import java.text.*;
-import java.util.*;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import javax.annotation.*;
+import javax.annotation.Resource;
 
-import org.slf4j.*;
-import org.springframework.beans.propertyeditors.*;
-import org.springframework.stereotype.*;
-import org.springframework.ui.*;
-import org.springframework.validation.*;
-import org.springframework.validation.annotation.*;
-import org.springframework.web.bind.*;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.domain.logic.*;
-import com.parasoft.parabank.util.*;
-import com.parasoft.parabank.web.*;
-import com.parasoft.parabank.web.form.*;
+import com.parasoft.parabank.domain.Account;
+import com.parasoft.parabank.domain.Customer;
+import com.parasoft.parabank.domain.Transaction;
+import com.parasoft.parabank.domain.logic.AdminManager;
+import com.parasoft.parabank.util.AccessModeController;
+import com.parasoft.parabank.util.Constants;
+import com.parasoft.parabank.util.SessionParam;
+import com.parasoft.parabank.web.UserSession;
+import com.parasoft.parabank.web.form.FindTransactionForm;
 
 /**
  * Controller for searching transactions
@@ -56,7 +69,7 @@ public class FindTransactionController extends AbstractValidatingBankController 
         final Customer customer = userSession.getCustomer();
         final List<Account> accounts = bankManager.getAccountsForCustomer(customer);
 
-        final List<Integer> accountIds = new ArrayList<Integer>();
+        final List<Integer> accountIds = new ArrayList<>();
         for (final Account account : accounts) {
             accountIds.add(account.getId());
         }
@@ -127,7 +140,7 @@ public class FindTransactionController extends AbstractValidatingBankController 
             transactions = bankManager.getTransactionsForAccount(account.getId(), findTransactionForm.getCriteria());
         }
 
-        final Map<String, Object> model = new HashMap<String, Object>();
+        final Map<String, Object> model = new HashMap<>();
         model.put("transactions", transactions);
 
         return new ModelAndView("transactionResults", "model", model);

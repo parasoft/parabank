@@ -1,15 +1,21 @@
 package com.parasoft.parabank.domain;
 
-import java.math.*;
-import java.text.*;
-import java.util.*;
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.util.Date;
 
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import com.fasterxml.jackson.annotation.*;
-import com.google.gson.*;
-import com.parasoft.parabank.util.*;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.google.gson.JsonObject;
+import com.parasoft.parabank.util.Constants;
+import com.parasoft.parabank.util.DateTimeAdapter;
+import com.parasoft.parabank.util.Util;
 
 /**
  * Domain object representing a bank account transaction
@@ -17,7 +23,7 @@ import com.parasoft.parabank.util.*;
 @XmlRootElement(name = Constants.TRANSACTION)
 @XmlType(propOrder = { "id", "accountId", "type", "date", "amount", "description" })
 public class Transaction {
-    public static enum TransactionType {
+    public enum TransactionType {
         Credit, Debit;
     }
 

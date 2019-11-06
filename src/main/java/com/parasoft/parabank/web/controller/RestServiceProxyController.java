@@ -66,13 +66,13 @@ public class RestServiceProxyController extends AbstractBankController implement
     private MessageSource messageSource;
 
     private ServletContext context;
-    
+
     @Resource(name = "accessModeController")
     private AccessModeController accessModeController;
 
     @Resource(name = "adminManager")
     private AdminManager adminManager;
-    
+
     @Override
     public void setAccessModeController(final AccessModeController accessModeController) {
         this.accessModeController = accessModeController;
@@ -81,10 +81,10 @@ public class RestServiceProxyController extends AbstractBankController implement
     public void setAdminManager(final AdminManager adminManager) {
         this.adminManager = adminManager;
     }
-    
+
     @Override
     public void setServletContext(ServletContext servletContext) {
-        this.context = servletContext;
+        context = servletContext;
     }
 
     @RequestMapping(value = "bank/customers/{id}/accounts", method = RequestMethod.GET, produces = "application/json")
@@ -182,7 +182,7 @@ public class RestServiceProxyController extends AbstractBankController implement
         }
         return customer;
     }
-    
+
     @RequestMapping(value = "bank/customers/update/{customerId}", method = RequestMethod.POST, produces = "application/json")
     public String updateCustomer(@PathVariable(value = "customerId") Integer customerId,
             @RequestParam("firstName") String firstName,
@@ -362,7 +362,7 @@ public class RestServiceProxyController extends AbstractBankController implement
             return bankManager.getTransactionsForAccount(accountId, criteria);
         }
     }
-    
+
     @RequestMapping(value = "bank/swagger.yaml")
     public ResponseEntity<String> getSwagger(HttpServletRequest request) throws IOException {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(context.getResourceAsStream("/WEB-INF/swagger.yaml")))) {
@@ -370,7 +370,7 @@ public class RestServiceProxyController extends AbstractBankController implement
             String content = br.lines().collect(Collectors.joining(System.lineSeparator())).replaceFirst("replace-host-name", host);
             HttpHeaders headers = new HttpHeaders();
             headers.add("Content-Type", "application/yaml");
-            return new ResponseEntity<String>(content, headers, HttpStatus.OK);
+            return new ResponseEntity<>(content, headers, HttpStatus.OK);
         }
     }
 

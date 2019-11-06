@@ -1,21 +1,31 @@
 package com.parasoft.parabank.service;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
-import java.math.*;
-import java.util.*;
+import java.math.BigDecimal;
+import java.util.Calendar;
+import java.util.List;
 
-import javax.annotation.*;
+import javax.annotation.Resource;
 
-import org.junit.*;
-import org.slf4j.*;
-import org.springframework.test.annotation.*;
-import org.springframework.transaction.annotation.*;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.parasoft.parabank.dao.jdbc.internal.*;
-import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.test.util.*;
-import com.parasoft.parabank.util.*;
+import com.parasoft.parabank.dao.jdbc.internal.StockDataInserter;
+import com.parasoft.parabank.domain.Account;
+import com.parasoft.parabank.domain.Customer;
+import com.parasoft.parabank.domain.HistoryPoint;
+import com.parasoft.parabank.domain.LoanResponse;
+import com.parasoft.parabank.domain.Position;
+import com.parasoft.parabank.domain.Transaction;
+import com.parasoft.parabank.test.util.AbstractParaBankDataSourceTest;
+import com.parasoft.parabank.util.DateTimeAdapter;
 
 /**
  * @req PAR-43

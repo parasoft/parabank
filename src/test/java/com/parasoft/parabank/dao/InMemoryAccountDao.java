@@ -1,13 +1,14 @@
 package com.parasoft.parabank.dao;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.Account;
 
 public class InMemoryAccountDao implements AccountDao {
     private static int ID = 0;
 
-    private List<Account> accounts;
+    private final List<Account> accounts;
 
     public InMemoryAccountDao(List<Account> accounts) {
         this.accounts = accounts;
@@ -27,7 +28,7 @@ public class InMemoryAccountDao implements AccountDao {
 
     @Override
     public List<Account> getAccountsForCustomerId(int customerId) {
-        List<Account> customerAccounts = new ArrayList<Account>();
+        List<Account> customerAccounts = new ArrayList<>();
 
         for (Account account : accounts) {
             if (account.getCustomerId() == customerId) {

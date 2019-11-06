@@ -5,11 +5,11 @@ import org.springframework.http.HttpStatus;
 public class AuthenticationException extends Exception {
 
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = 1068780730577472806L;
-    
-    private String errorMessage;
+
+    private final String errorMessage;
 
     public AuthenticationException(String errorMessage) {
         this.errorMessage = errorMessage;
@@ -20,17 +20,17 @@ public class AuthenticationException extends Exception {
     }
 
     protected static final class MessageBody {
-        
-        private String message;
-        
+
+        private final String message;
+
         public MessageBody(String message) {
             this.message = message;
         }
-        
+
         public String getMessage() {
             return message;
         }
-        
+
         public int getStatus() {
             return HttpStatus.UNAUTHORIZED.value();
         }

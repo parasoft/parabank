@@ -1,6 +1,6 @@
 package com.parasoft.parabank.service;
 
-import com.parasoft.parabank.domain.logic.*;
+import com.parasoft.parabank.domain.logic.AdminManager;
 
 public interface AdminManagerAware {
 

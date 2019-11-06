@@ -1,11 +1,11 @@
 package com.parasoft.parabank.domain.logic;
 
-import java.util.*;
+import java.util.Map;
 
-import org.springframework.jms.listener.*;
+import org.springframework.jms.listener.AbstractJmsListeningContainer;
 
-import com.parasoft.parabank.dao.*;
-import com.parasoft.parabank.web.form.*;
+import com.parasoft.parabank.dao.AdminDao;
+import com.parasoft.parabank.web.form.AdminForm;
 
 /**
  * Interface for bank system management
@@ -63,7 +63,7 @@ public interface AdminManager {
      *            the form to populate
      * @return populated form
      */
-    public AdminForm populateAdminForm(AdminForm form);
+    AdminForm populateAdminForm(AdminForm form);
 
     void setAdminDao(AdminDao adminDao);
 

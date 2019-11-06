@@ -1,13 +1,20 @@
 package com.parasoft.parabank.messaging;
 
-import javax.jms.*;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.MessageListener;
+import javax.jms.TextMessage;
 
-import org.slf4j.*;
-import org.springframework.jms.core.*;
-import org.springframework.oxm.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
+import org.springframework.oxm.Marshaller;
+import org.springframework.oxm.Unmarshaller;
 
-import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.domain.logic.*;
+import com.parasoft.parabank.domain.LoanRequest;
+import com.parasoft.parabank.domain.LoanResponse;
+import com.parasoft.parabank.domain.logic.LoanProvider;
 
 /**
  * Message listener that delegates to a loan processor to handle incoming loan requests over JMS
@@ -41,12 +48,7 @@ public class JmsLoanProcessor implements MessageListener {
             final Object obj = MarshalUtil.unmarshal(unmarshaller, text);
             final LoanRequest loanRequest = (LoanRequest) obj;
 
-            jmsTemplate.send(destinationName, new MessageCreator() {
-                @Override
-                public Message createMessage(final Session session) throws JMSException {
-                    return session.createTextMessage(getLoanResponseMessage(loanRequest));
-                }
-            });
+            jmsTemplate.send(destinationName, (MessageCreator) session -> session.createTextMessage(getLoanResponseMessage(loanRequest)));
         } catch (final JMSException e) {
             log.error("{} caught :", e.getClass().getSimpleName(), e);
         }

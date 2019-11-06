@@ -1,18 +1,25 @@
 package com.parasoft.parabank.util;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.Driver;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Enumeration;
+import java.util.Properties;
 
-import javax.annotation.*;
-import javax.sql.*;
+import javax.annotation.PreDestroy;
+import javax.sql.DataSource;
 
 import org.hsqldb.Server;
-import org.hsqldb.persist.*;
-import org.hsqldb.server.*;
-import org.slf4j.*;
+import org.hsqldb.persist.HsqlProperties;
+import org.hsqldb.server.ServerConfiguration;
+import org.hsqldb.server.ServerConstants;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.*;
-import org.springframework.context.*;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
 /**
  * Utility bean for embedding HSQLDB into the ParaBank application

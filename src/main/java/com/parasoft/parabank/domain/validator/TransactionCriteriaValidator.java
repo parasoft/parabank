@@ -1,8 +1,10 @@
 package com.parasoft.parabank.domain.validator;
 
-import org.springframework.validation.*;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
+import org.springframework.validation.Validator;
 
-import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.TransactionCriteria;
 
 /**
  * Provides basic empty field validation for TransactionCriteria object

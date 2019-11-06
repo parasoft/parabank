@@ -1,8 +1,8 @@
 package com.parasoft.parabank.domain;
 
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlType;
 
-import com.parasoft.parabank.util.*;
+import com.parasoft.parabank.util.Util;
 
 /**
  * Domain object representing an address

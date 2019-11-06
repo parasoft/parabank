@@ -1,9 +1,16 @@
 package com.parasoft.parabank.domain.logic;
 
-import java.math.*;
-import java.util.*;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
 
-import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.Account;
+import com.parasoft.parabank.domain.Customer;
+import com.parasoft.parabank.domain.HistoryPoint;
+import com.parasoft.parabank.domain.LoanResponse;
+import com.parasoft.parabank.domain.Position;
+import com.parasoft.parabank.domain.Transaction;
+import com.parasoft.parabank.domain.TransactionCriteria;
 
 /**
  * Interface that provides the core bank business operations

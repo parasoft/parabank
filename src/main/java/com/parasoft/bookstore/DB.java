@@ -1,7 +1,10 @@
 package com.parasoft.bookstore;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 public abstract class DB {
     private static org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(DB.class);

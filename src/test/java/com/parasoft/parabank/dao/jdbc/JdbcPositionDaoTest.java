@@ -1,21 +1,27 @@
 package com.parasoft.parabank.dao.jdbc;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.fail;
 
-import java.math.*;
-import java.util.*;
+import java.math.BigDecimal;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
-import javax.annotation.*;
+import javax.annotation.Resource;
 
-import org.junit.*;
-import org.slf4j.*;
-import org.springframework.dao.*;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
 
-import com.parasoft.parabank.dao.*;
-import com.parasoft.parabank.dao.jdbc.internal.*;
-import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.service.*;
-import com.parasoft.parabank.test.util.*;
+import com.parasoft.parabank.dao.PositionDao;
+import com.parasoft.parabank.dao.jdbc.internal.StockDataInserter;
+import com.parasoft.parabank.domain.HistoryPoint;
+import com.parasoft.parabank.domain.Position;
+import com.parasoft.parabank.service.ParaBankServiceImplTest;
+import com.parasoft.parabank.test.util.AbstractParaBankDataSourceTest;
 
 /**
  * @req PAR-16

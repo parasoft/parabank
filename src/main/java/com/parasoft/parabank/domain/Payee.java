@@ -2,7 +2,7 @@ package com.parasoft.parabank.domain;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.parasoft.parabank.util.*;
+import com.parasoft.parabank.util.Util;
 
 /**
  * Domain object representing the recipient of a bill payment

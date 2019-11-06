@@ -1,6 +1,6 @@
 package com.parasoft.parabank.dao.jdbc;
 
-import org.springframework.jdbc.core.support.*;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 /**
  * Manages sequences to automatically generate ids for new entities

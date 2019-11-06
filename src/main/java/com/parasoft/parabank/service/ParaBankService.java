@@ -1,19 +1,38 @@
 package com.parasoft.parabank.service;
 
-import java.math.*;
-import java.util.*;
+import java.math.BigDecimal;
+import java.util.List;
 
-import javax.jws.*;
-import javax.ws.rs.*;
-import javax.ws.rs.core.*;
+import javax.jws.WebParam;
+import javax.jws.WebResult;
+import javax.jws.WebService;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 
-import org.apache.cxf.jaxrs.ext.xml.*;
-import org.apache.cxf.rs.security.cors.*;
+import org.apache.cxf.jaxrs.ext.xml.ElementClass;
+import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 
-import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.util.*;
+import com.parasoft.parabank.domain.Account;
+import com.parasoft.parabank.domain.Customer;
+import com.parasoft.parabank.domain.HistoryPoint;
+import com.parasoft.parabank.domain.LoanResponse;
+import com.parasoft.parabank.domain.Position;
+import com.parasoft.parabank.domain.Transaction;
+import com.parasoft.parabank.util.Constants;
 
-import io.swagger.annotations.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.Contact;
+import io.swagger.annotations.Info;
+import io.swagger.annotations.License;
+import io.swagger.annotations.SwaggerDefinition;
+import io.swagger.annotations.Tag;
 
 /**
  * Java interface for ParaBank web service
@@ -99,7 +118,7 @@ public interface ParaBankService extends IBillPayService {
         ParaBankServiceConstants.ACCOUNTS })
     @WebResult(name = "account", targetNamespace = ParaBankServiceConstants.TNS)
     @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-    public Account createAccount(
+    Account createAccount(
         @ApiParam(value = CUSTOMER_ID_DESC, required = true) @QueryParam(CUSTOMER_ID) @WebParam(name = CUSTOMER_ID, targetNamespace = ParaBankServiceConstants.TNS) int customerId,
         @ApiParam(value = ACCOUNT_TYPE_DESC, required = true) @QueryParam("newAccountType") @WebParam(name = "newAccountType", targetNamespace = ParaBankServiceConstants.TNS) int newAccountType,
         @ApiParam(value = CUSTOMER_ACCOUNT_DESC, required = true) @QueryParam("fromAccountId") @WebParam(name = "fromAccountId", targetNamespace = ParaBankServiceConstants.TNS) int fromAccountId)
@@ -281,7 +300,7 @@ public interface ParaBankService extends IBillPayService {
         ParaBankServiceConstants.ACCOUNTS, ParaBankServiceConstants.TRANSACTIONS })
     @WebResult(name = Constants.TRANSACTION, targetNamespace = ParaBankServiceConstants.TNS)
     @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-    public List<Transaction> getTransactionsByAmount(
+    List<Transaction> getTransactionsByAmount(
         @ApiParam(value = CUSTOMER_ACCOUNT_FETCH_DESC, required = true) @PathParam(ACCOUNT_ID) @WebParam(name = ACCOUNT_ID, targetNamespace = ParaBankServiceConstants.TNS) int accountId,
         @ApiParam(value = AMOUNT_DESC, required = true) @PathParam("amount") @WebParam(name = "amount", targetNamespace = ParaBankServiceConstants.TNS) BigDecimal amount)
                 throws ParaBankServiceException;
@@ -292,7 +311,7 @@ public interface ParaBankService extends IBillPayService {
         ParaBankServiceConstants.ACCOUNTS, ParaBankServiceConstants.TRANSACTIONS })
     @WebResult(name = Constants.TRANSACTION, targetNamespace = ParaBankServiceConstants.TNS)
     @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-    public List<Transaction> getTransactionsByMonthAndType(
+    List<Transaction> getTransactionsByMonthAndType(
         @ApiParam(value = CUSTOMER_ACCOUNT_FETCH_DESC, required = true) @PathParam(ACCOUNT_ID) @WebParam(name = ACCOUNT_ID, targetNamespace = ParaBankServiceConstants.TNS) int accountId,
         @ApiParam(value = MONTH_DESC, required = true) @PathParam("month") @WebParam(name = "month", targetNamespace = ParaBankServiceConstants.TNS) String month,
         @ApiParam(value = TRANSACTION_TYPE_DESC, required = true) @PathParam("type") @WebParam(name = "type", targetNamespace = ParaBankServiceConstants.TNS) String type)
@@ -304,7 +323,7 @@ public interface ParaBankService extends IBillPayService {
         ParaBankServiceConstants.ACCOUNTS, ParaBankServiceConstants.TRANSACTIONS })
     @WebResult(name = Constants.TRANSACTION, targetNamespace = ParaBankServiceConstants.TNS)
     @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-    public List<Transaction> getTransactionsByToFromDate(
+    List<Transaction> getTransactionsByToFromDate(
         @ApiParam(value = CUSTOMER_ACCOUNT_FETCH_DESC, required = true) @PathParam(ACCOUNT_ID) @WebParam(name = ACCOUNT_ID, targetNamespace = ParaBankServiceConstants.TNS) int accountId,
         @ApiParam(value = START_DATE_DESC, required = true) @PathParam("fromDate") @WebParam(name = "fromDate", targetNamespace = ParaBankServiceConstants.TNS) String fromDate,
         @ApiParam(value = END_DATE_DESC, required = true) @PathParam("toDate") @WebParam(name = "toDate", targetNamespace = ParaBankServiceConstants.TNS) String toDate)
@@ -316,7 +335,7 @@ public interface ParaBankService extends IBillPayService {
         ParaBankServiceConstants.ACCOUNTS, ParaBankServiceConstants.TRANSACTIONS })
     @WebResult(name = Constants.TRANSACTION, targetNamespace = ParaBankServiceConstants.TNS)
     @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-    public List<Transaction> getTransactionsOnDate(
+    List<Transaction> getTransactionsOnDate(
         @ApiParam(value = CUSTOMER_ACCOUNT_FETCH_DESC, required = true) @PathParam(ACCOUNT_ID) @WebParam(name = ACCOUNT_ID, targetNamespace = ParaBankServiceConstants.TNS) int accountId,
         @ApiParam(value = DATE_DESC, required = true) @PathParam("onDate") @WebParam(name = "onDate", targetNamespace = ParaBankServiceConstants.TNS) String onDate)
                 throws ParaBankServiceException;
@@ -470,7 +489,7 @@ public interface ParaBankService extends IBillPayService {
         ParaBankServiceConstants.CUSTOMERS })
     @WebResult(name = "customerUpdateResult", targetNamespace = ParaBankServiceConstants.TNS)
     @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-    public String updateCustomer(
+    String updateCustomer(
         @ApiParam(value = CUSTOMER_ID_DESC, required = true) @PathParam(CUSTOMER_ID) @WebParam(name = CUSTOMER_ID, targetNamespace = ParaBankServiceConstants.TNS) int customerId,
         @ApiParam(value = CUSTOMER_FIRST_NAME_DESC, required = true) @QueryParam(FIRST_NAME) @WebParam(name = FIRST_NAME, targetNamespace = ParaBankServiceConstants.TNS) String firstName,
         @ApiParam(value = CUSTOMER_LAST_NAME_DESC, required = true) @QueryParam(LAST_NAME) @WebParam(name = LAST_NAME, targetNamespace = ParaBankServiceConstants.TNS) String lastName,

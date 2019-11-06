@@ -1,8 +1,8 @@
 package com.parasoft.parabank.domain.logic.impl;
 
-import java.math.*;
+import java.math.RoundingMode;
 
-import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.LoanRequest;
 
 /**
  * Calculates loan approval based on available funds and down payment

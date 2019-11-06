@@ -1,13 +1,16 @@
 package com.parasoft.parabank.web;
 
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.*;
-import org.springframework.web.servlet.*;
-import org.springframework.web.servlet.handler.*;
-import org.springframework.web.util.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.ModelAndViewDefiningException;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.util.WebUtils;
 
-import com.parasoft.parabank.util.*;
+import com.parasoft.parabank.util.Constants;
 
 /**
  * Spring MVC Interceptor that tests if a user is logged in (i.e. session object exists) before granting access to

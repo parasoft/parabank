@@ -1,16 +1,21 @@
 package com.parasoft.parabank.util;
 
-import java.io.*;
-import java.lang.reflect.*;
-import java.net.*;
-import java.util.*;
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
 
-import javax.management.*;
+import javax.management.MBeanServer;
+import javax.management.MBeanServerFactory;
+import javax.management.ObjectName;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.*;
-import org.slf4j.*;
-import org.springframework.context.*;
+import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
 
 import com.parasoft.parabank.domain.Customer;
 import com.parasoft.parabank.web.UserSession;
@@ -28,21 +33,21 @@ public final class Util {
      *
      * @return true if objects are both null or equal, false otherwise
      */
-    public static final boolean equals(final Object o1, final Object o2) {
+    public static boolean equals(final Object o1, final Object o2) {
         return o1 == o2 || o1 != null && o1.equals(o2);
     }
-    
+
     public static boolean isLoggedIn(HttpSession session, String username, String password)
     {
         UserSession userSession = (UserSession) session.getAttribute(Constants.USERSESSION);
-    	if (userSession == null) {
-    		return false;
-    	}
-    	Customer customer = userSession.getCustomer();
-    	if (customer == null || customer.getId() < 1) {
-    		return false;
-    	}
-    	return customer.getUsername().equals(username) && customer.getPassword().equals(password);
+        if (userSession == null) {
+            return false;
+        }
+        Customer customer = userSession.getCustomer();
+        if (customer == null || customer.getId() < 1) {
+            return false;
+        }
+        return customer.getUsername().equals(username) && customer.getPassword().equals(password);
     }
 
     public static String getCurrentPath(final ApplicationContext context) {
@@ -184,7 +189,7 @@ public final class Util {
      *            the string to test
      * @return true if string is null or empty, false otherwise
      */
-    public static final boolean isEmpty(final String string) {
+    public static boolean isEmpty(final String string) {
         return string == null || string.length() == 0;
     }
 

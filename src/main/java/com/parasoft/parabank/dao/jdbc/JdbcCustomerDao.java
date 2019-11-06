@@ -1,14 +1,18 @@
 package com.parasoft.parabank.dao.jdbc;
 
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-import org.slf4j.*;
-import org.springframework.dao.*;
-import org.springframework.jdbc.core.*;
-import org.springframework.jdbc.core.namedparam.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
 
-import com.parasoft.parabank.dao.*;
-import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.dao.CustomerDao;
+import com.parasoft.parabank.domain.Address;
+import com.parasoft.parabank.domain.Customer;
 
 /*
  * JDBC implementation of CustomerDao

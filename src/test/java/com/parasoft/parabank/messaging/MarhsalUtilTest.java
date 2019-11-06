@@ -1,17 +1,22 @@
 package com.parasoft.parabank.messaging;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import java.io.*;
+import java.io.IOException;
 
-import javax.annotation.*;
-import javax.xml.transform.*;
+import javax.annotation.Resource;
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
 
-import org.junit.*;
-import org.springframework.oxm.*;
+import org.junit.Test;
+import org.springframework.oxm.Marshaller;
+import org.springframework.oxm.Unmarshaller;
+import org.springframework.oxm.XmlMappingException;
 
-import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.test.util.*;
+import com.parasoft.parabank.domain.LoanRequest;
+import com.parasoft.parabank.test.util.AbstractParaBankDataSourceTest;
 
 /**
  * @req PAR-40

@@ -1,8 +1,11 @@
 package com.parasoft.parabank.service;
 
-import javax.jws.*;
+import javax.jws.WebParam;
+import javax.jws.WebResult;
+import javax.jws.WebService;
 
-import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.LoanRequest;
+import com.parasoft.parabank.domain.LoanResponse;
 
 /**
  * Java interface for loan web service

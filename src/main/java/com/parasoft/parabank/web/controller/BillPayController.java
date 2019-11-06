@@ -1,22 +1,32 @@
 package com.parasoft.parabank.web.controller;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.context.*;
-import org.springframework.stereotype.*;
-import org.springframework.ui.*;
-import org.springframework.validation.*;
-import org.springframework.validation.annotation.*;
-import org.springframework.web.bind.*;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.MessageSource;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.domain.logic.*;
-import com.parasoft.parabank.util.*;
-import com.parasoft.parabank.web.*;
-import com.parasoft.parabank.web.form.*;
+import com.parasoft.parabank.domain.Account;
+import com.parasoft.parabank.domain.Customer;
+import com.parasoft.parabank.domain.logic.BankManager;
+import com.parasoft.parabank.util.Constants;
+import com.parasoft.parabank.util.SessionParam;
+import com.parasoft.parabank.web.UserSession;
+import com.parasoft.parabank.web.form.BillPayForm;
 
 /**
  * Controller for online bill pay
@@ -45,7 +55,7 @@ public class BillPayController {
         final Customer customer = userSession.getCustomer();
         final List<Account> accounts = bankManager.getAccountsForCustomer(customer);
 
-        final List<Integer> accountIds = new ArrayList<Integer>();
+        final List<Integer> accountIds = new ArrayList<>();
         for (final Account account : accounts) {
             accountIds.add(account.getId());
         }

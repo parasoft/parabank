@@ -1,15 +1,18 @@
 package com.parasoft.parabank.dao;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
-import com.parasoft.parabank.domain.*;
+import com.parasoft.parabank.domain.HistoryPoint;
+import com.parasoft.parabank.domain.Position;
 
 public class InMemoryPositionDao implements PositionDao{
     private static int ID = 0;
 
-    private List<Position> positions;
+    private final List<Position> positions;
 
-    private List<HistoryPoint> history;
+    private final List<HistoryPoint> history;
 
     public InMemoryPositionDao(List<Position> positions, List<HistoryPoint> history) {
         this.positions = positions;
@@ -31,7 +34,7 @@ public class InMemoryPositionDao implements PositionDao{
 
     @Override
     public List<Position> getPositionsForCustomerId(int customerId) {
-        List<Position> customerPositions = new ArrayList<Position>();
+        List<Position> customerPositions = new ArrayList<>();
 
         for (Position position : positions) {
             if (position.getCustomerId() == customerId) {
@@ -44,7 +47,7 @@ public class InMemoryPositionDao implements PositionDao{
 
     @Override
     public List<HistoryPoint> getPositionHistory(int positionId, Date startDate, Date endDate) {
-        List<HistoryPoint> positionHistory = new ArrayList<HistoryPoint>();
+        List<HistoryPoint> positionHistory = new ArrayList<>();
 
         for (Position position : positions) {
             for (HistoryPoint historyPoint : history) {

@@ -1,13 +1,16 @@
 package com.parasoft.parabank.web.controller;
 
-import org.junit.*;
-import org.slf4j.*;
-import org.springframework.mock.web.*;
-import org.springframework.web.servlet.*;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.domain.validator.*;
-import com.parasoft.parabank.web.form.*;
+import com.parasoft.parabank.domain.Address;
+import com.parasoft.parabank.domain.validator.AddressValidator;
+import com.parasoft.parabank.domain.validator.CustomerValidator;
+import com.parasoft.parabank.web.form.CustomerForm;
 
 public abstract class AbstractCustomerControllerTest<T extends AbstractValidatingBankController>
         extends AbstractValidatingBankControllerTest<T> {

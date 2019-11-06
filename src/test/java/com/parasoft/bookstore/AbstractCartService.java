@@ -19,7 +19,7 @@ public abstract class AbstractCartService extends AbstractParaBankTest {
      * <DT>Date:</DT>
      * <DD>Oct 6, 2015</DD>
      * </DL>
-     * 
+     *
      * @throws java.lang.Exception
      */
     @BeforeClass
@@ -35,7 +35,7 @@ public abstract class AbstractCartService extends AbstractParaBankTest {
      * <DT>Date:</DT>
      * <DD>Oct 6, 2015</DD>
      * </DL>
-     * 
+     *
      * @throws java.lang.Exception
      */
     @AfterClass
@@ -68,7 +68,7 @@ public abstract class AbstractCartService extends AbstractParaBankTest {
      * <DT>Date:</DT>
      * <DD>Oct 6, 2015</DD>
      * </DL>
-     * 
+     *
      * @throws java.lang.Exception
      */
     @Override
@@ -83,7 +83,7 @@ public abstract class AbstractCartService extends AbstractParaBankTest {
      * <DT>Date:</DT>
      * <DD>Oct 6, 2015</DD>
      * </DL>
-     * 
+     *
      * @throws java.lang.Exception
      */
     @Override
@@ -105,7 +105,7 @@ public abstract class AbstractCartService extends AbstractParaBankTest {
 
     /**
      * <DL><DT>Description:</DT><DD>
-     * Setter for the service property 
+     * Setter for the service property
      * </DD>
      * <DT>Date:</DT><DD>Oct 7, 2015</DD>
      * </DL>

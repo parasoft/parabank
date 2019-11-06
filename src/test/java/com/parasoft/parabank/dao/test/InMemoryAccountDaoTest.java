@@ -1,15 +1,19 @@
 package com.parasoft.parabank.dao.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
-import java.math.*;
-import java.util.*;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.junit.*;
+import org.junit.Test;
 
-import com.parasoft.parabank.dao.*;
-import com.parasoft.parabank.domain.*;
-import com.parasoft.parabank.test.util.*;
+import com.parasoft.parabank.dao.AccountDao;
+import com.parasoft.parabank.dao.InMemoryAccountDao;
+import com.parasoft.parabank.domain.Account;
+import com.parasoft.parabank.test.util.AbstractParaBankTest;
 
 /**
  * @req PAR-21
@@ -24,7 +28,7 @@ public class InMemoryAccountDaoTest extends AbstractParaBankTest {
 
     @Override
     public void setUp() throws Exception {
-        final List<Account> accounts = new ArrayList<Account>();
+        final List<Account> accounts = new ArrayList<>();
 
         Account account = new Account();
         account.setId(ACCOUNT1_ID);

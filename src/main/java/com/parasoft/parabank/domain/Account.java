@@ -1,12 +1,15 @@
 package com.parasoft.parabank.domain;
 
-import java.math.*;
+import java.math.BigDecimal;
 
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
-import com.fasterxml.jackson.annotation.*;
-import com.google.gson.*;
-import com.parasoft.parabank.util.*;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.google.gson.JsonObject;
+import com.parasoft.parabank.util.Util;
 
 /**
  * Domain object representing a customer's bank account
@@ -15,7 +18,7 @@ import com.parasoft.parabank.util.*;
 @XmlType(propOrder = { "id", "customerId", "type", "balance" })
 public class Account {
 
-    public static enum AccountType {
+    public enum AccountType {
         CHECKING(false), SAVINGS(false), LOAN(true);
 
         private final boolean internal;

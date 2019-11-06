@@ -1,9 +1,11 @@
 package com.parasoft.parabank.domain;
 
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.parasoft.parabank.util.*;
+import com.parasoft.parabank.util.Util;
 
 /**
  * Domain object representing a bank customer
@@ -13,85 +15,85 @@ import com.parasoft.parabank.util.*;
 @XmlType(propOrder={"id", "firstName", "lastName", "address", "phoneNumber", "ssn"})
 
 public class Customer {
-	private int id;
-	private String firstName;
-	private String lastName;
-	private Address address;
-	private String phoneNumber;
-	private String ssn;
-	private String username;
-	private String password;
+    private int id;
+    private String firstName;
+    private String lastName;
+    private Address address;
+    private String phoneNumber;
+    private String ssn;
+    private String username;
+    private String password;
 
-	public int getId() {
+    public int getId() {
         return id;
     }
 
-	public void setId(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-	public String getFirstName() {
+    public String getFirstName() {
         return firstName;
     }
 
-	public void setFirstName(String firstName) {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-	public String getLastName() {
+    public String getLastName() {
         return lastName;
     }
 
-	public void setLastName(String lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-	@JsonIgnore
-	public String getFullName() {
-	    return firstName + " " + lastName;
-	}
+    @JsonIgnore
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
 
-	public Address getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-	public void setAddress(Address address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 
-	public String getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-	public void setPhoneNumber(String phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-	public String getSsn() {
+    public String getSsn() {
         return ssn;
     }
 
-	public void setSsn(String ssn) {
+    public void setSsn(String ssn) {
         this.ssn = ssn;
     }
 
-	@XmlTransient
-	@JsonIgnore
-	public String getUsername() {
+    @XmlTransient
+    @JsonIgnore
+    public String getUsername() {
         return username;
     }
 
-	public void setUsername(String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
-	@XmlTransient
-	@JsonIgnore
-	public String getPassword() {
+    @XmlTransient
+    @JsonIgnore
+    public String getPassword() {
         return password;
     }
 
-	public void setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
