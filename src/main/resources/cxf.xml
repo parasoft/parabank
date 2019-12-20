@@ -198,12 +198,9 @@
  -->
 		<!-- customize some of the properties -->
 		<property name="resourcePackage" value="io.swagger.resources,com.parasoft.parabank.service" />
-		<property name="host"  ref="hostAndPortStr" />
 		<property name="basePath" value="/parabank/services/bank"/>
 		<property name="prettyPrint" value="true" />
 	</bean>
-
-	<bean id="hostAndPortStr" factory-method="getHostPortString" class="com.parasoft.parabank.util.Util" />
 
 	<bean id="paraBankService" class="com.parasoft.parabank.service.ParaBankServiceImpl">
 		<property name="adminManager" ref="adminManager" />
