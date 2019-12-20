@@ -182,23 +182,9 @@
 	<bean id="jsonProviderJackson" class="com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider" />
 
 	<!-- CXF Swagger2Feature -->
-	<bean id="swagger2Feature" class="com.parasoft.parabank.util.CustomSwagger2Feature">
-<!--
-		<property name="version" value="3.0.0" />
-		<property name="title" value="ParaBank REST Services" />
-		<property name="contact" value="webadmin@parabank.parasoft.com" />
-		<property name="description" value="This API provides access to the ParaBank operations." />
-
-
-		 <property name="schemes" >
-			<array value-type="java.lang.String">
-				<value>"http"</value>
-			</array>
-		</property>
- -->
-		<!-- customize some of the properties -->
+	<bean id="swagger2Feature" class="org.apache.cxf.jaxrs.swagger.Swagger2Feature">
 		<property name="resourcePackage" value="io.swagger.resources,com.parasoft.parabank.service" />
-		<property name="basePath" value="/parabank/services/bank"/>
+		<property name="scan" value="true" />
 		<property name="prettyPrint" value="true" />
 	</bean>
 
