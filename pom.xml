@@ -49,7 +49,7 @@
     <jackson.version>2.10.3</jackson.version>
     <jackson.databind.version>${jackson.version}</jackson.databind.version>
     <slf4j.version>1.7.30</slf4j.version>
-    <log4j.version>2.13.1</log4j.version>
+    <log4j.version>2.13.3</log4j.version>
     <swagger2raml.version>1.0.0</swagger2raml.version>
     <commons-io.version>2.6</commons-io.version>
     <commons-codec.version>1.14</commons-codec.version>
