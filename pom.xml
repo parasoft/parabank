@@ -22,8 +22,8 @@
     <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
     <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
     <maven-war-plugin.version>3.3.1</maven-war-plugin.version>
-    <dependency-check-maven.version>6.0.2</dependency-check-maven.version>
-    <spring.version>4.3.29.RELEASE</spring.version>
+    <dependency-check-maven.version>6.0.3</dependency-check-maven.version>
+    <spring.version>4.3.30.RELEASE</spring.version>
     <jax-activation.version>1.2.2</jax-activation.version>
     <jax-annotation.version>1.3.2</jax-annotation.version>
     <jax-jws.version>1.1</jax-jws.version>
@@ -35,35 +35,36 @@
     <istack.version>3.0.11</istack.version>
     <txw2.version>2.3.3</txw2.version>
     <gson.version>2.8.6</gson.version>
-    <joda-time.version>2.10.6</joda-time.version>
+    <joda-time.version>2.10.8</joda-time.version>
     <activemq.version>5.16.0</activemq.version>
     <swagger-jaxrs.version>1.6.2</swagger-jaxrs.version>
-    <cxf.version>3.4.0</cxf.version>
+    <cxf.version>3.4.1</cxf.version>
     <servlet.version>3.1.0</servlet.version>
     <junit.version>4.13.1</junit.version>
     <jstl.version>1.2.5</jstl.version>
     <hsqldb.version>2.5.1</hsqldb.version>
     <commons-dbcp2.version>2.8.0</commons-dbcp2.version>
     <aspectjweaver.version>1.9.6</aspectjweaver.version>
-    <jackson.version>2.11.3</jackson.version>
+    <jackson.version>2.12.0</jackson.version>
     <jackson.databind.version>${jackson.version}</jackson.databind.version>
+    <woodstox.version>6.2.3</woodstox.version>
     <slf4j.version>1.7.30</slf4j.version>
-    <log4j.version>2.13.3</log4j.version>
+    <log4j.version>2.14.0</log4j.version>
     <swagger2raml.version>1.0.0</swagger2raml.version>
     <commons-io.version>2.8.0</commons-io.version>
     <commons-codec.version>1.15</commons-codec.version>
-    <groovy-all.version>2.4.20</groovy-all.version>
+    <groovy-all.version>2.4.21</groovy-all.version>
     <wiremock.version>2.27.2</wiremock.version>
     <mockito.version>2.28.2</mockito.version>
-    <bytebuddy.version>1.10.17</bytebuddy.version>
+    <bytebuddy.version>1.10.19</bytebuddy.version>
     <javassist.version>3.27.0-GA</javassist.version>
-    <powermock.version>2.0.7</powermock.version>
+    <powermock.version>2.0.9</powermock.version>
     <junitparams.version>1.1.1</junitparams.version>
     <hamcrest.version>2.2</hamcrest.version>
-    <wss4j.version>2.3.0</wss4j.version>
-    <bcprov.version>1.66</bcprov.version>
+    <wss4j.version>2.3.1</wss4j.version>
+    <bcprov.version>1.68</bcprov.version>
     <angularjs.version>1.6.9</angularjs.version>
-    <guava.version>29.0-jre</guava.version>
+    <guava.version>30.1-jre</guava.version>
     <snakeyaml.version>1.27</snakeyaml.version>
   </properties>
   <dependencyManagement>
@@ -474,6 +475,11 @@
           <groupId>com.sun.activation</groupId>
           <artifactId>javax.activation</artifactId>
         </exclusion>
+        <!-- conflicts with woodstox-core -->
+        <exclusion>
+          <groupId>org.codehaus.woodstox</groupId>
+          <artifactId>woodstox-core-asl</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
@@ -548,6 +554,11 @@
       <groupId>com.fasterxml.jackson.dataformat</groupId>
       <artifactId>jackson-dataformat-yaml</artifactId>
       <version>${jackson.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.woodstox</groupId>
+      <artifactId>woodstox-core</artifactId>
+      <version>${woodstox.version}</version>
     </dependency>
 
     <!-- servlet dependencies -->
@@ -664,7 +675,7 @@
     <dependency>
       <groupId>com.jayway.jsonpath</groupId>
       <artifactId>json-path</artifactId>
-      <version>2.4.0</version>
+      <version>2.5.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
