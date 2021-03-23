@@ -10,7 +10,15 @@
 <body>
 <%
    String hostname = request.getServerName();
+   String scheme = request.getScheme();
    int port = request.getServerPort();
+   String portStr = null;
+   if (scheme.equalsIgnoreCase("http") && port == 80 ||
+           scheme.equalsIgnoreCase("https") && port == 443) {
+       portStr = "";
+   } else {
+       portStr = ":" + Integer.toString(port);
+   }
    String contextPath = request.getServletContext().getContextPath();
 %>
 <span class="heading">Available Bookstore SOAP services:</span><br>
@@ -27,9 +35,9 @@
 Bookstore Web service with a database backend. Includes a total of 9
 book items.<br>
       <br>
-Endpoint address:</span> <span class="value">http://<%= hostname%>:<%= port %><%= contextPath%>/services/store-01</span><br>
+Endpoint address:</span> <span class="value"><%= scheme%>://<%= hostname%><%= portStr%><%= contextPath%>/services/store-01</span><br>
       <span class="field">WSDL :</span> <a
- href="http://<%= request.getServerName() %>:<%= port%><%= contextPath%>/services/store-01?wsdl">{http://store.parabank.parasoft.com/}Bookstore</a><br>
+ href="<%= scheme%>://<%= hostname%><%= portStr%><%= contextPath%>/services/store-01?wsdl">{http://store.parabank.parasoft.com/}Bookstore</a><br>
       <span class="field">Target namespace:</span> <span
  class="value">http://store.parabank.parasoft.com/</span></td>
     </tr>
@@ -43,9 +51,9 @@ Endpoint address:</span> <span class="value">http://<%= hostname%>:<%= port %><%
 Bookstore Web service with a database backend. Includes a total of 9
 book items.<br>
       <br>
-Endpoint address:</span> <span class="value">http://<%= hostname%>:<%= port %><%= contextPath%>/services/store-01V2</span><br>
+Endpoint address:</span> <span class="value"><%= scheme%>://<%= hostname%><%= portStr%><%= contextPath%>/services/store-01V2</span><br>
       <span class="field">WSDL :</span> <a
- href="http://<%= request.getServerName() %>:<%= port%><%= contextPath%>/services/store-01V2?wsdl">{http://store.parabank.parasoft.com/}Bookstore</a><br>
+ href="<%= scheme%>://<%= hostname%><%= portStr%><%= contextPath%>/services/store-01V2?wsdl">{http://store.parabank.parasoft.com/}Bookstore</a><br>
       <span class="field">Target namespace:</span> <span
  class="value">http://store.parabank.parasoft.com/</span></td>
     </tr>
@@ -64,9 +72,9 @@ need to authenticate themselves using Username Token.<br>
 username:soatest<br>
 password:soatest<br>
       <br>
-Endpoint address:</span> <span class="value">http://<%= hostname%>:<%= port%><%= contextPath%>/services/store-wss-01</span><br>
+Endpoint address:</span> <span class="value"><%= scheme%>://<%= hostname%><%= portStr%><%= contextPath%>/services/store-wss-01</span><br>
       <span class="field">WSDL :</span> <a
- href="http://<%= hostname%>:<%= port%><%= contextPath%>/services/store-wss-01?wsdl">{http://store.parabank.parasoft.com/}Bookstore</a><br>
+ href="<%= scheme%>://<%= hostname%><%= portStr%><%= contextPath%>/services/store-wss-01?wsdl">{http://store.parabank.parasoft.com/}Bookstore</a><br>
       <span class="field">Target namespace:</span> <span
  class="value">http://store.parabank.parasoft.com/</span></td>
     </tr>
@@ -89,9 +97,9 @@ algorithm: RSA<br>
       <br>
 Responses have the SOAP Body signed using the same certificate.<br>
       <br>
-Endpoint address:</span> <span class="value">http://<%= hostname%>:<%= port%><%= contextPath%>/services/store-wss-02</span><br>
+Endpoint address:</span> <span class="value"><%= scheme%>://<%= hostname%><%= portStr%><%= contextPath%>/services/store-wss-02</span><br>
       <span class="field">WSDL :</span> <a
- href="http://<%= hostname%>:<%= port%><%= contextPath%>/services/store-wss-02?wsdl">{http://store.parabank.parasoft.com/}Bookstore</a><br>
+ href="<%= scheme%>://<%= hostname%><%= portStr%><%= contextPath%>/services/store-wss-02?wsdl">{http://store.parabank.parasoft.com/}Bookstore</a><br>
       <span class="field">Target namespace:</span> <span
  class="value">http://store.parabank.parasoft.com/</span></td>
     </tr>
@@ -112,9 +120,9 @@ public key alias: soatest<br>
       <br>
 Responses have the SOAP Body encrypted using the same key.<br>
       <br>
-Endpoint address:</span> <span class="value">http://<%= hostname%>:<%= port%><%= contextPath%>/services/store-wss-03</span><br>
+Endpoint address:</span> <span class="value"><%= scheme%>://<%= hostname%><%= portStr%><%= contextPath%>/services/store-wss-03</span><br>
       <span class="field">WSDL :</span> <a
- href="http://<%= hostname%>:<%= port%><%= contextPath%>/services/store-wss-03?wsdl">{http://store.parabank.parasoft.com/}Bookstore</a><br>
+ href="<%= scheme%>://<%= hostname%><%= portStr%><%= contextPath%>/services/store-wss-03?wsdl">{http://store.parabank.parasoft.com/}Bookstore</a><br>
       <span class="field">Target namespace:</span> <span
  class="value">http://store.parabank.parasoft.com/</span></td>
     </tr>
@@ -137,9 +145,9 @@ key alias: soatest<br>
       <br>
 Responses have the SOAP Body signed, then encrypted using the same key<br>
       <br>
-Endpoint address:</span> <span class="value">http://<%= hostname%>:<%= port%><%= contextPath%>/services/store-wss-04</span><br>
+Endpoint address:</span> <span class="value"><%= scheme%>://<%= hostname%><%= portStr%><%= contextPath%>/services/store-wss-04</span><br>
       <span class="field">WSDL :</span> <a
- href="http://<%= hostname%>:<%= port%><%= contextPath%>/services/store-wss-04?wsdl">{http://store.parabank.parasoft.com/}Bookstore</a><br>
+ href="<%= scheme%>://<%= hostname%><%= portStr%><%= contextPath%>/services/store-wss-04?wsdl">{http://store.parabank.parasoft.com/}Bookstore</a><br>
       <span class="field">Target namespace:</span> <span
  class="value">http://store.parabank.parasoft.com/</span></td>
     </tr>
@@ -265,9 +273,9 @@ accessed within 20 minutes will be removed from the database.</td>
       </ul>
       </td>
       <td style="width: 1183px;"><span class="field">Endpoint
-address:</span> <span class="value">http://<%= hostname%>:<%= port%><%= contextPath%>/services/LoanProcessor</span><br>
+address:</span> <span class="value"><%= scheme%>://<%= hostname%><%= portStr%><%= contextPath%>/services/LoanProcessor</span><br>
       <span class="field">WSDL :</span> <a
- href="http://<%= hostname%>:<%= port%><%= contextPath%>/services/LoanProcessor?wsdl">{http://service.parabank.parasoft.com/}LoanProcessorServiceImplService</a><br>
+ href="<%= scheme%>://<%= hostname%><%= portStr%><%= contextPath%>/services/LoanProcessor?wsdl">{http://service.parabank.parasoft.com/}LoanProcessorServiceImplService</a><br>
       <span class="field">Target namespace:</span> <span
  class="value">http://service.parabank.parasoft.com/</span></td>
     </tr>
@@ -278,9 +286,9 @@ address:</span> <span class="value">http://<%= hostname%>:<%= port%><%= contextP
       </ul>
       </td>
       <td style="width: 1183px;"><span class="field">Endpoint
-address:</span> <span class="value">http://<%= hostname%>:<%= port%><%= contextPath%>/services/ParaBank</span><br>
+address:</span> <span class="value"><%= scheme%>://<%= hostname%><%= portStr%><%= contextPath%>/services/ParaBank</span><br>
       <span class="field">WSDL :</span> <a
- href="http://<%= hostname%>:<%= port%><%= contextPath%>/services/ParaBank?wsdl">{http://service.parabank.parasoft.com/}ParaBank</a><br>
+ href="<%= scheme%>://<%= hostname%><%= portStr%><%= contextPath%>/services/ParaBank?wsdl">{http://service.parabank.parasoft.com/}ParaBank</a><br>
       <span class="field">Target namespace:</span> <span
  class="value">http://service.parabank.parasoft.com/</span></td>
     </tr>
@@ -580,9 +588,9 @@ string, string, string<br>
   <tbody>
     <tr>
       <td><span class="field">Endpoint address:</span>
-      <span class="value">http://<%= hostname%>:<%= port%><%= contextPath%>/services/bank</span><br>
-      <span class="field">WADL :</span> <a
- href="http://<%= hostname%>:<%= port%><%= contextPath%>/services/bank?_wadl&amp;_type=xml">http://<%= hostname%>:<%= port%><%= contextPath%>/services/bank?_wadl&amp;type=xml</a></td>
+      <span class="value"><%= scheme%>://<%= hostname%><%= portStr%><%= contextPath%>/services/bank</span><br>
+      <span class="field">WADL :</span> <a href="<%= scheme%>://<%= hostname%><%= portStr%><%= contextPath%>/services/bank?_wadl&amp;_type=xml"><%= scheme%>://<%= hostname%><%= portStr%><%= contextPath%>/services/bank?_wadl&amp;type=xml</a><br>
+      <span class="field">Swagger :</span> <a href="<%= scheme%>://<%= hostname%><%= portStr%><%= contextPath%>/api-docs/index.html"><%= scheme%>://<%= hostname%><%= portStr%><%= contextPath%>/api-docs/index.html</a></td>
     </tr>
   </tbody>
 </table>
