@@ -41,7 +41,7 @@ public class JdbcAdminDao extends JdbcDaoSupport implements AdminDao {
      * @see com.parasoft.parabank.dao.AdminDao#cleanDB()
      */
     @Override
-    public void cleanDB() {
+    public synchronized void cleanDB() {
         ResultSet rs = null;
         try {
             log.info("Validating parabank database has been initialized...");
