@@ -59,7 +59,7 @@ public class JdbcBookstoreDao extends JdbcDaoSupport implements AdminDao {
      * @see com.parasoft.parabank.dao.AdminDao#initializeDB()
      */
     @Override
-    public void initializeDB() {
+    public synchronized void initializeDB() {
 
         log.info("Initializing database...");
         ScriptUtils.executeSqlScript(getConnection(), CREATE_RESOURCE);

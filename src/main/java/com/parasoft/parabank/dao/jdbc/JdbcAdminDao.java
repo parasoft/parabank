@@ -107,7 +107,7 @@ public class JdbcAdminDao extends JdbcDaoSupport implements AdminDao {
      * @see com.parasoft.parabank.dao.AdminDao#initializeDB()
      */
     @Override
-    public void initializeDB() {
+    public synchronized void initializeDB() {
 
         log.info("Initializing parabank database...");
         ScriptUtils.executeSqlScript(getConnection(), CREATE_RESOURCE);
@@ -135,7 +135,7 @@ public class JdbcAdminDao extends JdbcDaoSupport implements AdminDao {
      * <DD>Nov 1, 2016</DD>
      * </DL>
      */
-    private void performReset() {
+    private synchronized void performReset() {
         log.info("Resetting parabank database...");
         ScriptUtils.executeSqlScript(getConnection(), RESET_RESOURCE);
         // JdbcTestUtils.executeSqlScript(getJdbcTemplate(), resource, true);
