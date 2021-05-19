@@ -1,5 +1,6 @@
 package com.parasoft.bookstore.jdbc;
 
+import java.sql.Connection;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -60,15 +61,19 @@ public class JdbcBookstoreDao extends JdbcDaoSupport implements AdminDao {
      */
     @Override
     public synchronized void initializeDB() {
-
         log.info("Initializing database...");
-        ScriptUtils.executeSqlScript(getConnection(), CREATE_RESOURCE);
-        ScriptUtils.executeSqlScript(getConnection(), INSERT_RESOURCE);
-        // JdbcTestUtils.executeSqlScript(getJdbcTemplate(), CREATE_RESOURCE,
-        // false);
-        // JdbcTestUtils.executeSqlScript(getJdbcTemplate(), INSERT_RESOURCE,
-        // false);
-
+        Connection con = null;
+        try {
+            con  = getConnection();
+            ScriptUtils.executeSqlScript(con, CREATE_RESOURCE);
+            ScriptUtils.executeSqlScript(con, INSERT_RESOURCE);
+        } finally {
+            if (con != null) {
+                releaseConnection(con);
+            }
+        }
+        //JdbcTestUtils.executeSqlScript(getJdbcTemplate(), CREATE_RESOURCE, false);
+        //JdbcTestUtils.executeSqlScript(getJdbcTemplate(), INSERT_RESOURCE, false);
         log.info("Database initialized");
     }
 

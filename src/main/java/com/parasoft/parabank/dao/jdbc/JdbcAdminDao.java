@@ -1,5 +1,6 @@
 package com.parasoft.parabank.dao.jdbc;
 
+import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -42,32 +43,29 @@ public class JdbcAdminDao extends JdbcDaoSupport implements AdminDao {
      */
     @Override
     public synchronized void cleanDB() {
-        ResultSet rs = null;
+        log.info("Validating parabank database has been initialized...");
+        boolean initializeDb = false;
+        boolean resetDb = false;
+        Connection con = null;
         try {
-            log.info("Validating parabank database has been initialized...");
-            final DatabaseMetaData md = getConnection().getMetaData();
-            rs = md.getTables("PUBLIC", "PUBLIC", "STOCK", null);
-            if (rs.last()) {
-                rs.close();
-                performReset();
-            } else {
-                initializeDB();
-                performReset();
+            con  = getConnection();
+            final DatabaseMetaData md = con.getMetaData();
+            try (ResultSet rs = md.getTables("PUBLIC", "PUBLIC", "STOCK", null)) {
+                initializeDb = !rs.last();
             }
-        } catch (final CannotGetJdbcConnectionException ex) {
-            log.error("caught {} Error : ", ex.getClass().getSimpleName() //$NON-NLS-1$
-                , ex);
-        } catch (final SQLException ex) {
-            log.error("caught {} Error : ", ex.getClass().getSimpleName() //$NON-NLS-1$
-                , ex);
+            resetDb = true;
+        } catch (final CannotGetJdbcConnectionException | SQLException ex) {
+            log.error("caught {} Error : ", ex.getClass().getSimpleName(), ex); //$NON-NLS-1$
         } finally {
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (final SQLException ex) {
-                    //don't care;
-                }
+            if (con != null) {
+                releaseConnection(con);
             }
+        }
+        if (initializeDb) {
+            initializeDB();
+        }
+        if (resetDb) {
+            performReset();
         }
     }
 
@@ -108,16 +106,22 @@ public class JdbcAdminDao extends JdbcDaoSupport implements AdminDao {
      */
     @Override
     public synchronized void initializeDB() {
-
         log.info("Initializing parabank database...");
-        ScriptUtils.executeSqlScript(getConnection(), CREATE_RESOURCE);
-        log.info("Populating parabank database...");
-        ScriptUtils.executeSqlScript(getConnection(), INSERT_RESOURCE);
 
-        // JdbcTestUtils.executeSqlScript(getJdbcTemplate(), CREATE_RESOURCE,
-        // false);
-        // JdbcTestUtils.executeSqlScript(getJdbcTemplate(), INSERT_RESOURCE,
-        // false);
+        Connection con = null;
+        try {
+            con  = getConnection();
+            ScriptUtils.executeSqlScript(con, CREATE_RESOURCE);
+            log.info("Populating parabank database...");
+            ScriptUtils.executeSqlScript(con, INSERT_RESOURCE);
+        } finally {
+            if (con != null) {
+                releaseConnection(con);
+            }
+        }
+        //JdbcTestUtils.executeSqlScript(getJdbcTemplate(), CREATE_RESOURCE, false);
+        //JdbcTestUtils.executeSqlScript(getJdbcTemplate(), INSERT_RESOURCE, false);
+
         log.info("Running Dynamic Data inserters...");
         for (final DynamicDataInserter inserter : inserters) {
             inserter.insertData();
@@ -137,8 +141,16 @@ public class JdbcAdminDao extends JdbcDaoSupport implements AdminDao {
      */
     private synchronized void performReset() {
         log.info("Resetting parabank database...");
-        ScriptUtils.executeSqlScript(getConnection(), RESET_RESOURCE);
-        // JdbcTestUtils.executeSqlScript(getJdbcTemplate(), resource, true);
+        Connection con = null;
+        try {
+            con  = getConnection();
+            ScriptUtils.executeSqlScript(con, RESET_RESOURCE);
+        } finally {
+            if (con != null) {
+                releaseConnection(con);
+            }
+        }
+        //JdbcTestUtils.executeSqlScript(getJdbcTemplate(), resource, true);
         log.info("Database parabank reset");
     }
 
