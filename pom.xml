@@ -22,7 +22,7 @@
     <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
     <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
     <maven-war-plugin.version>3.3.1</maven-war-plugin.version>
-    <dependency-check-maven.version>6.0.3</dependency-check-maven.version>
+    <dependency-check-maven.version>6.1.6</dependency-check-maven.version>
     <spring.version>4.3.30.RELEASE</spring.version>
     <jax-activation.version>1.2.2</jax-activation.version>
     <jax-annotation.version>1.3.2</jax-annotation.version>
@@ -31,22 +31,21 @@
     <jax-soap.version>1.4.0</jax-soap.version>
     <jax-ws.version>2.3.1</jax-ws.version>
     <jaxb.version>2.3.3</jaxb.version>
-    <jaxb.impl.version>2.3.3</jaxb.impl.version>
-    <istack.version>3.0.11</istack.version>
-    <txw2.version>2.3.3</txw2.version>
+    <jaxb.impl.version>2.3.4</jaxb.impl.version>
+    <istack.version>3.0.12</istack.version>
     <gson.version>2.8.6</gson.version>
     <joda-time.version>2.10.10</joda-time.version>
-    <activemq.version>5.16.1</activemq.version>
+    <activemq.version>5.16.2</activemq.version>
     <swagger-jaxrs.version>1.6.2</swagger-jaxrs.version>
     <cxf.version>3.4.3</cxf.version>
     <servlet.version>3.1.0</servlet.version>
     <junit.version>4.13.2</junit.version>
     <jstl.version>1.2.5</jstl.version>
-    <hsqldb.version>2.5.1</hsqldb.version>
+    <hsqldb.version>2.5.2</hsqldb.version>
     <commons-dbcp2.version>2.8.0</commons-dbcp2.version>
     <aspectjweaver.version>1.9.6</aspectjweaver.version>
-    <jackson.version>2.12.2</jackson.version>
-    <woodstox.version>6.2.4</woodstox.version>
+    <jackson.version>2.12.3</jackson.version>
+    <woodstox.version>6.2.6</woodstox.version>
     <slf4j.version>1.7.30</slf4j.version>
     <log4j.version>2.14.1</log4j.version>
     <swagger2raml.version>1.0.0</swagger2raml.version>
@@ -55,9 +54,9 @@
     <groovy-all.version>2.4.21</groovy-all.version>
     <wiremock.version>2.27.2</wiremock.version>
     <mockito.version>2.28.2</mockito.version>
-    <bytebuddy.version>1.10.22</bytebuddy.version>
-    <jersey.version>2.33</jersey.version>
-    <javassist.version>3.27.0-GA</javassist.version>
+    <bytebuddy.version>1.11.0</bytebuddy.version>
+    <jersey.version>2.34</jersey.version>
+    <javassist.version>3.28.0-GA</javassist.version>
     <powermock.version>2.0.9</powermock.version>
     <junitparams.version>1.1.1</junitparams.version>
     <hamcrest.version>2.2</hamcrest.version>
@@ -335,14 +334,14 @@
       <version>${jaxb.impl.version}</version>
     </dependency>
     <dependency>
+      <groupId>org.glassfish.jaxb</groupId>
+      <artifactId>txw2</artifactId>
+      <version>${jaxb.impl.version}</version>
+    </dependency>
+    <dependency>
       <groupId>com.sun.istack</groupId>
       <artifactId>istack-commons-runtime</artifactId>
       <version>${istack.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.glassfish.jaxb</groupId>
-      <artifactId>txw2</artifactId>
-      <version>${txw2.version}</version>
     </dependency>
     <dependency>
       <groupId>com.google.code.gson</groupId>
