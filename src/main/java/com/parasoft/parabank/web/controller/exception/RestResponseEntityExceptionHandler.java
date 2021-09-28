@@ -18,6 +18,9 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         // Prevent IE from incorrectly caching AJAX/JSON results
         // http://www.dashbay.com/2011/05/internet-explorer-caches-ajax/
         headers.add("Expires", "-1");
+        // According to https://datatracker.ietf.org/doc/html/rfc7235#section-4.1,
+        // servers must include at at least one WWW-Authenticate header with 401 responses
+        headers.add("WWW-Authenticate", "Basic");
         return handleExceptionInternal(ex, ex.getMessageBody(), headers, HttpStatus.UNAUTHORIZED, request);
     }
 }
