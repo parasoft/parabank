@@ -48,7 +48,7 @@
     <jackson.version>2.13.0</jackson.version>
     <woodstox.version>6.2.7</woodstox.version>
     <slf4j.version>1.7.32</slf4j.version>
-    <log4j.version>2.16.0</log4j.version>
+    <log4j.version>2.17.0</log4j.version>
     <swagger2raml.version>1.0.0</swagger2raml.version>
     <commons-io.version>2.11.0</commons-io.version>
     <commons-codec.version>1.15</commons-codec.version>
