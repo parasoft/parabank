@@ -22,7 +22,7 @@
     <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
     <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
     <maven-war-plugin.version>3.3.2</maven-war-plugin.version>
-    <dependency-check-maven.version>6.5.1</dependency-check-maven.version>
+    <dependency-check-maven.version>6.5.2</dependency-check-maven.version>
     <spring.version>4.3.30.RELEASE</spring.version>
     <jax-activation.version>1.2.2</jax-activation.version>
     <jax-annotation.version>1.3.2</jax-annotation.version>
