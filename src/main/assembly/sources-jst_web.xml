@@ -7,21 +7,21 @@
 	<fileSets>
 		<fileSet>
 			<directory>src/main/java</directory>
-			<outputDirectory>src</outputDirectory>
+			<outputDirectory>src/main/java</outputDirectory>
 			<includes>
 				<include>**</include>
 			</includes>
 		</fileSet>
 		<fileSet>
 			<directory>src/main/resources</directory>
-			<outputDirectory>src</outputDirectory>
+			<outputDirectory>src/main/java</outputDirectory>
 			<includes>
 				<include>**</include>
 			</includes>
 		</fileSet>
 		<fileSet>
 			<directory>src/main/webapp</directory>
-			<outputDirectory>WebContent</outputDirectory>
+			<outputDirectory>src/main/webapp</outputDirectory>
 			<includes>
 				<include>**</include>
 			</includes>
@@ -30,7 +30,7 @@
 	<dependencySets>
 		<dependencySet>
 			<useProjectArtifact>false</useProjectArtifact>
-			<outputDirectory>WebContent/WEB-INF/lib</outputDirectory>
+			<outputDirectory>src/main/webapp/WEB-INF/lib</outputDirectory>
 		</dependencySet>
 	</dependencySets>
 </assembly>
