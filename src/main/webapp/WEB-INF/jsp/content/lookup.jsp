@@ -5,7 +5,7 @@
 
 <p><fmt:message key="fill.out.the.following"/></p>
 
-<form:form method="post" commandName="lookupForm">
+<form:form method="post" modelAttribute="lookupForm">
   <table class="form2" >
     <tr>
       <td align="right" width="30%"><b><fmt:message key="first.name"/>:</b></td>

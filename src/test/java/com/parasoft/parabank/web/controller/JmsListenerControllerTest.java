@@ -57,7 +57,7 @@ public class JmsListenerControllerTest extends AbstractAdminOperationsTest { //A
             processGetRequest(registerSession(new MockHttpServletRequest()), new MockHttpServletResponse());
             fail("expected exception (MissingServletRequestParameterException) not thrown");
         } catch (final Exception ex) {
-            assertEquals("Required String parameter 'shutdown' is not present", ex.getMessage());
+            assertEquals("Required request parameter 'shutdown' for method parameter type String is not present", ex.getMessage());
             // this is good
         }
         final MockHttpServletRequest req = registerSession(new MockHttpServletRequest());

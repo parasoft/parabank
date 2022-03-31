@@ -5,7 +5,7 @@
 
 <p><fmt:message key="personal.info"/></p>
 
-<form:form method="post" commandName="customerForm" >
+<form:form method="post" modelAttribute="customerForm" >
   <table class="form2" >
     <tr>
       <td align="right" width="30%"><b><fmt:message key="first.name"/>:</b></td>

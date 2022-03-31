@@ -52,7 +52,7 @@ public class DatabaseControllerTest extends AbstractAdminOperationsTest {
             processPostRequest(null, new MockHttpServletRequest(), new MockHttpServletResponse());
             fail("expected exception (MissingServletRequestParameterException) not thrown");
         } catch (final Exception ex) {
-            assertEquals("Required String parameter 'action' is not present", ex.getMessage());
+            assertEquals("Required request parameter 'action' for method parameter type String is not present", ex.getMessage());
             // this is good
         }
         MockHttpServletRequest lRequest = new MockHttpServletRequest();

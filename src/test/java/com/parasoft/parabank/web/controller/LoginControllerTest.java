@@ -58,7 +58,7 @@ public class LoginControllerTest extends AbstractBankControllerTest<LoginControl
             assertError("error.empty.username.or.password");
             fail("expected exception (MissingServletRequestParameterException) not thrown");
         } catch (final Exception ex) {
-            assertEquals("Required String parameter 'username' is not present", ex.getMessage());
+            assertEquals("Required request parameter 'username' for method parameter type String is not present", ex.getMessage());
             // this is good
         }
 
@@ -68,7 +68,7 @@ public class LoginControllerTest extends AbstractBankControllerTest<LoginControl
             assertError("error.empty.username.or.password");
             fail("expected exception (MissingServletRequestParameterException) not thrown");
         } catch (final Exception ex) {
-            assertEquals("Required String parameter 'password' is not present", ex.getMessage());
+            assertEquals("Required request parameter 'password' for method parameter type String is not present", ex.getMessage());
             // this is good
         }
 

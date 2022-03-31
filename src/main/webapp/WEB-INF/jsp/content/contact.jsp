@@ -5,7 +5,7 @@
 
 <p><fmt:message key="email.support.is.available"/></p>
 
-<form:form method="post" commandName="contactForm">
+<form:form method="post" modelAttribute="contactForm">
   <table class="form2" >
     <tr>
       <td align="right" width="30%"><b><fmt:message key="name"/>:</b></td>

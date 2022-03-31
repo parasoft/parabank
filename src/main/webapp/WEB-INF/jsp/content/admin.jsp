@@ -68,8 +68,7 @@
 </table>
 <br />
 
-<form:form method="post" action="admin.htm" 
- commandName="adminForm"  >
+<form:form method="post" action="admin.htm" modelAttribute="adminForm">
 
 	<h3>
 		<fmt:message key="data.access.mode" />

@@ -37,7 +37,7 @@ public class TransactionControllerTest extends AbstractBankControllerTest<Transa
             processGetRequest(request, new MockHttpServletResponse());
             fail("expected exception (MissingServletRequestParameterException) not thrown");
         } catch (final Exception ex) {
-            assertEquals("Required String parameter 'id' is not present", ex.getMessage());
+            assertEquals("Required request parameter 'id' for method parameter type String is not present", ex.getMessage());
             // this is good
         }
         request = registerSession(new MockHttpServletRequest());
