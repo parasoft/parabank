@@ -56,6 +56,7 @@
     <mockito.version>4.5.1</mockito.version>
     <bytebuddy.version>1.12.9</bytebuddy.version>
     <cxf.version>3.5.2</cxf.version>
+    <saaj-impl.version>1.5.3</saaj-impl.version>
     <jersey.version>2.35</jersey.version>
     <javassist.version>3.28.0-GA</javassist.version>
     <spring.version>5.3.19</spring.version>
@@ -104,6 +105,11 @@
         <version>${cxf.version}</version>
         <type>pom</type>
         <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.sun.xml.messaging.saaj</groupId>
+        <artifactId>saaj-impl</artifactId>
+        <version>${saaj-impl.version}</version>
       </dependency>
       <dependency>
         <groupId>org.glassfish.jersey</groupId>
@@ -414,6 +420,11 @@
     </dependency>
 
     <!-- CXF Dependencies -->
+    <dependency>
+      <groupId>com.sun.xml.messaging.saaj</groupId>
+      <artifactId>saaj-impl</artifactId>
+      <scope>runtime</scope>
+    </dependency>
     <dependency>
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-core</artifactId>
