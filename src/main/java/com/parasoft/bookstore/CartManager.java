@@ -28,7 +28,12 @@ public class CartManager {
         setItem(cartIdToOrderMap.get(cartId));
     }
 
-    public void addNewItemToCart(Order order) {
+    public void addNewItemToCart(Order order) throws Exception {
+        if (order == null) {
+         throw new Exception("order is " + order);   
+        }
+        int a = 10;
+        int b = 20;
         List<Order> list = new ArrayList<>();
         list.add(order);
         cartIdToOrderMap.put(generatedNewCartId.incrementAndGet(), list);
