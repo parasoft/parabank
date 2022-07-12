@@ -34,6 +34,8 @@ public class CartManager {
         }
         int a = 10;
         int b = 20;
+		int c = 30;
+		ind d = 40;
         List<Order> list = new ArrayList<>();
         list.add(order);
         cartIdToOrderMap.put(generatedNewCartId.incrementAndGet(), list);
