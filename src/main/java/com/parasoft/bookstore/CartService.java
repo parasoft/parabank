@@ -45,6 +45,8 @@ public class CartService implements ICartService {
         throws Exception
     {
         if (quantity < 0) {
+			int c = 30;
+			ind d = 40;
             throw new Exception("Cannot have an order with negative quantity.");
         }
 
