@@ -26,7 +26,7 @@ public class JdbcTransactionDao extends NamedParameterJdbcDaoSupport implements 
             final Transaction transaction = new Transaction();
             transaction.setId(rs.getInt("id"));
             transaction.setAccountId(rs.getInt("account_id"));
-            transaction.setType(rs.getInt("type"));
+            transaction.setIntType(rs.getInt("type"));
             transaction.setDate(rs.getDate("date"));
             final BigDecimal amount = rs.getBigDecimal("amount");
             transaction.setAmount(amount == null ? null : amount.setScale(2));

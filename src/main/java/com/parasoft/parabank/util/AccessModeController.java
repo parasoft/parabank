@@ -5,7 +5,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.net.HttpURLConnection;
@@ -14,6 +13,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -30,14 +30,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
 import com.parasoft.parabank.domain.Account;
 import com.parasoft.parabank.domain.Address;
 import com.parasoft.parabank.domain.Customer;
@@ -167,19 +161,10 @@ public class AccessModeController {
             LOG.info("Using REST xml Web Service: Bank");
 
         } else if (accessMode.equalsIgnoreCase("RESTJSON")) {
-
             final URL url = new URL(restEndpoint + "/createAccount?customerId=" + customerId + "&newAccountType="
                 + newAccountType + "&fromAccountId=" + fromAccountId);
-
             final HttpURLConnection conn = getConnection(url, MediaType.APPLICATION_JSON, POST);
-            final InputStream inputStream = conn.getInputStream();
-
-            final BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            final String message = reader.readLine();
-            final JsonElement rootElement = JsonParser.parseString(message);
-            final JsonObject actObject = rootElement.getAsJsonObject();
-            createdAccount = Account.readFrom(actObject);
-
+            createdAccount = (new ObjectMapper()).readValue(conn.getInputStream(), Account.class);
             conn.disconnect();
             LOG.info("Using REST json Web Service: Bank");
         }
@@ -359,17 +344,9 @@ public class AccessModeController {
 
             LOG.info("Using REST xml Web Service");
         } else if (accessMode.equalsIgnoreCase("RESTJSON")) {
-
             final URL url = new URL(restEndpoint + "/accounts/" + id);
-
             final HttpURLConnection conn = getConnection(url, MediaType.APPLICATION_JSON, GET);
-            final InputStream inputStream = conn.getInputStream();
-
-            final BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            final String message = reader.readLine();
-            final JsonElement rootElement = JsonParser.parseString(message);
-            final JsonObject obj = rootElement.getAsJsonObject();
-            account = Account.readFrom(obj);
+            account = (new ObjectMapper()).readValue(conn.getInputStream(), Account.class);
             conn.disconnect();
             LOG.info("Using REST json Web Service");
         }
@@ -432,23 +409,9 @@ public class AccessModeController {
             LOG.info("Using REST xml Web Service: Bank");
 
         } else if (accessMode.equalsIgnoreCase("RESTJSON")) {
-
             final URL url = new URL(restEndpoint + "/customers/" + customer.getId() + "/accounts");
-
             final HttpURLConnection conn = getConnection(url, MediaType.APPLICATION_JSON, GET);
-            final InputStream inputStream = conn.getInputStream();
-
-            final BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            final String message = reader.readLine();
-            final JsonElement rootElement = JsonParser.parseString(message);
-            final JsonArray arr = rootElement.getAsJsonArray();
-
-            for (int i = 0; i < arr.size(); i++) {
-                final Account acct = Account.readFrom(arr.get(i).getAsJsonObject());
-                LOG.info("Account read: " + acct.getId());
-                accounts.add(acct);
-            }
-
+            accounts = Arrays.asList((new ObjectMapper()).readValue(conn.getInputStream(), Account[].class));
             conn.disconnect();
             LOG.info("Using REST json Web Service: Bank");
         }
@@ -504,19 +467,9 @@ public class AccessModeController {
             LOG.info("Using REST xml Web Service: Bank");
 
         } else if (accessMode.equalsIgnoreCase("RESTJSON")) {
-
             final URL url = new URL(restEndpoint + "/customers/" + custId);
-
             final HttpURLConnection conn = getConnection(url, MediaType.APPLICATION_JSON, GET);
-
-            final BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-
-            String output;
-
-            while ((output = br.readLine()) != null) {
-                customer = new Gson().fromJson(output, Customer.class);
-            }
-
+            customer = (new ObjectMapper()).readValue(conn.getInputStream(), Customer.class);
             conn.disconnect();
             LOG.info("Using REST json Web Service: Bank");
         }
@@ -573,23 +526,10 @@ public class AccessModeController {
 
             LOG.info("Using REST xml Web Service");
         } else if (accessMode.equalsIgnoreCase("RESTJSON")) {
-
             final URL url = new URL(restEndpoint + "/transactions/" + id);
             final HttpURLConnection conn = getConnection(url, MediaType.APPLICATION_JSON, GET);
-
-            final InputStream inputStream = conn.getInputStream();
-
-            final BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            final String message = reader.readLine();
-            final JsonElement rootElement = JsonParser.parseString(message);
-
-            LOG.info("class=" + rootElement.getClass());
-            final JsonObject obj = rootElement.getAsJsonObject();
-
-            LOG.info("obj:" + obj);
-            transaction = Transaction.readFrom(obj);
+            transaction = (new ObjectMapper()).readValue(conn.getInputStream(), Transaction.class);
             conn.disconnect();
-
             LOG.info("Using REST JSON Web Service");
         }
 
@@ -647,26 +587,10 @@ public class AccessModeController {
 
             LOG.info("Using REST xml Web Service");
         } else if (accessMode.equalsIgnoreCase("RESTJSON")) {
-
             final HttpURLConnection conn = getConnection(createGetTransactionsRestUrl(accountId, null, restEndpoint),
                 MediaType.APPLICATION_JSON, GET);
-
-            final InputStream inputStream = conn.getInputStream();
-
-            final BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            final String message = reader.readLine();
-            final JsonElement rootElement = JsonParser.parseString(message);
-            final JsonArray arr = rootElement.getAsJsonArray();
-
-            for (int i = 0; i < arr.size(); i++) {
-                final Transaction trans = Transaction.readFrom(arr.get(i).getAsJsonObject());
-                // Account acct =
-                // Account.readFrom(arr.get(i).getAsJsonObject());
-                LOG.info("Account read: " + trans.getId());
-                transactions.add(trans);
-            }
+            transactions = Arrays.asList((new ObjectMapper()).readValue(conn.getInputStream(), Transaction[].class));
             conn.disconnect();
-
             LOG.info("Using REST JSON Web Service");
         }
 
@@ -727,21 +651,10 @@ public class AccessModeController {
 
             LOG.info("Using REST xml Web Service");
         } else if (accessMode.equalsIgnoreCase("RESTJSON")) {
-
             final URL url = new URL(restEndpoint + "/requestLoan?" + "downPayment=" + dwnpay + "&amount=" + amt
                 + "&fromAccountId=" + frmaccid + "&customerId=" + custid);
             final HttpURLConnection conn = getConnection(url, MediaType.APPLICATION_JSON, POST);
-
-            final InputStream inputStream = conn.getInputStream();
-
-            final BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            final String message = reader.readLine();
-            final JsonElement rootElement = JsonParser.parseString(message);
-
-            LOG.info("class=" + rootElement.getClass());
-            final JsonObject obj = rootElement.getAsJsonObject();
-
-            loanResponse = LoanResponse.readFrom(obj);
+            loanResponse = (new ObjectMapper()).readValue(conn.getInputStream(), LoanResponse.class);
             conn.disconnect();
             LOG.info("Using REST JSON Web Service");
         }
@@ -852,12 +765,7 @@ public class AccessModeController {
             final HttpURLConnection conn = getConnection(url, MediaType.APPLICATION_JSON, POST);
             conn.setDoOutput(true);
             conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-            OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream(), "UTF-8");
-            JsonFactory factory = new JsonFactory();
-            JsonGenerator generator = factory.createGenerator(writer);
-            generator.setCodec(new ObjectMapper());
-            generator.writeObject(payee);
-            generator.close();
+            (new ObjectMapper()).writeValue(conn.getOutputStream(), payee);
             conn.getResponseMessage();
             conn.disconnect();
             LOG.info("Using REST json Web Service");
@@ -926,23 +834,8 @@ public class AccessModeController {
         } else if (accessMode.equalsIgnoreCase("RESTJSON")) {
             final HttpURLConnection connection = getConnection(
                 createGetTransactionsRestUrl(account.getId(), criteria, restEndpoint), MediaType.APPLICATION_JSON, GET);
-            final InputStream inputStream = connection.getInputStream();
-
-            final BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            final String message = reader.readLine();
-            final JsonElement rootElement = JsonParser.parseString(message);
-            final JsonArray arr = rootElement.getAsJsonArray();
-
-            for (int i = 0; i < arr.size(); i++) {
-                final Transaction trans = Transaction.readFrom(arr.get(i).getAsJsonObject());
-                // Account acct =
-                // Account.readFrom(arr.get(i).getAsJsonObject());
-                LOG.info("Account read: " + trans.getId());
-                transactions.add(trans);
-            }
-
+            transactions = Arrays.asList((new ObjectMapper()).readValue(connection.getInputStream(), Transaction[].class));
             connection.disconnect();
-
             LOG.info("Using REST JSON Web Service");
         }
 
@@ -1036,24 +929,9 @@ public class AccessModeController {
 
             LOG.info("Using REST xml Web Service: Bank");
         } else if (accessMode != null && accessMode.equalsIgnoreCase("RESTJSON")) {
-
             final URL url = new URL(restEndpoint + "/login/" + username + "/" + password);
             final HttpURLConnection conn = getConnection(url, MediaType.APPLICATION_JSON, GET);
-            BufferedReader br = null;
-
-            try {
-                br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            } catch (final IOException e) {
-            }
-
-            String output;
-
-            if (br != null) {
-                while ((output = br.readLine()) != null) {
-                    customer = new Gson().fromJson(output, Customer.class);
-                }
-            }
-
+            customer = (new ObjectMapper()).readValue(conn.getInputStream(), Customer.class);
             conn.disconnect();
             LOG.info("Using REST json Web Service: Bank");
         } else {

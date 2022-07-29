@@ -48,6 +48,7 @@ public class Customer {
         this.lastName = lastName;
     }
 
+    @XmlTransient
     @JsonIgnore
     public String getFullName() {
         return firstName + " " + lastName;

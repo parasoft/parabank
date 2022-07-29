@@ -1,6 +1,5 @@
 package com.parasoft.parabank.domain;
 
-import java.text.ParseException;
 import java.util.Date;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -11,7 +10,6 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.google.gson.JsonObject;
 import com.parasoft.parabank.util.DateTimeAdapter;
 import com.parasoft.parabank.util.Util;
 
@@ -70,26 +68,6 @@ public class LoanResponse {
 
     public void setAccountId(Integer accountId) {
         this.accountId = accountId;
-    }
-
-    public static LoanResponse readFrom(JsonObject json) throws ParseException {
-
-        LoanResponse response = new LoanResponse();
-        boolean approved = json.get("approved").getAsBoolean();
-        response.setApproved(approved);
-
-        if (approved) {
-            response.setAccountId(json.get("accountId").getAsInt());
-        } else {
-            response.setMessage(json.get("message").getAsString());
-        }
-
-        response.setLoanProviderName(json.get("loanProviderName").getAsString());
-        final String dt = json.get("responseDate").getAsString();
-        final Date date = DateTimeAdapter.dateFromString(dt);
-        response.setResponseDate(date);
-
-        return response;
     }
 
     @Override

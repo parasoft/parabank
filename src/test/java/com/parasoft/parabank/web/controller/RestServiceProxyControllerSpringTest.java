@@ -34,7 +34,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.google.gson.JsonObject;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.parasoft.parabank.domain.Account;
 import com.parasoft.parabank.domain.Address;
 import com.parasoft.parabank.domain.Customer;
@@ -133,16 +134,17 @@ public class RestServiceProxyControllerSpringTest
             .perform(get("/bank/accounts/12345").with(createUserToken()).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk()).andExpect(jsonPath("$.balance", is(-2300.0)));
 
-        JsonObject address = new JsonObject();
-        address.addProperty("street", "Myrtle Ave");
-        address.addProperty("city", "Monrovia");
-        address.addProperty("state", "CA");
-        address.addProperty("zipCode", "91016");
-        JsonObject json = new JsonObject();
-        json.addProperty("name", "Jim");
-        json.add("address", address);
-        json.addProperty("phoneNumber", "6262626262");
-        json.addProperty("accountNumber", 12345);
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectNode address = objectMapper.createObjectNode();
+        address.put("street", "Myrtle Ave");
+        address.put("city", "Monrovia");
+        address.put("state", "CA");
+        address.put("zipCode", "91016");
+        ObjectNode json = objectMapper.createObjectNode();
+        json.put("name", "Jim");
+        json.set("address", address);
+        json.put("phoneNumber", "6262626262");
+        json.put("accountNumber", 12345);
         String responseStr = mockMvc
             .perform(post("/bank/billpay").with(createUserToken()).contentType(MediaType.APPLICATION_JSON)
             .param("accountId", "12345")

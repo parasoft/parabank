@@ -87,7 +87,7 @@ public class ParaBankServiceImpl implements ParaBankService, AdminManagerAware, 
             newAccount = new Account();
             newAccount.setCustomerId(customerId);
             newAccount.setBalance(BigDecimal.ZERO);
-            newAccount.setType(newAccountType);
+            newAccount.setIntType(newAccountType);
             newAccount.setId(bankManager.createAccount(newAccount, fromAccountId));
             return newAccount;
         } catch (final DataAccessException e) {

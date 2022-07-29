@@ -24,7 +24,7 @@ public class JdbcAccountDao extends NamedParameterJdbcDaoSupport implements Acco
             final Account account = new Account();
             account.setId(rs.getInt("id"));
             account.setCustomerId(rs.getInt("customer_id"));
-            account.setType(rs.getInt("type"));
+            account.setIntType(rs.getInt("type"));
             final BigDecimal balance = rs.getBigDecimal("balance");
             account.setBalance(balance == null ? null : balance.setScale(2));
             return account;

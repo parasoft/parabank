@@ -124,16 +124,7 @@ public class JmsListenerController extends AbstractBaseAdminController implement
     //            //                 conn.setRequestMethod("POST");
     //            //                 conn.setRequestProperty("Accept", "application/json");
     //            //
-    //            //                 BufferedReader br = new BufferedReader(new InputStreamReader(
-    //            //                         (conn.getInputStream())));
-    //            //
-    //            //                 String output;
-    //            //
-    //            //                 while ((output = br.readLine()) != null) {
-    //            ////                     customer = new Gson().fromJson(
-    //            ////                             output.substring(12, output.length() - 1),
-    //            ////                             Customer.class);
-    //            //                     }
+    //            //                 customer = (new ObjectMapper()).readValue(conn.getInputStream(), Customer.class);
     //            //                 conn.disconnect();
     //            //                 log.info("Using REST json Web Service: Bank");
     //            //             }
@@ -184,16 +175,7 @@ public class JmsListenerController extends AbstractBaseAdminController implement
     //            //                 conn.setRequestMethod("POST");
     //            //                 conn.setRequestProperty("Accept", "application/json");
     //            //
-    //            //                 BufferedReader br = new BufferedReader(new InputStreamReader(
-    //            //                         (conn.getInputStream())));
-    //            //
-    //            //                 String output;
-    //            //
-    //            //                 while ((output = br.readLine()) != null) {
-    //            ////                     customer = new Gson().fromJson(
-    //            ////                             output.substring(12, output.length() - 1),
-    //            ////                             Customer.class);
-    //            //                     }
+    //            //                 customer = (new ObjectMapper()).readValue(conn.getInputStream(), Customer.class);
     //            //                 conn.disconnect();
     //            //                 log.info("Using REST json Web Service: Bank");
     //            //             }

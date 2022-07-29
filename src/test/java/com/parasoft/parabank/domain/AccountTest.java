@@ -19,7 +19,7 @@ public class AccountTest extends AbstractBeanTestCase<Account> {
     @Test
     public void testGetAndSetType() {
         assertNull(bean.getType());
-        bean.setType(0);
+        bean.setIntType(0);
         assertEquals(AccountType.CHECKING, bean.getType());
     }
     @Test

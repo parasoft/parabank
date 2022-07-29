@@ -3,6 +3,7 @@ package com.parasoft.parabank.domain;
 import java.math.BigDecimal;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -69,6 +70,7 @@ public class Position {
         purchasePrice = price;
     }
 
+    @XmlTransient
     @JsonIgnore
     public BigDecimal getCostBasis() {
         return purchasePrice.multiply(new BigDecimal(shares));
