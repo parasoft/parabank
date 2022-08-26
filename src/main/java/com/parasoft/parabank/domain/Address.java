@@ -13,6 +13,7 @@ public class Address {
     private String city;
     private String state;
     private String zipCode;
+    private String planet = "Earth";
 
     public String getStreet() {
         return street;
@@ -44,6 +45,10 @@ public class Address {
 
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
+    }
+    
+    public String getPlanet() {
+    	return planet;
     }
 
     @Override

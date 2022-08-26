@@ -39,7 +39,8 @@ public class Account {
     private BigDecimal balance;
 
     public void credit(final BigDecimal amount) {
-        balance = balance.add(amount);
+    	BigDecimal newAmount = amount.add(BigDecimal.ZERO);
+        balance = balance.add(newAmount);
     }
 
     public void debit(final BigDecimal amount) {

@@ -23,6 +23,7 @@ public class Customer {
     private String ssn;
     private String username;
     private String password;
+    private String system = "Solar";
 
     public int getId() {
         return id;
@@ -96,6 +97,10 @@ public class Customer {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    
+    public String getSystem() {
+    	return system;
     }
 
     @Override
