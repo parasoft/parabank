@@ -115,6 +115,7 @@ public class Customer {
         result = prime * result + (ssn == null ? 0 : ssn.hashCode());
         result = prime * result + (password == null ? 0 : password.hashCode());
         result = prime * result + (username == null ? 0 : username.hashCode());
+        result = prime * result + (system == null ? 0 : system.hashCode());
         return result;
     }
 
@@ -134,7 +135,8 @@ public class Customer {
             Util.equals(phoneNumber, other.phoneNumber) &&
             Util.equals(ssn, other.ssn) &&
             Util.equals(username, other.username) &&
-            Util.equals(password, other.password);
+            Util.equals(password, other.password) &&
+        	Util.equals(system, other.system);
     }
 
     @Override
@@ -142,6 +144,6 @@ public class Customer {
         return "Customer [id=" + id + ", firstName=" + firstName
                 + ", lastName=" + lastName + ", address=" + address
                 + ", phoneNumber=" + phoneNumber + ", ssn=" + ssn
-                + ", username=" + username + ", password=" + password + "]";
+                + ", username=" + username + ", password=" + password + ", system=" + system + "]";
     }
 }

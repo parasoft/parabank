@@ -13,8 +13,9 @@ public class Address {
     private String city;
     private String state;
     private String zipCode;
-    private String planet = "Earth";
 
+    // Some comment for explanation what it is doing
+    // Sample 
     public String getStreet() {
         return street;
     }
@@ -47,10 +48,6 @@ public class Address {
         this.zipCode = zipCode;
     }
     
-    public String getPlanet() {
-    	return planet;
-    }
-
     @Override
     public int hashCode() {
         final int prime = 31;
