@@ -9,8 +9,5 @@
         <module name="parabank" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="parabank" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>
