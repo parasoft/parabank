@@ -40,7 +40,7 @@
     <junit.version>4.13.2</junit.version>
     <jstl.version>1.2.5</jstl.version>
     <!-- HyperSQL 2.6 and later requires Java 11 -->
-    <hsqldb.version>2.5.2</hsqldb.version>
+    <hsqldb.version>2.7.1</hsqldb.version>
     <commons-dbcp2.version>2.9.0</commons-dbcp2.version>
     <aspectjweaver.version>1.9.9.1</aspectjweaver.version>
     <jackson.version>2.13.4.20221013</jackson.version>
