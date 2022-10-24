@@ -30,12 +30,12 @@
     <jax-soap.version>1.4.2</jax-soap.version>
     <jax-ws.version>2.3.3</jax-ws.version>
     <jaxb.version>2.3.3</jaxb.version>
-    <jaxb.impl.version>2.3.6</jaxb.impl.version>
+    <jaxb.impl.version>2.3.7</jaxb.impl.version>
     <istack.version>3.0.12</istack.version>
-    <joda-time.version>2.11.1</joda-time.version>
+    <joda-time.version>2.12.0</joda-time.version>
     <!-- ActiveMQ 5.17 and later requires Java 11 -->
     <activemq.version>5.16.5</activemq.version>
-    <swagger-jaxrs.version>1.6.6</swagger-jaxrs.version>
+    <swagger-jaxrs.version>1.6.8</swagger-jaxrs.version>
     <servlet.version>3.1.0</servlet.version>
     <junit.version>4.13.2</junit.version>
     <jstl.version>1.2.5</jstl.version>
@@ -43,7 +43,7 @@
     <hsqldb.version>2.5.2</hsqldb.version>
     <commons-dbcp2.version>2.9.0</commons-dbcp2.version>
     <aspectjweaver.version>1.9.9.1</aspectjweaver.version>
-    <jackson.version>2.13.4</jackson.version>
+    <jackson.version>2.13.4.20221013</jackson.version>
     <woodstox.version>6.3.1</woodstox.version>
     <slf4j.version>1.7.36</slf4j.version>
     <log4j.version>2.19.0</log4j.version>
@@ -52,9 +52,9 @@
     <commons-codec.version>1.15</commons-codec.version>
     <groovy-all.version>2.4.21</groovy-all.version>
     <wiremock.version>2.34.0</wiremock.version>
-    <mockito.version>4.8.0</mockito.version>
-    <bytebuddy.version>1.12.17</bytebuddy.version>
-    <cxf.version>3.5.3</cxf.version>
+    <mockito.version>4.8.1</mockito.version>
+    <bytebuddy.version>1.12.18</bytebuddy.version>
+    <cxf.version>3.5.4</cxf.version>
     <saaj-impl.version>1.5.3</saaj-impl.version>
     <jersey.version>2.37</jersey.version>
     <javassist.version>3.29.2-GA</javassist.version>
@@ -64,7 +64,7 @@
     <bcprov.version>1.70</bcprov.version>
     <angularjs.version>1.8.2</angularjs.version>
     <guava.version>31.1-jre</guava.version>
-    <snakeyaml.version>1.32</snakeyaml.version>
+    <snakeyaml.version>1.33</snakeyaml.version>
   </properties>
   <dependencyManagement>
     <dependencies>
