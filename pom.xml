@@ -32,18 +32,17 @@
     <jaxb.version>2.3.3</jaxb.version>
     <jaxb.impl.version>2.3.7</jaxb.impl.version>
     <istack.version>3.0.12</istack.version>
-    <joda-time.version>2.12.0</joda-time.version>
+    <joda-time.version>2.12.1</joda-time.version>
     <!-- ActiveMQ 5.17 and later requires Java 11 -->
     <activemq.version>5.16.5</activemq.version>
     <swagger-jaxrs.version>1.6.8</swagger-jaxrs.version>
     <servlet.version>3.1.0</servlet.version>
     <junit.version>4.13.2</junit.version>
     <jstl.version>1.2.5</jstl.version>
-    <!-- HyperSQL 2.6 and later requires Java 11 -->
-    <hsqldb.version>2.5.2</hsqldb.version>
+    <hsqldb.version>2.7.1</hsqldb.version>
     <commons-dbcp2.version>2.9.0</commons-dbcp2.version>
     <aspectjweaver.version>1.9.9.1</aspectjweaver.version>
-    <jackson.version>2.13.4.20221013</jackson.version>
+    <jackson.version>2.14.0</jackson.version>
     <woodstox.version>6.4.0</woodstox.version>
     <slf4j.version>1.7.36</slf4j.version>
     <log4j.version>2.19.0</log4j.version>
@@ -51,7 +50,7 @@
     <commons-io.version>2.11.0</commons-io.version>
     <commons-codec.version>1.15</commons-codec.version>
     <groovy-all.version>2.4.21</groovy-all.version>
-    <wiremock.version>2.34.0</wiremock.version>
+    <wiremock.version>2.35.0</wiremock.version>
     <mockito.version>4.8.1</mockito.version>
     <bytebuddy.version>1.12.18</bytebuddy.version>
     <cxf.version>3.5.4</cxf.version>
@@ -259,6 +258,7 @@
       <groupId>org.hsqldb</groupId>
       <artifactId>hsqldb</artifactId>
       <version>${hsqldb.version}</version>
+      <classifier>jdk8</classifier>
     </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>
