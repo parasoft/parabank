@@ -58,7 +58,7 @@ Apache ActiveMQ listens on the default port number `61616`. This port number can
 * **applicationContext-jms.xml**: This file configures ActiveMQ. Modify the port number in the "uri" for the transportConnector:
 
 ```
-<amq:transportConnector uri="tcp://localhost:61617?transport.daemon=true" />
+<amq:transportConnector uri="tcp://0.0.0.0:61617?transport.daemon=true" />
 ```
 
 # Test scripts

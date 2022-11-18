@@ -65,7 +65,7 @@
 			<amq:mirroredQueue copyMessage="true" postfix=".mirror" prefix="" />
 		</amq:destinationInterceptors>
 		<amq:transportConnectors>
-			<amq:transportConnector uri="tcp://localhost:61616?transport.daemon=true" />
+			<amq:transportConnector uri="tcp://0.0.0.0:61616?transport.daemon=true" />
 		</amq:transportConnectors>
 	</amq:broker>
 
