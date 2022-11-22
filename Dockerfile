@@ -8,3 +8,4 @@ COPY target/parabank.war ${TOMCAT_HOME}/webapps
 
 EXPOSE 8080
 EXPOSE 61616
+EXPOSE 9001
