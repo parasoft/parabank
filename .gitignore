@@ -2,19 +2,23 @@
 /target/
 hs_err_*.log
 *.log
-soatest/.metadata/
+
+# Parasoft-specific:
+.parasoft
 .jtest/
 jtest-ma/
 jtest-sa/
 jtest-ut/
 jtest-mt-cov/
 jtest-ft-cov/
-soatest/report-bookstore/
-soatest/report-parabank/
-/.README.md.html
+/soatest/.metadata/
 /soatest/localsettings.properties
+/soatest/report-bookstore/
+/soatest/report-parabank/
+/soatest/TestAssets/test_templates/
 /soatest/stubs/
-.parasoft
+
+# Phabricator Arcanist
 /.arcconfig
 
 # All below configurations are copied from: https://github.com/github/gitignore/blob/master/Global/JetBrains.gitignore 

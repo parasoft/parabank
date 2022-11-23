@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+docker run \
+    --rm \
+    -e ACCEPT_EULA=true \
+    --net=host \
+    -v $PWD:$PWD \
+    parasoft/soavirt \
+    soatestcli "$@"

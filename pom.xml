@@ -21,8 +21,12 @@
     <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
     <maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
     <maven-war-plugin.version>3.3.2</maven-war-plugin.version>
+    <cargo-maven3-plugin.version>1.10.3</cargo-maven3-plugin.version>
+    <maven-parasoft-plugin.version>3.13</maven-parasoft-plugin.version>
     <versions-maven-plugin.version>2.13.0</versions-maven-plugin.version>
     <dependency-check-maven.version>7.3.0</dependency-check-maven.version>
+    <phase.start-container></phase.start-container>
+    <phase.stop-container></phase.stop-container>
     <jax-activation.version>1.2.2</jax-activation.version>
     <jax-annotation.version>1.3.5</jax-annotation.version>
     <jax-jws.version>2.1.0</jax-jws.version>
@@ -599,6 +603,11 @@
           <version>${maven-war-plugin.version}</version>
         </plugin>
         <plugin>
+          <groupId>org.codehaus.cargo</groupId>
+          <artifactId>cargo-maven3-plugin</artifactId>
+          <version>${cargo-maven3-plugin.version}</version>
+        </plugin>
+        <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>versions-maven-plugin</artifactId>
           <version>${versions-maven-plugin.version}</version>
@@ -644,6 +653,11 @@
               </pluginExecutions>
             </lifecycleMappingMetadata>
           </configuration>
+        </plugin>
+        <plugin>
+          <groupId>Parasoft</groupId>
+          <artifactId>maven-parasoft-plugin</artifactId>
+          <version>${maven-parasoft-plugin.version}</version>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -741,7 +755,158 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.codehaus.cargo</groupId>
+        <artifactId>cargo-maven3-plugin</artifactId>
+        <configuration>
+          <container>
+            <containerId>tomcat9x</containerId>
+            <artifactInstaller>
+              <groupId>org.apache.tomcat</groupId>
+              <artifactId>tomcat</artifactId>
+              <version>9.0.69</version>
+            </artifactInstaller>
+            <timeout>600000</timeout>
+          </container>
+        </configuration>
+        <executions>
+          <execution>
+            <id>start-container</id>
+            <phase>${phase.start-container}</phase>
+            <goals>
+              <goal>start</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>stop-container</id>
+            <phase>${phase.stop-container}</phase>
+            <goals>
+              <goal>stop</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>Parasoft</id>
+      <url>https://build.parasoft.com/maven/</url>
+    </pluginRepository>
+  </pluginRepositories>
+
+  <profiles>
+    <profile>
+      <id>soatest-it</id>
+      <properties>
+        <phase.start-container>pre-integration-test</phase.start-container>
+        <phase.stop-container>post-integration-test</phase.stop-container>
+
+        <!-- default values of user properties for maven-parasoft-plugin -->
+        <parasoft.config>soatest.builtin://Demo Configuration</parasoft.config>
+        <parasoft.data>${project.build.directory}/soatest/workspace</parasoft.data>
+        <parasoft.failOnViolation>false</parasoft.failOnViolation>
+        <parasoft.import>${project.basedir}/soatest/TestAssets</parasoft.import>
+        <parasoft.localsettings>${project.build.directory}/soatest/localsettings.properties</parasoft.localsettings>
+        <parasoft.report>${project.build.directory}/soatest/reports/report.html</parasoft.report>
+        <parasoft.resource>/TestAssets/Smoke.tst</parasoft.resource>
+
+        <!-- override on Maven command line if you are on Windows or otherwise can't use the docker image -->
+        <parasoft.soatest.home>${project.basedir}/soatest/docker</parasoft.soatest.home>
+
+        <!-- set to true on Maven command line if you accept the EULA: https://www.parasoft.com/license -->
+        <parasoft.eula.accepted>false</parasoft.eula.accepted>
+
+        <!-- set to true on Maven command line to opt-in to telemetry -->
+        <parasoft.localsettings.usage.reporting.enabled>false</parasoft.localsettings.usage.reporting.enabled>
+
+        <!-- DTP/LS/license settings which can be set on Maven command line -->
+        <parasoft.localsettings.dtp.enabled>false</parasoft.localsettings.dtp.enabled>
+        <parasoft.localsettings.dtp.url></parasoft.localsettings.dtp.url>
+        <parasoft.localsettings.dtp.user></parasoft.localsettings.dtp.user>
+        <parasoft.localsettings.dtp.password></parasoft.localsettings.dtp.password>
+        <parasoft.localsettings.license.network.use.specified.server>false</parasoft.localsettings.license.network.use.specified.server>
+        <parasoft.localsettings.license.network.url></parasoft.localsettings.license.network.url>
+        <parasoft.localsettings.license.network.auth.enabled>false</parasoft.localsettings.license.network.auth.enabled>
+        <parasoft.localsettings.license.network.user></parasoft.localsettings.license.network.user>
+        <parasoft.localsettings.license.network.password></parasoft.localsettings.license.network.password>
+        <parasoft.localsettings.soatest.license.use_network>true</parasoft.localsettings.soatest.license.use_network>
+        <parasoft.localsettings.soatest.license.network.edition>automation_edition</parasoft.localsettings.soatest.license.network.edition>
+        <parasoft.localsettings.soatest.license.custom_edition_features></parasoft.localsettings.soatest.license.custom_edition_features>
+        <parasoft.localsettings.soatest.license.local.password></parasoft.localsettings.soatest.license.local.password>
+        <parasoft.localsettings.report.test_suites_only>false</parasoft.localsettings.report.test_suites_only>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>soatest-settings</id>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+                <phase>pre-integration-test</phase>
+                <configuration>
+                  <target>
+                    <mkdir dir="${project.build.directory}/soatest" />
+                    <mkdir dir="${project.build.directory}/soatest/jdbc" />
+                    <copy file="${org.hsqldb:hsqldb:jar:jdk8}" tofile="${project.build.directory}/soatest/jdbc/hsqldb-jdk8.jar" />
+                    <propertyfile file="${parasoft.localsettings}">
+                      <entry key="parasoft.eula.accepted" value="${parasoft.eula.accepted}" />
+                      <entry key="parasoft.localsettings.usage.reporting.enabled" value="${parasoft.localsettings.usage.reporting.enabled}" />
+                      <entry key="dtp.enabled" value="${parasoft.localsettings.dtp.enabled}" />
+                      <entry key="dtp.url" value="${parasoft.localsettings.dtp.url}" />
+                      <entry key="dtp.user" value="${parasoft.localsettings.dtp.user}" />
+                      <entry key="dtp.password" value="${parasoft.localsettings.dtp.password}" />
+                      <entry key="license.network.use.specified.server" value="${parasoft.localsettings.license.network.use.specified.server}" />
+                      <entry key="license.network.url" value="${parasoft.localsettings.license.network.url}" />
+                      <entry key="license.network.auth.enabled" value="${parasoft.localsettings.license.network.auth.enabled}" />
+                      <entry key="license.network.user" value="${parasoft.localsettings.license.network.user}" />
+                      <entry key="license.network.password" value="${parasoft.localsettings.license.network.password}" />
+                      <entry key="soatest.license.use_network" value="${parasoft.localsettings.soatest.license.use_network}" />
+                      <entry key="soatest.license.network.edition" value="${parasoft.localsettings.soatest.license.network.edition}" />
+                      <entry key="soatest.license.custom_edition_features" value="${parasoft.localsettings.soatest.license.custom_edition_features}" />
+                      <entry key="soatest.license.local.password" value="${parasoft.localsettings.soatest.license.local.password}" />
+                      <entry key="report.test_suites_only" value="${parasoft.localsettings.report.test_suites_only}" />
+                      <entry key="datasources.jdbc.classpath" value="${project.build.directory}/soatest/jdbc/hsqldb-jdk8.jar" />
+                    </propertyfile>
+                  </target>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>Parasoft</groupId>
+            <artifactId>maven-parasoft-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>soatest-test</id>
+                <phase>integration-test</phase>
+                <goals>
+                  <goal>soatest</goal>
+                </goals>
+                <configuration>
+                  <clean>false</clean>
+                  <config>${parasoft.config}</config>
+                  <data>${parasoft.data}</data>
+                  <failOnViolation>${parasoft.failOnViolation}</failOnViolation>
+                  <importArgument>${parasoft.import}</importArgument>
+                  <localsettings>${parasoft.localsettings}</localsettings>
+                  <report>${parasoft.report}</report>
+                  <resources>
+                    <resource>${parasoft.resource}</resource>
+                  </resources>
+                  <soatestHome>${parasoft.soatest.home}</soatestHome>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
 </project>
