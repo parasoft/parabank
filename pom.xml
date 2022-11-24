@@ -851,9 +851,19 @@
                 <phase>pre-integration-test</phase>
                 <configuration>
                   <target>
+                    <!-- create dirs and assets -->
                     <mkdir dir="${project.build.directory}/soatest" />
                     <mkdir dir="${project.build.directory}/soatest/jdbc" />
+                    <mkdir dir="${project.build.directory}/soatest/workspace" />
+                    <mkdir dir="${project.build.directory}/soatest/reports" />
                     <copy file="${org.hsqldb:hsqldb:jar:jdk8}" tofile="${project.build.directory}/soatest/jdbc/hsqldb-jdk8.jar" />
+                    <!-- make everything accessible to the docker container -->
+                    <chmod dir="${project.build.directory}/soatest" perm="777" />
+                    <chmod dir="${project.build.directory}/soatest/jdbc" perm="777" />
+                    <chmod file="${project.build.directory}/soatest/jdbc/hsqldb-jdk8.jar" perm="777" />
+                    <chmod dir="${project.build.directory}/soatest/workspace" perm="777" />
+                    <chmod dir="${project.build.directory}/soatest/reports" perm="777" />
+                    <!-- create settings file -->
                     <propertyfile file="${parasoft.localsettings}">
                       <entry key="parasoft.eula.accepted" value="${parasoft.eula.accepted}" />
                       <entry key="parasoft.localsettings.usage.reporting.enabled" value="${parasoft.localsettings.usage.reporting.enabled}" />
