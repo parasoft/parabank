@@ -7,3 +7,14 @@ docker run \
     -v $PWD:$PWD \
     parasoft/soavirt \
     soatestcli "$@"
+soatestStatus=$?
+
+docker run \
+    --rm \
+    -e ACCEPT_EULA=true \
+    --net=host \
+    -v $PWD:$PWD \
+    parasoft/soavirt \
+    chown -R $(id -u):$(id -g) "$PWD/target/soatest"
+
+exit ${soatestStatus}
