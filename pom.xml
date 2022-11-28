@@ -854,15 +854,9 @@
                     <!-- create dirs and assets -->
                     <mkdir dir="${project.build.directory}/soatest" />
                     <mkdir dir="${project.build.directory}/soatest/jdbc" />
-                    <mkdir dir="${project.build.directory}/soatest/workspace" />
                     <mkdir dir="${project.build.directory}/soatest/reports" />
+                    <mkdir dir="${project.build.directory}/soatest/workspace" />
                     <copy file="${org.hsqldb:hsqldb:jar:jdk8}" tofile="${project.build.directory}/soatest/jdbc/hsqldb-jdk8.jar" />
-                    <!-- make everything accessible to the docker container -->
-                    <chmod dir="${project.build.directory}/soatest" perm="777" />
-                    <chmod dir="${project.build.directory}/soatest/jdbc" perm="777" />
-                    <chmod file="${project.build.directory}/soatest/jdbc/hsqldb-jdk8.jar" perm="777" />
-                    <chmod dir="${project.build.directory}/soatest/workspace" perm="777" />
-                    <chmod dir="${project.build.directory}/soatest/reports" perm="777" />
                     <!-- create settings file -->
                     <propertyfile file="${parasoft.localsettings}">
                       <entry key="parasoft.eula.accepted" value="${parasoft.eula.accepted}" />
@@ -883,6 +877,12 @@
                       <entry key="report.test_suites_only" value="${parasoft.localsettings.report.test_suites_only}" />
                       <entry key="datasources.jdbc.classpath" value="${project.build.directory}/soatest/jdbc/hsqldb-jdk8.jar" />
                     </propertyfile>
+                    <!-- make everything accessible to the docker container -->
+                    <chmod dir="${project.build.directory}/soatest" perm="go+rw" />
+                    <chmod dir="${project.build.directory}/soatest/jdbc" perm="go+rw" />
+                    <chmod dir="${project.build.directory}/soatest/reports" perm="go+rw" />
+                    <chmod dir="${project.build.directory}/soatest/workspace" perm="go+rw" />
+                    <chmod dir="${project.build.directory}/soatest" perm="go+rw" includes="**" />
                   </target>
                 </configuration>
               </execution>

@@ -15,6 +15,6 @@ docker run \
     --net=host \
     -v $PWD:$PWD \
     parasoft/soavirt \
-    chown -R $(id -u):$(id -g) "$PWD/target/soatest"
+    chmod -fR go+rw "$PWD/target/soatest"
 
 exit ${soatestStatus}
