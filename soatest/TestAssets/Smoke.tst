@@ -153,7 +153,7 @@
   <maxProfileMappingID>2</maxProfileMappingID>
   <PropertyOwnerImpl className="com.parasoft.property.PropertyOwnerImpl" version="1.1">
   </PropertyOwnerImpl>
-  <nextIdentifier>294</nextIdentifier>
+  <nextIdentifier>295</nextIdentifier>
   <testsSize>6</testsSize>
   <TestSuite className="webtool.test.TestSuite" version="48.15.2">
    <DebugAssets className="webtool.test.debug.DebugAssets" version="1">
@@ -8120,24 +8120,16 @@
                   <ElementType className="webtool.soap.ElementType" version="2.12.3">
                    <hash>13</hash>
                    <localName>stockQuantity</localName>
-                   <IntegerType className="webtool.soap.IntegerType" version="2">
-                    <hash>8</hash>
+                   <IntegerType className="webtool.soap.IntegerType" version="2.2.3">
+                    <hash>14</hash>
                    </IntegerType>
-                  </ElementType>
-                  <ElementType className="webtool.soap.ElementType" version="2.12.3">
-                   <hash>14</hash>
-                   <minOccurs>0</minOccurs>
-                   <maxOccurs>-1</maxOccurs>
-                   <nillable>true</nillable>
-                   <localName>authors</localName>
-                   <StringType className="webtool.soap.StringType" version="2">
-                    <hash>10</hash>
-                   </StringType>
                   </ElementType>
                   <ElementType className="webtool.soap.ElementType" version="2.12.3">
                    <hash>15</hash>
                    <minOccurs>0</minOccurs>
-                   <localName>description</localName>
+                   <maxOccurs>-1</maxOccurs>
+                   <nillable>true</nillable>
+                   <localName>authors</localName>
                    <StringType className="webtool.soap.StringType" version="2.5.3">
                     <hash>16</hash>
                    </StringType>
@@ -8145,9 +8137,17 @@
                   <ElementType className="webtool.soap.ElementType" version="2.12.3">
                    <hash>17</hash>
                    <minOccurs>0</minOccurs>
+                   <localName>description</localName>
+                   <StringType className="webtool.soap.StringType" version="2">
+                    <hash>10</hash>
+                   </StringType>
+                  </ElementType>
+                  <ElementType className="webtool.soap.ElementType" version="2.12.3">
+                   <hash>18</hash>
+                   <minOccurs>0</minOccurs>
                    <localName>ISBN</localName>
-                   <StringType className="webtool.soap.StringType" version="2.5.3">
-                    <hash>18</hash>
+                   <StringType className="webtool.soap.StringType" version="2">
+                    <hash>10</hash>
                    </StringType>
                   </ElementType>
                   <ElementType className="webtool.soap.ElementType" version="2.12.3">
@@ -8162,8 +8162,8 @@
                    <hash>21</hash>
                    <minOccurs>0</minOccurs>
                    <localName>publisher</localName>
-                   <StringType className="webtool.soap.StringType" version="2">
-                    <hash>16</hash>
+                   <StringType className="webtool.soap.StringType" version="2.5.3">
+                    <hash>22</hash>
                    </StringType>
                   </ElementType>
                  </SequenceCompositor>
@@ -17811,7 +17811,7 @@
                    <allowArrayExclude>true</allowArrayExclude>
                    <mode>3</mode>
                    <columnName>cartId</columnName>
-                   <value>16</value>
+                   <value>1</value>
                   </IntegerValue>
                  </ElementValue>
                  <ElementValue className="webtool.soap.ElementValue" version="1.11.13">
@@ -19756,7 +19756,7 @@
                  <IntegerValue className="webtool.soap.IntegerValue" version="1.3.1.13">
                   <mode>3</mode>
                   <columnName>cartId</columnName>
-                  <value>16</value>
+                  <value>1</value>
                  </IntegerValue>
                 </ElementValue>
                </CompositorValueSet>
@@ -21545,7 +21545,7 @@
                  <IntegerValue className="webtool.soap.IntegerValue" version="1.3.1.13">
                   <mode>3</mode>
                   <columnName>cartId</columnName>
-                  <value>16</value>
+                  <value>1</value>
                  </IntegerValue>
                 </ElementValue>
                </CompositorValueSet>
@@ -23508,7 +23508,7 @@
                    <allowArrayExclude>true</allowArrayExclude>
                    <mode>3</mode>
                    <columnName>cartId</columnName>
-                   <value>17</value>
+                   <value>2</value>
                   </IntegerValue>
                  </ElementValue>
                  <ElementValue className="webtool.soap.ElementValue" version="1.11.13">
@@ -25308,7 +25308,7 @@
                  <IntegerValue className="webtool.soap.IntegerValue" version="1.3.1.13">
                   <mode>3</mode>
                   <columnName>cartId</columnName>
-                  <value>17</value>
+                  <value>2</value>
                  </IntegerValue>
                 </ElementValue>
                </CompositorValueSet>
@@ -27055,7 +27055,7 @@
                  <IntegerValue className="webtool.soap.IntegerValue" version="1.3.1.13">
                   <mode>3</mode>
                   <columnName>cartId</columnName>
-                  <value>17</value>
+                  <value>2</value>
                  </IntegerValue>
                 </ElementValue>
                </CompositorValueSet>
@@ -29018,7 +29018,7 @@
                    <allowArrayExclude>true</allowArrayExclude>
                    <mode>3</mode>
                    <columnName>cartId</columnName>
-                   <value>18</value>
+                   <value>3</value>
                   </IntegerValue>
                  </ElementValue>
                  <ElementValue className="webtool.soap.ElementValue" version="1.11.13">
@@ -30818,7 +30818,7 @@
                  <IntegerValue className="webtool.soap.IntegerValue" version="1.3.1.13">
                   <mode>3</mode>
                   <columnName>cartId</columnName>
-                  <value>18</value>
+                  <value>3</value>
                  </IntegerValue>
                 </ElementValue>
                </CompositorValueSet>
@@ -32565,7 +32565,7 @@
                  <IntegerValue className="webtool.soap.IntegerValue" version="1.3.1.13">
                   <mode>3</mode>
                   <columnName>cartId</columnName>
-                  <value>18</value>
+                  <value>3</value>
                  </IntegerValue>
                 </ElementValue>
                </CompositorValueSet>
@@ -36970,6 +36970,7 @@
          </IgnoredKeyValues>
         </ControlSource>
         <XMLUnitEngine className="webtool.diff.XMLUnitEngine" version="1.2">
+         <ignoreOrder>true</ignoreOrder>
         </XMLUnitEngine>
         <VMToolsXMLDiffEngine className="webtool.diff.VMToolsXMLDiffEngine" version="1.1">
         </VMToolsXMLDiffEngine>
@@ -36979,6 +36980,7 @@
          <XMLBuilder className="webtool.xml.builder.XMLBuilder" version="6.6">
           <rootNodeExists>true</rootNodeExists>
           <XMLElementNode className="webtool.xml.builder.XMLElementNode" version="1.3.6">
+           <excludeColumnName>cartId</excludeColumnName>
            <value></value>
            <name>definitions</name>
            <namespace>true</namespace>
@@ -48326,6 +48328,24 @@
         <SoapDiffControlSource className="webtool.soap.diff.SoapDiffControlSource" version="1.1">
         </SoapDiffControlSource>
         <controlSourceMode>1</controlSourceMode>
+        <numIgnoredXPaths>3</numIgnoredXPaths>
+        <IgnoredXPath className="webtool.diff.IgnoredXPath" version="1.2">
+         <xpath>/definitions/types/schema/complexType*/sequence/element*</xpath>
+         <attributeName>name</attributeName>
+         <diff>4</diff>
+         <operation2>1</operation2>
+        </IgnoredXPath>
+        <IgnoredXPath className="webtool.diff.IgnoredXPath" version="1.2">
+         <xpath>/definitions/types/schema/complexType*/sequence/element*</xpath>
+         <attributeName>type</attributeName>
+         <diff>4</diff>
+         <operation2>1</operation2>
+        </IgnoredXPath>
+        <IgnoredXPath className="webtool.diff.IgnoredXPath" version="1.2">
+         <xpath>/definitions/types/schema/complexType*</xpath>
+         <diff>2</diff>
+         <operation1>2</operation1>
+        </IgnoredXPath>
        </XMLDifferNew>
        <JSONDiffer className="webtool.ecmascript.json.JSONDiffer" version="1.2.1">
         <source>true</source>
@@ -57956,6 +57976,20 @@ Timestamp: 2022-11-15 11:25:00</notes>
          <IgnoredKeyValues className="com.parasoft.data.IgnoredKeyValues" version="1.2">
          </IgnoredKeyValues>
         </ControlSource>
+        <ignoredJSONDiffsSize>2</ignoredJSONDiffsSize>
+        <IgnoredJSONDiff className="webtool.ecmascript.json.IgnoredJSONDiff" version="1.2">
+         <operations size="3">
+          <operation index="1">true</operation>
+         </operations>
+         <identifier>definitions</identifier>
+        </IgnoredJSONDiff>
+        <IgnoredJSONDiff className="webtool.ecmascript.json.IgnoredJSONDiff" version="1.2">
+         <operations size="3">
+          <operation index="1">true</operation>
+          <operation index="2">true</operation>
+         </operations>
+         <identifier>definitions.Payee.properties</identifier>
+        </IgnoredJSONDiff>
        </JSONDiffer>
        <mode>3</mode>
       </DiffTool>
