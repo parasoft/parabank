@@ -36,17 +36,17 @@
     <jaxb.version>2.3.3</jaxb.version>
     <jaxb.impl.version>2.3.7</jaxb.impl.version>
     <istack.version>3.0.12</istack.version>
-    <joda-time.version>2.12.1</joda-time.version>
+    <joda-time.version>2.12.2</joda-time.version>
     <!-- ActiveMQ 5.17 and later requires Java 11 -->
     <activemq.version>5.16.5</activemq.version>
-    <swagger-jaxrs.version>1.6.8</swagger-jaxrs.version>
+    <swagger-jaxrs.version>1.6.9</swagger-jaxrs.version>
     <servlet.version>3.1.0</servlet.version>
     <junit.version>4.13.2</junit.version>
     <jstl.version>1.2.5</jstl.version>
     <hsqldb.version>2.7.1</hsqldb.version>
     <commons-dbcp2.version>2.9.0</commons-dbcp2.version>
-    <aspectjweaver.version>1.9.9.1</aspectjweaver.version>
-    <jackson.version>2.14.0</jackson.version>
+    <aspectjweaver.version>1.9.19</aspectjweaver.version>
+    <jackson.version>2.14.1</jackson.version>
     <woodstox.version>6.4.0</woodstox.version>
     <slf4j.version>1.7.36</slf4j.version>
     <log4j.version>2.19.0</log4j.version>
@@ -55,13 +55,13 @@
     <commons-codec.version>1.15</commons-codec.version>
     <groovy-all.version>2.4.21</groovy-all.version>
     <wiremock.version>2.35.0</wiremock.version>
-    <mockito.version>4.8.1</mockito.version>
-    <bytebuddy.version>1.12.18</bytebuddy.version>
-    <cxf.version>3.5.4</cxf.version>
+    <mockito.version>4.10.0</mockito.version>
+    <bytebuddy.version>1.12.20</bytebuddy.version>
+    <cxf.version>3.5.5</cxf.version>
     <saaj-impl.version>1.5.3</saaj-impl.version>
     <jersey.version>2.37</jersey.version>
     <javassist.version>3.29.2-GA</javassist.version>
-    <spring.version>5.3.23</spring.version>
+    <spring.version>5.3.24</spring.version>
     <junitparams.version>1.1.1</junitparams.version>
     <hamcrest.version>2.2</hamcrest.version>
     <bcprov.version>1.70</bcprov.version>
