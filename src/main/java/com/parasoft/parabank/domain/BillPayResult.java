@@ -8,6 +8,7 @@
 package com.parasoft.parabank.domain;
 
 import java.math.BigDecimal;
+import java.util.logging.Logger;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -37,6 +38,7 @@ public class BillPayResult {
     }
 
     public String getPayeeName() {
+        Logger.getLogger("foo").info("Get Payee name");
         return payeeName;
     }
 
