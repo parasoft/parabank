@@ -38,7 +38,6 @@ public class BillPayResult {
     }
 
     public String getPayeeName() {
-        Logger.getLogger("foo").info("Get Payee name");
         return payeeName;
     }
 
