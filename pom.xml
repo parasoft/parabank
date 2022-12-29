@@ -55,7 +55,7 @@
     <commons-codec.version>1.15</commons-codec.version>
     <groovy-all.version>2.4.21</groovy-all.version>
     <wiremock.version>2.35.0</wiremock.version>
-    <mockito.version>4.10.0</mockito.version>
+    <mockito.version>4.11.0</mockito.version>
     <bytebuddy.version>1.12.20</bytebuddy.version>
     <cxf.version>3.5.5</cxf.version>
     <saaj-impl.version>1.5.3</saaj-impl.version>
