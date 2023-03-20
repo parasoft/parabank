@@ -35,9 +35,6 @@ public class ContactInformation {
     }
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
         if (!(obj instanceof Address)) {
             return false;
         }
