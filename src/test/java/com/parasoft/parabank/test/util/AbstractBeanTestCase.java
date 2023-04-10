@@ -46,7 +46,7 @@ public abstract class AbstractBeanTestCase<T> extends AbstractParaBankTest {
                 assertFalse("Instances with o1 having " + field.getName() + " set and o2 having it not set are equal", o1.equals(o2));
 
                 field.set(o2, field.get(o1));
-                assertTrue("After setting o2 with the value of the object in o1, the two objects in the field are not equal",
+                assertTrue("After setting o2 with the value of the object in o1, the two objects in the field " + field.getName() + " are not equal",
                     field.get(o1).equals(field.get(o2)));
                 assertTrue("Instances with o1 having " + field.getName() + " set and o2 having it set to the same object of type "
                     + field.get(o2).getClass().getName() + " are not equal", o1.equals(o2));
@@ -170,7 +170,7 @@ public abstract class AbstractBeanTestCase<T> extends AbstractParaBankTest {
         }
     }
 
-    private final Class<T> beanClass;
+    protected final Class<T> beanClass;
 
     protected T bean;
 
