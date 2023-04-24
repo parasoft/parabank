@@ -47,7 +47,7 @@
     <commons-dbcp2.version>2.9.0</commons-dbcp2.version>
     <aspectjweaver.version>1.9.19</aspectjweaver.version>
     <jackson.version>2.15.0</jackson.version>
-    <woodstox.version>6.5.0</woodstox.version>
+    <woodstox.version>6.5.1</woodstox.version>
     <slf4j.version>1.7.36</slf4j.version>
     <log4j.version>2.20.0</log4j.version>
     <swagger2raml.version>1.0.0</swagger2raml.version>
