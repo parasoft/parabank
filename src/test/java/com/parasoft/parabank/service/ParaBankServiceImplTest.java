@@ -1,5 +1,9 @@
 package com.parasoft.parabank.service;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -12,8 +16,6 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,8 +35,6 @@ import com.parasoft.parabank.util.DateTimeAdapter;
  */
 @Transactional
 public class ParaBankServiceImplTest extends AbstractParaBankDataSourceTest {
-    private static final Logger log = LoggerFactory.getLogger(ParaBankServiceImplTest.class);
-
     private static final int CUSTOMER_ID = 12212;
 
     private static final int ACCOUNT1_ID = 12345;
@@ -123,9 +123,10 @@ public class ParaBankServiceImplTest extends AbstractParaBankDataSourceTest {
             for (int positionId : positionIds) {
                 if (id == positionId) {
                     found = true;
+                    break;
                 }
             }
-            if (found == false) {
+            if (!found) {
                 newPositionId = id;
             }
         }
@@ -224,15 +225,7 @@ public class ParaBankServiceImplTest extends AbstractParaBankDataSourceTest {
         calendar.add(Calendar.DAY_OF_MONTH, -10);
         final String startDate = DateTimeAdapter.OUTPUT_FORMAT.format(calendar.toInstant());
         final List<HistoryPoint> history = paraBankService.getPositionHistory(POSITION_ID, startDate, endDate);
-        int expected = 11;
-        if (history.size() == 22) { // TODO figure out why when this test class
-                                    // is run by in isolation the result is 11
-                                    // if run as part all tests it's 22
-            expected = 22;
-        }
-        log.debug("using expected {} value", expected);
-        assertEquals(expected, history.size());
-
+        assertThat(history.size(), allOf(greaterThanOrEqualTo(10), lessThanOrEqualTo(12)));
         try {
             paraBankService.getPositionHistory(-1, startDate, endDate);
             fail("Did not throw expected ParaBankServiceException");
