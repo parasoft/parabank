@@ -54,7 +54,7 @@
     <commons-io.version>2.11.0</commons-io.version>
     <commons-codec.version>1.15</commons-codec.version>
     <groovy-all.version>2.4.21</groovy-all.version>
-    <wiremock.version>2.35.0</wiremock.version>
+    <wiremock.version>2.35.1</wiremock.version>
     <mockito.version>4.11.0</mockito.version>
     <bytebuddy.version>1.14.4</bytebuddy.version>
     <cxf.version>3.5.5</cxf.version>
