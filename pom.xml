@@ -59,7 +59,7 @@
     <bytebuddy.version>1.14.4</bytebuddy.version>
     <cxf.version>3.5.5</cxf.version>
     <saaj-impl.version>1.5.3</saaj-impl.version>
-    <jersey.version>2.39.1</jersey.version>
+    <jersey.version>2.40</jersey.version>
     <javassist.version>3.29.2-GA</javassist.version>
     <spring.version>5.3.30</spring.version>
     <junitparams.version>1.1.1</junitparams.version>
