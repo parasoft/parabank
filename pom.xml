@@ -57,7 +57,7 @@
     <wiremock.version>2.35.1</wiremock.version>
     <mockito.version>4.11.0</mockito.version>
     <bytebuddy.version>1.14.4</bytebuddy.version>
-    <cxf.version>3.5.5</cxf.version>
+    <cxf.version>3.5.7</cxf.version>
     <saaj-impl.version>1.5.3</saaj-impl.version>
     <jersey.version>2.40</jersey.version>
     <javassist.version>3.29.2-GA</javassist.version>
