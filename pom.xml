@@ -67,7 +67,7 @@
     <bcprov.version>1.70</bcprov.version>
     <angularjs.version>1.8.2</angularjs.version>
     <guava.version>32.1.1-jre</guava.version>
-    <snakeyaml.version>2.0</snakeyaml.version>
+    <snakeyaml.version>2.2</snakeyaml.version>
   </properties>
   <dependencyManagement>
     <dependencies>
