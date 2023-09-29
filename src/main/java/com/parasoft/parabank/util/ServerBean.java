@@ -289,6 +289,11 @@ public class ServerBean implements InitializingBean, DisposableBean, Application
         }
         server.signalCloseAllServerConnections();
         server.shutdownWithCatalogs(org.hsqldb.Database.CLOSEMODE_NORMAL);
+        try {
+            Thread.sleep(100);
+        } catch (final InterruptedException e) {
+            log.error("Interrupted before stopping HSQL Server: ", e);
+        }
 
         int status = server.stop();
         final long timeout = System.currentTimeMillis() + 5000;
