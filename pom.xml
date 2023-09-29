@@ -45,7 +45,7 @@
     <jstl.version>1.2.5</jstl.version>
     <hsqldb.version>2.7.2</hsqldb.version>
     <commons-dbcp2.version>2.9.0</commons-dbcp2.version>
-    <aspectjweaver.version>1.9.19</aspectjweaver.version>
+    <aspectjweaver.version>1.9.20.1</aspectjweaver.version>
     <jackson.version>2.15.2</jackson.version>
     <woodstox.version>6.5.1</woodstox.version>
     <slf4j.version>1.7.36</slf4j.version>
