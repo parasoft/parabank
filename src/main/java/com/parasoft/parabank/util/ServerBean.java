@@ -274,6 +274,7 @@ public class ServerBean implements InitializingBean, DisposableBean, Application
             try {
                 con = dataSource.getConnection();
                 con.createStatement().execute("SHUTDOWN");
+		return waitForShutdown(ServerConstants.SERVER_STATE_ONLINE);
             } catch (final SQLException ex) {
                 log.error("HSQL Server Shutdown failed: ", ex);
             } finally {
@@ -291,6 +292,10 @@ public class ServerBean implements InitializingBean, DisposableBean, Application
         server.shutdownWithCatalogs(org.hsqldb.Database.CLOSEMODE_NORMAL);
 
         int status = server.stop();
+        return waitForShutdown(status);
+    }
+
+    private int waitForShutdown(int status) {
         final long timeout = System.currentTimeMillis() + 5000;
         while (status != ServerConstants.SERVER_STATE_SHUTDOWN && System.currentTimeMillis() < timeout) {
             try {
