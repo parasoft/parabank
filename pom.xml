@@ -44,19 +44,22 @@
     <junit.version>4.13.2</junit.version>
     <jstl.version>1.2.5</jstl.version>
     <hsqldb.version>2.7.2</hsqldb.version>
-    <commons-dbcp2.version>2.9.0</commons-dbcp2.version>
+    <commons-dbcp2.version>2.10.0</commons-dbcp2.version>
     <aspectjweaver.version>1.9.20.1</aspectjweaver.version>
     <jackson.version>2.15.2</jackson.version>
     <woodstox.version>6.5.1</woodstox.version>
     <slf4j.version>1.7.36</slf4j.version>
     <log4j.version>2.20.0</log4j.version>
     <swagger2raml.version>1.0.0</swagger2raml.version>
-    <commons-io.version>2.11.0</commons-io.version>
-    <commons-codec.version>1.15</commons-codec.version>
+    <commons-io.version>2.14.0</commons-io.version>
+    <commons-codec.version>1.16.0</commons-codec.version>
     <groovy-all.version>2.4.21</groovy-all.version>
+    <!-- WireMock 3.0 and later requires Java 11 -->
     <wiremock.version>2.35.1</wiremock.version>
+    <!-- Mockito 5.0 and later requires Java 11 -->
     <mockito.version>4.11.0</mockito.version>
-    <bytebuddy.version>1.14.4</bytebuddy.version>
+    <bytebuddy.version>1.14.8</bytebuddy.version>
+    <!-- CXF 3.6 and later requires Java 11 -->
     <cxf.version>3.5.7</cxf.version>
     <saaj-impl.version>1.5.3</saaj-impl.version>
     <jersey.version>2.40</jersey.version>
@@ -66,7 +69,7 @@
     <hamcrest.version>2.2</hamcrest.version>
     <bcprov.version>1.70</bcprov.version>
     <angularjs.version>1.8.2</angularjs.version>
-    <guava.version>32.1.1-jre</guava.version>
+    <guava.version>32.1.2-jre</guava.version>
     <snakeyaml.version>2.2</snakeyaml.version>
   </properties>
   <dependencyManagement>
