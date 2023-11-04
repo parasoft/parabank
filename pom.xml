@@ -22,7 +22,7 @@
     <maven-surefire-plugin.version>3.2.1</maven-surefire-plugin.version>
     <maven-war-plugin.version>3.4.0</maven-war-plugin.version>
     <cargo-maven3-plugin.version>1.10.10</cargo-maven3-plugin.version>
-    <maven-parasoft-plugin.version>3.13</maven-parasoft-plugin.version>
+    <soatest-maven-plugin.version>1.0.0-SNAPSHOT</soatest-maven-plugin.version>
     <versions-maven-plugin.version>2.16.1</versions-maven-plugin.version>
     <dependency-check-maven.version>8.4.2</dependency-check-maven.version>
     <phase.start-container></phase.start-container>
@@ -679,9 +679,9 @@
           </configuration>
         </plugin>
         <plugin>
-          <groupId>Parasoft</groupId>
-          <artifactId>maven-parasoft-plugin</artifactId>
-          <version>${maven-parasoft-plugin.version}</version>
+          <groupId>com.parasoft</groupId>
+          <artifactId>soatest-maven-plugin</artifactId>
+          <version>${soatest-maven-plugin.version}</version>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -827,17 +827,17 @@
         <phase.start-container>pre-integration-test</phase.start-container>
         <phase.stop-container>post-integration-test</phase.stop-container>
 
-        <!-- default values of user properties for maven-parasoft-plugin -->
-        <parasoft.config>soatest.builtin://Demo Configuration</parasoft.config>
-        <parasoft.data>${project.build.directory}/soatest/workspace</parasoft.data>
-        <parasoft.failOnViolation>false</parasoft.failOnViolation>
-        <parasoft.import>${project.basedir}/soatest/TestAssets</parasoft.import>
-        <parasoft.localsettings>${project.build.directory}/soatest/localsettings.properties</parasoft.localsettings>
-        <parasoft.report>${project.build.directory}/soatest/reports/report.html</parasoft.report>
-        <parasoft.resource>/TestAssets/Smoke.tst</parasoft.resource>
+        <!-- default values of user properties for soatest-maven-plugin -->
+        <soatest.config>soatest.builtin://Demo Configuration</soatest.config>
+        <soatest.data>${project.build.directory}/soatest/workspace</soatest.data>
+        <soatest.fail>false</soatest.fail>
+        <soatest.import>${project.basedir}/soatest/TestAssets</soatest.import>
+        <soatest.settings>${project.build.directory}/soatest/localsettings.properties</soatest.settings>
+        <soatest.report>${project.build.directory}/soatest/reports/report.html</soatest.report>
+        <soatest.resources>/TestAssets/Smoke.tst</soatest.resources>
 
         <!-- override on Maven command line if you are on Windows or otherwise can't use the docker image -->
-        <parasoft.soatest.home>${project.basedir}/soatest/docker</parasoft.soatest.home>
+        <soatest.home>${project.basedir}/soatest/docker</soatest.home>
 
         <!-- set to true on Maven command line if you accept the EULA: https://www.parasoft.com/license -->
         <parasoft.eula.accepted>false</parasoft.eula.accepted>
@@ -882,7 +882,7 @@
                     <mkdir dir="${project.build.directory}/soatest/workspace" />
                     <copy file="${org.hsqldb:hsqldb:jar:jdk8}" tofile="${project.build.directory}/soatest/jdbc/hsqldb-jdk8.jar" />
                     <!-- create settings file -->
-                    <propertyfile file="${parasoft.localsettings}">
+                    <propertyfile file="${soatest.settings}">
                       <entry key="parasoft.eula.accepted" value="${parasoft.eula.accepted}" />
                       <entry key="parasoft.localsettings.usage.reporting.enabled" value="${parasoft.localsettings.usage.reporting.enabled}" />
                       <entry key="dtp.enabled" value="${parasoft.localsettings.dtp.enabled}" />
@@ -913,8 +913,8 @@
             </executions>
           </plugin>
           <plugin>
-            <groupId>Parasoft</groupId>
-            <artifactId>maven-parasoft-plugin</artifactId>
+            <groupId>com.parasoft</groupId>
+            <artifactId>soatest-maven-plugin</artifactId>
             <executions>
               <execution>
                 <id>soatest-test</id>
@@ -923,17 +923,12 @@
                   <goal>soatest</goal>
                 </goals>
                 <configuration>
-                  <clean>false</clean>
-                  <config>${parasoft.config}</config>
-                  <data>${parasoft.data}</data>
-                  <failOnViolation>${parasoft.failOnViolation}</failOnViolation>
-                  <importArgument>${parasoft.import}</importArgument>
-                  <localsettings>${parasoft.localsettings}</localsettings>
-                  <report>${parasoft.report}</report>
-                  <resources>
-                    <resource>${parasoft.resource}</resource>
-                  </resources>
-                  <soatestHome>${parasoft.soatest.home}</soatestHome>
+                  <config>${soatest.config}</config>
+                  <data>${soatest.data}</data>
+                  <fail>${soatest.fail}</fail>
+                  <settings>${soatest.settings}</settings>
+                  <report>${soatest.report}</report>
+                  <soatestHome>${soatest.home}</soatestHome>
                 </configuration>
               </execution>
             </executions>
