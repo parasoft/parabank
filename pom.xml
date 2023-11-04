@@ -788,7 +788,7 @@
             <artifactInstaller>
               <groupId>org.apache.tomcat</groupId>
               <artifactId>tomcat</artifactId>
-              <version>9.0.80</version>
+              <version>9.0.82</version>
             </artifactInstaller>
             <timeout>600000</timeout>
           </container>
