@@ -274,7 +274,10 @@ public class ServerBean implements InitializingBean, DisposableBean, Application
             try {
                 con = dataSource.getConnection();
                 con.createStatement().execute("SHUTDOWN");
-                return waitForShutdown(ServerConstants.SERVER_STATE_ONLINE);
+                int status = waitForShutdown(ServerConstants.SERVER_STATE_ONLINE);
+                if (status == ServerConstants.SERVER_STATE_SHUTDOWN) {
+                    return status;
+                }
             } catch (final SQLException ex) {
                 log.error("HSQL Server Shutdown failed: ", ex);
             } finally {
