@@ -1,4 +1,4 @@
-FROM tomcat:9.0.82-jre11-openjdk
+FROM tomcat:9.0.82-jre11-temurin-jammy
 
 ARG TOMCAT_HOME=/usr/local/tomcat
 
