@@ -22,7 +22,7 @@
     <maven-surefire-plugin.version>3.2.2</maven-surefire-plugin.version>
     <maven-war-plugin.version>3.4.0</maven-war-plugin.version>
     <cargo-maven3-plugin.version>1.10.10</cargo-maven3-plugin.version>
-    <soatest-maven-plugin.version>1.0.0-SNAPSHOT</soatest-maven-plugin.version>
+    <soatest-maven-plugin.version>1.0.0</soatest-maven-plugin.version>
     <versions-maven-plugin.version>2.16.1</versions-maven-plugin.version>
     <dependency-check-maven.version>8.4.2</dependency-check-maven.version>
     <phase.start-container></phase.start-container>
