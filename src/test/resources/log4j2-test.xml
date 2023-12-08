@@ -19,7 +19,9 @@
     <Logger name="org.apache.activemq" level="OFF" additivity="false">
       <AppenderRef ref="Console"/>
     </Logger>
-    
+    <Logger name="org.openqa.selenium" level="info" additivity="false">
+      <AppenderRef ref="Console"/>
+    </Logger>
     <Root level="info">
       <AppenderRef ref="Console"/>
     </Root>
