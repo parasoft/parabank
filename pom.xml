@@ -25,8 +25,8 @@
     <soatest-maven-plugin.version>1.0.0</soatest-maven-plugin.version>
     <versions-maven-plugin.version>2.16.2</versions-maven-plugin.version>
     <dependency-check-maven.version>9.0.7</dependency-check-maven.version>
-    <phase.start-container></phase.start-container>
-    <phase.stop-container></phase.stop-container>
+    <phase.start-container>pre-integration-test</phase.start-container>
+    <phase.stop-container>post-integration-test</phase.stop-container>
     <jax-activation.version>1.2.2</jax-activation.version>
     <jax-annotation.version>1.3.5</jax-annotation.version>
     <jax-jws.version>2.1.0</jax-jws.version>
@@ -45,32 +45,32 @@
     <jstl.version>1.2.5</jstl.version>
     <hsqldb.version>2.7.2</hsqldb.version>
     <commons-dbcp2.version>2.11.0</commons-dbcp2.version>
-    <aspectjweaver.version>1.9.20.1</aspectjweaver.version>
-    <jackson.version>2.15.3</jackson.version>
+    <aspectjweaver.version>1.9.21</aspectjweaver.version>
+    <jackson.version>2.16.1</jackson.version>
     <woodstox.version>6.5.1</woodstox.version>
-    <slf4j.version>1.7.36</slf4j.version>
-    <log4j.version>2.21.1</log4j.version>
+    <slf4j.version>2.0.9</slf4j.version>
+    <log4j.version>2.22.1</log4j.version>
     <swagger2raml.version>1.0.0</swagger2raml.version>
-    <commons-io.version>2.15.0</commons-io.version>
+    <commons-io.version>2.15.1</commons-io.version>
     <commons-codec.version>1.16.0</commons-codec.version>
     <groovy-all.version>2.4.21</groovy-all.version>
     <!-- WireMock 3.0 and later requires Java 11 -->
     <wiremock.version>2.35.1</wiremock.version>
     <!-- Mockito 5.0 and later requires Java 11 -->
     <mockito.version>4.11.0</mockito.version>
-    <bytebuddy.version>1.14.9</bytebuddy.version>
+    <bytebuddy.version>1.14.11</bytebuddy.version>
     <!-- CXF 3.6 and later requires Java 11 -->
     <cxf.version>3.5.7</cxf.version>
     <cxf.wss4j.version>2.4.3</cxf.wss4j.version>
     <saaj-impl.version>1.5.3</saaj-impl.version>
     <jersey.version>2.41</jersey.version>
-    <javassist.version>3.29.2-GA</javassist.version>
-    <spring.version>5.3.30</spring.version>
+    <javassist.version>3.30.2-GA</javassist.version>
+    <spring.version>5.3.31</spring.version>
     <junitparams.version>1.1.1</junitparams.version>
     <hamcrest.version>2.2</hamcrest.version>
-    <bcprov.version>1.76</bcprov.version>
-    <angularjs.version>1.8.2</angularjs.version>
-    <guava.version>32.1.3-jre</guava.version>
+    <bcprov.version>1.77</bcprov.version>
+    <angularjs.version>1.8.3</angularjs.version>
+    <guava.version>33.0.0-jre</guava.version>
     <snakeyaml.version>2.2</snakeyaml.version>
     <!-- Selenium 4.14 and later requires Java 11 -->
     <selenium.version>4.13.0</selenium.version>
@@ -313,7 +313,7 @@
     </dependency>
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-slf4j-impl</artifactId>
+      <artifactId>log4j-slf4j2-impl</artifactId>
     </dependency>
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
@@ -847,9 +847,6 @@
     <profile>
       <id>soatest-it</id>
       <properties>
-        <phase.start-container>pre-integration-test</phase.start-container>
-        <phase.stop-container>post-integration-test</phase.stop-container>
-
         <!-- default values of user properties for soatest-maven-plugin -->
         <soatest.config>soatest.builtin://Demo Configuration</soatest.config>
         <soatest.data>${project.build.directory}/soatest/workspace</soatest.data>
