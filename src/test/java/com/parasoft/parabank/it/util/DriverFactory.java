@@ -1,5 +1,6 @@
 package com.parasoft.parabank.it.util;
 
+import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -7,7 +8,9 @@ import java.util.logging.Logger;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.GeckoDriverService;
@@ -28,11 +31,11 @@ public final class DriverFactory {
 
     public static WebDriver getDriver(String browserType) {
         String browser = browserType.trim();
-        if (browser.isEmpty()) {
-            return new ChromeDriver();
-        }
         if (browser.equalsIgnoreCase("Firefox")) { //$NON-NLS-1$
             FirefoxOptions options = new FirefoxOptions();
+            if (GraphicsEnvironment.isHeadless()) {
+                options.addArguments("-headless"); //$NON-NLS-1$
+            }
             GeckoDriverService service = null;
             File snapGeckoDriver = new File("/snap/bin/geckodriver") { //$NON-NLS-1$
                 // https://github.com/SeleniumHQ/selenium/issues/7788
@@ -48,7 +51,11 @@ public final class DriverFactory {
             return service != null ? new FirefoxDriver(service, options) : new FirefoxDriver(options);
         }
         if (browser.equalsIgnoreCase("Edge")) { //$NON-NLS-1$
-            return new EdgeDriver();
+            EdgeOptions options = new EdgeOptions();
+            if (GraphicsEnvironment.isHeadless()) {
+                options.addArguments("--headless"); //$NON-NLS-1$
+            }
+            return new EdgeDriver(options);
         }
         if (browser.equalsIgnoreCase("IE") || browser.equalsIgnoreCase("Internet Explorer")) { //$NON-NLS-1$ //$NON-NLS-2$
             return new InternetExplorerDriver();
@@ -56,6 +63,10 @@ public final class DriverFactory {
         if (browser.equalsIgnoreCase("Safari")) { //$NON-NLS-1$
             return new SafariDriver();
         }
-        return new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        if (GraphicsEnvironment.isHeadless()) {
+            options.addArguments("--headless"); //$NON-NLS-1$
+        }
+        return new ChromeDriver(options);
     }
 }
