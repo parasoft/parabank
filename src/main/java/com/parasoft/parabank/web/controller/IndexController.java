@@ -21,7 +21,6 @@ import com.parasoft.parabank.domain.News;
 import com.parasoft.parabank.domain.logic.NewsManager;
 import com.parasoft.parabank.util.AccessModeController;
 import com.parasoft.parabank.util.Constants;
-import com.parasoft.parabank.util.CustomRamlGenerator;
 
 /**
  * Controller for home page
@@ -33,23 +32,6 @@ public class IndexController extends AbstractBankController {
 
     @Resource(name = "newsManager")
     private NewsManager newsManager;
-
-    @Resource(name = "customRamlGenerator")
-    private CustomRamlGenerator customRamlGenerator;
-
-    /**
-     * <DL>
-     * <DT>Description:</DT>
-     * <DD>Getter for the customRamlGenerator property</DD>
-     * <DT>Date:</DT>
-     * <DD>Oct 28, 2015</DD>
-     * </DL>
-     *
-     * @return the value of customRamlGenerator field
-     */
-    public CustomRamlGenerator getCustomRamlGenerator() {
-        return customRamlGenerator;
-    }
 
     @RequestMapping
     public ModelAndView handleRequest(final HttpSession session) throws Exception {
@@ -83,29 +65,12 @@ public class IndexController extends AbstractBankController {
             //return null;
             mav = new ModelAndView(new RedirectView("/initializeDB.htm", true));
         }
-        //adding the RAML generation here
-        //getCustomRamlGenerator().generateRaml();
         return mav;
     }
 
     @Override
     public void setAccessModeController(final AccessModeController aAccessModeController) {
         // not implemented
-    }
-
-    /**
-     * <DL>
-     * <DT>Description:</DT>
-     * <DD>Setter for the customRamlGenerator property</DD>
-     * <DT>Date:</DT>
-     * <DD>Oct 28, 2015</DD>
-     * </DL>
-     *
-     * @param aCustomRamlGenerator
-     *            new value for the customRamlGenerator property
-     */
-    public void setCustomRamlGenerator(final CustomRamlGenerator aCustomRamlGenerator) {
-        customRamlGenerator = aCustomRamlGenerator;
     }
 
     /** {@inheritDoc} */

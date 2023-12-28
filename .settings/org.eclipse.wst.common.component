@@ -6,7 +6,6 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/scripts"/>
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/webapp"/>
-        <wb-resource deploy-path="/" source-path="/target/generated-sources/jaxrs-raml"/>
         <property name="context-root" value="parabank"/>
         <property name="java-output-path" value="/parabank/target/classes"/>
     </wb-module>

@@ -108,7 +108,6 @@
 				<a href="<c:url value="services/ParaBank?wsdl"/>">WSDL</a>&nbsp;|&nbsp;<a
 				href="<c:url value="services/bank?_wadl&_type=xml"/>">WADL</a>&nbsp;|&nbsp;<a
 				href="<c:url value="/api-docs/index.html"/>">SWAGGER</a>&nbsp;]</td>
-				<!-- Not ready yet |&nbsp;<a href="<c:url value="/raml/raml.api"/>">RAML</a>&nbsp; -->
 		</tr>
 		<tr>
 			<td align="right" width="30%"><b><fmt:message

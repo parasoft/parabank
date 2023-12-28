@@ -80,7 +80,4 @@ public interface Constants {
     String USERSESSION = "userSession";
 
     String DB_PATH_FMT = "%1$s/WEB-INF/db/%2$s";
-
-    String RAML_PATH_FMT = "%1$s/raml/%2$s";
-
 }
