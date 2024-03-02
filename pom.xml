@@ -72,7 +72,7 @@
     <snakeyaml.version>2.2</snakeyaml.version>
     <!-- Selenium 4.14 and later requires Java 11 -->
     <selenium.version>4.13.0</selenium.version>
-    <selenium.latest.version>4.16.1</selenium.latest.version>
+    <selenium.latest.version>4.18.1</selenium.latest.version>
   </properties>
   <dependencyManagement>
     <dependencies>
