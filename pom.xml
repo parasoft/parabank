@@ -39,7 +39,7 @@
     <joda-time.version>2.12.5</joda-time.version>
     <!-- ActiveMQ 5.17 and later requires Java 11 -->
     <activemq.version>5.16.7</activemq.version>
-    <swagger-jaxrs.version>1.6.12</swagger-jaxrs.version>
+    <swagger-jaxrs.version>1.6.13</swagger-jaxrs.version>
     <servlet.version>3.1.0</servlet.version>
     <junit.version>4.13.2</junit.version>
     <jstl.version>1.2.5</jstl.version>
