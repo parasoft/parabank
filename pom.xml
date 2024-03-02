@@ -36,7 +36,7 @@
     <jaxb.version>2.3.3</jaxb.version>
     <jaxb.impl.version>2.3.9</jaxb.impl.version>
     <istack.version>3.0.12</istack.version>
-    <joda-time.version>2.12.5</joda-time.version>
+    <joda-time.version>2.12.7</joda-time.version>
     <!-- ActiveMQ 5.17 and later requires Java 11 -->
     <activemq.version>5.16.7</activemq.version>
     <swagger-jaxrs.version>1.6.13</swagger-jaxrs.version>
