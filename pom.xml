@@ -48,7 +48,7 @@
     <aspectjweaver.version>1.9.21.1</aspectjweaver.version>
     <jackson.version>2.16.1</jackson.version>
     <woodstox.version>6.6.1</woodstox.version>
-    <slf4j.version>2.0.9</slf4j.version>
+    <slf4j.version>2.0.12</slf4j.version>
     <log4j.version>2.23.0</log4j.version>
     <commons-io.version>2.15.1</commons-io.version>
     <commons-codec.version>1.16.1</commons-codec.version>
