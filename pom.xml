@@ -68,7 +68,7 @@
     <hamcrest.version>2.2</hamcrest.version>
     <bcprov.version>1.77</bcprov.version>
     <angularjs.version>1.8.3</angularjs.version>
-    <guava.version>33.0.0-jre</guava.version>
+    <guava.version>33.1.0-jre</guava.version>
     <snakeyaml.version>2.2</snakeyaml.version>
     <!-- Selenium 4.14 and later requires Java 11 -->
     <selenium.version>4.13.0</selenium.version>
