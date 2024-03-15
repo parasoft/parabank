@@ -24,7 +24,7 @@
     <cargo-maven3-plugin.version>1.10.12</cargo-maven3-plugin.version>
     <soatest-maven-plugin.version>1.0.0</soatest-maven-plugin.version>
     <versions-maven-plugin.version>2.16.2</versions-maven-plugin.version>
-    <dependency-check-maven.version>9.0.9</dependency-check-maven.version>
+    <dependency-check-maven.version>9.0.10</dependency-check-maven.version>
     <phase.start-container>pre-integration-test</phase.start-container>
     <phase.stop-container>post-integration-test</phase.stop-container>
     <jax-activation.version>1.2.2</jax-activation.version>
