@@ -1,10 +1,8 @@
 // parasoft-begin-suppress PB.RE.RCODE "Reviewed and found appropriate for this class only"
 package com.parasoft.parabank.util;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.net.HttpURLConnection;
@@ -31,7 +29,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
 import com.parasoft.parabank.domain.Account;
 import com.parasoft.parabank.domain.Address;
 import com.parasoft.parabank.domain.Customer;
@@ -62,14 +59,9 @@ public class AccessModeController {
 
     private static final String POST = "POST";
 
-    private static int getCatalinaPort() {
-        final int port = Util.getPort();
-        return port > 0 ? port : Util.DEFAULT_CATALINA_PORT;
-    }
-
     private Customer customer = null;
 
-    private final int catalinaPort;
+    private volatile Integer catalinaPort;
 
     @Resource(name = "adminManager")
     private AdminManager adminManager;
@@ -78,8 +70,19 @@ public class AccessModeController {
     private BankManager bankManager;
 
     public AccessModeController() {
-        catalinaPort = getCatalinaPort();
-        LOG.info("Getting Tomcat HTTP port = " + catalinaPort);
+    }
+
+    private int getCatalinaPort() {
+        if (catalinaPort == null) {
+            synchronized (this) {
+                if (catalinaPort == null) {
+                    final int port = Util.getPort();
+                    catalinaPort = port > 0 ? port: Util.DEFAULT_CATALINA_PORT;
+                    LOG.info("Getting Tomcat HTTP port = " + catalinaPort);
+                }
+            }
+        }
+        return catalinaPort;
     }
 
     /**
@@ -131,7 +134,7 @@ public class AccessModeController {
 
         if (accessMode.equalsIgnoreCase("SOAP")) {
 
-            final URL url = new URL("http://localhost:" + catalinaPort + "/parabank/services/ParaBank?wsdl");
+            final URL url = new URL("http://localhost:" + getCatalinaPort() + "/parabank/services/ParaBank?wsdl");
             final QName qname = new QName("http://service.parabank.parasoft.com/", "ParaBank");
             final Service service = Service.create(url, qname);
             final ParaBankService parabankService = service.getPort(ParaBankService.class);
@@ -227,14 +230,14 @@ public class AccessModeController {
         final String accessMode = adminManager.getParameter("accessmode");
 
         if (accessMode.equalsIgnoreCase("SOAP")) {
-            final URL url = new URL("http://localhost:" + catalinaPort + "/parabank/services/ParaBank?wsdl");
+            final URL url = new URL("http://localhost:" + getCatalinaPort() + "/parabank/services/ParaBank?wsdl");
             final QName qname = new QName("http://service.parabank.parasoft.com/", "ParaBank");
             final Service service = Service.create(url, qname);
             final ParaBankService parabankService = service.getPort(ParaBankService.class);
             parabankService.cleanDB();
             LOG.info("Using SOAP Web Service: ParaBank");
         } else if (accessMode.equalsIgnoreCase("RESTXML")) {
-            final URL url = new URL("http://localhost:" + catalinaPort + "/parabank/services/bank/cleanDB");
+            final URL url = new URL("http://localhost:" + getCatalinaPort() + "/parabank/services/bank/cleanDB");
 
             final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
@@ -244,7 +247,7 @@ public class AccessModeController {
             LOG.info("Using REST xml Web Service: Bank");
 
         } else if (accessMode.equalsIgnoreCase("RESTJSON")) {
-            final URL url = new URL("http://localhost:" + catalinaPort + "/parabank/services/bank/cleanDB");
+            final URL url = new URL("http://localhost:" + getCatalinaPort() + "/parabank/services/bank/cleanDB");
             final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Accept", "application/json");
@@ -266,14 +269,14 @@ public class AccessModeController {
         final String accessMode = adminManager.getParameter("accessmode");
 
         if (accessMode.equalsIgnoreCase("SOAP")) {
-            final URL url = new URL("http://localhost:" + catalinaPort + "/parabank/services/ParaBank?wsdl");
+            final URL url = new URL("http://localhost:" + getCatalinaPort() + "/parabank/services/ParaBank?wsdl");
             final QName qname = new QName("http://service.parabank.parasoft.com/", "ParaBank");
             final Service service = Service.create(url, qname);
             final ParaBankService parabankService = service.getPort(ParaBankService.class);
             parabankService.initializeDB();
             LOG.info("Using SOAP Web Service: ParaBank");
         } else if (accessMode.equalsIgnoreCase("RESTXML")) {
-            final URL url = new URL("http://localhost:" + catalinaPort + "/parabank/services/bank/initializeDB");
+            final URL url = new URL("http://localhost:" + getCatalinaPort() + "/parabank/services/bank/initializeDB");
 
             final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
@@ -283,7 +286,7 @@ public class AccessModeController {
 
             LOG.info("Using REST xml Web Service: Bank");
         } else if (accessMode.equalsIgnoreCase("RESTJSON")) {
-            final URL url = new URL("http://localhost:" + catalinaPort + "/parabank/services/bank/initializeDB");
+            final URL url = new URL("http://localhost:" + getCatalinaPort() + "/parabank/services/bank/initializeDB");
 
             final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
@@ -318,7 +321,7 @@ public class AccessModeController {
         }
 
         if (accessMode.equalsIgnoreCase("SOAP")) {
-            final URL url = new URL("http://localhost:" + catalinaPort + "/parabank/services/ParaBank?wsdl");
+            final URL url = new URL("http://localhost:" + getCatalinaPort() + "/parabank/services/ParaBank?wsdl");
             final QName qname = new QName("http://service.parabank.parasoft.com/", "ParaBank");
             final Service service = Service.create(url, qname);
             final ParaBankService parabankService = service.getPort(ParaBankService.class);
@@ -378,7 +381,7 @@ public class AccessModeController {
         }
 
         if (accessMode.equalsIgnoreCase("SOAP")) {
-            final URL url = new URL("http://localhost:" + catalinaPort + "/parabank/services/ParaBank?wsdl");
+            final URL url = new URL("http://localhost:" + getCatalinaPort() + "/parabank/services/ParaBank?wsdl");
             final QName qname = new QName("http://service.parabank.parasoft.com/", "ParaBank");
             final Service service = Service.create(url, qname);
             final ParaBankService parabankService = service.getPort(ParaBankService.class);
@@ -438,7 +441,7 @@ public class AccessModeController {
 
         if (accessMode.equalsIgnoreCase("SOAP")) {
 
-            final URL url = new URL("http://localhost:" + catalinaPort + "/parabank/services/ParaBank?wsdl");
+            final URL url = new URL("http://localhost:" + getCatalinaPort() + "/parabank/services/ParaBank?wsdl");
             final QName qname = new QName("http://service.parabank.parasoft.com/", "ParaBank");
             final Service service = Service.create(url, qname);
             final ParaBankService parabankService = service.getPort(ParaBankService.class);
@@ -499,7 +502,7 @@ public class AccessModeController {
 
         if (accessMode.equalsIgnoreCase("SOAP")) {
 
-            final URL url = new URL("http://localhost:" + catalinaPort + "/parabank/services/ParaBank?wsdl");
+            final URL url = new URL("http://localhost:" + getCatalinaPort() + "/parabank/services/ParaBank?wsdl");
             final QName qname = new QName("http://service.parabank.parasoft.com/", "ParaBank");
             final Service service = Service.create(url, qname);
             final ParaBankService parabankService = service.getPort(ParaBankService.class);
@@ -559,7 +562,7 @@ public class AccessModeController {
         Transactions ts = new Transactions();
 
         if (accessMode.equalsIgnoreCase("SOAP")) {
-            final URL url = new URL("http://localhost:" + catalinaPort + "/parabank/services/ParaBank?wsdl");
+            final URL url = new URL("http://localhost:" + getCatalinaPort() + "/parabank/services/ParaBank?wsdl");
             final QName qname = new QName("http://service.parabank.parasoft.com/", "ParaBank");
             final Service service = Service.create(url, qname);
             final ParaBankService parabankService = service.getPort(ParaBankService.class);
@@ -623,7 +626,7 @@ public class AccessModeController {
         }
 
         if (accessMode.equalsIgnoreCase("SOAP")) {
-            final URL url = new URL("http://localhost:" + catalinaPort + "/parabank/services/ParaBank?wsdl");
+            final URL url = new URL("http://localhost:" + getCatalinaPort() + "/parabank/services/ParaBank?wsdl");
             final QName qname = new QName("http://service.parabank.parasoft.com/", "ParaBank");
             final Service service = Service.create(url, qname);
             final ParaBankService parabankService = service.getPort(ParaBankService.class);
@@ -684,7 +687,7 @@ public class AccessModeController {
 
         if (accessMode.equalsIgnoreCase("SOAP")) {
 
-            final URL url = new URL("http://localhost:" + catalinaPort + "/parabank/services/ParaBank?wsdl");
+            final URL url = new URL("http://localhost:" + getCatalinaPort() + "/parabank/services/ParaBank?wsdl");
             final QName qname = new QName("http://service.parabank.parasoft.com/", "ParaBank");
             final Service service = Service.create(url, qname);
             final ParaBankService parabankService = service.getPort(ParaBankService.class);
@@ -781,7 +784,7 @@ public class AccessModeController {
     }
 
     private String getDefaultRestEndpoint() {
-        return "http://localhost:" + catalinaPort + "/parabank/services/bank";
+        return "http://localhost:" + getCatalinaPort() + "/parabank/services/bank";
     }
 
     public List<Transaction> getTransactionsForAccount(final Account account, final TransactionCriteria criteria)
@@ -806,7 +809,7 @@ public class AccessModeController {
 
         if (accessMode.equalsIgnoreCase("SOAP")) {
 
-            final URL url = new URL("http://localhost:" + catalinaPort + "/parabank/services/ParaBank?wsdl");
+            final URL url = new URL("http://localhost:" + getCatalinaPort() + "/parabank/services/ParaBank?wsdl");
             final QName qname = new QName("http://service.parabank.parasoft.com/", "ParaBank");
             final Service service = Service.create(url, qname);
             final ParaBankService parabankService = service.getPort(ParaBankService.class);
@@ -889,7 +892,7 @@ public class AccessModeController {
 
         if (accessMode != null && accessMode.equalsIgnoreCase("SOAP")) {
 
-            final URL url = new URL("http://localhost:" + catalinaPort + "/parabank/services/ParaBank?wsdl");
+            final URL url = new URL("http://localhost:" + getCatalinaPort() + "/parabank/services/ParaBank?wsdl");
             final QName qname = new QName("http://service.parabank.parasoft.com/", "ParaBank");
             final Service service = Service.create(url, qname);
             final ParaBankService parabankService = service.getPort(ParaBankService.class);
@@ -966,7 +969,7 @@ public class AccessModeController {
 
         if (accessMode.equalsIgnoreCase("SOAP")) {
 
-            final URL url = new URL("http://localhost:" + catalinaPort + "/parabank/services/ParaBank?wsdl");
+            final URL url = new URL("http://localhost:" + getCatalinaPort() + "/parabank/services/ParaBank?wsdl");
             final QName qname = new QName("http://service.parabank.parasoft.com/", "ParaBank");
             final Service service = Service.create(url, qname);
             final ParaBankService parabankService = service.getPort(ParaBankService.class);
