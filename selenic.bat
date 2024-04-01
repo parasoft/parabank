@@ -58,6 +58,6 @@ call mvn
     -Dselenic.coverage.showdetails=true ^
     -DargLine=-javaagent:%SELENIC_HOME%\selenic_agent.jar=captureDom=true,selfHealing=true ^
     cargo:start ^
-    com.parasoft:selenic-maven-plugin:1.0.0-SNAPSHOT:impacted-tests ^
+    com.parasoft:selenic-maven-plugin:1.0.0:impacted-tests ^
     failsafe:integration-test ^
     cargo:stop
