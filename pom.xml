@@ -2,14 +2,14 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.parasoft</groupId>
   <artifactId>parabank</artifactId>
-  <version>3.0.0-SNAPSHOT</version>
+  <version>4.0.0-SNAPSHOT</version>
   <packaging>war</packaging>
   <name>ParaBank Sample Project</name>
   <description>ParaBank Sample Project for use with Parasoft SOAtest and Virtualize</description>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
     <maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
     <maven-assembly-plugin.version>3.7.0</maven-assembly-plugin.version>
     <maven-clean-plugin.version>3.3.2</maven-clean-plugin.version>
@@ -38,7 +38,7 @@
     <istack.version>3.0.12</istack.version>
     <joda-time.version>2.12.7</joda-time.version>
     <!-- ActiveMQ 5.17 and later requires Java 11 -->
-    <activemq.version>5.16.7</activemq.version>
+    <activemq.version>5.17.6</activemq.version>
     <swagger-jaxrs.version>1.6.13</swagger-jaxrs.version>
     <servlet.version>3.1.0</servlet.version>
     <junit.version>4.13.2</junit.version>
@@ -53,12 +53,12 @@
     <commons-io.version>2.15.1</commons-io.version>
     <commons-codec.version>1.16.1</commons-codec.version>
     <!-- WireMock 3.0 and later requires Java 11 -->
-    <wiremock.version>2.35.2</wiremock.version>
+    <wiremock.version>3.0.0</wiremock.version>
     <!-- Mockito 5.0 and later requires Java 11 -->
-    <mockito.version>4.11.0</mockito.version>
+    <mockito.version>5.0.0</mockito.version>
     <bytebuddy.version>1.14.12</bytebuddy.version>
     <!-- CXF 3.6 and later requires Java 11 -->
-    <cxf.version>3.5.8</cxf.version>
+    <cxf.version>3.6.3</cxf.version>
     <cxf.wss4j.version>2.4.3</cxf.wss4j.version>
     <saaj-impl.version>1.5.3</saaj-impl.version>
     <jersey.version>2.41</jersey.version>
@@ -71,7 +71,7 @@
     <guava.version>33.1.0-jre</guava.version>
     <snakeyaml.version>2.2</snakeyaml.version>
     <!-- Selenium 4.14 and later requires Java 11 -->
-    <selenium.version>4.13.0</selenium.version>
+    <selenium.version>4.14.1</selenium.version>
     <selenium.latest.version>4.18.1</selenium.latest.version>
   </properties>
   <dependencyManagement>
@@ -342,6 +342,18 @@
     </dependency>
 
     <!-- CXF Dependencies -->
+    <!--Conflicting jaxb version so exclude it-->
+    <dependency>
+      <groupId>org.ehcache</groupId>
+      <artifactId>ehcache</artifactId>
+      <version>3.10.8</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.glassfish.jaxb</groupId>
+          <artifactId>jaxb-runtime</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
     <dependency>
       <groupId>com.sun.xml.messaging.saaj</groupId>
       <artifactId>saaj-impl</artifactId>
@@ -363,9 +375,16 @@
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-rt-frontend-jaxws</artifactId>
     </dependency>
+    <!--We explictiy pull in org.ehcache to prevent transitive conflicts -->
     <dependency>
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-rt-ws-security</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>org.ehcache</groupId>
+          <artifactId>ehcache</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.apache.cxf</groupId>
@@ -492,8 +511,8 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>com.github.tomakehurst</groupId>
-      <artifactId>wiremock-jre8</artifactId>
+      <groupId>org.wiremock</groupId>
+      <artifactId>wiremock</artifactId>
       <version>${wiremock.version}</version>
       <scope>test</scope>
     </dependency>
