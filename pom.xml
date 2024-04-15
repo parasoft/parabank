@@ -68,7 +68,7 @@
     <hamcrest.version>2.2</hamcrest.version>
     <bcprov.version>1.78</bcprov.version>
     <angularjs.version>1.8.3</angularjs.version>
-    <react.version>18.2.0</react.version>
+    <jquery.version>3.7.1</jquery.version>
     <guava.version>33.1.0-jre</guava.version>
     <snakeyaml.version>2.2</snakeyaml.version>
     <!-- Selenium 4.14 and later requires Java 11 -->
@@ -505,9 +505,9 @@
       <version>${angularjs.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.webjars.npm</groupId>
-      <artifactId>react</artifactId>
-      <version>${react.version}</version>
+      <groupId>org.webjars</groupId>
+      <artifactId>jquery</artifactId>
+      <version>${jquery.version}</version>
     </dependency>
 
     <!-- Testing dependencies -->

@@ -15,7 +15,7 @@
 		<link href="<c:url value="/style.css"/>" rel="stylesheet"
 			type="text/css" />
 		<script src="<c:url value="/webjars/angularjs/1.8.3/angular.min.js"/>"></script>
-		<script src="<c:url value="/webjars/react/18.2.0/umd/react.production.min.js"/>"></script>
+		<script src="<c:url value="/webjars/jquery/3.7.1/jquery.min.js" />"></script>
 	</head>
 
 	<body
