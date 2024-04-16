@@ -1,29 +1,29 @@
 <%@ include file="../include/include.jsp" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<div ng-app="RequestLoanApp" ng-controller="RequestLoanAppCtrl" ng-cloak>
+<div>
 
-    <div ng-if="showForm">
+    <div id="requestLoanForm">
 	   <h1 class="title">
 		  <fmt:message key="apply.for.a.loan" />
 	   </h1>
 
-	   <form ng-submit="submit()">
+	   <form>
 		<table class="form2">
 			<tr>
 				<td align="right" width="40%"><b><fmt:message key="loan.amount" />:</b> $</td>
-					<td width="20%"><input id="amount" class="input" ng-model="loanRequest.amount" /></td>
+					<td width="20%"><input id="amount" class="input"/></td>
 					<td width="40%"></td>
 			</tr>
 			<tr>
 				<td align="right" width="40%"><b><fmt:message key="down.payment" />:</b> $</td>
-				<td width="20%"><input id="downPayment" class="input" ng-model="loanRequest.downPayment" /></td>
+				<td width="20%"><input id="downPayment" class="input"/></td>
 				<td width="40%"></td>
 			</tr>
 			<tr>
 				<td align="right" width="40%"><b><fmt:message key="from.account.number" />:</b></td>
 				<td width="20%">
-				    <select id="fromAccountId" class="input" ng-init="loanRequest.fromAccountId = '${accounts[0]}'" ng-model="loanRequest.fromAccountId">
+				    <select id="fromAccountId" class="input" >
                         <c:forEach items="${accounts}" var="account">
                             <option value="${account}">${account}</option>
                         </c:forEach>
@@ -33,44 +33,40 @@
 			</tr>
 			<tr>
 				<td>&nbsp;</td>
-				<td colspan="2"><input type="submit" class="button" value="<fmt:message key="apply.now"/>"></td>
+				<td colspan="2"><input type="button" class="button" value="<fmt:message key="apply.now"/>"></td>
 			</tr>
 		</table>
 		<br>
 	</form>
     </div>
     
-    <div ng-if="showResult">
+    <div id="requestLoanResult" style="display:none">
         <h1 class="title"><fmt:message key="loan.request.processed"/></h1>
         <table class="form" style="width: 500px;">
             <tr>
                 <td align="right" width="25%"><b><fmt:message key="loan.provider.name"/>:</b></td>
-                <td id="loanProviderName" width="75%">{{loanResponse.loanProviderName}}</td>
+                <td id="loanProviderName" width="75%"></td>
             </tr>
             <tr>
                 <td align="right"><b><fmt:message key="loan.response.date"/>:</b></td>
-                <td id="responseDate">{{loanResponse.formattedDate}}</td>
+                <td id="responseDate"></td>
             </tr>
             <tr>
                 <td align="right"><b><fmt:message key="loan.status"/>:</b></td>
-                <td ng-if="loanResponse.approved" id="loanStatus"><fmt:message key="loan.approved"/></td>
-                <td ng-if="!loanResponse.approved" id="loanStatus"><fmt:message key="loan.denied"/></td>
+                <td id="loanStatus"></td>
             </tr>
         </table>
         <br/>
-        <div ng-if="!loanResponse.approved">
-            <p ng-if="loanResponse.message === 'error.insufficient.funds.for.down.payment'" class="error"><fmt:message key="error.insufficient.funds.for.down.payment"/></p>
-            <p ng-if="loanResponse.message === 'error.insufficient.funds'" class="error"><fmt:message key="error.insufficient.funds"/></p>
-            <p ng-if="loanResponse.message === 'error.insufficient.funds.and.down.payment'" class="error"><fmt:message key="error.insufficient.funds.and.down.payment"/></p>
-            <p ng-if="loanResponse.message === 'error.insufficient.down.payment'" class="error"><fmt:message key="error.insufficient.down.payment"/></p>
+        <div id="loanRequestDenied" style="display:none">
+            <p class="error"></p>
         </div>
-        <div ng-if="loanResponse.approved">
+        <div id="loanRequestApproved" style="display:none">
             <p><fmt:message key="loan.approved.message"/></p>    
-            <p><b><fmt:message key="new.account.number"/>:</b> <a id="newAccountId" href="${pageContext.request.contextPath}/activity.htm?id={{loanResponse.accountId}}">{{loanResponse.accountId}}</a></p>
+            <p><b><fmt:message key="new.account.number"/>:</b> <a id="newAccountId" href=""></a></p>
         </div>
     </div>
 
-	<div ng-if="showError">
+	<div id="requestLoanError" style="display:none">
 		<h1 class="title">
 			<fmt:message key="error.heading" />
 		</h1>
@@ -80,8 +76,77 @@
 	</div>
 
 </div>
-
 <script>
+	$(document).ready(function() {
+		var showForm = function(visible) {
+			if (visible) {
+				$("#requestLoanForm").show();
+			} else {
+				$("#requestLoanForm").hide();
+			}
+		}
+		var showResult = function(visible) {
+			if (visible) {
+				$("#requestLoanResult").show();
+			} else {
+				$("#requestLoanResult").hide();
+			}
+		}
+		
+		 function format(date) {
+			var month = date.getMonth() + 1 + "";
+			if (month.length === 1) {
+				month = "0" + month;
+			}
+			return month + '-' + date.getDate() + '-' +  date.getFullYear();
+		}
+		
+		var submit = function() {
+			var url = 'services_proxy/bank/requestLoan?customerId=${customerId}&amount=' + $("#amount").val() + '&downPayment=' + $("#downPayment").val() + '&fromAccountId=' + $("#fromAccountId").val();
+			$.ajax({
+				url: url,
+				type: 'POST',
+				success: function(response) {
+					showForm(false);
+					showResult(true);
+					$("#loanProviderName").html(response.loanProviderName);
+					$("#responseDate").html(format(new Date(response.responseDate)));
+					$("#loanStatus").html(response.approved ? '<fmt:message key="loan.approved"/>' : '<fmt:message key="loan.denied"/>');
+					if (response.approved)  {
+						$("#loanRequestApproved").show();
+					} else {
+						$("#loanRequestDenied").show();					
+					}
+					$("#newAccountId").attr("href", "${pageContext.request.contextPath}/activity.htm?id=" + response.accountId).text(response.accountId);
+					if (response.message === 'error.insufficient.funds.for.down.payment') {
+						$('#loanRequestDenied p.error').html('<fmt:message key="error.insufficient.funds.for.down.payment"/>');
+					}
+		            if (response.message === 'error.insufficient.funds.and.down.payment') {
+			            $('#loanRequestDenied p.error').html('<fmt:message key="error.insufficient.funds.and.down.payment"/>');
+		            }
+		            if (response.message === 'error.insufficient.funds') {
+			            $('#loanRequestDenied p.error').html('<fmt:message key="error.insufficient.funds"/>');
+		            }
+		            if (response.message === 'error.insufficient.down.payment') {
+			            $('#loanRequestDenied p.error').html('<fmt:message key="error.insufficient.down.payment"/>');
+		            }
+				},
+				error: function(response) {
+					showForm(false);
+					showResult(false);
+					$("#requestLoanError").show();
+				}
+			})
+		}
+		
+		$("input[type=button]").click(() => {
+        	submit(); 
+		});
+		
+	})
+</script>
+
+<!-- <script>
 var app = angular.module('RequestLoanApp', []);
 
 app.controller('RequestLoanAppCtrl', function ($scope, $rootScope, $http) {
@@ -124,4 +189,4 @@ app.controller('RequestLoanAppCtrl', function ($scope, $rootScope, $http) {
     }
 });
 
-</script>
+</script> -->
