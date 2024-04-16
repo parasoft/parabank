@@ -1,90 +1,92 @@
-<%@ include file="../include/include.jsp" %>
+<%@ include file="../include/include.jsp"%>
 
-<div ng-app="OverviewAccountsApp" ng-controller="OverviewAccountsCtrl" ng-cloak>
-  <div ng-if="showOverview">
-    <h1 class="title"><fmt:message key="accounts.overview" /></h1>
-    <table id="accountTable" class="gradient-style">
-      <thead>
-        <tr>
-          <th><fmt:message key="account" /></th>
-          <th><fmt:message key="balance" /></th>
-          <th><fmt:message key="available.amount" /></th>
-        </tr>
-      </thead>
-      <tbody>
+<div id="overviewAccountsApp">
+	<div id="showOverview">
+		<h1 class="title">
+			<fmt:message key="accounts.overview" />
+		</h1>
+		<table id="accountTable" class="gradient-style">
+			<thead>
+				<tr>
+					<th><fmt:message key="account" /></th>
+					<th><fmt:message key="balance" /></th>
+					<th><fmt:message key="available.amount" /></th>
+				</tr>
+			</thead>
+			<tbody></tbody>
+			<tfoot>
+				<tr>
+					<td colspan="3"><fmt:message key="balance.note" /></td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
 
-        <tr ng-repeat="account in accounts">
-          <td><a href="activity.htm?id={{account.id}}">{{account.id}}</a></td>
-          <td>{{account.balance | currency: "$" : 2 | commaLess}}</td>
-          <td>{{account.availableBalance | currency: "$" : 2 | commaLess}}</td>
-        </tr>
-
-        <tr>
-          <td align="right"><b><fmt:message key="total" /></b></td>
-          <td><b>{{totalBalance | currency: "$" : 2 | commaLess}}</b></td>
-          <td>&nbsp;</td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-          <td colspan="3"><fmt:message key="balance.note" />
-        </tr>
-      </tfoot>
-    </table>
-
-  </div>
-
-  <div ng-if="showError">
-    <h1 class="title"><fmt:message key="error.heading" /></h1>
-    <p class="error"><fmt:message key="error.internal" /></p>
-  </div>
+	<div id="showError" style="display: none">
+		<h1 class="title">
+			<fmt:message key="error.heading" />
+		</h1>
+		<p class="error">
+			<fmt:message key="error.internal" />
+		</p>
+	</div>
 </div>
 
 <script>
-    var app = angular.module('OverviewAccountsApp', []);
-    app.controller('OverviewAccountsCtrl', function ($scope, $http) {
-        $scope.showOverview = true;
-        $scope.showError = false;
-        
-        $http.get("services_proxy/bank/customers/" + ${model.customerId} + "/accounts", {timeout:30000})
-            .then(function (response) {
-                $scope.accounts = [];
-                $scope.accounts = response.data;
-                $scope.totalBalance = computeTotalBalance($scope.accounts);
+$(document).ready(function() {
+      
+      function formatCurrency(amount) {
+      	if (amount == null) {
+      		return "$0.00";
+      	}
+          amount = parseFloat(amount);
+          var isNegative = amount < 0;
+          amount = Math.abs(amount);
+          var formattedAmount = amount.toFixed(2);
+          formattedAmount = (isNegative ? '-$' : '$') + formattedAmount;
+          return formattedAmount;
+      }
+    
+    var $overviewTable = $('#accountTable tbody');
+    var $showOverview = $('#showOverview');
+    var $showError = $('#showError');
 
-                angular.forEach($scope.accounts, function(account) {
-                    account.availableBalance = getAvailableBalance(account);
-                });
-            })
-            .catch(function (response){
-                showError(response);
+    $.ajax({
+        url: "services_proxy/bank/customers/" + ${model.customerId} + "/accounts",
+        type: "GET",
+        timeout: 30000,
+        success: function(response) {
+            var accounts = response;
+            var totalBalance = 0;
+            
+            $.each(accounts, function(index, account) {
+                var availableBalance = account.balance < 0 ? 0 : account.balance;
+                totalBalance += parseFloat(account.balance);
+                
+                var row = '<tr>' +
+                            '<td><a href="activity.htm?id=' + account.id + '">' + account.id + '</a></td>' +
+                            '<td>' + formatCurrency(account.balance) + '</td>' +
+                            '<td>' + formatCurrency(availableBalance) + '</td>' +
+                          '</tr>';
+                          
+                $overviewTable.append(row);
             });
-
-        function getAvailableBalance(account) {
-            return account.balance < 0 ? 0 : account.balance;
+            
+            var totalRow = '<tr>' +
+                              '<td align="right"><b><fmt:message key="total" /></b></td>' +
+                              '<td><b>' + formatCurrency(totalBalance) + '</b></td>' +
+                              '<td>&nbsp;</td>' +
+                            '</tr>';
+                            
+            $overviewTable.append(totalRow);
+            
+            $showOverview.show();
+        },
+        error: function(xhr, status, error) {
+            $showOverview.hide();
+            $showError.show();
+            console.error("Server returned " + status + ": " + error);
         }
-
-        function computeTotalBalance(accounts) {
-            var totalBalance = 0.0;
-            angular.forEach(accounts, function(account) {
-                totalBalance = totalBalance + parseFloat(account.balance, 10);
-            });
-            return totalBalance;
-        }
-        
-        function showError(error) {
-            $scope.showOverview = false;
-            $scope.showError = true;
-            var status = error.status > 0 ? error.status : "timeout";
-            var data = error.data ? error.data : "Server timeout"
-            console.error("Server returned " + status + ": " + data);
-        }
-
     });
-
-	app.filter('commaLess', function() {
-		return function(input) {
-			return (input) ? input.toString().trim().replace(",","") : null;
-		};
-	});
+});
 </script>
