@@ -1,40 +1,40 @@
 <%@ include file="../include/include.jsp" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<div ng-app="BillPayApp" ng-controller="BillPayCtrl">
+<div>
 
-<div ng-show="showForm">
+<div id="billpayForm">
     <h1 class="title"><fmt:message key="bill.payment.service"/></h1>
     <p><fmt:message key="enter.payee.information"/></p>
 
-    <form ng-submit="submit()">
+    <form>
         <table class="form2">
             <tr>
                 <td align="right" width="30%"><b><fmt:message key="payee.name" />:</b></td>
-                <td width="20%"><input ng-model="payee.name" class="input" name="payee.name" /></td>
+                <td width="20%"><input class="input" name="payee.name" /></td>
                 <td width="50%">
-                    <span ng-show="!validationModel.name" class="error"><fmt:message key="error.payee.name.required" /></span>
+                    <span style="display:none" id="validationModel-name" class="error"><fmt:message key="error.payee.name.required" /></span>
                 </td>
             </tr>
             <tr>
                 <td align="right" width="30%"><b><fmt:message key="address" />:</b></td>
-                <td width="20%"><input class="input" ng-model="payee.address.street" name="payee.address.street" /></td>
-                <td width="50%"><span ng-show="!validationModel.address" class="error"><fmt:message key="error.address.required" /></span></td>
+                <td width="20%"><input class="input"  name="payee.address.street" /></td>
+                <td width="50%"><span style="display:none" id="validationModel-address" class="error"><fmt:message key="error.address.required" /></span></td>
             </tr>
             <tr>
                 <td align="right" width="30%"><b><fmt:message key="city" />:</b></td>
-                <td width="20%"><input class="input" ng-model="payee.address.city" name="payee.address.city" /></td>
-                <td width="50%"><span ng-show="!validationModel.city" class="error"><fmt:message key="error.city.required" /></span></td>
+                <td width="20%"><input class="input" name="payee.address.city" /></td>
+                <td width="50%"><span style="display:none" id="validationModel-city" class="error"><fmt:message key="error.city.required" /></span></td>
             </tr>
             <tr>
                 <td align="right" width="30%"><b><fmt:message key="state" />:</b></td>
-                <td width="20%"><input class="input" ng-model="payee.address.state" name="payee.address.state" /></td>
-                <td width="50%"><span ng-show="!validationModel.state" class="error"><fmt:message key="error.state.required" /></span></td>
+                <td width="20%"><input class="input" name="payee.address.state" /></td>
+                <td width="50%"><span style="display:none" id="validationModel-state" class="error"><fmt:message key="error.state.required" /></span></td>
             </tr>
             <tr>
                 <td align="right" width="30%"><b><fmt:message key="zip.code" />:</b></td>
-                <td width="20%"><input class="input" ng-model="payee.address.zipCode" name="payee.address.zipCode" /></td>
-                <td width="50%"><span ng-show="!validationModel.zipCode" class="error"><fmt:message key="error.zip.code.required" /></span></td>
+                <td width="20%"><input class="input" name="payee.address.zipCode" /></td>
+                <td width="50%"><span style="display:none" id="validationModel-zipCode" class="error"><fmt:message key="error.zip.code.required" /></span></td>
             </tr>
             <tr>
                 <%-- Random id and class attributes in "payee.phoneNamber" are for demonstrating
@@ -44,25 +44,25 @@
                         String phoneNumberclass = String.format("input phone-number-%s", phoneNumberRandomId);
                 %>
                 <td align="right" width="30%"><b><fmt:message key="phone.number" />:</b></td>
-                <td width="20%"><input id="<%=phoneNumberRandomId%>" class="<%=phoneNumberclass%>" ng-model="payee.phoneNumber" name="payee.phoneNumber" /></td>
-                <td width="50%"><span ng-show="!validationModel.phoneNumber" class="error"><fmt:message key="error.phone.number.required" /></span></td>
+                <td width="20%"><input id="<%=phoneNumberRandomId%>" class="<%=phoneNumberclass%>" name="payee.phoneNumber" /></td>
+                <td width="50%"><span style="display:none" id="validationModel-phoneNumber" class="error"><fmt:message key="error.phone.number.required" /></span></td>
             </tr>
             <tr><td>&nbsp;</td></tr>
             <tr>
                 <td align="right" width="30%"><b><fmt:message key="payee.account" />:</b></td>
-                <td><input class="input" ng-model="payee.accountNumber" name="payee.accountNumber" /></td>
+                <td><input class="input" name="payee.accountNumber" /></td>
                 <td width="50%">
-                    <span ng-show="validationModel.account == 'empty'" class="error"><fmt:message key="error.account.number.required" /></span>
-                    <span ng-show="validationModel.account == 'invalid'" class="error"><fmt:message key="typeMismatch.java.lang.Integer" /></span>
+                    <span style="display:none" id="validationModel-account-empty" class="error"><fmt:message key="error.account.number.required" /></span>
+                    <span style="display:none" id="validationModel-account-invalid" class="error"><fmt:message key="typeMismatch.java.lang.Integer" /></span>
                 </td>
             </tr>
             <tr>
                 <td align="right" width="30%"><b><fmt:message key="verify.account" />:</b></td>
-                <td width="20%"><input class="input" ng-model="verifyAccount" name="verifyAccount" /></td>
+                <td width="20%"><input class="input" name="verifyAccount" /></td>
                 <td width="50%">
-                    <span ng-show="validationModel.verifyAccount == 'empty'" class="error"><fmt:message key="error.account.number.required" /></span>
-                    <span ng-show="validationModel.verifyAccount == 'invalid'" class="error"><fmt:message key="typeMismatch.java.lang.Integer" /></span>
-                    <span ng-show="validationModel.verifyAccount == 'mismatch'" class="error"><fmt:message key="error.account.number.mismatch" /></span>
+                    <span style="display:none" id="validationModel-verifyAccount-empty" class="error"><fmt:message key="error.account.number.required" /></span>
+                    <span style="display:none" id="validationModel-verifyAccount-invalid" class="error"><fmt:message key="typeMismatch.java.lang.Integer" /></span>
+                    <span style="display:none" id="validationModel-verifyAccount-mismatch" class="error"><fmt:message key="error.account.number.mismatch" /></span>
                 </td>
             </tr>
             <tr>
@@ -70,10 +70,10 @@
             </tr>
             <tr>
                 <td align="right" width="30%"><b><fmt:message key="billpay.amount" />: $</b></td>
-                <td width="20%"><input class="input" ng-model="amount" name="amount" /></td>
+                <td width="20%"><input class="input" name="amount" /></td>
                 <td width="50%">
-                    <span ng-show="validationModel.amount == 'empty'" class="error"><fmt:message key="error.amount.empty" /></span>
-                    <span ng-show="validationModel.amount == 'invalid'" class="error"><fmt:message key="typeMismatch.java.math.BigDecimal" /></span>
+                    <span style="display:none" id="validationModel-amount-empty" class="error"><fmt:message key="error.amount.empty" /></span>
+                    <span style="display:none" id="validationModel-amount-invalid" class="error"><fmt:message key="typeMismatch.java.math.BigDecimal" /></span>
                 </td>
             </tr>
             <tr>
@@ -82,7 +82,7 @@
             <tr>
                 <td align="right"><b><fmt:message key="from.account.number" />:</b></td>
                 <td>
-                    <select name="fromAccountId" class="input" ng-init="accountId='${accounts[0]}'"  ng-model="accountId">
+                    <select name="fromAccountId" class="input">
                         <c:forEach items="${accounts}" var="account">
                             <option value="${account}">${account}</option>
                         </c:forEach>
@@ -91,25 +91,25 @@
             </tr>
             <tr>
                 <td>&nbsp;</td>
-                <td><input type="submit" class="button" value="<fmt:message key="send.payment"/>"></td>
+                <td><input type="button" class="button" value="<fmt:message key="send.payment"/>"></td>
             </tr>
         </table>
     </form>
 </div>
 
-<div ng-show="showResult">
+<div id="billpayResult" style="display:none">
     <h1 class="title"><fmt:message key="bill.payment.complete"/></h1>
     <p>
         <fmt:message key="billpay.confirmation">
-            <fmt:param value="<span id='payeeName'>{{result.payeeName}}</span>"/>
-            <fmt:param value="<span id='amount'>{{result.amount}}</span>"/>
-            <fmt:param value="<span id='fromAccountId'>{{result.fromAccountId}}</span>"/>
+            <fmt:param value="<span id='payeeName'></span>"/>
+            <fmt:param value="<span id='amount'></span>"/>
+            <fmt:param value="<span id='fromAccountId'></span>"/>
         </fmt:message>
     </p>
     <p><fmt:message key="see.account.activity"/></p>
 </div>
 
-<div ng-show="showError">
+<div id="billpayError" style="display:none">
      <h1 class="title"><fmt:message key="error.heading" /></h1>
      <p class="error"><fmt:message key="error.internal" /></p>
 </div>
@@ -117,15 +117,35 @@
 </div>
 
 <script type="text/javascript">
-
-	var app = angular.module('BillPayApp', []);
-	app.controller('BillPayCtrl', function($scope, $http) {
-        $scope.showForm = true;
-        $scope.showResult = false;
-        $scope.payee = {
-        		address : { }
+	$(document).ready(function() {
+		var accountId= null;
+		var verifyAccount = null;
+		var amount = null;
+		var showForm = function(visible) {
+			if (visible) {
+				$("#billpayForm").show();
+			} else {
+				$("#billpayForm").hide();
+			}
+		}
+        var showResult = function(visible) {
+			if (visible) {
+				$("#billpayResult").show();
+			} else {
+				$("#billpayResult").hide();
+			}	
+        }
+        var showBillpayError = function(visible) {
+			if (visible) {
+				$("#billpayError").show();
+			} else {
+				$("#billpayError").hide();
+			}
+        }
+        var payee = {
+			address : { }
         };
-        $scope.result = {};
+        
         var currencyFormat = function(amount) {
             return '$' + amount.toFixed(2);
         }
@@ -146,7 +166,6 @@
         	}
         	return null;
         }
-        
         var createValidationModel = function() {
         	return { 
                 name : true,
@@ -161,67 +180,87 @@
             };
         }
         
+        var updateModels = function() {
+        	//payee
+	        payee.name = $("[name='payee.name']").val();
+	        payee.address.street = $("[name='payee.address.street']").val();
+	        payee.address.city = $("[name='payee.address.city']").val();
+	        payee.address.state = $("[name='payee.address.state']").val();
+	        payee.address.zipCode = $("[name='payee.address.zipCode']").val();
+	        payee.phoneNumber = $("[name='payee.phoneNumber']").val();
+	        payee.accountNumber = $("[name='payee.accountNumber']").val();
+	        
+	        //account
+	        accountId = $("[name='fromAccountId']").val();
+	        verifyAccount = $("[name='verifyAccount']").val();
+	        amount = $("[name='amount']").val();
+        }
+        
         var showError= function(error) {
-            $scope.validationModel = createValidationModel();
-            $scope.showForm = false;
-            $scope.showResult = false;
-            $scope.showError = true;
+            validationModel = createValidationModel();
+            showForm(false);
+            showResult(false);
+            showBillpayError(true);
             var status = error.status > 0 ? error.status : "timeout";
             var data = error.data ? error.data : "Server timeout"
             console.error("Server returned " + status + ": " + data);
         }
         
         var validate = function() {
-            $scope.validationModel.name = isNonEmpty($scope.payee.name);
-        	var address = $scope.payee.address;
-            $scope.validationModel.address = isNonEmpty(address.street);
-        	$scope.validationModel.city = isNonEmpty(address.city);
-        	$scope.validationModel.state = isNonEmpty(address.state);
-        	$scope.validationModel.zipCode = isNonEmpty(address.zipCode);
-        	$scope.validationModel.phoneNumber = isNonEmpty($scope.payee.phoneNumber);
-        	var account = $scope.payee.accountNumber;
-        	$scope.validationModel.account = validateNumber($scope.payee.accountNumber);
-        	var verifyAccount = $scope.verifyAccount;
-        	$scope.validationModel.verifyAccount = validateNumber(verifyAccount);
-        	if ($scope.validationModel.verifyAccount == null && verifyAccount !== account) {
-        		$scope.validationModel.verifyAccount = 'mismatch';
+            isNonEmpty(payee.name) ? $("#validationModel-name").hide() : $("#validationModel-name").show();
+        	var address = payee.address;
+            isNonEmpty(address.street) ? $("#validationModel-address").hide() : $("#validationModel-address").show();
+        	isNonEmpty(address.city) ? $("#validationModel-city").hide() : $("#validationModel-city").show();
+        	isNonEmpty(address.state) ? $("#validationModel-state").hide() : $("#validationModel-state").show();
+        	isNonEmpty(address.zipCode) ? $("#validationModel-zipCode").hide() : $("#validationModel-zipCode").show();
+        	isNonEmpty(payee.phoneNumber) ? $("#validationModel-phoneNumber").hide() : $("#validationModel-phoneNumber").show();
+        	var account = payee.accountNumber;
+        	validationModel.account = validateNumber(payee.accountNumber);
+        	validationModel.account == "empty" ? $("#validationModel-account-empty").show() : $("#validationModel-account-empty").hide();
+        	validationModel.account == "invalid" ? $("#validationModel-account-invalid").show() : $("#validationModel-account-invalid").hide();
+        	validationModel.verifyAccount = validateNumber(verifyAccount);
+        	if (validationModel.verifyAccount == null && verifyAccount !== account) {
+        		validationModel.verifyAccount = 'mismatch';
         	}
-        	$scope.validationModel.amount = validateNumber($scope.amount)
-        	//look thru validation model for a false || string value which
-        	//indicates an error
-        	var valid = true;
-        	for (prop in $scope.validationModel) {
-        		var value = $scope.validationModel[prop];
-        		if (value === false || typeof value === 'string') {
-        			valid = false;
-        			break
-        		}
-        	}
-        	return valid;
+        	validationModel.verifyAccount == "empty" ? $("#validationModel-verifyAccount-empty").show() : $("#validationModel-verifyAccount-empty").hide();
+        	validationModel.verifyAccount == "mismatch" ? $("#validationModel-verifyAccount-mismatch").show() : $("#validationModel-verifyAccount-mismatch").hide();
+        	validationModel.verifyAccount == "invalid" ? $("#validationModel-verifyAccount-invalid").show() : $("#validationModel-verifyAccount-invalid").hide();
+        	
+        	validationModel.amount = validateNumber(amount)
+        	validationModel.amount == "empty" ? $("#validationModel-amount-empty").show() : $("#validationModel-amount-empty").hide();
+        	validationModel.amount == "invalid" ? $("#validationModel-amount-invalid").show() : $("#validationModel-amount-invalid").hide();
+			
+        	//look thru validation markers to see if any are visible
+        	return $("[id^=validationModel]:visible").length == 0;
         }
         
-        $scope.validationModel = createValidationModel();
-        $scope.submit = function() {
+        var validationModel = createValidationModel();
+        
+        var submit = function() {
             if (!validate()) {
             	return;
             } 
-            $http.post(
-            	    'services_proxy/bank/billpay?accountId='+ this.accountId + '&amount=' + this.amount,
-            		this.payee, 
-            		{timeout: 30000}
-            ).then(function(response) {
-                $scope.result.payeeName = response.data.payeeName;
-                $scope.result.amount = currencyFormat(response.data.amount);
-                $scope.result.fromAccountId = response.data.accountId;
-                $scope.showForm = false;
-                $scope.showResult = true;
-                document.title = 'ParaBank | ' + '<fmt:message key="billpayConfirm.title" />'
-                })
-            .catch(function(response) {
-            	showError(response);
-            });
+            $.ajax({
+            	  url: 'services_proxy/bank/billpay?accountId='+ accountId + '&amount=' + amount,
+            	  type: 'POST',
+            	  contentType: 'application/json',
+            	  data: JSON.stringify(payee),
+            	  success: function(response) {
+					$("#payeeName").text(response.payeeName);
+					$("#amount").text(currencyFormat(response.amount));
+              		$("#fromAccountId").text(response.accountId);
+              		showForm(false);
+					showResult(true);
+              		document.title = 'ParaBank | ' + '<fmt:message key="billpayConfirm.title" />'
+            	  },
+            	  error: function(xhr, status, error) {
+            		  showError(error);
+            	  }
+            	});
         }
-       
-       
+        $("input[type=button]").click(() => {
+        	updateModels();
+        	submit(); 
+		});
 	});
 </script>
