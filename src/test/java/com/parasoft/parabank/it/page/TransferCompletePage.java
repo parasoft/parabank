@@ -11,7 +11,7 @@ public class TransferCompletePage extends PageObject {
     @FindBy(xpath = "//h1[text()='Transfer Complete!']")
     private WebElement title;
 
-    @FindBy(id = "amount")
+    @FindBy(id = "amountResult")
     private WebElement transferAmount;
 
     public TransferCompletePage(WebDriver driver) {

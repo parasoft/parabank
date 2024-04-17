@@ -31,9 +31,7 @@
 		</form>
 	</div>
 	<div id="showResult" style="display: none;">
-		<h1 class="title">
-			<fmt:message key="transfer.complete" />
-		</h1>
+		<h1 class="title"><fmt:message key="transfer.complete" /></h1>
 		<p>
 			<fmt:message key="transfer.confirmation">
 				<fmt:param value="<span id='amountResult'></span>" />
