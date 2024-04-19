@@ -53,8 +53,7 @@
     <commons-io.version>2.15.1</commons-io.version>
     <commons-codec.version>1.16.1</commons-codec.version>
     <wiremock.version>3.5.3</wiremock.version>
-    <!-- Mockito 5.0 and later requires Java 11 -->
-    <mockito.version>5.0.0</mockito.version>
+    <mockito.version>5.11.0</mockito.version>
     <bytebuddy.version>1.14.12</bytebuddy.version>
     <!-- CXF 3.6 and later requires Java 11 -->
     <cxf.version>3.6.3</cxf.version>
@@ -524,7 +523,7 @@
     </dependency>
     <dependency>
       <groupId>org.mockito</groupId>
-      <artifactId>mockito-inline</artifactId>
+      <artifactId>mockito-core</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
