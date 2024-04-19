@@ -68,6 +68,8 @@
                             text: account.id
                         }));
                     });
+                    $('#fromAccountId option:first-child').attr('selected', true);
+                    $('#toAccountId option:first-child').attr('selected', true);
                 },
                 error: function(xhr, status, error) {
                     showError(xhr);
