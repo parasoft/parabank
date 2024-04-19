@@ -52,8 +52,7 @@
     <log4j.version>2.23.1</log4j.version>
     <commons-io.version>2.15.1</commons-io.version>
     <commons-codec.version>1.16.1</commons-codec.version>
-    <!-- WireMock 3.0 and later requires Java 11 -->
-    <wiremock.version>3.0.3</wiremock.version>
+    <wiremock.version>3.5.3</wiremock.version>
     <!-- Mockito 5.0 and later requires Java 11 -->
     <mockito.version>5.0.0</mockito.version>
     <bytebuddy.version>1.14.12</bytebuddy.version>
