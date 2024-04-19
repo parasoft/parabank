@@ -68,9 +68,7 @@
     <jquery.version>3.7.1</jquery.version>
     <guava.version>33.1.0-jre</guava.version>
     <snakeyaml.version>2.2</snakeyaml.version>
-    <!-- Selenium 4.14 and later requires Java 11 -->
-    <selenium.version>4.14.1</selenium.version>
-    <selenium.latest.version>4.18.1</selenium.latest.version>
+    <selenium.version>4.19.1</selenium.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -897,15 +895,6 @@
           </plugin>
         </plugins>
       </build>
-    </profile>
-    <profile>
-      <id>java-11</id>
-      <activation>
-          <jdk>[11,)</jdk>
-      </activation>
-      <properties>
-          <selenium.version>${selenium.latest.version}</selenium.version>
-      </properties>
     </profile>
   </profiles>
 
