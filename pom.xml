@@ -37,8 +37,8 @@
     <jaxb.impl.version>2.3.9</jaxb.impl.version>
     <istack.version>3.0.12</istack.version>
     <joda-time.version>2.12.7</joda-time.version>
-    <!-- ActiveMQ 5.17 and later requires Java 11 -->
-    <activemq.version>5.17.6</activemq.version>
+    <!-- ActiveMQ 6.0 and later requires Tomcat 10 and Jakarta EE namespaces -->
+    <activemq.version>5.18.4</activemq.version>
     <swagger-jaxrs.version>1.6.13</swagger-jaxrs.version>
     <servlet.version>3.1.0</servlet.version>
     <junit.version>4.13.2</junit.version>
@@ -452,6 +452,13 @@
       <groupId>org.apache.activemq</groupId>
       <artifactId>activemq-broker</artifactId>
       <version>${activemq.version}</version>
+      <exclusions>
+        <!-- ParaBank uses jakarta.annotation-api instead -->
+        <exclusion>
+          <groupId>javax.annotation</groupId>
+          <artifactId>javax.annotation-api</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.apache.activemq</groupId>
