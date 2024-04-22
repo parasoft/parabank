@@ -70,6 +70,19 @@
                     });
                     $('#fromAccountId option:first-child').attr('selected', true);
                     $('#toAccountId option:first-child').attr('selected', true);
+                    
+                    $('#fromAccountId').change(function() {
+                        var selectedValue = $(this).val();
+                        $('#fromAccountId option').removeAttr('selected');
+                        $('#fromAccountId option[value="' + selectedValue + '"]').attr('selected', 'selected');
+                    });
+
+					$('#toAccountId').change(function() {
+						var selectedValue = $(this).val();
+						$('#toAccountId option').removeAttr('selected');
+						$('#toAccountId option[value="' + selectedValue + '"]').attr('selected', 'selected');
+					});
+                    
                 },
                 error: function(xhr, status, error) {
                     showError(xhr);
