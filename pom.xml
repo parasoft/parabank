@@ -282,7 +282,6 @@
       <groupId>org.hsqldb</groupId>
       <artifactId>hsqldb</artifactId>
       <version>${hsqldb.version}</version>
-      <classifier>jdk8</classifier>
     </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>
@@ -838,7 +837,7 @@
                     <mkdir dir="${project.build.directory}/soatest/jdbc" />
                     <mkdir dir="${project.build.directory}/soatest/reports" />
                     <mkdir dir="${project.build.directory}/soatest/workspace" />
-                    <copy file="${org.hsqldb:hsqldb:jar:jdk8}" tofile="${project.build.directory}/soatest/jdbc/hsqldb-jdk8.jar" />
+                    <copy file="${org.hsqldb:hsqldb:jar}" tofile="${project.build.directory}/soatest/jdbc/hsqldb.jar" />
                     <!-- create settings file -->
                     <propertyfile file="${soatest.settings}">
                       <entry key="parasoft.eula.accepted" value="${parasoft.eula.accepted}" />
@@ -857,7 +856,7 @@
                       <entry key="soatest.license.custom_edition_features" value="${parasoft.localsettings.soatest.license.custom_edition_features}" />
                       <entry key="soatest.license.local.password" value="${parasoft.localsettings.soatest.license.local.password}" />
                       <entry key="report.test_suites_only" value="${parasoft.localsettings.report.test_suites_only}" />
-                      <entry key="datasources.jdbc.classpath" value="${project.build.directory}/soatest/jdbc/hsqldb-jdk8.jar" />
+                      <entry key="datasources.jdbc.classpath" value="${project.build.directory}/soatest/jdbc/hsqldb.jar" />
                     </propertyfile>
                     <!-- make everything accessible to the docker container -->
                     <chmod dir="${project.build.directory}/soatest" perm="go+rw" />
