@@ -52,7 +52,7 @@
     <log4j.version>2.23.1</log4j.version>
     <commons-io.version>2.16.1</commons-io.version>
     <commons-codec.version>1.16.1</commons-codec.version>
-    <wiremock.version>3.5.3</wiremock.version>
+    <wiremock.version>3.5.4</wiremock.version>
     <mockito.version>5.11.0</mockito.version>
     <bytebuddy.version>1.14.13</bytebuddy.version>
     <cxf.version>3.6.3</cxf.version>
