@@ -67,7 +67,7 @@
     <jquery.version>3.7.1</jquery.version>
     <guava.version>33.1.0-jre</guava.version>
     <snakeyaml.version>2.2</snakeyaml.version>
-    <selenium.version>4.19.1</selenium.version>
+    <selenium.version>4.20.0</selenium.version>
   </properties>
   <dependencyManagement>
     <dependencies>
