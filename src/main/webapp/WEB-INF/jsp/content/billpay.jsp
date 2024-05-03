@@ -226,7 +226,6 @@
         	isNonEmpty(address.state) ? $("#validationModel-state").hide() : $("#validationModel-state").show();
         	isNonEmpty(address.zipCode) ? $("#validationModel-zipCode").hide() : $("#validationModel-zipCode").show();
         	isNonEmpty(payee.contactInformation.phoneNumber) ? $("#validationModel-phoneNumber").hide() : $("#validationModel-phoneNumber").show();
-			isNonEmpty(payee.contactInformation.email) ? $("#validationModel-email").hide() : $("#validationModel-email").show();
         	var account = payee.accountNumber;
         	validationModel.account = validateNumber(payee.accountNumber);
         	validationModel.account == "empty" ? $("#validationModel-account-empty").show() : $("#validationModel-account-empty").hide();
