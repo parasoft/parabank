@@ -19,9 +19,13 @@
 			</p>
 			<div>
 				<fmt:message key="from.account.number" />
-				<select id="fromAccountId" class="input"></select>
+				<select id="fromAccountId" class="input">
+					<option value="?" selected="selected"></option>
+				</select>
 				<fmt:message key="to.account.number" />
-				<select id="toAccountId" class="input"></select>
+					<select id="toAccountId" class="input">
+				<option value="?" selected="selected"></option>
+				</select>
 			</div>
 			<br />
 			<div>
@@ -63,6 +67,8 @@
                 timeout: 30000,
                 success: function(response) {
                     var accounts = response;
+                    $('#fromAccountId').empty();
+                    $('#toAccountId').empty();
                     $.each(accounts, function(index, account) {
                         $('#fromAccountId, #toAccountId').append($('<option>', {
                             value: account.id,
