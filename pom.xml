@@ -57,6 +57,7 @@
     <bytebuddy.version>1.14.14</bytebuddy.version>
     <cxf.version>3.6.3</cxf.version>
     <cxf.wss4j.version>2.4.3</cxf.wss4j.version>
+    <ehcache.version>3.10.8</ehcache.version>
     <saaj-impl.version>1.5.3</saaj-impl.version>
     <jersey.version>2.43</jersey.version>
     <javassist.version>3.30.2-GA</javassist.version>
@@ -129,6 +130,26 @@
         <groupId>org.apache.wss4j</groupId>
         <artifactId>wss4j-ws-security-policy-stax</artifactId>
         <version>${cxf.wss4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.ehcache</groupId>
+        <artifactId>ehcache</artifactId>
+        <version>${ehcache.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.glassfish.jaxb</groupId>
+        <artifactId>jaxb-runtime</artifactId>
+        <version>${jaxb.impl.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.glassfish.jaxb</groupId>
+        <artifactId>txw2</artifactId>
+        <version>${jaxb.impl.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.sun.istack</groupId>
+        <artifactId>istack-commons-runtime</artifactId>
+        <version>${istack.version}</version>
       </dependency>
       <dependency>
         <groupId>com.sun.xml.messaging.saaj</groupId>
@@ -259,21 +280,6 @@
       <version>${jaxb.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.glassfish.jaxb</groupId>
-      <artifactId>jaxb-runtime</artifactId>
-      <version>${jaxb.impl.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.glassfish.jaxb</groupId>
-      <artifactId>txw2</artifactId>
-      <version>${jaxb.impl.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.sun.istack</groupId>
-      <artifactId>istack-commons-runtime</artifactId>
-      <version>${istack.version}</version>
-    </dependency>
-    <dependency>
       <groupId>joda-time</groupId>
       <artifactId>joda-time</artifactId>
       <version>${joda-time.version}</version>
@@ -336,18 +342,6 @@
     </dependency>
 
     <!-- CXF Dependencies -->
-    <!--Conflicting jaxb version so exclude it-->
-    <dependency>
-      <groupId>org.ehcache</groupId>
-      <artifactId>ehcache</artifactId>
-      <version>3.10.8</version>
-      <exclusions>
-        <exclusion>
-          <groupId>org.glassfish.jaxb</groupId>
-          <artifactId>jaxb-runtime</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
     <dependency>
       <groupId>com.sun.xml.messaging.saaj</groupId>
       <artifactId>saaj-impl</artifactId>
@@ -369,16 +363,9 @@
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-rt-frontend-jaxws</artifactId>
     </dependency>
-    <!--We explictiy pull in org.ehcache to prevent transitive conflicts -->
     <dependency>
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-rt-ws-security</artifactId>
-      <exclusions>
-        <exclusion>
-          <groupId>org.ehcache</groupId>
-          <artifactId>ehcache</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.apache.cxf</groupId>
