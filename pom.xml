@@ -54,7 +54,7 @@
     <commons-codec.version>1.17.0</commons-codec.version>
     <wiremock.version>3.5.4</wiremock.version>
     <mockito.version>5.11.0</mockito.version>
-    <bytebuddy.version>1.14.14</bytebuddy.version>
+    <bytebuddy.version>1.14.15</bytebuddy.version>
     <cxf.version>3.6.3</cxf.version>
     <cxf.wss4j.version>2.4.3</cxf.wss4j.version>
     <ehcache.version>3.10.8</ehcache.version>
