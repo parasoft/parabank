@@ -10,11 +10,11 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>ParaBank | <fmt:message key="${view}.title" /></title>
-		<link href="<c:url value="/template.css"/>" rel="stylesheet"
+		<link href="<c:url value="template.css"/>" rel="stylesheet"
 			type="text/css" />
-		<link href="<c:url value="/style.css"/>" rel="stylesheet"
+		<link href="<c:url value="style.css"/>" rel="stylesheet"
 			type="text/css" />
-		<script src="<c:url value="/webjars/jquery/3.7.1/jquery.min.js" />"></script>
+		<script src="<c:url value="webjars/jquery/3.7.1/jquery.min.js" />"></script>
 	</head>
 
 	<body

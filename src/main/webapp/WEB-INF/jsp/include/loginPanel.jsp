@@ -2,7 +2,7 @@
 
 <h2><fmt:message key="customer.login"/></h2>
 <div id="loginPanel">
-  <form name="login" action="<c:url value="/login.htm"/>" method="POST">
+  <form name="login" action="<c:url value="login.htm"/>" method="POST">
     <c:if test="${!empty loginForwardAction}">
         <input type="hidden" name="forwardAction" value="<c:url value="${loginForwardAction}"/>"/>
     </c:if>

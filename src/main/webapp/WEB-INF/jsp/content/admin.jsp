@@ -29,7 +29,7 @@
     	<h3>
 			<fmt:message key="database" />
 		</h3>
-		<form name="initializeDB" action="<c:url value="/db.htm"/>"
+		<form name="initializeDB" action="<c:url value="db.htm"/>"
 			method="POST">
 			<table class="form2" style="width: 100%;">
 				<tr>
@@ -50,7 +50,7 @@
 		<h3>
 			<fmt:message key="jms.service" />
 		</h3>
-		<form name="toggleJms" action="<c:url value="/jms.htm"/>" method="POST">
+		<form name="toggleJms" action="<c:url value="jms.htm"/>" method="POST">
 			<input type="hidden" name="shutdown" value="${isJmsRunning}" />
 			<table class="form2" style="width: 100%;" >
 				<tr>
@@ -107,7 +107,7 @@
 			<td colspan="2"><b><fmt:message key="parabank.service" /></b>[&nbsp;
 				<a href="<c:url value="services/ParaBank?wsdl"/>">WSDL</a>&nbsp;|&nbsp;<a
 				href="<c:url value="services/bank?_wadl&_type=xml"/>">WADL</a>&nbsp;|&nbsp;<a
-				href="<c:url value="/api-docs/index.html"/>">SWAGGER</a>&nbsp;]</td>
+				href="<c:url value="api-docs/index.html"/>">SWAGGER</a>&nbsp;]</td>
 		</tr>
 		<tr>
 			<td align="right" width="30%"><b><fmt:message

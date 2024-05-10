@@ -18,7 +18,7 @@
     <c:forEach items="${model.transactions}" var="transaction">
     <tr>
       <td><fmt:formatDate pattern="MM-dd-yyyy" value="${transaction.date}"/></td>
-      <td><a href="<c:url value="/transaction.htm?id=${transaction.id}"/>">${transaction.description}</a></td>
+      <td><a href="<c:url value="transaction.htm?id=${transaction.id}"/>">${transaction.description}</a></td>
       <td>
         <c:if test="${transaction.type eq 'Debit'}">
           <fmt:formatNumber type="currency" pattern="$0.00;-$0.00" value="${transaction.amount}"/>

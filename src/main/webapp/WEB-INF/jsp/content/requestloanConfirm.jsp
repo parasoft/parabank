@@ -24,7 +24,7 @@
     <p class="error"><fmt:message key="${loanResponse.message}"/></p>
   </c:when>
   <c:otherwise>
-    <c:url var="accountUrl" value="/activity.htm">
+    <c:url var="accountUrl" value="activity.htm">
       <c:param name="id" value="${loanResponse.accountId}"/>
     </c:url>
     <p><fmt:message key="loan.approved.message"/></p>    
