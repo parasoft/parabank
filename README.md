@@ -9,7 +9,7 @@ NOTE: if using the coverage agent when running the functional/manual tests (see 
 * ParaBank uses a built-in HyperSQL database. You must shut down all running instances of **ParaBank** and *HyperSQL* for the build to succeed. Otherwise several tests may fail, since there are a number of ports that are shared between the test instances and the real thing. See [changing default ports](#changing-default-ports).
 
 ## Apache Tomcat notes
-* Java `11` is recommended. Oracle JDK or Zulu OpenJDK is preferred.
+* Java `17` is recommended. Oracle JDK or Zulu OpenJDK is preferred.
 
 * Apache Tomcat `9` is recommended.
 
