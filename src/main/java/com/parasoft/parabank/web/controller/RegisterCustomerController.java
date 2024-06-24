@@ -2,7 +2,7 @@ package com.parasoft.parabank.web.controller;
 
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpSession;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

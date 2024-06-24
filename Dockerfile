@@ -1,4 +1,4 @@
-FROM tomcat:9.0.89-jre17-temurin-jammy
+FROM tomcat:10.1.25-jre17-temurin-jammy
 
 ARG TOMCAT_HOME=/usr/local/tomcat
 

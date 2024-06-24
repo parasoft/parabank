@@ -446,6 +446,8 @@ public abstract class AbstractParaBankDataSourceTest extends JdbcDaoSupport {
         ModelAndView mav;
         aRequest.setMethod("GET");
         aRequest.setServletPath(getPath());
+        aRequest.setAttribute(org.springframework.web.util.WebUtils.INCLUDE_REQUEST_URI_ATTRIBUTE, getPath());
+        
         final RequestMappingHandlerMapping mapping = getHandlerMapping();
         final HandlerExecutionChain chain = mapping.getHandler(aRequest);
         handler = chain.getHandler();
@@ -459,6 +461,7 @@ public abstract class AbstractParaBankDataSourceTest extends JdbcDaoSupport {
         ModelAndView mav;
         aRequest.setMethod("POST");
         aRequest.setServletPath(getPath());
+        aRequest.setAttribute(org.springframework.web.util.WebUtils.INCLUDE_REQUEST_URI_ATTRIBUTE, getPath());
         if (form != null) {
             aRequest.getSession().setAttribute(getFormName(), form);
         }

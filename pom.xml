@@ -33,7 +33,7 @@
     <jax-jws.version>3.0.0</jax-jws.version>
     <jax-rs.version>4.0.0</jax-rs.version>
     <jax-soap.version>3.0.2</jax-soap.version>
-    <jax-ws.version>2.3.3</jax-ws.version>
+    <jax-ws.version>4.0.2</jax-ws.version>
     <jaxb.version>4.0.2</jaxb.version>
     <jaxb.impl.version>4.0.5</jaxb.impl.version>
     <istack.version>3.0.12</istack.version>
@@ -42,7 +42,7 @@
     <swagger-jaxrs.version>2.2.21</swagger-jaxrs.version>
     <jakarta.servlet.version>6.0.0</jakarta.servlet.version>
     <junit.version>4.13.2</junit.version>
-    <jstl.version>1.2.5</jstl.version>
+    <jstl.version>3.0.0</jstl.version>
     <hsqldb.version>2.7.2</hsqldb.version>
     <commons-dbcp2.version>2.12.0</commons-dbcp2.version>
     <aspectjweaver.version>1.9.22.1</aspectjweaver.version>
@@ -373,8 +373,7 @@
     </dependency>
     <dependency>
       <groupId>org.apache.cxf</groupId>
-      <artifactId>cxf-rt-rs-service-description-swagger</artifactId>
-      <version>${cxf.swagger.version}</version>
+      <artifactId>cxf-rt-rs-service-description-openapi-v3</artifactId>
     </dependency>
     <dependency>
       <groupId>org.apache.cxf</groupId>
@@ -386,8 +385,8 @@
       <version>${aspectjweaver.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.fasterxml.jackson.jaxrs</groupId>
-      <artifactId>jackson-jaxrs-json-provider</artifactId>
+      <groupId>com.fasterxml.jackson.jakarta.rs</groupId>
+      <artifactId>jackson-jakarta-rs-json-provider</artifactId>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
@@ -415,10 +414,15 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.apache.taglibs</groupId>
-      <artifactId>taglibs-standard-jstlel</artifactId>
-      <version>${jstl.version}</version>
-    </dependency>
+	    <groupId>jakarta.servlet.jsp.jstl</groupId>
+	    <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+	    <version>${jstl.version}</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.glassfish.web</groupId>
+	    <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+	    <version>${jstl.version}</version>
+	</dependency>
 
     <!-- ActiveMQ -->
     <dependency>
@@ -715,11 +719,11 @@
         <artifactId>cargo-maven3-plugin</artifactId>
         <configuration>
           <container>
-            <containerId>tomcat9x</containerId>
+            <containerId>tomcat10x</containerId>
             <artifactInstaller>
               <groupId>org.apache.tomcat</groupId>
               <artifactId>tomcat</artifactId>
-              <version>9.0.89</version>
+              <version>10.1.25</version>
             </artifactInstaller>
             <timeout>600000</timeout>
           </container>

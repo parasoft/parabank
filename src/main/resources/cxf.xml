@@ -24,6 +24,9 @@
 	<!-- ========================= WEB SERVICE ========================= -->
 
 	<import resource="classpath*:META-INF/cxf/cxf.xml" />
+	<import resource="classpath*:META-INF/cxf/cxf-extension-soap.xml" />
+	<import resource="classpath*:META-INF/cxf/cxf-extension-http-binding.xml" />
+	<import resource="classpath*:META-INF/cxf/cxf-servlet.xml" />
 
 	<!-- ========================= Application Bean Definitions ========================= -->
 
@@ -158,7 +161,7 @@
 		</jaxrs:providers>
 
 		<jaxrs:features>
-			<ref bean="swagger2Feature" />
+			<ref bean="openApiFeature" />
 		</jaxrs:features>
 
 	</jaxrs:server>
@@ -177,14 +180,15 @@
 	<bean id="cors-filter" class="org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter"/>
 
   <!-- JAXRS providers -->
-	<bean id="jsonProviderJackson" class="com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider" />
-
-	<!-- CXF Swagger2Feature -->
-	<bean id="swagger2Feature" class="org.apache.cxf.jaxrs.swagger.Swagger2Feature">
-		<property name="resourcePackage" value="io.swagger.resources,com.parasoft.parabank.service" />
-		<property name="scan" value="true" />
-		<property name="prettyPrint" value="true" />
-	</bean>
+	<bean id="jsonProviderJackson" class="com.fasterxml.jackson.jakarta.rs.json.JacksonJsonProvider" />
+	
+	<!-- CXF OpenAPIFeature -->
+	    <bean id="openApiFeature" class="org.apache.cxf.jaxrs.openapi.OpenApiFeature">
+        <property name="title" value="Sample REST Application" />
+        <property name="useContextBasedConfig" value="true" />
+        <property name="scan" value="false" />
+        <property name="scannerClass" value="io.swagger.v3.jaxrs2.integration.JaxrsApplicationScanner"/>
+    </bean>
 
 	<bean id="paraBankService" class="com.parasoft.parabank.service.ParaBankServiceImpl">
 		<property name="adminManager" ref="adminManager" />

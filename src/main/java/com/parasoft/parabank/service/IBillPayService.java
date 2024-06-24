@@ -19,8 +19,8 @@ import jakarta.ws.rs.core.MediaType;
 import com.parasoft.parabank.domain.BillPayResult;
 import com.parasoft.parabank.domain.Payee;
 
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 
 public interface IBillPayService extends ParaBankServiceConstants {
 
@@ -34,12 +34,12 @@ public interface IBillPayService extends ParaBankServiceConstants {
      */
     @POST
     @Path("/billpay")
-    @ApiOperation(value = "Pay bill", tags = { ParaBankServiceConstants.ACCOUNTS })
+    @Operation(summary = "Pay bill", tags = { ParaBankServiceConstants.ACCOUNTS })
     @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
     BillPayResult billPay(
-            @ApiParam(value = BILL_PAY_ACCOUNT_ID_DESC, required = true) @QueryParam(ACCOUNT_ID) int accountId,
-            @ApiParam(value = AMOUNT_DESC, required = true) @QueryParam("amount") BigDecimal amount,
-            @ApiParam(value = "Payee", required = true) Payee Payee) throws ParaBankServiceException;
+            @Parameter(description = BILL_PAY_ACCOUNT_ID_DESC, required = true) @QueryParam(ACCOUNT_ID) int accountId,
+            @Parameter(description = AMOUNT_DESC, required = true) @QueryParam("amount") BigDecimal amount,
+            @Parameter(description = "Payee", required = true) Payee Payee) throws ParaBankServiceException;
 
 }
