@@ -6,7 +6,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletRequest;

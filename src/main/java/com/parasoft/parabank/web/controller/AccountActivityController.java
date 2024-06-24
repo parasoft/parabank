@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.annotation.Resource;
-import javax.xml.bind.JAXBException;
+import jakarta.annotation.Resource;
+import jakarta.xml.bind.JAXBException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

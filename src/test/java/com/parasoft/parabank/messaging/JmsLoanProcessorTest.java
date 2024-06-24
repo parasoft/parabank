@@ -7,9 +7,9 @@ import static org.junit.Assert.assertTrue;
 import java.io.StringReader;
 import java.math.BigDecimal;
 
-import javax.annotation.Resource;
-import javax.jms.JMSException;
-import javax.jms.TextMessage;
+import jakarta.annotation.Resource;
+import jakarta.jms.JMSException;
+import jakarta.jms.TextMessage;
 import javax.xml.transform.stream.StreamSource;
 
 import org.apache.activemq.command.ActiveMQTextMessage;

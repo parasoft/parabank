@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.Properties;
 
-import javax.annotation.PreDestroy;
+import jakarta.annotation.PreDestroy;
 import javax.sql.DataSource;
 
 import org.hsqldb.Server;

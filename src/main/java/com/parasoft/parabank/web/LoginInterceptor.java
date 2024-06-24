@@ -1,13 +1,13 @@
 package com.parasoft.parabank.web;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.ModelAndViewDefiningException;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.util.WebUtils;
 
 import com.parasoft.parabank.util.Constants;
@@ -16,7 +16,7 @@ import com.parasoft.parabank.util.Constants;
  * Spring MVC Interceptor that tests if a user is logged in (i.e. session object exists) before granting access to
  * protected pages
  */
-public class LoginInterceptor extends HandlerInterceptorAdapter {
+public class LoginInterceptor implements HandlerInterceptor {
     private static final Logger log = LoggerFactory.getLogger(LoginInterceptor.class);
 
     @Override
@@ -36,6 +36,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             }
             throw new ModelAndViewDefiningException(modelAndView);
         }
-        return super.preHandle(request, response, handler);
+        return true;
+       
     }
 }

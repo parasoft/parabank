@@ -9,7 +9,7 @@ package com.parasoft.parabank.domain;
 
 import java.math.BigDecimal;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "billPayResult")
 public class BillPayResult {

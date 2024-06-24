@@ -3,7 +3,7 @@ package com.parasoft.parabank.dao.jdbc;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 import org.junit.Test;
 import org.springframework.dao.DataAccessException;

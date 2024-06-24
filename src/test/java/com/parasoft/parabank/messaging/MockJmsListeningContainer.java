@@ -1,6 +1,6 @@
 package com.parasoft.parabank.messaging;
 
-import javax.jms.JMSException;
+import jakarta.jms.JMSException;
 
 import org.springframework.jms.JmsException;
 import org.springframework.jms.listener.AbstractJmsListeningContainer;

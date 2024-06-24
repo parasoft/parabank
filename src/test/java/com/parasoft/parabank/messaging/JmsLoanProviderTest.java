@@ -6,9 +6,9 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-import javax.annotation.Resource;
-import javax.jms.JMSException;
-import javax.jms.TextMessage;
+import jakarta.annotation.Resource;
+import jakarta.jms.JMSException;
+import jakarta.jms.TextMessage;
 
 import org.apache.activemq.command.ActiveMQTextMessage;
 import org.junit.Test;

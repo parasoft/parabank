@@ -18,8 +18,8 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
-import javax.annotation.Resource;
-import javax.ws.rs.core.MediaType;
+import jakarta.annotation.Resource;
+import jakarta.ws.rs.core.MediaType;
 
 import org.junit.Before;
 import org.junit.Test;

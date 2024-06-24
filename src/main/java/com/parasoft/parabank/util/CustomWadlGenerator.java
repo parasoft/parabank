@@ -3,7 +3,7 @@ package com.parasoft.parabank.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ws.rs.core.UriInfo;
+import jakarta.ws.rs.core.UriInfo;
 
 import org.apache.cxf.jaxrs.model.ClassResourceInfo;
 import org.apache.cxf.jaxrs.model.wadl.WadlGenerator;

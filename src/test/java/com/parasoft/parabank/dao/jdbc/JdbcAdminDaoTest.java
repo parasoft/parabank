@@ -7,7 +7,7 @@ import static org.junit.Assert.fail;
 
 import java.util.Map;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;

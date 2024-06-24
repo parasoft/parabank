@@ -1,6 +1,6 @@
 package com.parasoft.parabank.web.controller;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

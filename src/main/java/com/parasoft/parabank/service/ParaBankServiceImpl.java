@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import javax.jws.WebService;
+import jakarta.jws.WebService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

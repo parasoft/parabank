@@ -6,7 +6,7 @@ import static org.junit.Assert.assertNotNull;
 
 import java.lang.reflect.ParameterizedType;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 import org.junit.Test;
 

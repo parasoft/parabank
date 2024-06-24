@@ -6,7 +6,7 @@ import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import javax.management.MBeanServer;
 import javax.management.MBeanServerFactory;
 import javax.management.ObjectName;

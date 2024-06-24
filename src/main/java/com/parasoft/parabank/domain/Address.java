@@ -1,6 +1,6 @@
 package com.parasoft.parabank.domain;
 
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlType;
 
 import com.parasoft.parabank.util.Util;
 

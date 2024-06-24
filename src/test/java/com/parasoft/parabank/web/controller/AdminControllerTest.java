@@ -5,7 +5,7 @@ import static org.junit.Assert.assertNotNull;
 
 import java.math.BigDecimal;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 import org.junit.Test;
 import org.slf4j.Logger;

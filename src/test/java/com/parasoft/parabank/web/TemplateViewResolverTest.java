@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 import org.junit.Test;
 import org.springframework.web.servlet.View;

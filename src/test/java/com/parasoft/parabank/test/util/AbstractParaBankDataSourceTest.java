@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import javax.sql.DataSource;
 
 import org.junit.After;
@@ -149,7 +149,7 @@ public abstract class AbstractParaBankDataSourceTest extends JdbcDaoSupport {
     @Rule
     public WireMockRule wireMockRule = new WireMockRule(19089);
 
-    @javax.annotation.Resource(name = "resources")
+    @jakarta.annotation.Resource(name = "resources")
     private List<LoanRequestTestConfig> resources;
 
     @Resource(name = "adminDao")

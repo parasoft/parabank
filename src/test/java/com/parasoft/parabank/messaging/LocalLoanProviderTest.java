@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 import org.junit.Test;
 

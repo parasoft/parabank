@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 

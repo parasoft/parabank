@@ -9,7 +9,7 @@ import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 import org.junit.Test;
 import org.springframework.dao.DataAccessException;

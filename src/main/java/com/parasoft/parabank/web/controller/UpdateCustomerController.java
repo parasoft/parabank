@@ -2,9 +2,9 @@ package com.parasoft.parabank.web.controller;
 
 import java.io.IOException;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
-import javax.xml.bind.JAXBException;
+import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpSession;
+import jakarta.xml.bind.JAXBException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

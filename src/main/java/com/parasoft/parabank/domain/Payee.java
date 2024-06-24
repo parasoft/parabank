@@ -1,6 +1,6 @@
 package com.parasoft.parabank.domain;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 import com.parasoft.parabank.util.Util;
 

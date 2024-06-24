@@ -2,7 +2,7 @@ package com.parasoft.parabank.service;
 
 import static org.junit.Assert.assertEquals;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;

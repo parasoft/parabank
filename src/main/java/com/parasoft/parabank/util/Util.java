@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import javax.management.MBeanServer;
 import javax.management.MBeanServerFactory;
 import javax.management.ObjectName;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;

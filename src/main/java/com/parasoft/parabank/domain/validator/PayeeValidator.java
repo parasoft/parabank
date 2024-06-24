@@ -1,6 +1,6 @@
 package com.parasoft.parabank.domain.validator;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
