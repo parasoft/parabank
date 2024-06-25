@@ -39,7 +39,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
  */
 @Path("/")
 @OpenAPIDefinition( //
-servers = @Server(url = "http://localhost:8080/services/bank"),
+servers = @Server(url = "/parabank/services/bank"),
 info = @Info( //
 description = "This API provides access to various ParaBank internal operations", //
 version = "3.0.0", //

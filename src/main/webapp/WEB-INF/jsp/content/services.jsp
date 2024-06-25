@@ -590,7 +590,7 @@ string, string, string<br>
       <td><span class="field">Endpoint address:</span>
       <span class="value"><%= scheme%>://<%= hostname%><%= portStr%><%= contextPath%>/services/bank</span><br>
       <span class="field">WADL :</span> <a href="<%= scheme%>://<%= hostname%><%= portStr%><%= contextPath%>/services/bank?_wadl&amp;_type=xml"><%= scheme%>://<%= hostname%><%= portStr%><%= contextPath%>/services/bank?_wadl&amp;type=xml</a><br>
-      <span class="field">Swagger :</span> <a href="<%= scheme%>://<%= hostname%><%= portStr%><%= contextPath%>/api-docs/index.html"><%= scheme%>://<%= hostname%><%= portStr%><%= contextPath%>/api-docs/index.html</a></td>
+      <span class="field">OpenAPI :</span> <a href="<%= scheme%>://<%= hostname%><%= portStr%><%= contextPath%>/api-docs/index.html"><%= scheme%>://<%= hostname%><%= portStr%><%= contextPath%>/api-docs/index.html</a></td>
     </tr>
   </tbody>
 </table>

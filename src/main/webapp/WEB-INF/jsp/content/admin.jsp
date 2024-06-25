@@ -107,7 +107,7 @@
 			<td colspan="2"><b><fmt:message key="parabank.service" /></b>[&nbsp;
 				<a href="<c:url value="services/ParaBank?wsdl"/>">WSDL</a>&nbsp;|&nbsp;<a
 				href="<c:url value="services/bank?_wadl&_type=xml"/>">WADL</a>&nbsp;|&nbsp;<a
-				href="<c:url value="api-docs/index.html"/>">SWAGGER</a>&nbsp;]</td>
+				href="<c:url value="api-docs/index.html"/>">OpenAPI</a>&nbsp;]</td>
 		</tr>
 		<tr>
 			<td align="right" width="30%"><b><fmt:message
