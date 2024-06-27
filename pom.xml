@@ -36,41 +36,42 @@
     <jax-ws.version>4.0.2</jax-ws.version>
     <jaxb.version>4.0.2</jaxb.version>
     <jaxb.impl.version>4.0.5</jaxb.impl.version>
-    <istack.version>3.0.12</istack.version>
+    <istack.version>4.2.0</istack.version>
     <joda-time.version>2.12.7</joda-time.version>
     <activemq.version>6.1.2</activemq.version>
-    <swagger-jaxrs.version>2.2.21</swagger-jaxrs.version>
-    <jakarta.servlet.version>6.0.0</jakarta.servlet.version>
+    <swagger-jaxrs.version>2.2.22</swagger-jaxrs.version>
+    <jakarta.servlet.version>6.1.0</jakarta.servlet.version>
     <junit.version>4.13.2</junit.version>
     <jstl.version>3.0.1</jstl.version>
     <jstl-api.version>3.0.0</jstl-api.version>
-    <hsqldb.version>2.7.2</hsqldb.version>
+    <hsqldb.version>2.7.3</hsqldb.version>
     <commons-dbcp2.version>2.12.0</commons-dbcp2.version>
     <aspectjweaver.version>1.9.22.1</aspectjweaver.version>
-    <jackson.version>2.17.0</jackson.version>
-    <woodstox.version>6.6.2</woodstox.version>
+    <jackson.version>2.17.1</jackson.version>
+    <woodstox.version>7.0.0</woodstox.version>
     <slf4j.version>2.0.13</slf4j.version>
     <log4j.version>2.23.1</log4j.version>
     <commons-io.version>2.16.1</commons-io.version>
     <commons-codec.version>1.17.0</commons-codec.version>
-    <wiremock.version>3.5.4</wiremock.version>
+    <wiremock.version>3.7.0</wiremock.version>
     <mockito.version>5.12.0</mockito.version>
-    <bytebuddy.version>1.14.15</bytebuddy.version>
+    <bytebuddy.version>1.14.17</bytebuddy.version>
     <cxf.version>4.0.4</cxf.version>
     <cxf.wss4j.version>3.0.3</cxf.wss4j.version>
     <cxf.swagger.version>3.6.3</cxf.swagger.version>
     <ehcache.version>3.10.8</ehcache.version>
     <saaj-impl.version>3.0.4</saaj-impl.version>
-    <jersey.version>3.1.6</jersey.version>
+    <jersey.version>3.1.7</jersey.version>
     <javassist.version>3.30.2-GA</javassist.version>
-    <spring.version>6.1.7</spring.version>
+    <spring.version>6.1.10</spring.version>
     <junitparams.version>1.1.1</junitparams.version>
     <hamcrest.version>2.2</hamcrest.version>
     <bcprov.version>1.78.1</bcprov.version>
     <jquery.version>3.7.1</jquery.version>
-    <guava.version>33.2.0-jre</guava.version>
+    <guava.version>33.2.1-jre</guava.version>
     <snakeyaml.version>2.2</snakeyaml.version>
-    <selenium.version>4.20.0</selenium.version>
+    <selenium.version>4.22.0</selenium.version>
+    <angus.version>2.0.3</angus.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -492,6 +493,13 @@
       <groupId>org.webjars</groupId>
       <artifactId>jquery</artifactId>
       <version>${jquery.version}</version>
+    </dependency>
+    
+    <!-- Override dependencies for CVE-->
+    <dependency>
+        <groupId>org.eclipse.angus</groupId>
+        <artifactId>angus-mail</artifactId>
+        <version>${angus.version}</version>
     </dependency>
 
     <!-- Testing dependencies -->
