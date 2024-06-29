@@ -136,6 +136,11 @@
         <version>${cxf.wss4j.version}</version>
       </dependency>
       <dependency>
+        <groupId>org.eclipse.angus</groupId>
+        <artifactId>angus-mail</artifactId>
+        <version>${angus.version}</version>
+      </dependency>
+      <dependency>
         <groupId>org.ehcache</groupId>
         <artifactId>ehcache</artifactId>
         <version>${ehcache.version}</version>
@@ -331,13 +336,6 @@
       <groupId>io.swagger.core.v3</groupId>
       <artifactId>swagger-jaxrs2-jakarta</artifactId>
       <version>${swagger-jaxrs.version}</version>
-      <exclusions>
-        <!-- redundant to jakarta.ws.rs-api -->
-        <exclusion>
-          <groupId>jakarta.ws.rs</groupId>
-          <artifactId>jakarta.ws.rs-api</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
 
     <!-- CXF Dependencies -->
@@ -417,14 +415,14 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-        <groupId>jakarta.servlet.jsp.jstl</groupId>
-        <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
-        <version>${jstl-api.version}</version>
+      <groupId>jakarta.servlet.jsp.jstl</groupId>
+      <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+      <version>${jstl-api.version}</version>
     </dependency>
     <dependency>
-        <groupId>org.glassfish.web</groupId>
-        <artifactId>jakarta.servlet.jsp.jstl</artifactId>
-        <version>${jstl.version}</version>
+      <groupId>org.glassfish.web</groupId>
+      <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+      <version>${jstl.version}</version>
     </dependency>
 
     <!-- ActiveMQ -->
@@ -437,13 +435,6 @@
       <groupId>org.apache.activemq</groupId>
       <artifactId>activemq-broker</artifactId>
       <version>${activemq.version}</version>
-      <exclusions>
-        <!-- ParaBank uses jakarta.annotation-api instead -->
-        <exclusion>
-          <groupId>jakarta.annotation</groupId>
-          <artifactId>jakarta.annotation-api</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.apache.activemq</groupId>
@@ -496,13 +487,6 @@
       <version>${jquery.version}</version>
     </dependency>
     
-    <!-- Override dependencies for CVE-->
-    <dependency>
-        <groupId>org.eclipse.angus</groupId>
-        <artifactId>angus-mail</artifactId>
-        <version>${angus.version}</version>
-    </dependency>
-
     <!-- Testing dependencies -->
     <dependency>
       <groupId>junit</groupId>
