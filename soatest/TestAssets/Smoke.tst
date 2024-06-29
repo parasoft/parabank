@@ -69136,14 +69136,14 @@ Timestamp: 2022-11-15 11:25:00</notes>
          <operations size="3">
           <operation index="1">true</operation>
          </operations>
-         <identifier>definitions</identifier>
+         <identifier>components.schemas</identifier>
         </IgnoredJSONDiff>
         <IgnoredJSONDiff className="webtool.ecmascript.json.IgnoredJSONDiff" version="1.2">
          <operations size="3">
           <operation index="1">true</operation>
           <operation index="2">true</operation>
          </operations>
-         <identifier>definitions.Payee.properties</identifier>
+         <identifier>components.schemas.Payee.properties</identifier>
         </IgnoredJSONDiff>
        </JSONDiffer>
        <mode>3</mode>
