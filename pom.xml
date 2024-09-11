@@ -69,7 +69,7 @@
     <hamcrest.version>2.2</hamcrest.version>
     <bcprov.version>1.78.1</bcprov.version>
     <jquery.version>3.7.1</jquery.version>
-    <guava.version>33.2.1-jre</guava.version>
+    <guava.version>33.3.0-jre</guava.version>
     <snakeyaml.version>2.2</snakeyaml.version>
     <selenium.version>4.22.0</selenium.version>
     <angus.version>2.0.3</angus.version>
