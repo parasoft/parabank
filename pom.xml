@@ -51,7 +51,7 @@
     <jackson.version>2.17.1</jackson.version>
     <woodstox.version>7.0.0</woodstox.version>
     <slf4j.version>2.0.13</slf4j.version>
-    <log4j.version>2.23.1</log4j.version>
+    <log4j.version>2.24.0</log4j.version>
     <commons-io.version>2.16.1</commons-io.version>
     <commons-codec.version>1.17.1</commons-codec.version>
     <wiremock.version>3.7.0</wiremock.version>
