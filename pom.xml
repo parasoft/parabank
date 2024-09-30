@@ -27,9 +27,9 @@
     <versions-maven-plugin.version>2.17.1</versions-maven-plugin.version>
     <phase.start-container>pre-integration-test</phase.start-container>
     <phase.stop-container>post-integration-test</phase.stop-container>
+    <jakarta-annotation-api.version>2.1.1</jakarta-annotation-api.version>
     <jax-activation.version>2.1.3</jax-activation.version>
     <jax-activation-sun.version>2.0.1</jax-activation-sun.version>
-    <jax-annotation.version>3.0.0</jax-annotation.version>
     <jax-jws.version>3.0.0</jax-jws.version>
     <jax-rs.version>4.0.0</jax-rs.version>
     <jax-soap.version>3.0.2</jax-soap.version>
@@ -253,10 +253,12 @@
       <artifactId>jakarta.activation-api</artifactId>
       <version>${jax-activation.version}</version>
     </dependency>
+    <!-- Jakarta annotations-api 2.1.1 is provided by Tomcat 10.1 -->
     <dependency>
       <groupId>jakarta.annotation</groupId>
       <artifactId>jakarta.annotation-api</artifactId>
-      <version>${jax-annotation.version}</version>
+      <version>${jakarta-annotation-api.version}</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>jakarta.jws</groupId>
