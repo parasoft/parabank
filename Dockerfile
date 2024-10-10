@@ -1,4 +1,4 @@
-FROM tomcat:10.1.30-jre17-temurin-jammy
+FROM tomcat:10.1.31-jre21-temurin-noble
 
 ARG TOMCAT_HOME=/usr/local/tomcat
 
