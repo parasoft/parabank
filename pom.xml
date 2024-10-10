@@ -719,7 +719,7 @@
             <artifactInstaller>
               <groupId>org.apache.tomcat</groupId>
               <artifactId>tomcat</artifactId>
-              <version>10.1.30</version>
+              <version>10.1.31</version>
             </artifactInstaller>
             <timeout>600000</timeout>
           </container>
