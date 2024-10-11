@@ -36,7 +36,7 @@ mvn \
 
 echo "**4/7** Running jtestcov to create a baseline coverage.xml"
 java -jar ${SELENIC_HOME}/coverage/Java/jtestcov/jtestcov.jar coverage -selenic \
-    -app target/parabank-4.0.0-SNAPSHOT.war \
+    -app target/parabank-5.0.0-SNAPSHOT.war \
     -include com/parasoft/parabank/** \
     -runtime runtime_coverage \
     -report coverage_report \
@@ -54,7 +54,7 @@ mvn clean package -DskipTests
 echo "**7/7** Running impacted tests"
 mvn \
     -Dselenic.home=${SELENIC_HOME} \
-    -Dselenic.coverage.binaries=target/parabank-4.0.0-selenium-demo-SNAPSHOT.war \
+    -Dselenic.coverage.binaries=target/parabank-5.0.0-selenium-demo-SNAPSHOT.war \
     -Dselenic.coverage.binaries.includes=com/parasoft/parabank/** \
     -Dselenic.coverage.baseline=coverage_report/coverage.xml \
     -Dselenic.coverage.showdetails=true \
