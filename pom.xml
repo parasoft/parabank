@@ -798,7 +798,7 @@
         <soatest.data>${project.build.directory}/soatest/workspace</soatest.data>
         <soatest.fail>false</soatest.fail>
         <soatest.import>${project.basedir}/soatest/TestAssets</soatest.import>
-        <soatest.settings>${project.build.directory}/soatest/localsettings.properties</soatest.settings>
+        <soatest.settings>${project.build.directory}/soatest/settings.properties</soatest.settings>
         <soatest.report>${project.build.directory}/soatest/reports/report.html</soatest.report>
         <soatest.resources>/TestAssets/Smoke.tst</soatest.resources>
 
@@ -809,23 +809,23 @@
         <parasoft.eula.accepted>false</parasoft.eula.accepted>
 
         <!-- set to true on Maven command line to opt-in to telemetry -->
-        <parasoft.localsettings.usage.reporting.enabled>false</parasoft.localsettings.usage.reporting.enabled>
+        <parasoft.settings.usage.reporting.enabled>false</parasoft.settings.usage.reporting.enabled>
 
         <!-- DTP/LS/license settings which can be set on Maven command line -->
-        <parasoft.localsettings.dtp.enabled>false</parasoft.localsettings.dtp.enabled>
-        <parasoft.localsettings.dtp.url></parasoft.localsettings.dtp.url>
-        <parasoft.localsettings.dtp.user></parasoft.localsettings.dtp.user>
-        <parasoft.localsettings.dtp.password></parasoft.localsettings.dtp.password>
-        <parasoft.localsettings.license.network.use.specified.server>false</parasoft.localsettings.license.network.use.specified.server>
-        <parasoft.localsettings.license.network.url></parasoft.localsettings.license.network.url>
-        <parasoft.localsettings.license.network.auth.enabled>false</parasoft.localsettings.license.network.auth.enabled>
-        <parasoft.localsettings.license.network.user></parasoft.localsettings.license.network.user>
-        <parasoft.localsettings.license.network.password></parasoft.localsettings.license.network.password>
-        <parasoft.localsettings.soatest.license.use_network>true</parasoft.localsettings.soatest.license.use_network>
-        <parasoft.localsettings.soatest.license.network.edition>automation_edition</parasoft.localsettings.soatest.license.network.edition>
-        <parasoft.localsettings.soatest.license.custom_edition_features></parasoft.localsettings.soatest.license.custom_edition_features>
-        <parasoft.localsettings.soatest.license.local.password></parasoft.localsettings.soatest.license.local.password>
-        <parasoft.localsettings.report.test_suites_only>false</parasoft.localsettings.report.test_suites_only>
+        <parasoft.settings.dtp.enabled>false</parasoft.settings.dtp.enabled>
+        <parasoft.settings.dtp.url></parasoft.settings.dtp.url>
+        <parasoft.settings.dtp.user></parasoft.settings.dtp.user>
+        <parasoft.settings.dtp.password></parasoft.settings.dtp.password>
+        <parasoft.settings.license.network.use.specified.server>false</parasoft.settings.license.network.use.specified.server>
+        <parasoft.settings.license.network.url></parasoft.settings.license.network.url>
+        <parasoft.settings.license.network.auth.enabled>false</parasoft.settings.license.network.auth.enabled>
+        <parasoft.settings.license.network.user></parasoft.settings.license.network.user>
+        <parasoft.settings.license.network.password></parasoft.settings.license.network.password>
+        <parasoft.settings.soatest.license.use_network>true</parasoft.settings.soatest.license.use_network>
+        <parasoft.settings.soatest.license.network.edition>automation_edition</parasoft.settings.soatest.license.network.edition>
+        <parasoft.settings.soatest.license.custom_edition_features></parasoft.settings.soatest.license.custom_edition_features>
+        <parasoft.settings.soatest.license.local.password></parasoft.settings.soatest.license.local.password>
+        <parasoft.settings.report.test_suites_only>false</parasoft.settings.report.test_suites_only>
       </properties>
       <build>
         <plugins>
@@ -850,21 +850,21 @@
                     <!-- create settings file -->
                     <propertyfile file="${soatest.settings}">
                       <entry key="parasoft.eula.accepted" value="${parasoft.eula.accepted}" />
-                      <entry key="parasoft.localsettings.usage.reporting.enabled" value="${parasoft.localsettings.usage.reporting.enabled}" />
-                      <entry key="dtp.enabled" value="${parasoft.localsettings.dtp.enabled}" />
-                      <entry key="dtp.url" value="${parasoft.localsettings.dtp.url}" />
-                      <entry key="dtp.user" value="${parasoft.localsettings.dtp.user}" />
-                      <entry key="dtp.password" value="${parasoft.localsettings.dtp.password}" />
-                      <entry key="license.network.use.specified.server" value="${parasoft.localsettings.license.network.use.specified.server}" />
-                      <entry key="license.network.url" value="${parasoft.localsettings.license.network.url}" />
-                      <entry key="license.network.auth.enabled" value="${parasoft.localsettings.license.network.auth.enabled}" />
-                      <entry key="license.network.user" value="${parasoft.localsettings.license.network.user}" />
-                      <entry key="license.network.password" value="${parasoft.localsettings.license.network.password}" />
-                      <entry key="soatest.license.use_network" value="${parasoft.localsettings.soatest.license.use_network}" />
-                      <entry key="soatest.license.network.edition" value="${parasoft.localsettings.soatest.license.network.edition}" />
-                      <entry key="soatest.license.custom_edition_features" value="${parasoft.localsettings.soatest.license.custom_edition_features}" />
-                      <entry key="soatest.license.local.password" value="${parasoft.localsettings.soatest.license.local.password}" />
-                      <entry key="report.test_suites_only" value="${parasoft.localsettings.report.test_suites_only}" />
+                      <entry key="parasoft.settings.usage.reporting.enabled" value="${parasoft.settings.usage.reporting.enabled}" />
+                      <entry key="dtp.enabled" value="${parasoft.settings.dtp.enabled}" />
+                      <entry key="dtp.url" value="${parasoft.settings.dtp.url}" />
+                      <entry key="dtp.user" value="${parasoft.settings.dtp.user}" />
+                      <entry key="dtp.password" value="${parasoft.settings.dtp.password}" />
+                      <entry key="license.network.use.specified.server" value="${parasoft.settings.license.network.use.specified.server}" />
+                      <entry key="license.network.url" value="${parasoft.settings.license.network.url}" />
+                      <entry key="license.network.auth.enabled" value="${parasoft.settings.license.network.auth.enabled}" />
+                      <entry key="license.network.user" value="${parasoft.settings.license.network.user}" />
+                      <entry key="license.network.password" value="${parasoft.settings.license.network.password}" />
+                      <entry key="soatest.license.use_network" value="${parasoft.settings.soatest.license.use_network}" />
+                      <entry key="soatest.license.network.edition" value="${parasoft.settings.soatest.license.network.edition}" />
+                      <entry key="soatest.license.custom_edition_features" value="${parasoft.settings.soatest.license.custom_edition_features}" />
+                      <entry key="soatest.license.local.password" value="${parasoft.settings.soatest.license.local.password}" />
+                      <entry key="report.test_suites_only" value="${parasoft.settings.report.test_suites_only}" />
                       <entry key="datasources.jdbc.classpath" value="${project.build.directory}/soatest/jdbc/hsqldb.jar" />
                     </propertyfile>
                     <!-- make everything accessible to the docker container -->
