@@ -748,6 +748,15 @@
             </artifactInstaller>
             <timeout>600000</timeout>
           </container>
+          <deployables>
+            <deployable>
+              <groupId>${project.groupId}</groupId>
+              <artifactId>${project.artifactId}</artifactId>
+              <type>${project.packaging}</type>
+              <pingUrlPath>/parabank/</pingUrlPath>
+              <pingTimeout>60000</pingTimeout>
+            </deployable>
+          </deployables>
         </configuration>
         <executions>
           <execution>
