@@ -62,7 +62,7 @@
     <cxf.swagger.version>3.6.3</cxf.swagger.version>
     <ehcache.version>3.10.8</ehcache.version>
     <saaj-impl.version>3.0.4</saaj-impl.version>
-    <jersey.version>3.1.9</jersey.version>
+    <jersey.version>3.1.10</jersey.version>
     <javassist.version>3.30.2-GA</javassist.version>
     <spring.version>6.1.14</spring.version>
     <junitparams.version>1.1.1</junitparams.version>
