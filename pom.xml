@@ -45,7 +45,7 @@
     <junit.version>4.13.2</junit.version>
     <jstl.version>3.0.1</jstl.version>
     <jstl-api.version>3.0.2</jstl-api.version>
-    <hsqldb.version>2.7.3</hsqldb.version>
+    <hsqldb.version>2.7.4</hsqldb.version>
     <commons-dbcp2.version>2.12.0</commons-dbcp2.version>
     <aspectjweaver.version>1.9.22.1</aspectjweaver.version>
     <jackson.version>2.18.2</jackson.version>
