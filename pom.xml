@@ -58,7 +58,7 @@
     <mockito.version>5.15.2</mockito.version>
     <bytebuddy.version>1.16.1</bytebuddy.version>
     <cxf.version>4.0.5</cxf.version>
-    <cxf.wss4j.version>3.0.3</cxf.wss4j.version>
+    <cxf.wss4j.version>3.0.4</cxf.wss4j.version>
     <cxf.swagger.version>3.6.3</cxf.swagger.version>
     <ehcache.version>3.10.8</ehcache.version>
     <saaj-impl.version>3.0.4</saaj-impl.version>
