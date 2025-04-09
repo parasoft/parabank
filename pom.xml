@@ -55,7 +55,7 @@
     <commons-io.version>2.18.0</commons-io.version>
     <commons-codec.version>1.18.0</commons-codec.version>
     <wiremock.version>3.12.1</wiremock.version>
-    <mockito.version>5.16.0</mockito.version>
+    <mockito.version>5.17.0</mockito.version>
     <bytebuddy.version>1.17.2</bytebuddy.version>
     <cxf.version>4.1.1</cxf.version>
     <cxf.wss4j.version>4.0.0</cxf.wss4j.version>
