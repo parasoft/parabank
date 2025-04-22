@@ -35,3 +35,6 @@ jtest-ft-cov/
 
 # IntelliJ
 out/
+
+# Spring Tools Suite
+/.factorypath
