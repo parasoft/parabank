@@ -50,7 +50,7 @@
     <hsqldb.version>2.7.4</hsqldb.version>
     <commons-dbcp2.version>2.13.0</commons-dbcp2.version>
     <aspectjweaver.version>1.9.24</aspectjweaver.version>
-    <jackson.version>2.19.0</jackson.version>
+    <jackson.version>2.19.1</jackson.version>
     <woodstox.version>7.1.1</woodstox.version>
     <slf4j.version>2.0.17</slf4j.version>
     <log4j.version>2.25.1</log4j.version>
