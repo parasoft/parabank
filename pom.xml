@@ -74,7 +74,7 @@
     <guava.version>33.4.8-jre</guava.version>
     <snakeyaml.version>2.4</snakeyaml.version>
     <selenium.version>4.35.0</selenium.version>
-    <angus.version>2.0.3</angus.version>
+    <angus.version>2.0.4</angus.version>
   </properties>
   <dependencyManagement>
     <dependencies>
