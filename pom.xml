@@ -23,7 +23,7 @@
     <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
     <maven-surefire-plugin.version>3.5.4</maven-surefire-plugin.version>
     <maven-war-plugin.version>3.4.0</maven-war-plugin.version>
-    <cargo-maven3-plugin.version>1.10.21</cargo-maven3-plugin.version>
+    <cargo-maven3-plugin.version>1.10.22</cargo-maven3-plugin.version>
     <dependency-check-maven.version>12.1.3</dependency-check-maven.version>
     <soatest-maven-plugin.version>1.0.2</soatest-maven-plugin.version>
     <versions-maven-plugin.version>2.19.0</versions-maven-plugin.version>
