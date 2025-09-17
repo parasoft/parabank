@@ -41,7 +41,7 @@
     <istack.version>4.2.0</istack.version>
     <joda-time.version>2.14.0</joda-time.version>
     <activemq.version>6.1.7</activemq.version>
-    <swagger-jaxrs.version>2.2.36</swagger-jaxrs.version>
+    <swagger-jaxrs.version>2.2.37</swagger-jaxrs.version>
     <!-- Tomcat 10.1 only supports Servlet API 6.0 -->
     <jakarta.servlet.version>6.0.0</jakarta.servlet.version>
     <junit.version>4.13.2</junit.version>
