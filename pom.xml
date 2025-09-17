@@ -72,7 +72,7 @@
     <bcprov.version>1.82</bcprov.version>
     <jquery.version>3.7.1</jquery.version>
     <guava.version>33.4.8-jre</guava.version>
-    <snakeyaml.version>2.4</snakeyaml.version>
+    <snakeyaml.version>2.5</snakeyaml.version>
     <selenium.version>4.35.0</selenium.version>
     <angus.version>2.0.4</angus.version>
   </properties>
