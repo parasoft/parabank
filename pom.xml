@@ -75,7 +75,9 @@
     <guava.version>33.5.0-jre</guava.version>
     <snakeyaml.version>2.5</snakeyaml.version>
     <selenium.version>4.35.0</selenium.version>
-    <angus.version>2.0.5</angus.version>
+    <angus-activation.version>2.0.3</angus-activation.version>
+    <angus-mail.version>2.0.5</angus-mail.version>
+    <jakarta.mail-api.version>2.1.5</jakarta.mail-api.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -140,8 +142,18 @@
       </dependency>
       <dependency>
         <groupId>org.eclipse.angus</groupId>
+        <artifactId>angus-activation</artifactId>
+        <version>${angus-activation.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.angus</groupId>
         <artifactId>angus-mail</artifactId>
-        <version>${angus.version}</version>
+        <version>${angus-mail.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>jakarta.mail</groupId>
+        <artifactId>jakarta.mail-api</artifactId>
+        <version>${jakarta.mail-api.version}</version>
       </dependency>
       <dependency>
         <groupId>org.ehcache</groupId>
