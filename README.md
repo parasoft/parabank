@@ -11,7 +11,7 @@ NOTE: if using the coverage agent when running the functional/manual tests (see 
 ## Apache Tomcat notes
 * Java `17` is recommended. Oracle JDK or Zulu OpenJDK is preferred.
 
-* Apache Tomcat `9` is recommended.
+* Apache Tomcat `10.1` is recommended.
 
 * To prevent verbose cache warnings in the tomcat log::
 
