@@ -74,7 +74,7 @@
     <jquery.version>3.7.1</jquery.version>
     <guava.version>33.5.0-jre</guava.version>
     <snakeyaml.version>2.5</snakeyaml.version>
-    <selenium.version>4.35.0</selenium.version>
+    <selenium.version>4.38.0</selenium.version>
     <angus-activation.version>2.0.3</angus-activation.version>
     <angus-mail.version>2.0.5</angus-mail.version>
     <jakarta.mail-api.version>2.1.5</jakarta.mail-api.version>
