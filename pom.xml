@@ -24,7 +24,7 @@
     <maven-surefire-plugin.version>3.5.4</maven-surefire-plugin.version>
     <maven-war-plugin.version>3.5.0</maven-war-plugin.version>
     <cargo-maven3-plugin.version>1.10.25</cargo-maven3-plugin.version>
-    <dependency-check-maven.version>12.1.6</dependency-check-maven.version>
+    <dependency-check-maven.version>12.1.9</dependency-check-maven.version>
     <soatest-maven-plugin.version>1.0.2</soatest-maven-plugin.version>
     <versions-maven-plugin.version>2.19.1</versions-maven-plugin.version>
     <phase.start-container>pre-integration-test</phase.start-container>
