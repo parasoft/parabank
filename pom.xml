@@ -40,7 +40,7 @@
     <jaxb.impl.version>4.0.6</jaxb.impl.version>
     <istack.version>4.2.0</istack.version>
     <joda-time.version>2.14.0</joda-time.version>
-    <activemq.version>6.1.7</activemq.version>
+    <activemq.version>6.1.8</activemq.version>
     <swagger-jaxrs.version>2.2.40</swagger-jaxrs.version>
     <!-- Tomcat 10.1 only supports Servlet 6.0 and EL 5.0  -->
     <jakarta.servlet.version>6.0.0</jakarta.servlet.version>
