@@ -1,10 +1,3 @@
-/*
- * (C) Copyright Parasoft Corporation 2017.  All rights reserved.
- * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF Parasoft
- * The copyright notice above does not evidence any
- * actual or intended publication of such source code.
- */
-
 package com.parasoft.parabank.util;
 
 import java.time.Instant;
