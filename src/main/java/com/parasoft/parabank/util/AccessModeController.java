@@ -181,7 +181,9 @@ public class AccessModeController {
         final String urlString = restEndpoint + "/accounts/" + accountId + "/transactions";
 
         if (criteria != null) {
-            if (criteria.getAmount() != null) {
+            if (criteria.getTransactionId() != null) {
+                return new URL(restEndpoint + "/transactions/" + criteria.getTransactionId());
+            } else if (criteria.getAmount() != null) {
                 return new URL(urlString + "/amount/" + criteria.getAmount());
             } else if (criteria.getOnDate() != null) {
                 return new URL(
