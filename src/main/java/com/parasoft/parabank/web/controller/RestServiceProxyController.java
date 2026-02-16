@@ -96,10 +96,11 @@ public class RestServiceProxyController extends AbstractBankController implement
         if (adminManager != null) {
             accessMode = adminManager.getParameter("accessmode");
         }
-        final Customer customer = bankManager.getCustomer(id);
         if (accessMode != null && !accessMode.equalsIgnoreCase("jdbc")) {
+            final Customer customer = accessModeController.doGetCustomer(id);
             accounts = accessModeController.doGetAccounts(customer);
         } else {
+            final Customer customer = bankManager.getCustomer(id);
             accounts = bankManager.getAccountsForCustomer(customer);
             log.warn("Using regular JDBC connection");
         }
@@ -129,14 +130,15 @@ public class RestServiceProxyController extends AbstractBankController implement
         authenticate();
         String accessMode = null;
         List<Transaction> transactions;
-        Account account = bankManager.getAccount(id);
         if (adminManager != null) {
             accessMode = adminManager.getParameter("accessmode");
         }
         if (accessMode != null && !accessMode.equalsIgnoreCase("jdbc")) {
+            Account account = accessModeController.doGetAccount(id);
             transactions = accessModeController.getTransactionsForAccount(account, null);
         } else {
             // default JDBC
+            Account account = bankManager.getAccount(id);
             transactions = bankManager.getTransactionsForAccount(account);
         }
         return transactions;
@@ -148,7 +150,6 @@ public class RestServiceProxyController extends AbstractBankController implement
         authenticate();
         String accessMode = null;
         List<Transaction> transactions;
-        Account account = bankManager.getAccount(id);
         if (adminManager != null) {
             accessMode = adminManager.getParameter("accessmode");
         }
@@ -157,6 +158,7 @@ public class RestServiceProxyController extends AbstractBankController implement
         criteria.setTransactionType(type);
         criteria.setMonth(month);
         if (accessMode != null && !accessMode.equalsIgnoreCase("jdbc")) {
+            Account account = accessModeController.doGetAccount(id);
             transactions = accessModeController.getTransactionsForAccount(account, criteria);
         } else {
             // default JDBC
@@ -312,7 +314,7 @@ public class RestServiceProxyController extends AbstractBankController implement
         criteria.setOnDate(TransactionCriteria.DATE_FORMATTER.get().parse(onDate));
         criteria.setSearchType(SearchType.DATE);
         if (accessMode != null && !accessMode.equalsIgnoreCase("jdbc")) {
-            Account account = bankManager.getAccount(accountId);
+            Account account = accessModeController.doGetAccount(accountId);
             return accessModeController.getTransactionsForAccount(account, criteria);
         } else {
             // default JDBC
@@ -334,7 +336,7 @@ public class RestServiceProxyController extends AbstractBankController implement
         criteria.setFromDate(TransactionCriteria.DATE_FORMATTER.get().parse(fromDate));
         criteria.setSearchType(SearchType.DATE_RANGE);
         if (accessMode != null && !accessMode.equalsIgnoreCase("jdbc")) {
-            Account account = bankManager.getAccount(accountId);
+            Account account = accessModeController.doGetAccount(accountId);
             return accessModeController.getTransactionsForAccount(account, criteria);
         } else {
             // default JDBC
@@ -354,7 +356,7 @@ public class RestServiceProxyController extends AbstractBankController implement
         criteria.setAmount(amount);
         criteria.setSearchType(SearchType.AMOUNT);
         if (accessMode != null && !accessMode.equalsIgnoreCase("jdbc")) {
-            Account account = bankManager.getAccount(accountId);
+            Account account = accessModeController.doGetAccount(accountId);
             return accessModeController.getTransactionsForAccount(account, criteria);
         } else {
             // default JDBC

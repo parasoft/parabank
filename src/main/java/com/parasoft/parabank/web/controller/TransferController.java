@@ -1,9 +1,11 @@
 package com.parasoft.parabank.web.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.annotation.Resource;
+import jakarta.xml.bind.JAXBException;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.parasoft.parabank.domain.Account;
 import com.parasoft.parabank.domain.Customer;
 import com.parasoft.parabank.domain.logic.AdminManager;
+import com.parasoft.parabank.service.ParaBankServiceException;
 import com.parasoft.parabank.util.AccessModeController;
 import com.parasoft.parabank.util.Constants;
 import com.parasoft.parabank.util.SessionParam;
@@ -37,11 +40,23 @@ public class TransferController extends AbstractValidatingBankController {
     private AdminManager adminManager;
 
     @ModelAttribute("accounts")
-    public List<Integer> getAccountIds(@SessionParam(Constants.USERSESSION) final UserSession userSession) {
+    public List<Integer> getAccountIds(@SessionParam(Constants.USERSESSION) final UserSession userSession)
+            throws ParaBankServiceException, IOException, JAXBException {
         //final UserSession userSession = (UserSession) WebUtils.getRequiredSessionAttribute(request, Constants.USERSESSION);
 
         final Customer customer = userSession.getCustomer();
-        final List<Account> accounts = bankManager.getAccountsForCustomer(customer);
+
+        String accessMode = null;
+        if (adminManager != null) {
+            accessMode = adminManager.getParameter("accessmode");
+        }
+
+        List<Account> accounts;
+        if (accessMode != null && !accessMode.equalsIgnoreCase("jdbc")) {
+            accounts = accessModeController.doGetAccounts(customer);
+        } else {
+            accounts = bankManager.getAccountsForCustomer(customer);
+        }
 
         final List<Integer> accountIds = new ArrayList<>();
         for (final Account account : accounts) {
