@@ -1,5 +1,7 @@
 package com.parasoft.parabank.web.controller;
 
+import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import jakarta.annotation.Resource;
+import jakarta.xml.bind.JAXBException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +31,7 @@ import com.parasoft.parabank.domain.Account;
 import com.parasoft.parabank.domain.Customer;
 import com.parasoft.parabank.domain.Transaction;
 import com.parasoft.parabank.domain.logic.AdminManager;
+import com.parasoft.parabank.service.ParaBankServiceException;
 import com.parasoft.parabank.util.AccessModeController;
 import com.parasoft.parabank.util.Constants;
 import com.parasoft.parabank.util.SessionParam;
@@ -63,11 +67,23 @@ public class FindTransactionController extends AbstractValidatingBankController 
      * @return
      */
     @ModelAttribute("accounts")
-    public List<Integer> getAccountIds(@SessionParam(Constants.USERSESSION) final UserSession userSession) {
+    public List<Integer> getAccountIds(@SessionParam(Constants.USERSESSION) final UserSession userSession)
+            throws ParaBankServiceException, IOException, JAXBException {
         //final UserSession userSession = (UserSession) WebUtils.getRequiredSessionAttribute(request, Constants.USERSESSION);
 
         final Customer customer = userSession.getCustomer();
-        final List<Account> accounts = bankManager.getAccountsForCustomer(customer);
+
+        String accessMode = null;
+        if (adminManager != null) {
+            accessMode = adminManager.getParameter("accessmode");
+        }
+
+        List<Account> accounts;
+        if (accessMode != null && !accessMode.equalsIgnoreCase("jdbc")) {
+            accounts = accessModeController.doGetAccounts(customer);
+        } else {
+            accounts = bankManager.getAccountsForCustomer(customer);
+        }
 
         final List<Integer> accountIds = new ArrayList<>();
         for (final Account account : accounts) {
@@ -117,26 +133,28 @@ public class FindTransactionController extends AbstractValidatingBankController 
     @RequestMapping(method = RequestMethod.POST)
     public ModelAndView onSubmit(
         @Validated @ModelAttribute(Constants.FINDTRANSACTIONFORM) final FindTransactionForm findTransactionForm,
-        final BindingResult errors) throws Exception {
+        final BindingResult errors) throws ParaBankServiceException, IOException, JAXBException, ParseException {
         //final FindTransactionForm findTransactionForm = (FindTransactionForm) command;
         if (errors.hasErrors()) {
             return new ModelAndView(getFormView(), errors.getModel());
         }
 
-        final Account account = bankManager.getAccount(findTransactionForm.getAccountId());
         String accessMode = null;
 
         if (adminManager != null) {
             accessMode = adminManager.getParameter("accessmode");
         }
+
         List<Transaction> transactions = null;
         if (accessMode != null && !accessMode.equalsIgnoreCase("jdbc")) {
             final Integer transactionId = findTransactionForm.getCriteria().getTransactionId();
             if (log.isDebugEnabled()) {
-                log.debug("ptocessing TransactionId: " + transactionId);
+                log.debug("processing TransactionId: " + transactionId);
             }
+            final Account account = accessModeController.doGetAccount(findTransactionForm.getAccountId());
             transactions = accessModeController.getTransactionsForAccount(account, findTransactionForm.getCriteria());
         } else {
+            final Account account = bankManager.getAccount(findTransactionForm.getAccountId());
             transactions = bankManager.getTransactionsForAccount(account.getId(), findTransactionForm.getCriteria());
         }
 

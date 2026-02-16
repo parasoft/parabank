@@ -60,8 +60,20 @@ public class UpdateCustomerController extends AbstractValidatingBankController {
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView getLookupForm(@SessionParam(Constants.USERSESSION) final UserSession userSession,
-        final Model model) throws Exception {
-        final CustomerForm form = new CustomerForm(bankManager.getCustomer(userSession.getCustomer().getId()));
+        final Model model) throws ParaBankServiceException, IOException, JAXBException {
+        String accessMode = null;
+        if (adminManager != null) {
+            accessMode = adminManager.getParameter("accessmode");
+        }
+
+        Customer customer;
+        if (accessMode != null && !accessMode.equalsIgnoreCase("jdbc")) {
+            customer = accessModeController.doGetCustomer(userSession.getCustomer().getId());
+        } else {
+            customer = bankManager.getCustomer(userSession.getCustomer().getId());
+        }
+
+        final CustomerForm form = new CustomerForm(customer);
         form.setRepeatedPassword(form.getCustomer().getPassword());
         final ModelAndView mv = super.prepForm(model, form);
         mv.addObject("customerId", userSession.getCustomer().getId());
