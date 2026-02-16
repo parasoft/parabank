@@ -22,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -376,17 +377,23 @@ public class RestServiceProxyController extends AbstractBankController implement
     }
 
     @RequestMapping(value = "bank/transactions/{transactionId}", method = RequestMethod.GET, produces = "application/json")
-    public Transaction getTransaction(@PathVariable(value = "transactionId") Integer transactionId) throws Exception {
+    public ResponseEntity<Transaction> getTransaction(@PathVariable(value = "transactionId") Integer transactionId) throws Exception {
         authenticate();
         String accessMode = null;
         if (adminManager != null) {
             accessMode = adminManager.getParameter("accessmode");
         }
-        if (accessMode != null && !accessMode.equalsIgnoreCase("jdbc")) {
-            return accessModeController.doGetTransaction(transactionId);
-        } else {
-            // default JDBC
-            return bankManager.getTransaction(transactionId);
+        try {
+            Transaction transaction;
+            if (accessMode != null && !accessMode.equalsIgnoreCase("jdbc")) {
+                transaction = accessModeController.doGetTransaction(transactionId);
+            } else {
+                // default JDBC
+                transaction = bankManager.getTransaction(transactionId);
+            }
+            return ResponseEntity.ok(transaction);
+        } catch (EmptyResultDataAccessException e) {
+            return ResponseEntity.notFound().build();
         }
     }
 

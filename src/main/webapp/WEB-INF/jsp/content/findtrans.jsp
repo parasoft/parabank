@@ -126,7 +126,9 @@
 				function submitCriteria(criteria) {
 					var accountId = $('#accountId').val();
 				    var url = 'services_proxy/bank/accounts/' + accountId + '/transactions/';
-				    if (criteria.searchType === 'DATE') {
+				    if (criteria.searchType === 'ID') {
+				        url = 'services_proxy/bank/transactions/' + criteria.transactionId;
+				    } else if (criteria.searchType === 'DATE') {
 				        url += 'onDate/' + criteria.onDate;
 				    } else if (criteria.searchType === 'DATE_RANGE') {
 				        url += 'fromDate/' + criteria.fromDate + '/toDate/' + criteria.toDate;
@@ -139,18 +141,25 @@
 							$('#resultContainer').show();
 							displayTransactions(response);
 				        })
-				        .catch(function(error) {
+				        .catch(function(jqXHR) {
 				        	$('#formContainer').hide();
-							$('#resultContainer').hide();
-							$('#errorContainer').show();
-							console.error("Server returned " + status
-									+ ": " + error);
-				        });
+							if (jqXHR.status === 404) {
+								$('#resultContainer').show();
+								displayTransactions([]);
+							} else {
+								$('#resultContainer').hide();
+								$('#errorContainer').show();
+								console.error("Server returned " + jqXHR.status + ": " + jqXHR.statusText);
+							}
+                        });
 				}
 
 				function displayTransactions(transactions) {
 					var transactionBody = $('#transactionBody');
 					transactionBody.empty();
+					if (!Array.isArray(transactions)) {
+						transactions = [transactions];
+					}
 					transactions.forEach(function(transaction) {
 						var formattedDate = formatDate(transaction.date);
 						var transactionRow = $('<tr>');
