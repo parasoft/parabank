@@ -106,7 +106,7 @@
             <fmt:param value="<span id='fromAccountId'></span>"/>
         </fmt:message>
     </p>
-    <p><fmt:message key="see.account.activity"/></p>
+    <p><a id="billpayActivityLink" href="<c:url value="activity.htm"/>"><fmt:message key="see.account.activity"/></a></p>
 </div>
 
 <div id="billpayError" style="display:none">
@@ -196,14 +196,12 @@
 	        amount = $("[name='amount']").val();
         }
         
-        var showError= function(error) {
+        var showError= function(xhr) {
             validationModel = createValidationModel();
             showForm(false);
             showResult(false);
             showBillpayError(true);
-            var status = error.status > 0 ? error.status : "timeout";
-            var data = error.data ? error.data : "Server timeout"
-            console.error("Server returned " + status + ": " + data);
+            JumiBank.logAjaxError(xhr);
         }
         
         var validate = function() {
@@ -240,23 +238,19 @@
             if (!validate()) {
             	return;
             } 
-            $.ajax({
-            	  url: 'services_proxy/bank/billpay?accountId='+ accountId + '&amount=' + amount,
-            	  type: 'POST',
-            	  contentType: 'application/json',
-            	  data: JSON.stringify(payee),
-            	  success: function(response) {
+            JumiBank.postJSON('/services_proxy/bank/billpay?accountId='+ accountId + '&amount=' + amount, payee)
+            	  .done(function(response) {
 					$("#payeeName").text(response.payeeName);
 					$("#amount").text(currencyFormat(response.amount));
               		$("#fromAccountId").text(response.accountId);
+              		$("#billpayActivityLink").attr("href", JumiBank.url("/activity.htm?id=" + response.accountId));
               		showForm(false);
 					showResult(true);
-              		document.title = 'ParaBank | ' + '<fmt:message key="billpayConfirm.title" />'
-            	  },
-            	  error: function(xhr, status, error) {
-            		  showError(error);
-            	  }
-            	});
+              		document.title = 'JumiBank | ' + '<fmt:message key="billpayConfirm.title" />'
+            	  })
+            	  .fail(function(xhr) {
+            		  showError(xhr);
+            	  });
         }
         $("input[type=button]").click(() => {
         	updateModels();

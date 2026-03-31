@@ -1,35 +1,3 @@
-body {
-	padding: 0px;
-	margin: 0px;
-	background: #f0f4f8;
-	color: #334155;
-	font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-}
-
-div,p,ul,h2,h3,h4,h5,img {
-	padding: 0px;
-	margin: 0px;
-}
-
-a {
-    color: #1d9e75;
-}
-a:hover {
-    color: #158a63;
-}
-
-ul {
-	list-style-type: none
-}
-
-hr {
-    border: 0;
-    color: #cbd5e1;
-    background-color: #cbd5e1;
-    height: 1px;
-    margin: 20px 0 20px 0;
-}
-
 #mainPanel {
 	width: 876px;
 	position: relative;
@@ -39,7 +7,7 @@ hr {
 #topPanel {
 	width: 876px;
 	height: 65px;
-	background: #1c2b3a;
+	background: var(--jb-navy);
 	color: #e2e8f0;
 	position: relative;
 	margin: 0 auto;
@@ -61,7 +29,7 @@ hr {
 	transition: color 0.2s;
 }
 #topPanel a.admin-link:hover {
-	color: #1d9e75;
+	color: var(--jb-green);
 }
 
 #topPanel img.logo {
@@ -93,7 +61,7 @@ hr {
 }
 
 .headerPanel {
-	background: linear-gradient(145deg, #1c2b3a 0%, #243a4f 45%, #1c2b3a 100%);
+	background: linear-gradient(145deg, var(--jb-navy) 0%, var(--jb-navy-mid) 45%, var(--jb-navy) 100%);
 }
 
 
@@ -130,18 +98,18 @@ hr {
 
 /* Replaced bullet-hover.gif with CSS */
 #headerPanel ul.leftmenu li a:hover {
-	color: #1d9e75;
+	color: var(--jb-green);
 	text-decoration: none;
 }
 #headerPanel ul.leftmenu li a:hover::before {
-	color: #1d9e75;
+	color: var(--jb-green);
 }
 
 #headerPanel ul.leftmenu li.Solutions {
 	width: 122px;
 	height: 22px;
 	display: block;
-	color: #1d9e75;
+	color: var(--jb-green);
 	line-height: 22px;
 	text-decoration: none;
 	padding: 0 0 0 14px;
@@ -151,7 +119,7 @@ hr {
 	content: '›';
 	position: absolute;
 	left: 2px;
-	color: #1d9e75;
+	color: var(--jb-green);
 	font-size: 16px;
 	line-height: 22px;
 }
@@ -206,7 +174,7 @@ hr {
 #headerPanel ul.button li a:hover {
 	background: rgba(29, 158, 117, 0.2);
 	border-color: rgba(29, 158, 117, 0.5);
-	color: #1d9e75;
+	color: var(--jb-green);
 }
 
 #bodyPanel {
@@ -226,7 +194,7 @@ hr {
 	width: 164px;
 	height: 34px;
 	background: #fff;
-	color: #1c2b3a;
+	color: var(--jb-navy);
 	font-size: 16px;
 	line-height: 34px;
 	font-weight: 600;
@@ -266,17 +234,17 @@ hr {
 }
 
 #leftPanel ul li a:hover {
-	color: #1d9e75;
+	color: var(--jb-green);
 }
 
 #leftPanel ul li a:hover i {
-	color: #1d9e75;
+	color: var(--jb-green);
 }
 
 .input {
     width: 140px;
     border: 1px solid #cbd5e1;
-    color: #1c2b3a;
+    color: var(--jb-navy);
     font-size: 13px;
     border-radius: 4px;
 }
@@ -284,7 +252,7 @@ hr {
 .inputSmall {
 	width: 50px;
 	border: 1px solid #cbd5e1;
-	color: #1c2b3a;
+	color: var(--jb-navy);
 	font-size: 13px;
 	border-radius: 4px;
 }
@@ -292,7 +260,7 @@ hr {
 .inputLarge {
     width: 400px;
     border: 1px solid #cbd5e1;
-    color: #1c2b3a;
+    color: var(--jb-navy);
     font-size: 13px;
     border-radius: 4px;
 }
@@ -307,15 +275,15 @@ td input.input {
 }
 
 input.button:hover, button.button:hover {
-    background-color: #158a63;
+    background-color: var(--jb-green-dark);
 }
 
 input.button, button.button {
-	background-color: #1d9e75;
+	background-color: var(--jb-green);
 	background-image: none;
 	background-position: 0 0;
 	background-repeat: repeat-x;
-	border: 1px solid #158a63;
+	border: 1px solid var(--jb-green-dark);
 	color: white !important;
 	cursor: pointer;
 	font-family: system-ui, Arial, Verdana, Helvetica, sans-serif !important;
@@ -355,7 +323,7 @@ input.button, button.button {
 	display: inline-flex;
 	align-items: center;
 	gap: 6px;
-	color: #1c2b3a;
+	color: var(--jb-navy);
 	font-size: 12px;
 	font-weight: 600;
 	text-transform: uppercase;
@@ -370,7 +338,7 @@ input.button, button.button {
 
 #rightPanel p.more a:hover {
 	background: #ecfdf5;
-	color: #1d9e75;
+	color: var(--jb-green);
 	border-color: #b6e9d8;
 }
 
@@ -382,7 +350,7 @@ input.button, button.button {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background: linear-gradient(135deg, #1d9e75, #158a63);
+	background: linear-gradient(135deg, var(--jb-green), var(--jb-green-dark));
 	color: #fff;
 	font-size: 28px;
 	border-radius: 10px;
@@ -402,7 +370,7 @@ input.button, button.button {
 
 #rightPanel ul.services li.captionone {
 	background: #fff;
-	color: #1d9e75;
+	color: var(--jb-green);
 	font-size: 12px;
 	font-weight: bold;
 	text-decoration: underline;
@@ -430,7 +398,7 @@ input.button, button.button {
 	color: #94a3b8;
 }
 #rightPanel ul.services li a:hover {
-	color: #1d9e75;
+	color: var(--jb-green);
 	text-decoration: none;
 }
 
@@ -448,7 +416,7 @@ input.button, button.button {
 
 #rightPanel ul.servicestwo li.captiontwo {
 	background: #fff;
-	color: #1d9e75;
+	color: var(--jb-green);
 	font-size: 12px;
 	font-weight: bold;
 	text-decoration: underline;
@@ -476,7 +444,7 @@ input.button, button.button {
 	color: #94a3b8;
 }
 #rightPanel ul.servicestwo li a:hover {
-	color: #1d9e75;
+	color: var(--jb-green);
 	text-decoration: none;
 }
 
@@ -488,7 +456,7 @@ input.button, button.button {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background: linear-gradient(135deg, #1c2b3a, #243a4f);
+	background: linear-gradient(135deg, var(--jb-navy), var(--jb-navy-mid));
 	color: #fff;
 	font-size: 28px;
 	border-radius: 10px;
@@ -510,7 +478,7 @@ input.button, button.button {
 
 #rightPanel ul.events li.captionthree {
 	background: #fff;
-	color: #1d9e75;
+	color: var(--jb-green);
 	font-size: 12px;
 	font-weight: bold;
 	text-decoration: none;
@@ -544,7 +512,7 @@ input.button, button.button {
 
 #footermainPanel {
 	min-height: 103px;
-	background: #1c2b3a;
+	background: var(--jb-navy);
 	color: #cbd5e1;
 	font: 14px/1.5 system-ui, "Trebuchet MS", Arial, Helvetica, sans-serif;
 	position: relative;
@@ -580,7 +548,7 @@ input.button, button.button {
 
 #footerPanel ul li a:hover {
 	text-decoration: underline;
-	color: #1d9e75;
+	color: var(--jb-green);
 }
 
 #footerPanel p.copyright {
@@ -606,7 +574,7 @@ input.button, button.button {
 #footerPanel ul.visit li a {
 	background: transparent;
 	display: block;
-	color: #1d9e75;
+	color: var(--jb-green);
 	text-decoration: none;
 	padding: 0px;
 	font-size: 10px;

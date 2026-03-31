@@ -11,6 +11,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>JumiBank | <fmt:message key="${view}.title" /></title>
 		<link rel="icon" href="<c:url value="images/jumibank-icon.svg"/>" type="image/svg+xml" />
+		<link href="<c:url value="theme.css"/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value="template.css"/>" rel="stylesheet"
 			type="text/css" />
 		<link href="<c:url value="style.css"/>" rel="stylesheet"
@@ -23,6 +24,8 @@
 		<c:if test="${empty userSession.customer}">
 	    onload="document.login.username.focus();"
 	  </c:if>>
+		<%@ include file="include/appGlobals.jsp" %>
+		<script src="<c:url value="js/jumibank-core.js"/>"></script>
 		<div id="mainPanel">
 			<c:choose>
 				<c:when test="${empty userSession.customer}">

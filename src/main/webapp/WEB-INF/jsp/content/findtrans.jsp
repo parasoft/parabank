@@ -122,20 +122,19 @@
 <script>
 	$(document).ready(
 			function() {
-				
 				function submitCriteria(criteria) {
 					var accountId = $('#accountId').val();
-				    var url = 'services_proxy/bank/accounts/' + accountId + '/transactions/';
+				    var path = '/services_proxy/bank/accounts/' + accountId + '/transactions/';
 				    if (criteria.searchType === 'ID') {
-				        url = 'services_proxy/bank/transactions/' + criteria.transactionId;
+				        path = '/services_proxy/bank/transactions/' + criteria.transactionId;
 				    } else if (criteria.searchType === 'DATE') {
-				        url += 'onDate/' + criteria.onDate;
+				        path += 'onDate/' + criteria.onDate;
 				    } else if (criteria.searchType === 'DATE_RANGE') {
-				        url += 'fromDate/' + criteria.fromDate + '/toDate/' + criteria.toDate;
+				        path += 'fromDate/' + criteria.fromDate + '/toDate/' + criteria.toDate;
 				    } else if (criteria.searchType === 'AMOUNT') {
-				        url += 'amount/' + criteria.amount;
+				        path += 'amount/' + criteria.amount;
 				    }
-				    $.get(url, { timeout: 30000 })
+				    JumiBank.getJSON(path)
 				        .then(function(response) {
 				        	$('#formContainer').hide();
 							$('#resultContainer').show();
@@ -149,7 +148,7 @@
 							} else {
 								$('#resultContainer').hide();
 								$('#errorContainer').show();
-								console.error("Server returned " + jqXHR.status + ": " + jqXHR.statusText);
+								JumiBank.logAjaxError(jqXHR);
 							}
                         });
 				}
@@ -165,8 +164,8 @@
 						var transactionRow = $('<tr>');
 						transactionRow.append($('<td>').text(formattedDate));
 						transactionRow.append($('<td>').html(
-								'<a href="${pageContext.request.contextPath}/transaction.htm?id='
-										+ transaction.id + '">'
+								'<a href="' + JumiBank.url('/transaction.htm?id='
+										+ transaction.id) + '">'
 										+ transaction.description + '</a>'));
 						transactionRow.append($('<td>').text((transaction.type == 'Debit' ? formatCurrency(transaction.amount) : '')));
 						transactionRow.append($('<td>').text((transaction.type == 'Credit' ? formatCurrency(transaction.amount) : '')));

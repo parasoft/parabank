@@ -83,19 +83,16 @@
 <script type="text/javascript">
   $(document).ready(function() {
     function fetchAccountDetails() {
-      $.ajax({
-        url: "services_proxy/bank/accounts/" + ${model.accountId},
-        timeout: 30000,
-        success: function(data) {
+      JumiBank.getJSON("/services_proxy/bank/accounts/" + ${model.accountId})
+        .done(function(data) {
           $('#accountId').text(data.id);
           $('#accountType').text(data.type);
           $('#balance').text(formatCurrency(data.balance));
           $('#availableBalance').text(formatCurrency(data.balance < 0 ? 0 : data.balance));
-        },
-        error: function(xhr, status, error) {
-          reportError(xhr.status > 0 ? xhr.status : "timeout", xhr.responseText ? xhr.responseText : "Server timeout");
-        }
-      });
+        })
+        .fail(function(xhr) {
+          reportError(xhr);
+        });
     }
 
     function formatDate(dateString) {
@@ -120,10 +117,8 @@
     }
 
     function fetchAccountActivity(period, type) {
-      $.ajax({
-        url: "services_proxy/bank/accounts/" + ${model.accountId} + "/transactions/month/" + period + "/type/" + type,
-        timeout: 30000,
-        success: function(data) {
+      JumiBank.getJSON("/services_proxy/bank/accounts/" + ${model.accountId} + "/transactions/month/" + period + "/type/" + type)
+        .done(function(data) {
           $('#transactionTable tbody').empty();
           if (data.length > 0) {
         	$('#transactionTable').show();
@@ -132,7 +127,7 @@
               $('#transactionTable tbody').append(
                 "<tr>" +
                   "<td>" + formatDate(transaction.date) + "</td>" +
-                  "<td><a href='transaction.htm?id=" + transaction.id + "'>" + transaction.description + "</a></td>" +
+                  "<td><a href='" + JumiBank.url("/transaction.htm?id=" + transaction.id) + "'>" + transaction.description + "</a></td>" +
                   "<td>" + (transaction.type == 'Debit' ? formatCurrency(transaction.amount) : '') + "</td>" +
                   "<td>" + (transaction.type == 'Credit' ? formatCurrency(transaction.amount) : '') + "</td>" +
                 "</tr>"
@@ -142,18 +137,17 @@
             $('#noTransactions').show();
             $('#transactionTable').hide();
           }
-        },
-        error: function(xhr, status, error) {
-          reportError(xhr.status > 0 ? xhr.status : "timeout", xhr.responseText ? xhr.responseText : "Server timeout");
-        }
-      });
+        })
+        .fail(function(xhr) {
+          reportError(xhr);
+        });
     }
     
-    function reportError(status, data) {
+    function reportError(xhr) {
         $('#accountDetails').hide();
         $('#accountActivity').hide();
-        $('#error').show().find('.error').text("Server returned " + status + ": " + data);
-        console.error("Server returned " + status + ": " + data);
+        var e = JumiBank.logAjaxError(xhr);
+        $('#error').show().find('.error').text('Server returned ' + e.status + ': ' + e.message);
       }
     
     function fetchActivity() {

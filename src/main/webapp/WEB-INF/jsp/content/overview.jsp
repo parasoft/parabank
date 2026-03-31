@@ -34,7 +34,6 @@
 
 <script>
 $(document).ready(function() {
-      
       function formatCurrency(amount) {
       	if (amount == null) {
       		return "$0.00";
@@ -51,11 +50,8 @@ $(document).ready(function() {
     var $showOverview = $('#showOverview');
     var $showError = $('#showError');
 
-    $.ajax({
-        url: "services_proxy/bank/customers/" + ${model.customerId} + "/accounts",
-        type: "GET",
-        timeout: 30000,
-        success: function(response) {
+    JumiBank.getJSON("/services_proxy/bank/customers/" + ${model.customerId} + "/accounts")
+        .done(function(response) {
             var accounts = response;
             var totalBalance = 0;
             
@@ -64,7 +60,7 @@ $(document).ready(function() {
                 totalBalance += parseFloat(account.balance);
                 
                 var row = '<tr>' +
-                            '<td><a href="activity.htm?id=' + account.id + '">' + account.id + '</a></td>' +
+                            '<td><a href="' + JumiBank.url('/activity.htm?id=' + account.id) + '">' + account.id + '</a></td>' +
                             '<td>' + formatCurrency(account.balance) + '</td>' +
                             '<td>' + formatCurrency(availableBalance) + '</td>' +
                           '</tr>';
@@ -81,12 +77,11 @@ $(document).ready(function() {
             $overviewTable.append(totalRow);
             
             $showOverview.show();
-        },
-        error: function(xhr, status, error) {
+        })
+        .fail(function(xhr) {
             $showOverview.hide();
             $showError.show();
-            console.error("Server returned " + status + ": " + error);
-        }
-    });
+            JumiBank.logAjaxError(xhr);
+        });
 });
 </script>

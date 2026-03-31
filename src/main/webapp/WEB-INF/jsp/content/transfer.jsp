@@ -6,10 +6,10 @@
 		<h1 class="title">
 			<fmt:message key="transfer.funds" />
 		</h1>
-		<p id="amount.errors" class="error" style="display: none;">
+		<p id="amountErrorEmpty" class="error" style="display: none;">
 			<fmt:message key="error.amount.empty" />
 		</p>
-		<p id="amount.errors" class="error" style="display: none;">
+		<p id="amountErrorType" class="error" style="display: none;">
 			<fmt:message key="typeMismatch.java.math.BigDecimal" />
 		</p>
 		<form id="transferForm">
@@ -40,7 +40,7 @@
 			</fmt:message>
 		</p>
 		<p>
-			<fmt:message key="see.account.activity" />
+			<a id="transferActivityLink" href="<c:url value="activity.htm"/>"><fmt:message key="see.account.activity" /></a>
 		</p>
 	</div>
 	<div id="showError" style="display: none;">
@@ -56,12 +56,12 @@
 <script>
     $(document).ready(function() {
         function getAccounts() {
-            $.ajax({
-                url: "services_proxy/bank/customers/" + ${customerId} + "/accounts",
-                type: "GET",
-                timeout: 30000,
-                success: function(response) {
+            JumiBank.getJSON("/services_proxy/bank/customers/" + ${customerId} + "/accounts")
+                .done(function(response) {
                     var accounts = response;
+                    if (!accounts || !accounts.length) {
+                        return;
+                    }
                     $.each(accounts, function(index, account) {
                         $('#fromAccountId, #toAccountId').append($('<option>', {
                             value: account.id,
@@ -82,52 +82,54 @@
 						$('#toAccountId option').removeAttr('selected');
 						$('#toAccountId option[value="' + selectedValue + '"]').attr('selected', 'selected');
 					});
-                    
-                },
-                error: function(xhr, status, error) {
+                })
+                .fail(function(xhr) {
                     showError(xhr);
-                }
-            });
+                });
         }
 
         $('#transferForm').submit(function(event) {
             event.preventDefault();
             resetErrors();
 
-            var amount = $('#amount').val();
+            var amountRaw = $('#amount').val();
+            var amount = amountRaw != null ? String(amountRaw).trim() : '';
+            if (!amount) {
+                $('#amountErrorEmpty').show();
+                return;
+            }
+            if (isNaN(parseFloat(amount))) {
+                $('#amountErrorType').show();
+                return;
+            }
             var fromAccountId = $('#fromAccountId').val();
             var toAccountId = $('#toAccountId').val();
+            if (!fromAccountId || !toAccountId) {
+                return;
+            }
 
-            var url = "services_proxy/bank/transfer?fromAccountId=" + fromAccountId + "&toAccountId=" + toAccountId + "&amount=" + amount;
-
-            $.ajax({
-                url: url,
-                type: "POST",
-                timeout: 30000,
-                dataType: 'text',
-                success: function(response) {
+            JumiBank.postText("/services_proxy/bank/transfer?fromAccountId=" + fromAccountId + "&toAccountId=" + toAccountId + "&amount=" + encodeURIComponent(amount))
+                .done(function() {
                     $('#showForm').hide();
                     $('#showResult').show();
                     $('#amountResult').text(formatCurrency(amount));
                     $('#fromAccountIdResult').text(fromAccountId);
                     $('#toAccountIdResult').text(toAccountId);
-                },
-                error: function(xhr, status, error) {
+                    $('#transferActivityLink').attr('href', JumiBank.url("/activity.htm?id=" + fromAccountId));
+                })
+                .fail(function(xhr) {
                     showError(xhr);
-                }
-            });
+                });
         });
 
         function resetErrors() {
-            $('#amount.errors').hide();
+            $('#amountErrorEmpty, #amountErrorType').hide();
         }
 
         function showError(xhr) {
             $('#showForm, #showResult').hide();
             $('#showError').show();
-            var status = xhr.status > 0 ? xhr.status : "timeout";
-            var data = xhr.responseJSON ? xhr.responseJSON.message : "Server timeout";
-            console.error("Server returned " + status + ": " + data);
+            JumiBank.logAjaxError(xhr);
         }
         
         function formatCurrency(amount) {

@@ -12,7 +12,7 @@
       <li><a href="<c:url value="sitemap.htm"/>"><fmt:message key="site.map"/></a>| </li>
       <li><a href="<c:url value="contact.htm"/>"><fmt:message key="contact.us"/></a></li>
     </ul>
-    <p class="copyright">&copy; Parasoft. All rights reserved.</p>
+    <p class="copyright">&copy; JumiBank. Demo application.</p>
     <ul class="visit">
       <li><fmt:message key="visit.us"/>:</li>
       <li><a href="http://www.parasoft.com/" target="_blank">www.parasoft.com</a></li>

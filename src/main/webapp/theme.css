@@ -1,0 +1,51 @@
+/* JumiBank design tokens and base typography — load before template.css */
+:root {
+	--jb-navy: #1c2b3a;
+	--jb-navy-mid: #243a4f;
+	--jb-green: #1d9e75;
+	--jb-green-dark: #158a63;
+	--jb-text: #334155;
+	--jb-bg-page: #f0f4f8;
+	--jb-border: #e2e8f0;
+	--jb-muted: #94a3b8;
+	--jb-hr: #cbd5e1;
+}
+
+body {
+	padding: 0px;
+	margin: 0px;
+	background: var(--jb-bg-page);
+	color: var(--jb-text);
+	font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+div,
+p,
+ul,
+h2,
+h3,
+h4,
+h5,
+img {
+	padding: 0px;
+	margin: 0px;
+}
+
+a {
+	color: var(--jb-green);
+}
+a:hover {
+	color: var(--jb-green-dark);
+}
+
+ul {
+	list-style-type: none;
+}
+
+hr {
+	border: 0;
+	color: var(--jb-hr);
+	background-color: var(--jb-hr);
+	height: 1px;
+	margin: 20px 0 20px 0;
+}

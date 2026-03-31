@@ -10,7 +10,7 @@
     <div class="login"><input type="text" class="input" name="username"/></div>
     <p class="login-label"><i class="fas fa-lock"></i> <b><fmt:message key="password"/></b></p>
     <div class="login"><input type="password" class="input" name="password"/></div>
-    <div class="login"><input type="submit" class="button" value="Log In"/></div>
+    <div class="login"><input type="submit" class="button" value="<fmt:message key="login.submit"/>"/></div>
   </form>
   <p><a href="<c:url value="lookup.htm"/>"><fmt:message key="forgot.login.info"/></a></p>
   <p><a href="<c:url value="register.htm"/>"><fmt:message key="register"/></a></p>

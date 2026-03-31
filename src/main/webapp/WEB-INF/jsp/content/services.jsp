@@ -261,7 +261,7 @@ accessed within 20 minutes will be removed from the database.</td>
 </table>
 <br>
 <br>
-<span class="heading">Available ParaBank SOAP services:</span><br>
+<span class="heading">Available JumiBank SOAP services:</span><br>
 <table style="text-align: left; width: 925px;" border="1"
  cellpadding="1" cellspacing="1" width="100%">
   <tbody>
@@ -281,14 +281,14 @@ address:</span> <span class="value"><%= scheme%>://<%= hostname%><%= portStr%><%
     </tr>
     <tr>
       <td style="width: 400px;"><span
- class="porttypename">ParaBankService</span>
+ class="porttypename">JumiBank (ParaBankService)</span>
       <ul>
       </ul>
       </td>
       <td style="width: 1183px;"><span class="field">Endpoint
 address:</span> <span class="value"><%= scheme%>://<%= hostname%><%= portStr%><%= contextPath%>/services/ParaBank</span><br>
       <span class="field">WSDL :</span> <a
- href="<%= scheme%>://<%= hostname%><%= portStr%><%= contextPath%>/services/ParaBank?wsdl">{http://service.parabank.parasoft.com/}ParaBank</a><br>
+ href="<%= scheme%>://<%= hostname%><%= portStr%><%= contextPath%>/services/ParaBank?wsdl">{http://service.parabank.parasoft.com/}JumiBank</a><br>
       <span class="field">Target namespace:</span> <span
  class="value">http://service.parabank.parasoft.com/</span></td>
     </tr>
@@ -296,7 +296,7 @@ address:</span> <span class="value"><%= scheme%>://<%= hostname%><%= portStr%><%
 </table>
 <br>
 <br>
-<span class="heading">ParaBank services:</span><br>
+<span class="heading">JumiBank services:</span><br>
 <table style="text-align: left; width: 925px;" border="1"
  cellpadding="1" cellspacing="1" width="100%">
   <tbody>

@@ -104,7 +104,7 @@
 
 	<table class="form2">
 		<tr>
-			<td colspan="2"><b><fmt:message key="parabank.service" /></b>[&nbsp;
+			<td colspan="2"><b><fmt:message key="jumibank.service" /></b>[&nbsp;
 				<a href="<c:url value="services/ParaBank?wsdl"/>">WSDL</a>&nbsp;|&nbsp;<a
 				href="<c:url value="services/bank?_wadl&_type=xml"/>">WADL</a>&nbsp;|&nbsp;<a
 				href="<c:url value="api-docs/index.html"/>">OpenAPI</a>&nbsp;]</td>

@@ -13,4 +13,4 @@
   </fmt:message>
 </p>
 
-<p><fmt:message key="see.account.activity"/></p>
+<p><a href="<c:url value="activity.htm"/>?id=${model.fromAccountId}"><fmt:message key="see.account.activity"/></a></p>

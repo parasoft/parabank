@@ -52,30 +52,28 @@
 				$("#openAccountResult").hide();
 			}	
 		}
-		var showError = function() {
+		var showError = function(xhr) {
 			showForm(false);
             showResult(false);
             $("#openAccountError").show();
-            var status = error.status > 0 ? error.status : "timeout";
-            var data = error.data ? error.data : "Server timeout"
-            console.error("Server returned " + status + ": " + data);
+            JumiBank.logAjaxError(xhr);
 		}
 		var getAccounts = function() {
-			$.ajax({
-				url: "services_proxy/bank/customers/${customerId}/accounts",
-				dataType: "json",
-				success: function(data) {
+			JumiBank.getJSON("/services_proxy/bank/customers/${customerId}/accounts")
+				.done(function(data) {
 					accounts = data;
+					if (!accounts || !accounts.length) {
+						return;
+					}
 					accounts.selectedOption = accounts[0];
 					$("#fromAccountId").empty();
 					$.each(accounts, function(i, item) {
 						$("#fromAccountId").append($("<option></option>").attr("value", item.id).text(item.id));
 					});
-				},
-				error: function(data) {
-					showError(true);
-				}
-			});
+				})
+				.fail(function(xhr) {
+					showError(xhr);
+				});
 		}
 		getAccounts();
 		$('#fromAccountId').change(function() {
@@ -92,24 +90,21 @@
 			types.selectedOption = type;
 		});
 		types.selectedOption = $('#type').val();
-		var submit = function(error) {
-			var url = "services_proxy/bank/createAccount?customerId=${customerId}&newAccountType="+ types.selectedOption + "&fromAccountId=" + accounts.selectedOption.id;
-			$.ajax({
-				type: 'POST',
-          	  	contentType: 'application/json',
-				url: url,
-				success: function(data) {
+		var submit = function() {
+			if (!accounts || !accounts.length || !accounts.selectedOption) {
+				return;
+			}
+			JumiBank.postJSON("/services_proxy/bank/createAccount?customerId=${customerId}&newAccountType="+ types.selectedOption + "&fromAccountId=" + accounts.selectedOption.id)
+				.done(function(data) {
 					newAccountId = data.id;
-					newAccountUrl = "activity.htm" + "?id=" + newAccountId;
+					newAccountUrl = JumiBank.url("/activity.htm?id=" + newAccountId);
 					$('#newAccountId').attr("href", newAccountUrl).text(newAccountId);
 					showForm(false);
 					showResult(true);
-					
-				},
-				error: function(data) {
-					showError(true);
-				}
-			});
+				})
+				.fail(function(xhr) {
+					showError(xhr);
+				});
 		}
 		$("input[type=button]").click(() => {
         	submit(); 

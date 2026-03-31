@@ -105,26 +105,15 @@
 				$("#updateProfileResult").hide();
 			}
 		}
-		var showError = function() {
-			if (visible) {
-				$("#updateProfileError").show();
-			} else {
-				$("#updateProfileError").hide();
-			}
-		}
-		var showError = function(error) {
+		var showError = function(xhr) {
             showForm(false);
             showResult(false);
             $('#updateProfileError').show();
-            var status = error.status > 0 ? error.status : "timeout";
-            var data = error.data ? error.data : "Server timeout"
-            console.error("Server returned " + status + ": " + data);
+            JumiBank.logAjaxError(xhr);
         }
 		var getCustomer = function() {
-			$.ajax({
-				url: "services_proxy/bank/customers/${customerId}",
-				dataType: "json",
-				success: function(data) {
+			JumiBank.getJSON("/services_proxy/bank/customers/${customerId}")
+				.done(function(data) {
 					customer = data;
 					$('#customer\\.firstName').val(data.firstName);
 					$('#customer\\.lastName').val(data.lastName);
@@ -133,11 +122,10 @@
 					$('#customer\\.address\\.state').val(data.address.state);
 					$('#customer\\.address\\.zipCode').val(data.address.zipCode);
 					$('#customer\\.phoneNumber').val(data.phoneNumber);
-				},
-				error: function(data) {
-					showError(data);
-				}
-			})
+				})
+				.fail(function(xhr) {
+					showError(xhr);
+				});
 		}
 		var validate = function() {
 			$('#customer\\.firstName').val() ? $('#firstName-error').hide() : $('#firstName-error').show();
@@ -152,7 +140,8 @@
 		}
 		var submit = function() {
 			if (validate()) {
-				var url = "services_proxy/bank/customers/update/${customerId}" +
+				JumiBank.ajax({
+					url: "/services_proxy/bank/customers/update/${customerId}" +
 					"?firstName=" + encodeURIComponent($('#customer\\.firstName').val()) +
 					"&lastName=" + encodeURIComponent($('#customer\\.lastName').val()) +
 					"&street=" + encodeURIComponent($('#customer\\.address\\.street').val()) +
@@ -161,11 +150,9 @@
 					"&zipCode=" + encodeURIComponent($('#customer\\.address\\.zipCode').val()) +
 					"&phoneNumber=" + encodeURIComponent($('#customer\\.phoneNumber').val()) +
 					"&ssn=" + encodeURIComponent(customer.ssn) +
-					"&username=${username}&password=${password}";
-				$.ajax({
-					url: url,
+					"&username=${username}&password=${password}",
 					type: "POST",
-					timeout: 30000, 
+					timeout: 30000,
 					success: function(data) {
 						//Will always fail if the update succeeds because
 						//its trying to parse the response as JSON
@@ -180,7 +167,7 @@
 							showError(data);							
 						}
 					}
-				})
+				});
 			}
 		}
 		

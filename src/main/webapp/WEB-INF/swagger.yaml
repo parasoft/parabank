@@ -3,10 +3,10 @@ swagger: "2.0"
 info:
   description: "This API provides access to the internal PROXY for internal REST services"
   version: "3.0.0"
-  title: "The ParaBank services proxy REST API"
+  title: "The JumiBank services proxy REST API"
   termsOfService: "/parabank/about.htm"
   contact:
-    name: "ParaBank Web Administrator"
+    name: "JumiBank Web Administrator"
     url: "http://www.parasoft.com"
     email: "webadmin@parabank.parasoft.com"
   license:

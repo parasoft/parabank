@@ -102,11 +102,9 @@
 		}
 		
 		var submit = function() {
-			var url = 'services_proxy/bank/requestLoan?customerId=${customerId}&amount=' + $("#amount").val() + '&downPayment=' + $("#downPayment").val() + '&fromAccountId=' + $("#fromAccountId").val();
-			$.ajax({
-				url: url,
-				type: 'POST',
-				success: function(response) {
+			var path = '/services_proxy/bank/requestLoan?customerId=${customerId}&amount=' + $("#amount").val() + '&downPayment=' + $("#downPayment").val() + '&fromAccountId=' + $("#fromAccountId").val();
+			JumiBank.postExpectJSON(path)
+				.done(function(response) {
 					showForm(false);
 					showResult(true);
 					$("#loanProviderName").html(response.loanProviderName);
@@ -117,7 +115,7 @@
 					} else {
 						$("#loanRequestDenied").show();					
 					}
-					$("#newAccountId").attr("href", "${pageContext.request.contextPath}/activity.htm?id=" + response.accountId).text(response.accountId);
+					$("#newAccountId").attr("href", JumiBank.url("/activity.htm?id=" + response.accountId)).text(response.accountId);
 					if (response.message === 'error.insufficient.funds.for.down.payment') {
 						$('#loanRequestDenied p.error').html('<fmt:message key="error.insufficient.funds.for.down.payment"/>');
 					}
@@ -130,13 +128,13 @@
 		            if (response.message === 'error.insufficient.down.payment') {
 			            $('#loanRequestDenied p.error').html('<fmt:message key="error.insufficient.down.payment"/>');
 		            }
-				},
-				error: function(response) {
+				})
+				.fail(function(xhr) {
 					showForm(false);
 					showResult(false);
 					$("#requestLoanError").show();
-				}
-			})
+					JumiBank.logAjaxError(xhr);
+				});
 		}
 		
 		$("input[type=button]").click(() => {

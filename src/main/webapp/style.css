@@ -1,11 +1,11 @@
 .title {
     font-size: 20px;
     font-weight: 600;
-    color: #1c2b3a;
+    color: var(--jb-navy);
     width: 502px;
     min-height: 28px;
     background: none;
-    border-bottom: 2px solid #1d9e75;
+    border-bottom: 2px solid var(--jb-green);
     padding-bottom: 6px;
     margin: 0px 0px 14px 0px;
 }
@@ -25,14 +25,14 @@
     font-size: 13px;
     font-weight: 600;
     padding: 8px 6px;
-    background: #1c2b3a;
+    background: var(--jb-navy);
     border: none;
     color: #f8fafc;
 }
 .gradient-style td {
     padding: 8px 6px;
-    border-bottom: 1px solid #e2e8f0;
-    color: #334155;
+    border-bottom: 1px solid var(--jb-border);
+    color: var(--jb-text);
     background: #f8fafc;
 }
 .gradient-style tfoot tr td {
@@ -42,7 +42,7 @@
 }
 .gradient-style tbody tr:hover td {
     background: #ecfdf5;
-    color: #1c2b3a;
+    color: var(--jb-navy);
 }
 
 .smallText {
@@ -65,7 +65,7 @@
     background: #f8fafc;
     border-width: 1px;
     border-style: solid;
-    border-color: #e2e8f0;
+    border-color: var(--jb-border);
     border-radius: 6px;
 }
 .form2 {
@@ -73,7 +73,7 @@
     background: #f8fafc;
     border-width: 1px;
     border-style: solid;
-    border-color: #e2e8f0;
+    border-color: var(--jb-border);
     border-spacing: 4px;
     border-radius: 6px;
 }
@@ -85,7 +85,7 @@
     border-spacing: 0px;
 }
 .headline {
-    color: #1d9e75;
+    color: var(--jb-green);
 }
 [ng\:cloak], [ng-cloak], .ng-cloak {
   display: none !important;

@@ -4,8 +4,8 @@
   <artifactId>parabank</artifactId>
   <version>5.0.0-SNAPSHOT</version>
   <packaging>war</packaging>
-  <name>ParaBank Sample Project</name>
-  <description>ParaBank Sample Project for use with Parasoft SOAtest and Virtualize</description>
+  <name>JumiBank</name>
+  <description>JumiBank demo web application (forked from ParaBank sample)</description>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>17</maven.compiler.source>
