@@ -9,11 +9,13 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<title>ParaBank | <fmt:message key="${view}.title" /></title>
+		<title>JumiBank | <fmt:message key="${view}.title" /></title>
+		<link rel="icon" href="<c:url value="images/jumibank-icon.svg"/>" type="image/svg+xml" />
 		<link href="<c:url value="template.css"/>" rel="stylesheet"
 			type="text/css" />
 		<link href="<c:url value="style.css"/>" rel="stylesheet"
 			type="text/css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uu0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 		<script src="<c:url value="webjars/jquery/3.7.1/jquery.min.js" />"></script>
 	</head>
 

@@ -6,9 +6,9 @@
     <c:if test="${!empty loginForwardAction}">
         <input type="hidden" name="forwardAction" value="<c:url value="${loginForwardAction}"/>"/>
     </c:if>
-    <p><b><fmt:message key="username"/></b></p>
+    <p class="login-label"><i class="fas fa-user"></i> <b><fmt:message key="username"/></b></p>
     <div class="login"><input type="text" class="input" name="username"/></div>
-    <p><b><fmt:message key="password"/></b></p>
+    <p class="login-label"><i class="fas fa-lock"></i> <b><fmt:message key="password"/></b></p>
     <div class="login"><input type="password" class="input" name="password"/></div>
     <div class="login"><input type="submit" class="button" value="Log In"/></div>
   </form>

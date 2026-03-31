@@ -1,47 +1,48 @@
 .title {
-    font-size: 18px;
-    color: #3979AA;
+    font-size: 20px;
+    font-weight: 600;
+    color: #1c2b3a;
     width: 502px;
-    height: 25px;
-    background: url(images/sky-color-bg.gif) 0 10px repeat-x;
-    margin: 0px 0px 10px 0px;
+    min-height: 28px;
+    background: none;
+    border-bottom: 2px solid #1d9e75;
+    padding-bottom: 6px;
+    margin: 0px 0px 14px 0px;
 }
 
 .error {
-    color: red;	
+    color: #c2410c;
 }
 
 .gradient-style {
-    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-    font-size: 12px;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 13px;
     width: 480px;
     text-align: left;
     border-collapse: collapse;
 }
 .gradient-style th {
     font-size: 13px;
-    font-weight: normal;
-    padding: 4px;
-    background: #b9c9fe url('images/gradhead.png') repeat-x;
-    border-top: 2px solid #d3ddff;
-    border-bottom: 1px solid #fff;
-    color: #039;
+    font-weight: 600;
+    padding: 8px 6px;
+    background: #1c2b3a;
+    border: none;
+    color: #f8fafc;
 }
 .gradient-style td {
-    padding: 4px; 
-    border-bottom: 1px solid #fff;
-    color: #669;
-    border-top: 1px solid #fff;
-    background: #e8edff url('images/gradback.png') repeat-x;
+    padding: 8px 6px;
+    border-bottom: 1px solid #e2e8f0;
+    color: #334155;
+    background: #f8fafc;
 }
 .gradient-style tfoot tr td {
-    background: #e8edff;
+    background: #f1f5f9;
     font-size: 12px;
-    color: #99c;
+    color: #64748b;
 }
 .gradient-style tbody tr:hover td {
-    background: #d0dafd url('images/gradhover.png') repeat-x;
-    color: #339;
+    background: #ecfdf5;
+    color: #1c2b3a;
 }
 
 .smallText {
@@ -60,19 +61,21 @@
 }
 
 .form {
-	padding: 10px;
-    background: #d5e2ff;
-    border-width: 2px;
+	padding: 12px;
+    background: #f8fafc;
+    border-width: 1px;
     border-style: solid;
-    border-color: #bbccff;
+    border-color: #e2e8f0;
+    border-radius: 6px;
 }
 .form2 {
-	padding: 2px;
-    background: #d5e2ff;
-    border-width: 2px;
+	padding: 8px;
+    background: #f8fafc;
+    border-width: 1px;
     border-style: solid;
-    border-color: #bbccff;
-    border-spacing: 3px;
+    border-color: #e2e8f0;
+    border-spacing: 4px;
+    border-radius: 6px;
 }
 
 .form_activity {
@@ -82,7 +85,25 @@
     border-spacing: 0px;
 }
 .headline {
-    color: #3979AA;	
+    color: #1d9e75;
 }
 [ng\:cloak], [ng-cloak], .ng-cloak {
   display: none !important;
+}
+
+/* Login panel icon labels */
+#loginPanel .login-label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 600;
+    font-size: 13px;
+    color: #475569;
+    margin-bottom: 4px;
+}
+#loginPanel .login-label i {
+    color: #94a3b8;
+    font-size: 12px;
+    width: 14px;
+    text-align: center;
+}
