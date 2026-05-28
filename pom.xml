@@ -37,7 +37,7 @@
     <jax-soap.version>3.0.2</jax-soap.version>
     <jax-ws.version>4.0.3</jax-ws.version>
     <jaxb.version>4.0.5</jaxb.version>
-    <jaxb.impl.version>4.0.8</jaxb.impl.version>
+    <jaxb.impl.version>4.0.9</jaxb.impl.version>
     <istack.version>4.2.0</istack.version>
     <joda-time.version>2.14.2</joda-time.version>
     <activemq.version>6.2.5</activemq.version>
