@@ -64,7 +64,7 @@
     <cxf.wss4j.version>4.0.1</cxf.wss4j.version>
     <ehcache.version>3.12.0</ehcache.version>
     <saaj-impl.version>3.0.6</saaj-impl.version>
-    <jersey.version>3.1.11</jersey.version>
+    <jersey.version>3.1.12</jersey.version>
     <javassist.version>3.31.0-GA</javassist.version>
     <spring.version>6.2.19</spring.version>
     <junitparams.version>1.1.1</junitparams.version>
