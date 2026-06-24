@@ -52,7 +52,7 @@
     <commons-dbcp2.version>2.14.0</commons-dbcp2.version>
     <aspectjweaver.version>1.9.25.1</aspectjweaver.version>
     <jackson.version>2.22.0</jackson.version>
-    <woodstox.version>7.1.1</woodstox.version>
+    <woodstox.version>7.2.1</woodstox.version>
     <slf4j.version>2.0.18</slf4j.version>
     <log4j.version>2.25.4</log4j.version>
     <commons-io.version>2.22.0</commons-io.version>
