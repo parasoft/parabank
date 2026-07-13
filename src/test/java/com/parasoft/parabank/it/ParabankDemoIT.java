@@ -6,8 +6,11 @@ import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
+
+import com.parasoft.coverage.integration.junit4.ParasoftJUnit4Watcher;
 
 import com.parasoft.parabank.it.page.AccountActivityPage;
 import com.parasoft.parabank.it.page.AccountServicesComponent;
@@ -20,6 +23,7 @@ import com.parasoft.parabank.it.page.RequestLoanPage;
 import com.parasoft.parabank.it.page.TransferCompletePage;
 import com.parasoft.parabank.it.page.TransferFundsPage;
 import com.parasoft.parabank.it.util.DriverFactory;
+import com.parasoft.parabank.it.util.DriverFactory.CoverageWebDriver;
 
 public class ParabankDemoIT {
     private static final String BROWSER = ParabankDemoIT.class.getName() + ".BROWSER";
@@ -27,10 +31,15 @@ public class ParabankDemoIT {
     private static final String FIND_ELEMENTS = ParabankDemoIT.class.getName() + ".FIND.ELEMENTS";
 
     protected WebDriver _driver;
+    private CoverageWebDriver _coverageDriver;
+
+    @Rule
+    public ParasoftJUnit4Watcher parasoftJUnit4Watcher = new ParasoftJUnit4Watcher();
 
     @Before
     public void beforeTest() {
-        _driver = DriverFactory.getDriver(System.getProperty(BROWSER, "Chrome"));
+        _coverageDriver = DriverFactory.getDriver(System.getProperty(BROWSER, "Chrome"));
+        _driver = _coverageDriver.getDriver();
         _driver.manage().window().maximize();
     }
 
@@ -140,8 +149,8 @@ public class ParabankDemoIT {
 
     @After
     public void afterTest() {
-        if (_driver != null) {
-            _driver.quit();
+        if (_coverageDriver != null) {
+            _coverageDriver.close();
         }
     }
 }

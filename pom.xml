@@ -75,6 +75,7 @@
     <neethi.version>3.2.2</neethi.version>
     <snakeyaml.version>2.6</snakeyaml.version>
     <selenium.version>4.45.0</selenium.version>
+    <coverage-integration.version>0.0.1</coverage-integration.version>
     <angus-activation.version>2.0.3</angus-activation.version>
     <angus-mail.version>2.0.5</angus-mail.version>
     <jakarta.mail-api.version>2.1.5</jakarta.mail-api.version>
@@ -579,6 +580,18 @@
       <scope>test</scope>
     </dependency>
     <dependency>
+      <groupId>com.parasoft</groupId>
+      <artifactId>coverage-integration-junit4</artifactId>
+      <version>${coverage-integration.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.parasoft</groupId>
+      <artifactId>coverage-integration-selenium</artifactId>
+      <version>${coverage-integration.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>jul-to-slf4j</artifactId>
       <version>${slf4j.version}</version>
@@ -803,6 +816,17 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
         <version>${maven-surefire-plugin.version}</version>
+        <configuration>
+          <parallel>methods</parallel>
+          <threadCount>3</threadCount>
+          <perCoreThreadCount>false</perCoreThreadCount>
+          <properties>
+            <property>
+              <name>listener</name>
+              <value>com.parasoft.coverage.integration.junit4.ParasoftJUnit4RunListener</value>
+            </property>
+          </properties>
+        </configuration>
         <executions>
           <execution>
             <goals>

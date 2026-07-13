@@ -16,7 +16,12 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.GeckoDriverService;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.safari.SafariOptions;
 import org.slf4j.bridge.SLF4JBridgeHandler;
+
+import com.parasoft.coverage.integration.selenium.SeleniumCoverageIntegration;
+import com.parasoft.coverage.integration.selenium.SeleniumCoverageIntegration.FirefoxBrowserCoverage;
+import com.parasoft.coverage.integration.selenium.SeleniumCoverageIntegration.SafariBrowserCoverage;
 
 public final class DriverFactory {
 
@@ -29,7 +34,7 @@ public final class DriverFactory {
     private DriverFactory() {
     }
 
-    public static WebDriver getDriver(String browserType) {
+    public static CoverageWebDriver getDriver(String browserType) {
         String browser = browserType.trim();
         if (browser.equalsIgnoreCase("Firefox")) { //$NON-NLS-1$
             FirefoxOptions options = new FirefoxOptions();
@@ -48,25 +53,62 @@ public final class DriverFactory {
             if (snapGeckoDriver.exists()) {
                 service = new GeckoDriverService.Builder().usingDriverExecutable(snapGeckoDriver).build();
             }
-            return service != null ? new FirefoxDriver(service, options) : new FirefoxDriver(options);
+            FirefoxBrowserCoverage coverage = SeleniumCoverageIntegration.createFirefoxBrowserCoverage(options);
+            WebDriver driver = service != null ? new FirefoxDriver(service, coverage.getFirefoxOptions())
+                    : new FirefoxDriver(coverage.getFirefoxOptions());
+            return new CoverageWebDriver(driver, coverage);
         }
         if (browser.equalsIgnoreCase("Edge")) { //$NON-NLS-1$
             EdgeOptions options = new EdgeOptions();
             if (GraphicsEnvironment.isHeadless()) {
                 options.addArguments("--headless"); //$NON-NLS-1$
             }
-            return new EdgeDriver(options);
+            EdgeDriver driver = new EdgeDriver(options);
+            SeleniumCoverageIntegration.configureCdpBaggageHeader(driver);
+            return new CoverageWebDriver(driver, null);
         }
         if (browser.equalsIgnoreCase("IE") || browser.equalsIgnoreCase("Internet Explorer")) { //$NON-NLS-1$ //$NON-NLS-2$
-            return new InternetExplorerDriver();
+            return new CoverageWebDriver(new InternetExplorerDriver(), null);
         }
         if (browser.equalsIgnoreCase("Safari")) { //$NON-NLS-1$
-            return new SafariDriver();
+            SafariBrowserCoverage coverage = SeleniumCoverageIntegration.createSafariBrowserCoverage(new SafariOptions());
+            return new CoverageWebDriver(new SafariDriver(coverage.getSafariOptions()), coverage);
         }
         ChromeOptions options = new ChromeOptions();
         if (GraphicsEnvironment.isHeadless()) {
             options.addArguments("--headless"); //$NON-NLS-1$
         }
-        return new ChromeDriver(options);
+        ChromeDriver driver = new ChromeDriver(options);
+        SeleniumCoverageIntegration.configureCdpBaggageHeader(driver);
+        return new CoverageWebDriver(driver, null);
+    }
+
+    public static final class CoverageWebDriver implements AutoCloseable {
+        private final WebDriver driver;
+        private final AutoCloseable coverage;
+
+        private CoverageWebDriver(WebDriver driver, AutoCloseable coverage) {
+            this.driver = driver;
+            this.coverage = coverage;
+        }
+
+        public WebDriver getDriver() {
+            return driver;
+        }
+
+        @Override
+        public void close() {
+            try {
+                driver.quit();
+            } finally {
+                if (coverage != null) {
+                    try {
+                        coverage.close();
+                    } catch (Exception e) {
+                        throw new IllegalStateException("Unable to close Selenium coverage integration", e);
+                    }
+                }
+            }
+        }
     }
 }
