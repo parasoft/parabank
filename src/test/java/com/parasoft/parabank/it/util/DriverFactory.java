@@ -76,7 +76,10 @@ public final class DriverFactory {
         }
         ChromeOptions options = new ChromeOptions();
         if (GraphicsEnvironment.isHeadless()) {
-            options.addArguments("--headless"); //$NON-NLS-1$
+            options.addArguments("--headless=new"); //$NON-NLS-1$
+            options.addArguments("--no-sandbox"); //$NON-NLS-1$
+            options.addArguments("--disable-dev-shm-usage"); //$NON-NLS-1$
+            options.addArguments("--window-size=1920,1080"); //$NON-NLS-1$
         }
         ChromeDriver driver = new ChromeDriver(options);
         SeleniumCoverageIntegration.configureCdpBaggageHeader(driver);
