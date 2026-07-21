@@ -23,7 +23,7 @@ import com.parasoft.parabank.it.page.RequestLoanPage;
 import com.parasoft.parabank.it.page.TransferCompletePage;
 import com.parasoft.parabank.it.page.TransferFundsPage;
 import com.parasoft.parabank.it.util.DriverFactory;
-import com.parasoft.parabank.it.util.DriverFactory.CoverageWebDriver;
+import com.parasoft.parabank.it.util.DriverFactory.WebDriverWrapper;
 
 public class ParabankDemoIT {
     private static final String BROWSER = ParabankDemoIT.class.getName() + ".BROWSER";
@@ -31,7 +31,7 @@ public class ParabankDemoIT {
     private static final String FIND_ELEMENTS = ParabankDemoIT.class.getName() + ".FIND.ELEMENTS";
 
     protected WebDriver _driver;
-    private CoverageWebDriver _coverageDriver;
+    private WebDriverWrapper _coverageDriver;
 
     @Rule
     public ParasoftJUnit4Watcher parasoftJUnit4Watcher = new ParasoftJUnit4Watcher();

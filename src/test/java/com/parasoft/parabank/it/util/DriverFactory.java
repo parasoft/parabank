@@ -20,8 +20,8 @@ import org.openqa.selenium.safari.SafariOptions;
 import org.slf4j.bridge.SLF4JBridgeHandler;
 
 import com.parasoft.coverage.integration.selenium.SeleniumCoverageIntegration;
-import com.parasoft.coverage.integration.selenium.SeleniumCoverageIntegration.FirefoxBrowserCoverage;
-import com.parasoft.coverage.integration.selenium.SeleniumCoverageIntegration.SafariBrowserCoverage;
+import com.parasoft.coverage.integration.selenium.SeleniumCoverageIntegration.FirefoxCoverageConfig;
+import com.parasoft.coverage.integration.selenium.SeleniumCoverageIntegration.SafariCoverageConfig;
 
 public final class DriverFactory {
 
@@ -34,7 +34,7 @@ public final class DriverFactory {
     private DriverFactory() {
     }
 
-    public static CoverageWebDriver getDriver(String browserType) {
+    public static WebDriverWrapper getDriver(String browserType) {
         String browser = browserType.trim();
         if (browser.equalsIgnoreCase("Firefox")) { //$NON-NLS-1$
             FirefoxOptions options = new FirefoxOptions();
@@ -53,10 +53,10 @@ public final class DriverFactory {
             if (snapGeckoDriver.exists()) {
                 service = new GeckoDriverService.Builder().usingDriverExecutable(snapGeckoDriver).build();
             }
-            FirefoxBrowserCoverage coverage = SeleniumCoverageIntegration.createFirefoxBrowserCoverage(options);
+            FirefoxCoverageConfig coverage = SeleniumCoverageIntegration.createFirefoxBrowserCoverage(options);
             WebDriver driver = service != null ? new FirefoxDriver(service, coverage.getFirefoxOptions())
                     : new FirefoxDriver(coverage.getFirefoxOptions());
-            return new CoverageWebDriver(driver, coverage);
+            return new WebDriverWrapper(driver, coverage);
         }
         if (browser.equalsIgnoreCase("Edge")) { //$NON-NLS-1$
             EdgeOptions options = new EdgeOptions();
@@ -65,14 +65,14 @@ public final class DriverFactory {
             }
             EdgeDriver driver = new EdgeDriver(options);
             SeleniumCoverageIntegration.configureCdpBaggageHeader(driver);
-            return new CoverageWebDriver(driver, null);
+            return new WebDriverWrapper(driver, null);
         }
         if (browser.equalsIgnoreCase("IE") || browser.equalsIgnoreCase("Internet Explorer")) { //$NON-NLS-1$ //$NON-NLS-2$
-            return new CoverageWebDriver(new InternetExplorerDriver(), null);
+            return new WebDriverWrapper(new InternetExplorerDriver(), null);
         }
         if (browser.equalsIgnoreCase("Safari")) { //$NON-NLS-1$
-            SafariBrowserCoverage coverage = SeleniumCoverageIntegration.createSafariBrowserCoverage(new SafariOptions());
-            return new CoverageWebDriver(new SafariDriver(coverage.getSafariOptions()), coverage);
+            SafariCoverageConfig coverage = SeleniumCoverageIntegration.createSafariBrowserCoverage(new SafariOptions());
+            return new WebDriverWrapper(new SafariDriver(coverage.getSafariOptions()), coverage);
         }
         ChromeOptions options = new ChromeOptions();
         if (GraphicsEnvironment.isHeadless()) {
@@ -83,14 +83,14 @@ public final class DriverFactory {
         }
         ChromeDriver driver = new ChromeDriver(options);
         SeleniumCoverageIntegration.configureCdpBaggageHeader(driver);
-        return new CoverageWebDriver(driver, null);
+        return new WebDriverWrapper(driver, null);
     }
 
-    public static final class CoverageWebDriver implements AutoCloseable {
+    public static final class WebDriverWrapper implements AutoCloseable {
         private final WebDriver driver;
         private final AutoCloseable coverage;
 
-        private CoverageWebDriver(WebDriver driver, AutoCloseable coverage) {
+        private WebDriverWrapper(WebDriver driver, AutoCloseable coverage) {
             this.driver = driver;
             this.coverage = coverage;
         }
