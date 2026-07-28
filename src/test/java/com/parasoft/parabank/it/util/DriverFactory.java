@@ -21,7 +21,6 @@ import org.slf4j.bridge.SLF4JBridgeHandler;
 
 import com.parasoft.coverage.integration.selenium.SeleniumCoverageIntegration;
 import com.parasoft.coverage.integration.selenium.SeleniumCoverageIntegration.FirefoxCoverageConfig;
-import com.parasoft.coverage.integration.selenium.SeleniumCoverageIntegration.SafariCoverageConfig;
 
 public final class DriverFactory {
 
@@ -53,7 +52,7 @@ public final class DriverFactory {
             if (snapGeckoDriver.exists()) {
                 service = new GeckoDriverService.Builder().usingDriverExecutable(snapGeckoDriver).build();
             }
-            FirefoxCoverageConfig coverage = SeleniumCoverageIntegration.createFirefoxBrowserCoverage(options);
+            FirefoxCoverageConfig coverage = SeleniumCoverageIntegration.configureProxyBaggageHeader(options);
             WebDriver driver = service != null ? new FirefoxDriver(service, coverage.getFirefoxOptions())
                     : new FirefoxDriver(coverage.getFirefoxOptions());
             return new WebDriverWrapper(driver, coverage);
@@ -71,8 +70,7 @@ public final class DriverFactory {
             return new WebDriverWrapper(new InternetExplorerDriver(), null);
         }
         if (browser.equalsIgnoreCase("Safari")) { //$NON-NLS-1$
-            SafariCoverageConfig coverage = SeleniumCoverageIntegration.createSafariBrowserCoverage(new SafariOptions());
-            return new WebDriverWrapper(new SafariDriver(coverage.getSafariOptions()), coverage);
+            return new WebDriverWrapper(new SafariDriver(new SafariOptions()), null);
         }
         ChromeOptions options = new ChromeOptions();
         if (GraphicsEnvironment.isHeadless()) {
