@@ -1,0 +1,503 @@
+{
+  "info": {
+    "_postman_id": "ea1a494b-1d63-4f9d-a823-ea25399db518",
+    "name": "ParaBank API",
+    "description": "Accounts & Transactions API coverage for ParaBank practice project (JIRA ticket: API test coverage - Accounts & Transactions). Responses are XML by default.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "56317208",
+    "_collection_link": "https://go.postman.co/collection/56317208-ea1a494b-1d63-4f9d-a823-ea25399db518?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Login",
+      "item": [
+        {
+          "name": "Login (username/password)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Response contains customer id\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(\"<id>\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/login/Susmitha/Password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "login",
+                "Susmitha",
+                "Password"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Accounts",
+      "item": [
+        {
+          "name": "Get Account by Id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Response contains correct account id\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(`<id>${pm.collectionVariables.get(\"accountId\")}</id>`);",
+                  "});",
+                  "pm.test(\"Response contains a type\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(\"<type>\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/accounts/{{accountId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "accounts",
+                "{{accountId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Account by Id - Invalid Id (Edge Case)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Verify how invalid account id is handled (status logged, not asserted yet)\", function () {",
+                  "    console.log(\"Status for invalid account:\", pm.response.code);",
+                  "    console.log(\"Body:\", pm.response.text());",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/accounts/999999999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "accounts",
+                "999999999"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Customer Accounts",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Response contains both known accounts\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(\"<id>13566</id>\");",
+                  "    pm.expect(pm.response.text()).to.include(\"<id>13677</id>\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/customers/{{customerId}}/accounts",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "customers",
+                "{{customerId}}",
+                "accounts"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Account",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Response returns a new account id\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(\"<id>\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/createAccount?customerId={{customerId}}&newAccountType=0&fromAccountId={{accountId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "createAccount"
+              ],
+              "query": [
+                {
+                  "key": "customerId",
+                  "value": "{{customerId}}"
+                },
+                {
+                  "key": "newAccountType",
+                  "value": "0"
+                },
+                {
+                  "key": "fromAccountId",
+                  "value": "{{accountId}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Deposit Funds",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Response indicates success\", function () {",
+                  "    pm.expect(pm.response.text().toLowerCase()).to.include(\"success\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/deposit?accountId={{accountId}}&amount=50",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "deposit"
+              ],
+              "query": [
+                {
+                  "key": "accountId",
+                  "value": "{{accountId}}"
+                },
+                {
+                  "key": "amount",
+                  "value": "50"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Withdraw Funds",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/withdraw?accountId={{accountId}}&amount=50",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "withdraw"
+              ],
+              "query": [
+                {
+                  "key": "accountId",
+                  "value": "{{accountId}}"
+                },
+                {
+                  "key": "amount",
+                  "value": "50"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Withdraw More Than Balance (Edge Case - overdraft bug from DB testing)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Log actual behavior for overdraft withdrawal\", function () {",
+                  "    console.log(\"Status:\", pm.response.code);",
+                  "    console.log(\"Body:\", pm.response.text());",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/withdraw?accountId={{toAccountId}}&amount=999999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "withdraw"
+              ],
+              "query": [
+                {
+                  "key": "accountId",
+                  "value": "{{toAccountId}}"
+                },
+                {
+                  "key": "amount",
+                  "value": "999999"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Transfer Funds",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/transfer?fromAccountId={{accountId}}&toAccountId={{toAccountId}}&amount=25",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "transfer"
+              ],
+              "query": [
+                {
+                  "key": "fromAccountId",
+                  "value": "{{accountId}}"
+                },
+                {
+                  "key": "toAccountId",
+                  "value": "{{toAccountId}}"
+                },
+                {
+                  "key": "amount",
+                  "value": "25"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Transactions",
+      "item": [
+        {
+          "name": "Get Transactions for Account",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Response contains at least one transaction\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(\"<transaction>\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/accounts/{{accountId}}/transactions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "accounts",
+                "{{accountId}}",
+                "transactions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Transactions by Amount",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/accounts/{{accountId}}/transactions/amount/100",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "accounts",
+                "{{accountId}}",
+                "transactions",
+                "amount",
+                "100"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Transaction by Id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Response contains correct transaction id\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(\"<id>14809</id>\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/transactions/14809",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "transactions",
+                "14809"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080/parabank/services/bank"
+    },
+    {
+      "key": "customerId",
+      "value": "12434"
+    },
+    {
+      "key": "accountId",
+      "value": "13566"
+    },
+    {
+      "key": "toAccountId",
+      "value": "13677"
+    }
+  ]
+}

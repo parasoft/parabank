@@ -35,3 +35,4 @@ jtest-ft-cov/
 
 # IntelliJ
 out/
+.DS_Store
