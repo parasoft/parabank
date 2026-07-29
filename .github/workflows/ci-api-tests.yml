@@ -22,24 +22,6 @@ jobs:
       - name: Build with Maven (package only, skip built-in tests)
         run: mvn -B clean package -DskipTests
 
-      - name: Start ParaBank via Cargo (Tomcat + HSQLDB)
-        run: nohup mvn -B cargo:start > cargo.log 2>&1 &
-
-      - name: Wait for ParaBank to be ready
-        run: |
-          for i in $(seq 1 30); do
-            code=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080/parabank/ || echo "000")
-            if [ "$code" = "200" ] || [ "$code" = "302" ]; then
-              echo "ParaBank is up (HTTP $code)"
-              exit 0
-            fi
-            echo "Waiting for ParaBank... (attempt $i, got HTTP $code)"
-            sleep 5
-          done
-          echo "ParaBank did not start in time"
-          cat cargo.log
-          exit 1
-
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -48,16 +30,37 @@ jobs:
       - name: Install Newman
         run: npm install -g newman
 
-      - name: Run Postman API tests via Newman
+      - name: Start ParaBank, wait for it, run Newman tests, then stop it
         run: |
+          nohup mvn -B cargo:start > cargo.log 2>&1 &
+
+          ready=0
+          for i in $(seq 1 30); do
+            code=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080/parabank/ || echo "000")
+            if [ "$code" = "200" ] || [ "$code" = "302" ]; then
+              echo "ParaBank is up (HTTP $code)"
+              ready=1
+              break
+            fi
+            echo "Waiting for ParaBank... (attempt $i, got HTTP $code)"
+            sleep 5
+          done
+
+          if [ "$ready" != "1" ]; then
+            echo "ParaBank did not start in time"
+            cat cargo.log
+            exit 1
+          fi
+
           newman run "postman/ParaBank API.postman_collection.json" \
             -e "postman/ParaBank Local.postman_environment.json" \
             --reporters cli,junit \
             --reporter-junit-export newman-results.xml
+          newman_exit=$?
 
-      - name: Stop ParaBank
-        if: always()
-        run: mvn -B cargo:stop || true
+          mvn -B cargo:stop || true
+
+          exit $newman_exit
 
       - name: Upload Newman results
         if: always()
