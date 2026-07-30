@@ -30,9 +30,17 @@ jobs:
       - name: Install Newman
         run: npm install -g newman
 
-      - name: Start ParaBank, wait for it, run Newman tests, then stop it
+      - name: Download and set up standalone Tomcat 10
         run: |
-          nohup mvn -B cargo:start > cargo.log 2>&1 &
+          wget -q https://archive.apache.org/dist/tomcat/tomcat-10/v10.1.31/bin/apache-tomcat-10.1.31.tar.gz
+          tar xzf apache-tomcat-10.1.31.tar.gz
+          mv apache-tomcat-10.1.31 tomcat
+          chmod +x tomcat/bin/*.sh
+          cp target/parabank.war tomcat/webapps/parabank.war
+
+      - name: Start Tomcat, wait for it, run Newman tests, then stop it
+        run: |
+          ./tomcat/bin/startup.sh
 
           ready=0
           for i in $(seq 1 30); do
@@ -48,7 +56,7 @@ jobs:
 
           if [ "$ready" != "1" ]; then
             echo "ParaBank did not start in time"
-            cat cargo.log
+            cat tomcat/logs/catalina.out
             exit 1
           fi
 
@@ -62,12 +70,12 @@ jobs:
           newman_exit=$?
 
           if [ "$newman_exit" != "0" ]; then
-            echo "----- cargo.log (Tomcat/ParaBank server log) -----"
-            cat cargo.log
-            echo "---------------------------------------------------"
+            echo "----- catalina.out (Tomcat/ParaBank server log) -----"
+            cat tomcat/logs/catalina.out
+            echo "------------------------------------------------------"
           fi
 
-          mvn -B cargo:stop || true
+          ./tomcat/bin/shutdown.sh || true
 
           exit $newman_exit
 
