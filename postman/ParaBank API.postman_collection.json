@@ -13,6 +13,30 @@
   ],
   "item": [
     {
+      "name": "Setup",
+      "item": [
+        {
+          "name": "Initialize DB (ensures john/demo seed data exists)",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/initializeDB"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 204 (No Content - success)\", function () {",
+                  "    pm.response.to.have.status(204);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "Login",
       "item": [
         {
