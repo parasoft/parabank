@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.parabank.tests.LoginTest" time="1.891" tests="1" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="26"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/Users/apple/Documents/personal-practice/parabank/selenium-tests/target/test-classes:/Users/apple/Documents/personal-practice/parabank/selenium-tests/target/classes:/Users/apple/.m2/repository/org/seleniumhq/selenium/selenium-java/4.25.0/selenium-java-4.25.0.jar:/Users/apple/.m2/repository/org/seleniumhq/selenium/selenium-api/4.25.0/selenium-api-4.25.0.jar:/Users/apple/.m2/repository/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar:/Users/apple/.m2/repository/org/seleniumhq/selenium/selenium-chrome-driver/4.25.0/selenium-chrome-driver-4.25.0.jar:/Users/apple/.m2/repository/com/google/auto/service/auto-service-annotations/1.1.1/auto-service-annotations-1.1.1.jar:/Users/apple/.m2/repository/org/seleniumhq/selenium/selenium-chromium-driver/4.25.0/selenium-chromium-driver-4.25.0.jar:/Users/apple/.m2/repository/org/seleniumhq/selenium/selenium-json/4.25.0/selenium-json-4.25.0.jar:/Users/apple/.m2/repository/org/seleniumhq/selenium/selenium-manager/4.25.0/selenium-manager-4.25.0.jar:/Users/apple/.m2/repository/org/seleniumhq/selenium/selenium-devtools-v127/4.25.0/selenium-devtools-v127-4.25.0.jar:/Users/apple/.m2/repository/org/seleniumhq/selenium/selenium-devtools-v128/4.25.0/selenium-devtools-v128-4.25.0.jar:/Users/apple/.m2/repository/org/seleniumhq/selenium/selenium-devtools-v129/4.25.0/selenium-devtools-v129-4.25.0.jar:/Users/apple/.m2/repository/org/seleniumhq/selenium/selenium-devtools-v85/4.25.0/selenium-devtools-v85-4.25.0.jar:/Users/apple/.m2/repository/org/seleniumhq/selenium/selenium-edge-driver/4.25.0/selenium-edge-driver-4.25.0.jar:/Users/apple/.m2/repository/org/seleniumhq/selenium/selenium-firefox-driver/4.25.0/selenium-firefox-driver-4.25.0.jar:/Users/apple/.m2/repository/org/seleniumhq/selenium/selenium-http/4.25.0/selenium-http-4.25.0.jar:/Users/apple/.m2/repository/dev/failsafe/failsafe/3.3.2/failsafe-3.3.2.jar:/Users/apple/.m2/repository/org/seleniumhq/selenium/selenium-ie-driver/4.25.0/selenium-ie-driver-4.25.0.jar:/Users/apple/.m2/repository/org/seleniumhq/selenium/selenium-remote-driver/4.25.0/selenium-remote-driver-4.25.0.jar:/Users/apple/.m2/repository/com/google/guava/guava/33.3.0-jre/guava-33.3.0-jre.jar:/Users/apple/.m2/repository/com/google/guava/failureaccess/1.0.2/failureaccess-1.0.2.jar:/Users/apple/.m2/repository/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar:/Users/apple/.m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar:/Users/apple/.m2/repository/org/checkerframework/checker-qual/3.43.0/checker-qual-3.43.0.jar:/Users/apple/.m2/repository/com/google/errorprone/error_prone_annotations/2.28.0/error_prone_annotations-2.28.0.jar:/Users/apple/.m2/repository/com/google/j2objc/j2objc-annotations/3.0.0/j2objc-annotations-3.0.0.jar:/Users/apple/.m2/repository/io/opentelemetry/semconv/opentelemetry-semconv/1.25.0-alpha/opentelemetry-semconv-1.25.0-alpha.jar:/Users/apple/.m2/repository/io/opentelemetry/opentelemetry-api/1.42.1/opentelemetry-api-1.42.1.jar:/Users/apple/.m2/repository/io/opentelemetry/opentelemetry-context/1.42.1/opentelemetry-context-1.42.1.jar:/Users/apple/.m2/repository/io/opentelemetry/opentelemetry-exporter-logging/1.42.1/opentelemetry-exporter-logging-1.42.1.jar:/Users/apple/.m2/repository/io/opentelemetry/opentelemetry-sdk-common/1.42.1/opentelemetry-sdk-common-1.42.1.jar:/Users/apple/.m2/repository/io/opentelemetry/opentelemetry-sdk-extension-autoconfigure-spi/1.42.1/opentelemetry-sdk-extension-autoconfigure-spi-1.42.1.jar:/Users/apple/.m2/repository/io/opentelemetry/opentelemetry-sdk-extension-autoconfigure/1.42.1/opentelemetry-sdk-extension-autoconfigure-1.42.1.jar:/Users/apple/.m2/repository/io/opentelemetry/opentelemetry-api-incubator/1.42.1-alpha/opentelemetry-api-incubator-1.42.1-alpha.jar:/Users/apple/.m2/repository/io/opentelemetry/opentelemetry-sdk-trace/1.42.1/opentelemetry-sdk-trace-1.42.1.jar:/Users/apple/.m2/repository/io/opentelemetry/opentelemetry-sdk/1.42.1/opentelemetry-sdk-1.42.1.jar:/Users/apple/.m2/repository/io/opentelemetry/opentelemetry-sdk-metrics/1.42.1/opentelemetry-sdk-metrics-1.42.1.jar:/Users/apple/.m2/repository/io/opentelemetry/opentelemetry-sdk-logs/1.42.1/opentelemetry-sdk-logs-1.42.1.jar:/Users/apple/.m2/repository/net/bytebuddy/byte-buddy/1.15.1/byte-buddy-1.15.1.jar:/Users/apple/.m2/repository/org/seleniumhq/selenium/selenium-os/4.25.0/selenium-os-4.25.0.jar:/Users/apple/.m2/repository/org/apache/commons/commons-exec/1.4.0/commons-exec-1.4.0.jar:/Users/apple/.m2/repository/org/seleniumhq/selenium/selenium-safari-driver/4.25.0/selenium-safari-driver-4.25.0.jar:/Users/apple/.m2/repository/org/seleniumhq/selenium/selenium-support/4.25.0/selenium-support-4.25.0.jar:/Users/apple/.m2/repository/org/junit/jupiter/junit-jupiter/5.11.3/junit-jupiter-5.11.3.jar:/Users/apple/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.11.3/junit-jupiter-api-5.11.3.jar:/Users/apple/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/apple/.m2/repository/org/junit/platform/junit-platform-commons/1.11.3/junit-platform-commons-1.11.3.jar:/Users/apple/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/apple/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.11.3/junit-jupiter-params-5.11.3.jar:/Users/apple/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.11.3/junit-jupiter-engine-5.11.3.jar:/Users/apple/.m2/repository/org/junit/platform/junit-platform-engine/1.11.3/junit-platform-engine-1.11.3.jar:"/>
+    <property name="java.vm.vendor" value="Homebrew"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.vendor.url" value="https://github.com/Homebrew/homebrew-core/issues"/>
+    <property name="user.timezone" value="Asia/Kolkata"/>
+    <property name="os.name" value="Mac OS X"/>
+    <property name="java.vm.specification.version" value="26"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="IN"/>
+    <property name="sun.boot.library.path" value="/opt/homebrew/Cellar/openjdk/26.0.2/libexec/openjdk.jdk/Contents/Home/lib"/>
+    <property name="sun.java.command" value="/Users/apple/Documents/personal-practice/parabank/selenium-tests/target/surefire/surefirebooter-20260730193204770_3.jar /Users/apple/Documents/personal-practice/parabank/selenium-tests/target/surefire 2026-07-30T19-32-04_724-jvmRun1 surefire-20260730193204770_1tmp surefire_0-20260730193204770_2tmp"/>
+    <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="/Users/apple/Documents/personal-practice/parabank/selenium-tests/target/test-classes:/Users/apple/Documents/personal-practice/parabank/selenium-tests/target/classes:/Users/apple/.m2/repository/org/seleniumhq/selenium/selenium-java/4.25.0/selenium-java-4.25.0.jar:/Users/apple/.m2/repository/org/seleniumhq/selenium/selenium-api/4.25.0/selenium-api-4.25.0.jar:/Users/apple/.m2/repository/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar:/Users/apple/.m2/repository/org/seleniumhq/selenium/selenium-chrome-driver/4.25.0/selenium-chrome-driver-4.25.0.jar:/Users/apple/.m2/repository/com/google/auto/service/auto-service-annotations/1.1.1/auto-service-annotations-1.1.1.jar:/Users/apple/.m2/repository/org/seleniumhq/selenium/selenium-chromium-driver/4.25.0/selenium-chromium-driver-4.25.0.jar:/Users/apple/.m2/repository/org/seleniumhq/selenium/selenium-json/4.25.0/selenium-json-4.25.0.jar:/Users/apple/.m2/repository/org/seleniumhq/selenium/selenium-manager/4.25.0/selenium-manager-4.25.0.jar:/Users/apple/.m2/repository/org/seleniumhq/selenium/selenium-devtools-v127/4.25.0/selenium-devtools-v127-4.25.0.jar:/Users/apple/.m2/repository/org/seleniumhq/selenium/selenium-devtools-v128/4.25.0/selenium-devtools-v128-4.25.0.jar:/Users/apple/.m2/repository/org/seleniumhq/selenium/selenium-devtools-v129/4.25.0/selenium-devtools-v129-4.25.0.jar:/Users/apple/.m2/repository/org/seleniumhq/selenium/selenium-devtools-v85/4.25.0/selenium-devtools-v85-4.25.0.jar:/Users/apple/.m2/repository/org/seleniumhq/selenium/selenium-edge-driver/4.25.0/selenium-edge-driver-4.25.0.jar:/Users/apple/.m2/repository/org/seleniumhq/selenium/selenium-firefox-driver/4.25.0/selenium-firefox-driver-4.25.0.jar:/Users/apple/.m2/repository/org/seleniumhq/selenium/selenium-http/4.25.0/selenium-http-4.25.0.jar:/Users/apple/.m2/repository/dev/failsafe/failsafe/3.3.2/failsafe-3.3.2.jar:/Users/apple/.m2/repository/org/seleniumhq/selenium/selenium-ie-driver/4.25.0/selenium-ie-driver-4.25.0.jar:/Users/apple/.m2/repository/org/seleniumhq/selenium/selenium-remote-driver/4.25.0/selenium-remote-driver-4.25.0.jar:/Users/apple/.m2/repository/com/google/guava/guava/33.3.0-jre/guava-33.3.0-jre.jar:/Users/apple/.m2/repository/com/google/guava/failureaccess/1.0.2/failureaccess-1.0.2.jar:/Users/apple/.m2/repository/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar:/Users/apple/.m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar:/Users/apple/.m2/repository/org/checkerframework/checker-qual/3.43.0/checker-qual-3.43.0.jar:/Users/apple/.m2/repository/com/google/errorprone/error_prone_annotations/2.28.0/error_prone_annotations-2.28.0.jar:/Users/apple/.m2/repository/com/google/j2objc/j2objc-annotations/3.0.0/j2objc-annotations-3.0.0.jar:/Users/apple/.m2/repository/io/opentelemetry/semconv/opentelemetry-semconv/1.25.0-alpha/opentelemetry-semconv-1.25.0-alpha.jar:/Users/apple/.m2/repository/io/opentelemetry/opentelemetry-api/1.42.1/opentelemetry-api-1.42.1.jar:/Users/apple/.m2/repository/io/opentelemetry/opentelemetry-context/1.42.1/opentelemetry-context-1.42.1.jar:/Users/apple/.m2/repository/io/opentelemetry/opentelemetry-exporter-logging/1.42.1/opentelemetry-exporter-logging-1.42.1.jar:/Users/apple/.m2/repository/io/opentelemetry/opentelemetry-sdk-common/1.42.1/opentelemetry-sdk-common-1.42.1.jar:/Users/apple/.m2/repository/io/opentelemetry/opentelemetry-sdk-extension-autoconfigure-spi/1.42.1/opentelemetry-sdk-extension-autoconfigure-spi-1.42.1.jar:/Users/apple/.m2/repository/io/opentelemetry/opentelemetry-sdk-extension-autoconfigure/1.42.1/opentelemetry-sdk-extension-autoconfigure-1.42.1.jar:/Users/apple/.m2/repository/io/opentelemetry/opentelemetry-api-incubator/1.42.1-alpha/opentelemetry-api-incubator-1.42.1-alpha.jar:/Users/apple/.m2/repository/io/opentelemetry/opentelemetry-sdk-trace/1.42.1/opentelemetry-sdk-trace-1.42.1.jar:/Users/apple/.m2/repository/io/opentelemetry/opentelemetry-sdk/1.42.1/opentelemetry-sdk-1.42.1.jar:/Users/apple/.m2/repository/io/opentelemetry/opentelemetry-sdk-metrics/1.42.1/opentelemetry-sdk-metrics-1.42.1.jar:/Users/apple/.m2/repository/io/opentelemetry/opentelemetry-sdk-logs/1.42.1/opentelemetry-sdk-logs-1.42.1.jar:/Users/apple/.m2/repository/net/bytebuddy/byte-buddy/1.15.1/byte-buddy-1.15.1.jar:/Users/apple/.m2/repository/org/seleniumhq/selenium/selenium-os/4.25.0/selenium-os-4.25.0.jar:/Users/apple/.m2/repository/org/apache/commons/commons-exec/1.4.0/commons-exec-1.4.0.jar:/Users/apple/.m2/repository/org/seleniumhq/selenium/selenium-safari-driver/4.25.0/selenium-safari-driver-4.25.0.jar:/Users/apple/.m2/repository/org/seleniumhq/selenium/selenium-support/4.25.0/selenium-support-4.25.0.jar:/Users/apple/.m2/repository/org/junit/jupiter/junit-jupiter/5.11.3/junit-jupiter-5.11.3.jar:/Users/apple/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.11.3/junit-jupiter-api-5.11.3.jar:/Users/apple/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/apple/.m2/repository/org/junit/platform/junit-platform-commons/1.11.3/junit-platform-commons-1.11.3.jar:/Users/apple/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/apple/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.11.3/junit-jupiter-params-5.11.3.jar:/Users/apple/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.11.3/junit-jupiter-engine-5.11.3.jar:/Users/apple/.m2/repository/org/junit/platform/junit-platform-engine/1.11.3/junit-platform-engine-1.11.3.jar:"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="/Users/apple"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2026-07-21"/>
+    <property name="java.home" value="/opt/homebrew/Cellar/openjdk/26.0.2/libexec/openjdk.jdk/Contents/Home"/>
+    <property name="file.separator" value="/"/>
+    <property name="basedir" value="/Users/apple/Documents/personal-practice/parabank/selenium-tests"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="apple.awt.application.name" value="ForkedBooter"/>
+    <property name="surefire.real.class.path" value="/Users/apple/Documents/personal-practice/parabank/selenium-tests/target/surefire/surefirebooter-20260730193204770_3.jar"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="java.runtime.version" value="26.0.2"/>
+    <property name="user.name" value="apple"/>
+    <property name="stdout.encoding" value="UTF-8"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="26.5.2"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="Homebrew"/>
+    <property name="localRepository" value="/Users/apple/.m2/repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/Homebrew/homebrew-core/issues"/>
+    <property name="java.io.tmpdir" value="/var/folders/28/0gwm_n8956q_v0q9mc7c25xc0000gn/T/"/>
+    <property name="java.version" value="26.0.2"/>
+    <property name="user.dir" value="/Users/apple/Documents/personal-practice/parabank/selenium-tests"/>
+    <property name="os.arch" value="aarch64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="native.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/Users/apple/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="UTF-8"/>
+    <property name="java.vendor" value="Homebrew"/>
+    <property name="java.vm.version" value="26.0.2"/>
+    <property name="stdin.encoding" value="UTF-8"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
+    <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="java.class.version" value="70.0"/>
+  </properties>
+  <testcase name="validLoginShowsAccountsOverview" classname="com.parabank.tests.LoginTest" time="1.88">
+    <system-out><![CDATA[PAGE TITLE: ParaBank | Accounts Overview
+PAGE SOURCE SNIPPET: <html><head>
+		<meta charset="UTF-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>ParaBank | Accounts Overview</title>
+		<link href="template.css" rel="stylesheet" type="text/css">
+		<link href="style.css" rel="stylesheet" type="text/css">
+		<script src="webjars/jquery/4.0.0/jquery.min.js"></script>
+	</head>
+
+	<body>
+		<div id="mainPanel">
+			
+				
+				
+					
+
+
+
+<div id="topPanel">
+  <a href="admin.htm"><img src="images/clear.gif" width="56" height="42" border=
+]]></system-out>
+    <system-err><![CDATA[Jul 30, 2026 7:32:06 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find CDP implementation matching 150
+Jul 30, 2026 7:32:06 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$5
+WARNING: Unable to find version of CDP to use for 150.0.7871.187. You may need to include a dependency on a specific version of the CDP using something similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.25.0` where the version ("v86") matches the version of the chromium-based browser you're using and the version number of the artifact is the same as Selenium's.
+]]></system-err>
+  </testcase>
+</testsuite>
