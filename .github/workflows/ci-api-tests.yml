@@ -52,11 +52,20 @@ jobs:
             exit 1
           fi
 
+          echo "Giving Tomcat a few more seconds to stabilize..."
+          sleep 10
+
           newman run "postman/ParaBank API.postman_collection.json" \
             -e "postman/ParaBank Local.postman_environment.json" \
             --reporters cli,junit \
             --reporter-junit-export newman-results.xml
           newman_exit=$?
+
+          if [ "$newman_exit" != "0" ]; then
+            echo "----- cargo.log (Tomcat/ParaBank server log) -----"
+            cat cargo.log
+            echo "---------------------------------------------------"
+          fi
 
           mvn -B cargo:stop || true
 
