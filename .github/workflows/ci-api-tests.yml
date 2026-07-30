@@ -36,7 +36,8 @@ jobs:
           tar xzf apache-tomcat-10.1.31.tar.gz
           mv apache-tomcat-10.1.31 tomcat
           chmod +x tomcat/bin/*.sh
-          cp target/parabank.war tomcat/webapps/parabank.war
+          ls -la target/*.war
+          cp target/parabank-*.war tomcat/webapps/parabank.war
 
       - name: Start Tomcat, wait for it, run Newman tests, then stop it
         run: |
