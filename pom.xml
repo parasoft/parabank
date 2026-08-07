@@ -70,6 +70,7 @@
     <junitparams.version>1.1.1</junitparams.version>
     <hamcrest.version>3.0</hamcrest.version>
     <bcprov.version>1.85.2</bcprov.version>
+    <bcpkix.version>1.85</bcpkix.version>
     <jquery.version>4.0.0</jquery.version>
     <guava.version>33.6.0-jre</guava.version>
     <neethi.version>3.2.3</neethi.version>
@@ -435,7 +436,7 @@
     <dependency>
       <groupId>org.bouncycastle</groupId>
       <artifactId>bcpkix-jdk18on</artifactId>
-      <version>${bcprov.version}</version>
+      <version>${bcpkix.version}</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.jakarta.rs</groupId>
