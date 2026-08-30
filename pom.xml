@@ -74,7 +74,7 @@
     <jquery.version>4.0.0</jquery.version>
     <guava.version>33.7.1-jre</guava.version>
     <neethi.version>3.2.3</neethi.version>
-    <snakeyaml.version>2.6</snakeyaml.version>
+    <snakeyaml.version>2.7</snakeyaml.version>
     <selenium.version>4.48.0</selenium.version>
     <angus-activation.version>2.0.3</angus-activation.version>
     <angus-mail.version>2.0.5</angus-mail.version>
