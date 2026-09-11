@@ -70,7 +70,7 @@
     <junitparams.version>1.1.1</junitparams.version>
     <hamcrest.version>3.0</hamcrest.version>
     <bcprov.version>1.86</bcprov.version>
-    <bcpkix.version>1.85</bcpkix.version>
+    <bcpkix.version>1.86</bcpkix.version>
     <jquery.version>4.0.0</jquery.version>
     <guava.version>33.7.1-jre</guava.version>
     <neethi.version>3.2.3</neethi.version>
