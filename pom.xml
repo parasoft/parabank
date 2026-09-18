@@ -2,15 +2,15 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.parasoft</groupId>
   <artifactId>parabank</artifactId>
-  <version>5.0.0-SNAPSHOT</version>
+  <version>6.0.0-SNAPSHOT</version>
   <packaging>war</packaging>
   <name>ParaBank Sample Project</name>
   <description>ParaBank Sample Project for use with Parasoft SOAtest and Virtualize</description>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>17</maven.compiler.source>
-    <maven.compiler.target>17</maven.compiler.target>
-    <maven.compiler.release>17</maven.compiler.release>
+    <maven.compiler.source>21</maven.compiler.source>
+    <maven.compiler.target>21</maven.compiler.target>
+    <maven.compiler.release>21</maven.compiler.release>
     <maven.compiler.proc>none</maven.compiler.proc>
     <maven-antrun-plugin.version>3.2.0</maven-antrun-plugin.version>
     <maven-assembly-plugin.version>3.8.0</maven-assembly-plugin.version>
@@ -43,8 +43,8 @@
     <activemq.version>6.2.8</activemq.version>
     <swagger-jaxrs.version>2.2.55</swagger-jaxrs.version>
     <!-- Tomcat 10.1 only supports Servlet 6.0 and EL 5.0  -->
-    <jakarta.servlet.version>6.0.0</jakarta.servlet.version>
-    <jakarta.el.version>5.0.1</jakarta.el.version>
+    <jakarta.servlet.version>6.1.0</jakarta.servlet.version>
+    <jakarta.el.version>6.0.1</jakarta.el.version>
     <junit.version>4.13.2</junit.version>
     <jstl.version>3.0.1</jstl.version>
     <jstl-api.version>3.0.2</jstl-api.version>
@@ -765,11 +765,11 @@
         <artifactId>cargo-maven3-plugin</artifactId>
         <configuration>
           <container>
-            <containerId>tomcat10x</containerId>
+            <containerId>tomcat11x</containerId>
             <artifactInstaller>
               <groupId>org.apache.tomcat</groupId>
               <artifactId>tomcat</artifactId>
-              <version>10.1.60</version>
+              <version>11.0.26</version>
             </artifactInstaller>
             <timeout>600000</timeout>
           </container>
