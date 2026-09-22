@@ -40,7 +40,7 @@
     <jaxb.impl.version>4.0.9</jaxb.impl.version>
     <istack.version>4.2.0</istack.version>
     <joda-time.version>2.14.4</joda-time.version>
-    <activemq.version>6.2.8</activemq.version>
+    <activemq.version>6.3.2</activemq.version>
     <swagger-jaxrs.version>2.2.55</swagger-jaxrs.version>
     <jakarta.servlet.version>6.1.0</jakarta.servlet.version>
     <jakarta.el.version>6.0.1</jakarta.el.version>
@@ -59,13 +59,13 @@
     <wiremock.version>3.13.2</wiremock.version>
     <mockito.version>5.23.0</mockito.version>
     <bytebuddy.version>1.18.14</bytebuddy.version>
-    <cxf.version>4.1.8</cxf.version>
+    <cxf.version>4.2.3</cxf.version>
     <cxf.wss4j.version>4.0.1</cxf.wss4j.version>
     <ehcache.version>3.12.0</ehcache.version>
     <saaj-impl.version>3.0.6</saaj-impl.version>
-    <jersey.version>3.1.12</jersey.version>
+    <jersey.version>4.0.2</jersey.version>
     <javassist.version>3.33.0-GA</javassist.version>
-    <spring.version>6.2.19</spring.version>
+    <spring.version>7.0.9</spring.version>
     <junitparams.version>1.1.1</junitparams.version>
     <hamcrest.version>3.0</hamcrest.version>
     <bcprov.version>1.86</bcprov.version>
