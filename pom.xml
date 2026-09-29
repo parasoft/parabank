@@ -71,7 +71,7 @@
     <bcprov.version>1.86</bcprov.version>
     <bcpkix.version>1.86</bcpkix.version>
     <jquery.version>4.0.0</jquery.version>
-    <guava.version>33.7.1-jre</guava.version>
+    <guava.version>33.7.2-jre</guava.version>
     <neethi.version>3.2.4</neethi.version>
     <snakeyaml.version>2.7</snakeyaml.version>
     <selenium.version>4.49.0</selenium.version>
