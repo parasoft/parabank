@@ -79,6 +79,7 @@
     <angus-mail.version>2.0.5</angus-mail.version>
     <jakarta.mail-api.version>2.1.5</jakarta.mail-api.version>
     <xmlschema.version>2.3.3</xmlschema.version>
+    <asm.version>9.11</asm.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -101,6 +102,13 @@
         <groupId>org.mockito</groupId>
         <artifactId>mockito-bom</artifactId>
         <version>${mockito.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.ow2.asm</groupId>
+        <artifactId>asm-bom</artifactId>
+        <version>${asm.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
