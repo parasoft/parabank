@@ -79,7 +79,7 @@
     <angus-mail.version>2.0.5</angus-mail.version>
     <jakarta.mail-api.version>2.1.5</jakarta.mail-api.version>
     <xmlschema.version>2.3.3</xmlschema.version>
-    <asm.version>9.11</asm.version>
+    <asm.version>9.11.1</asm.version>
   </properties>
   <dependencyManagement>
     <dependencies>
