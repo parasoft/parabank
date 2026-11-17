@@ -41,7 +41,7 @@
     <istack.version>4.2.0</istack.version>
     <joda-time.version>2.15.1</joda-time.version>
     <activemq.version>6.3.2</activemq.version>
-    <swagger-jaxrs.version>2.2.55</swagger-jaxrs.version>
+    <swagger-jaxrs.version>2.2.56</swagger-jaxrs.version>
     <jakarta.servlet.version>6.1.0</jakarta.servlet.version>
     <jakarta.el.version>6.0.1</jakarta.el.version>
     <junit.version>4.13.2</junit.version>
