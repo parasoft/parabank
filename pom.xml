@@ -70,7 +70,7 @@
     <hamcrest.version>3.0</hamcrest.version>
     <bcprov.version>1.87</bcprov.version>
     <bcpkix.version>1.87</bcpkix.version>
-    <jquery.version>4.0.0</jquery.version>
+    <jquery.version>4.1.0</jquery.version>
     <guava.version>33.8.0-jre</guava.version>
     <neethi.version>3.2.4</neethi.version>
     <snakeyaml.version>2.7</snakeyaml.version>
