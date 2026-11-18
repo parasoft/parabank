@@ -14,7 +14,7 @@
 			type="text/css" />
 		<link href="<c:url value="style.css"/>" rel="stylesheet"
 			type="text/css" />
-		<script src="<c:url value="webjars/jquery/4.0.0/jquery.min.js" />"></script>
+		<script src="<c:url value="webjars/jquery/4.1.0/jquery.min.js" />"></script>
 	</head>
 
 	<body
